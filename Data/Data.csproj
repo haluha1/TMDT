@@ -48,7 +48,6 @@
     <Folder Include="Entities\" />
     <Folder Include="Enum\" />
     <Folder Include="IRepository\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
