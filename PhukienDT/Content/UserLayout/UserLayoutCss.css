@@ -1,0 +1,22 @@
+﻿body {
+}
+#header {
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    background-color: #e94e41;
+}
+#menungang ul {
+    list-style-type: none;
+}
+#menungang ul a {
+    text-decoration: none;
+    background: green;
+    width: 100px;
+    float: left;
+    color: #fff;
+    line-height: 30px;
+    text-align: center;
+    border-left: 1px solid #ccc;
+}
