@@ -9,9 +9,13 @@ namespace Data.Entities
 {
     public class CtRating : DomainEntity<int>
     {
-        public int marating { get; set; }
+        public int RatingFK { get; set; }
         public int makh { get; set; }
         public float diem { get; set; }
         public string comment { get; set; }
-    }
+		public virtual Rating RatingNavigation { get; set; }
+		public virtual Khachhang KhachhangNavigation { get; set; }
+
+
+	}
 }

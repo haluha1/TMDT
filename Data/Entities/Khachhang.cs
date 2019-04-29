@@ -9,6 +9,10 @@ namespace Data.Entities
 {
     public class Khachhang : DomainEntity<int>
     {
-        public virtual TaiKhoan TaiKhoanBy { get; set; }
-    }
+		public string makh { get; set; }
+		public int User_FK { get; set; }
+		public virtual TaiKhoan TaiKhoanBy { get; set; }
+		public virtual ICollection<CtRating> CtRatings { get; set; }
+
+	}
 }

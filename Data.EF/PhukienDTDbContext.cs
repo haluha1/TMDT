@@ -30,56 +30,125 @@ namespace Data.EF
 		#region creare DbSet
 		//public DbSet<Student> Students { get; set; }
 		#endregion
-		public DbSet<Student> Students { get; set; }
-		public DbSet<Enrollment> Enrollments { get; set; }
-		public DbSet<Course> Courses { get; set; }
+		public DbSet<Cthd> Cthds { get; set; }
+		public DbSet<CtRating> CtRatings { get; set; }
+		public DbSet<Giatin> Giatins { get; set; }
+		public DbSet<Giohang> Giohangs { get; set; }
+		public DbSet<Hoadon> Hoadons { get; set; }
+		public DbSet<Hoadonmuatin> Hoadonmuatins { get; set; }
+		public DbSet<Khachhang> Khachhangs { get; set; }
+		public DbSet<Loaisp> Loaisps { get; set; }
+		public DbSet<Mucduytri> Mucduytris { get; set; }
+		public DbSet<Ncc> Nccs { get; set; }
+		public DbSet<Rating> Ratings { get; set; }
+		public DbSet<RatingNcc> RatingNccs { get; set; }
+		public DbSet<RatingSp> RatingSps { get; set; }
+		public DbSet<Sanpham> Sanphams { get; set; }
+		public DbSet<TaiKhoan> TaiKhoans { get; set; }
+		public DbSet<Webmaster> Webmasters { get; set; }
+
+		public DbSet<Function> Functions { get; set; }
+
+
+
+
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-			//modelBuilder.Entity<ArAccountsReceivable>(entity =>
-			//{
-			//	entity.HasKey(e => e.KeyId);
+			modelBuilder.Entity<Cthd>().HasKey(e => e.KeyId).ToTable("CTHD");
+			modelBuilder.Entity<Cthd>()
+			.HasRequired<Hoadon>(s => s.HoadonNavigation)
+			.WithMany(g => g.Cthdons)
+			.HasForeignKey<int>(s => s.mahd);
+			modelBuilder.Entity<Cthd>()
+			.HasRequired<Sanpham>(s => s.SanphamNavigation)
+			.WithMany(g => g.Cthds)
+			.HasForeignKey<int>(s => s.masp);
 
-			//	entity.ToTable("AR_AccountsReceivable");
+			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
+			modelBuilder.Entity<CtRating>()
+			.HasRequired<Rating>(s => s.RatingNavigation)
+			.WithMany(g => g.CtRatings)
+			.HasForeignKey<int>(s => s.RatingFK);
+			modelBuilder.Entity<CtRating>()
+			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
+			.WithMany(g => g.CtRatings)
+			.HasForeignKey<int>(s => s.makh);
 
-			//	entity.HasIndex(e => e.ProjectId)
-			//		.HasName("IX_ProjectId");
+			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
-			//	// entity.Property(e => e.Amount).HasColumnType("decimal(65,30)");
+			modelBuilder.Entity<Giohang>().HasKey(e => e.KeyId).ToTable("GioHang");
+			
 
-			//	entity.Property(e => e.ArNo)
-			//		.HasColumnName("AR_No")
-			//		.HasMaxLength(15)
-			//		.IsUnicode(false);
 
-			//	entity.Property(e => e.CustomerFk).HasColumnName("Customer_FK");
+			modelBuilder.Entity<Hoadon>().HasKey(e => e.KeyId).ToTable("HoaDon");
+			modelBuilder.Entity<Hoadon>()
+			.HasRequired<TaiKhoan>(s => s.TaiKhoanNavigation)
+			.WithMany(g => g.Hoadons)
+			.HasForeignKey<int>(s => s.makh);
 
-			//	entity.Property(e => e.Department)
-			//		.HasMaxLength(15)
-			//		.IsUnicode(false);
+			modelBuilder.Entity<Hoadonmuatin>().HasKey(e => e.KeyId).ToTable("HoaDonMuaTin");
+			modelBuilder.Entity<Hoadonmuatin>()
+			.HasRequired<Giatin>(s => s.GiatinNavigation)
+			.WithMany(g => g.Hoadonmuatins)
+			.HasForeignKey<int>(s => s.magiatin);
+			modelBuilder.Entity<Hoadonmuatin>()
+			.HasRequired<TaiKhoan>(s => s.TaiKhoanNavigation)
+			.WithMany(g => g.Hoadonmuatins)
+			.HasForeignKey<int>(s => s.mancc);
 
-			//	entity.Property(e => e.Description).HasMaxLength(255);
+			modelBuilder.Entity<Khachhang>().HasKey(e => e.KeyId).ToTable("KhachHang");
+			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
+			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
+			modelBuilder.Entity<Ncc>().HasKey(e => e.KeyId).ToTable("Ncc");
+			modelBuilder.Entity<Rating>().HasKey(e => e.KeyId).ToTable("Rating");
+			modelBuilder.Entity<Rating>()
+							.HasOptional(s => s.RatingSpNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.RatingBy);
+			modelBuilder.Entity<Rating>()
+							.HasOptional(s => s.RatingNccNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.RatingBy);
 
-			//	entity.Property(e => e.PoNo).HasColumnName("PO_No");
+			modelBuilder.Entity<RatingNcc>().HasKey(e => e.KeyId).ToTable("RatingNCC");
+			modelBuilder.Entity<RatingSp>().HasKey(e => e.KeyId).ToTable("RatingSP");
+			
 
-			//	entity.Property(e => e.RecordCode)
-			//		.HasColumnName("Record_Code")
-			//		.HasColumnType("char(2)");
+			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");
+			modelBuilder.Entity<Sanpham>()
+			.HasRequired<Loaisp>(s => s.LoaispNavigation)
+			.WithMany(g => g.Sanphams)
+			.HasForeignKey<int>(s => s.maloai);
+			modelBuilder.Entity<Sanpham>()
+			.HasMany<Giohang>(s => s.Giohangs)
+			.WithMany(g => g.Sanphams)
+			.Map(cs =>
+			{
+				cs.MapLeftKey("SanPhamRefId");
+				cs.MapRightKey("GiaHangRefId");
+				cs.ToTable("SanPhamGioHang");
+			});
 
-			//	entity.Property(e => e.TransactNo).HasColumnName("Transact_No");
+			modelBuilder.Entity<TaiKhoan>().HasKey(e => e.KeyId).ToTable("TaiKhoan");
+			modelBuilder.Entity<TaiKhoan>()
+							.HasOptional(s => s.KhachhangNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.TaiKhoanBy);
+			modelBuilder.Entity<TaiKhoan>()
+							.HasOptional(s => s.NccNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.TaiKhoanBy);
+			modelBuilder.Entity<TaiKhoan>()
+							.HasOptional(s => s.WebmasterNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.TaiKhoanBy);
+			modelBuilder.Entity<TaiKhoan>()
+							.HasOptional(s => s.GiohangNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.TaiKhoanBy);
 
-			//	entity.Property(e => e.WarehouseFk)
-			//		.HasColumnName("Warehouse_FK")
-			//		.HasMaxLength(15)
-			//		.IsUnicode(false);
 
-			//	entity.HasOne(d => d.Project)
-			//		.WithMany(p => p.ArAccountsReceivable)
-			//		.HasForeignKey(d => d.ProjectId)
-			//		.HasConstraintName("FK_dbo.AR_AccountsReceivable_dbo.GNProject_ProjectId");
-			//});
+
+
+			modelBuilder.Entity<Webmaster>().HasKey(e => e.KeyId).ToTable("WebMaster");
+
 		}
 	}
 }

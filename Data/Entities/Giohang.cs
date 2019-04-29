@@ -10,8 +10,10 @@ namespace Data.Entities
     public class Giohang : DomainEntity<int>
     {
         public int makh { get; set; }
-        public int masp { get; set; }
         public int soluong { get; set; }
         public double thanhtien { get; set; }
-    }
+		public virtual ICollection<Sanpham> Sanphams { get; set; }
+		public virtual TaiKhoan TaiKhoanBy { get; set; }
+
+	}
 }

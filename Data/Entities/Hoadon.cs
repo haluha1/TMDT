@@ -11,13 +11,15 @@ namespace Data.Entities
     {
         public Hoadon()
         {
-            Cthdon = new HashSet<Cthd>();
+            Cthdons = new HashSet<Cthd>();
         }
 
         public int mahd { get; set; }
         public int makh { get; set; }
         public double tongtien { get; set; }
         public string thoigian { get; set; }
-        public ICollection<Cthd> Cthdon { get; set; }
+        public ICollection<Cthd> Cthdons { get; set; }
+		public virtual TaiKhoan TaiKhoanNavigation { get; set; }
+
     }
 }

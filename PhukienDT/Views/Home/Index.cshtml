@@ -1,7 +1,13 @@
 ﻿@{
     ViewBag.Title = "Trang chủ";
 }
+@section Scripts{
+    <script src="~/Scripts/app/home/index.js"></script>
 
+    <script>
+        var home = new homeController();
+        home.initialize();</script>
+}
 <!--- Hình --->
 <div class="slideshow-container">
     <div class="mySlides fade">

@@ -18,6 +18,10 @@ namespace Data.Entities
         public string mota { get; set; }
         public string tenhinh { get; set; }
         public float khuyenmai { get; set; }
+		public virtual Loaisp LoaispNavigation { get; set; }
+		public virtual ICollection<Cthd> Cthds { get; set; }
+		public virtual Ncc NccNavigation { get; set; }
+		public virtual ICollection<Giohang> Giohangs { get; set; }
 
-    }
+	}
 }

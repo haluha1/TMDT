@@ -11,5 +11,6 @@ namespace Data.Entities
     {
         public int maloai { get; set; }
         public string tenloai { get; set; }
+		public virtual ICollection<Sanpham> Sanphams { get; set; }
     }
 }

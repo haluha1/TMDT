@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.SharedKernel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Interfaces
 {
-	public interface IRepository<T, K> where T : class
+	public interface IRepository<T, K> where T : DomainEntity<K>
 	{
 		T FindById(K id, params Expression<Func<T, object>>[] includeProperties);
 

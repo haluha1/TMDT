@@ -59,10 +59,10 @@
     <Compile Include="Entities\Sanpham.cs" />
     <Compile Include="Entities\TaiKhoan.cs" />
     <Compile Include="Entities\Webmaster.cs" />
+    <Compile Include="Enum\RatingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enum\" />
     <Folder Include="IRepository\" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,8 @@ namespace Data.Entities
 {
     public class Webmaster : DomainEntity<int>
     {
-        public virtual TaiKhoan TaiKhoanBy { get; set; }
+		public string WebmasterID { get; set; }
+		public int User_FK { get; set; }
+		public virtual TaiKhoan TaiKhoanBy { get; set; }
     }
 }

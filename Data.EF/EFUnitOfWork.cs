@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.EF
 {
-	public class EFUnitOfWork<T> : IUnitOfWork<T>
+	public class EFUnitOfWork : IUnitOfWork
 	{
 		public bool Commit()
 		{
@@ -53,19 +53,19 @@ namespace Data.EF
 			PhukienDTDbContext.Instance.Dispose();
 		}
 
-		public void RegisterAmended(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
-		{
-			repository.PersistUpdateOf(entity);
-		}
+		//public void RegisterAmended(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
+		//{
+		//	repository.PersistUpdateOf(entity);
+		//}
 
-		public void RegisterNew(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
-		{
-			repository.PersistCreationOf(entity);
-		}
+		//public void RegisterNew(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
+		//{
+		//	repository.PersistCreationOf(entity);
+		//}
 
-		public void RegisterRemoved(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
-		{
-			repository.PersistDeletionOf(entity);
-		}
+		//public void RegisterRemoved(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)
+		//{
+		//	repository.PersistDeletionOf(entity);
+		//}
 	}
 }

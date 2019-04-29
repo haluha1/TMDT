@@ -11,7 +11,7 @@
 //	{
 //		public static void AddConfiguration<TEntity>(
 //		  this DbModelBuilder modelBuilder,
-//		  DbEntityConfiguration<TEntity> entityConfiguration) where TEntity : class
+//		  DbEntityConfiguration<TEntity> entityConfiguration) where tEntity : class
 //		{
 //			modelBuilder.Entity<TEntity>(entityConfiguration.Configure);
 //		}

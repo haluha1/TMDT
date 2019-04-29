@@ -12,5 +12,7 @@ namespace Data.Entities
         public int magiatin { get; set; }
         public int soluongtin { get; set; }
         public double gia { get; set; }
-    }
+		public virtual ICollection<Hoadonmuatin> Hoadonmuatins { get; set; }
+
+	}
 }

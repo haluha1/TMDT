@@ -13,5 +13,8 @@ namespace Data.Entities
         public int mancc { get; set; }
         public int magiatin { get; set; }
         public string thoigian { get; set; }
-    }
+		public virtual Giatin GiatinNavigation { get; set; }
+		public virtual TaiKhoan TaiKhoanNavigation { get; set; }
+
+	}
 }

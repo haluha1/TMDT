@@ -21,5 +21,7 @@ namespace Data.Entities
         public int masp { get; set; }
         public int soluong { get; set; }
         public double thanhtien { get; set; }
-    }
+		public virtual Sanpham SanphamNavigation { get; set; }
+		public virtual Hoadon HoadonNavigation { get; set; }
+	}
 }

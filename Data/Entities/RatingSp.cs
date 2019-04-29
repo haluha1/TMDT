@@ -10,7 +10,8 @@ namespace Data.Entities
     public class RatingSp : DomainEntity<int>
     {
         public int masp { get; set; }
+		public int Rating_FK { get; set; }
 
-        public virtual Rating RatingBy { get; set; }
+		public virtual Rating RatingBy { get; set; }
     }
 }
