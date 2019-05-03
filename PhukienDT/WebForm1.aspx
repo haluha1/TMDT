@@ -219,7 +219,7 @@
         </div>
         <div style="text-align:center;font-family:'HP-Murray Heavy'; font-weight:bold; font-size:100px">Best Seller</div>
 
-        <div style="margin-left: 16px">
+        <div style="margin-left: 5px">
             <div style="float:left">
             <a href="#">
                 <img style="width:180px" src="img\44.png">

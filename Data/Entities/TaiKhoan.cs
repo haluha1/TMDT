@@ -1,4 +1,5 @@
-﻿using Infrastructure.SharedKernel;
+﻿using Data.Enum;
+using Infrastructure.SharedKernel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,15 +21,10 @@ namespace Data.Entities
         public string matkhau { get; set; }
         public string thoigiandk { get; set; }
 
-		
-		[DefaultValue(false)]
-		public bool? IsCustomer { get; set; }
-		[DefaultValue(false)]
-		public bool? IsMerchant { get; set; }
-		[DefaultValue(false)]
-		public bool? IsWebmaster { get; set; }
 
-		public virtual Khachhang KhachhangNavigation { get; set; }
+        public RatingType UserType { get; set; }
+
+        public virtual Khachhang KhachhangNavigation { get; set; }
 		public virtual Ncc NccNavigation { get; set; }
 		public virtual Webmaster WebmasterNavigation { get; set; }
 
