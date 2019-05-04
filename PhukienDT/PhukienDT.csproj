@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Ctsp.aspx.cs">
       <DependentUpon>Ctsp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

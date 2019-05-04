@@ -8,39 +8,27 @@ using System.Web.Mvc;
 
 namespace PhukienDT.Controllers
 {
-	public class HomeController : Controller
-	{
-		private ILoaiSPService _loaiSPService;
+    public class SanphamController : Controller
+    {
+		private ISanphamService _sanphamService;
 
-		public HomeController(ILoaiSPService loaiSPService)
+		public SanphamController(ISanphamService sanphamService)
 		{
-			_loaiSPService = loaiSPService;
+			_sanphamService = sanphamService;
 		}
 
 		public ActionResult Index()
-		{
-			return View();
-		}
+        {
+            return View();
+        }
 
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
-		}
-		public JsonResult GetAllLoaiSP()
+		#region AjaxAPI
+		public JsonResult GetAllSanPham()
 		{
 			try
 			{
 
-				var data = _loaiSPService.GetAll();
+				var data = _sanphamService.GetAll();
 
 				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
 				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
@@ -54,5 +42,6 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
+		#endregion
 	}
 }

@@ -9,7 +9,11 @@ namespace Data.Entities
 {
     public class Cthd : DomainEntity<int>
     {
-        public Cthd(int Mahd, int Masp, int Soluong, double Thanhtien)
+		public Cthd()
+		{
+		}
+
+		public Cthd(int Mahd, int Masp, int Soluong, double Thanhtien)
         {
             mahd = Mahd;
             masp = Masp;
