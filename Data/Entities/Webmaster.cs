@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    public class Webmaster : DomainEntity<int>
+    public class Webmaster
     {
+		public int User_FK { get; set; } // PK
 		public string WebmasterID { get; set; }
-		public int User_FK { get; set; }
+		
 		public virtual TaiKhoan TaiKhoanBy { get; set; }
     }
 }

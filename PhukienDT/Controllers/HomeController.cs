@@ -51,7 +51,7 @@ namespace PhukienDT.Controllers
 			catch (Exception ex)
 			{
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message);
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
 	}

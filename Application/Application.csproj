@@ -48,7 +48,9 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Implementation\LoaiSPService.cs" />
+    <Compile Include="Implementation\SanphamService.cs" />
     <Compile Include="Interfaces\ILoaiSPService.cs" />
+    <Compile Include="Interfaces\ISanphamService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CthdViewModel.cs" />
     <Compile Include="ViewModels\CtRatingViewModel.cs" />

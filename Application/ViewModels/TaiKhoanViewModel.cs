@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,12 +20,8 @@ namespace Application.ViewModels
 		public string thoigiandk { get; set; }
 
 
-		
-		public bool? IsCustomer { get; set; }
-		
-		public bool? IsMerchant { get; set; }
-		
-		public bool? IsWebmaster { get; set; }
+
+		public RatingType UserType { get; set; }
 
 		public virtual KhachhangViewModel KhachhangNavigation { get; set; }
 		public virtual NccViewModel NccNavigation { get; set; }

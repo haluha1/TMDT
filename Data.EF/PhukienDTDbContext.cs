@@ -99,10 +99,10 @@ namespace Data.EF
 			.WithMany(g => g.Hoadonmuatins)
 			.HasForeignKey<int>(s => s.mancc);
 
-			modelBuilder.Entity<Khachhang>().HasKey(e => e.KeyId).ToTable("KhachHang");
+			modelBuilder.Entity<Khachhang>().HasKey(e => e.User_FK).ToTable("KhachHang");
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
-			modelBuilder.Entity<Ncc>().HasKey(e => e.KeyId).ToTable("Ncc");
+			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
 			modelBuilder.Entity<Rating>().HasKey(e => e.KeyId).ToTable("Rating");
 			modelBuilder.Entity<Rating>()
 							.HasOptional(s => s.RatingSpNavigation) // Mark Address property optional in Student entity
@@ -147,7 +147,7 @@ namespace Data.EF
 
 
 
-			modelBuilder.Entity<Webmaster>().HasKey(e => e.KeyId).ToTable("WebMaster");
+			modelBuilder.Entity<Webmaster>().HasKey(e => e.User_FK).ToTable("WebMaster");
 
 		}
 	}

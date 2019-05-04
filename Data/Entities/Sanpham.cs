@@ -9,7 +9,11 @@ namespace Data.Entities
 {
     public class Sanpham : DomainEntity<int>
     {
-        public int masp { get; set; }
+		public Sanpham()
+		{
+		}
+
+		public int masp { get; set; }
         public string tensp { get; set; }
         public int maloai { get; set; }
         public int mancc { get; set; }

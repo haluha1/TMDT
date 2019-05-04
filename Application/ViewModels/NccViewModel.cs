@@ -8,11 +8,11 @@ namespace Application.ViewModels
 {
 	public class NccViewModel
 	{
-		public int KeyId { get; set; }
+		public int User_FK { get; set; } // PK
 		public string tenncc { get; set; }
 		public string gioithieu { get; set; }
 		public int sltinton { get; set; }
-		public int User_FK { get; set; }
+		
 		public virtual TaiKhoanViewModel TaiKhoanBy { get; set; }
 	}
 }

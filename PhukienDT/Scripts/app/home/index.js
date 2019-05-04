@@ -1244,7 +1244,7 @@ function loadData(isPageChanged) {
     var render = "";
     $.ajax({
         type: 'GET',
-        url: '/Home/GetAllLoaiSP',
+        url: '/Sanpham/GetAllSanPham',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         success: function (response) {
