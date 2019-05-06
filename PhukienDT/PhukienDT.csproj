@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NguoibanController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Ctsp.aspx.cs">
       <DependentUpon>Ctsp.aspx</DependentUpon>
@@ -502,6 +503,8 @@
     <Content Include="Scripts\twbs-pagination\README.md" />
     <Content Include="Scripts\twbs-pagination\twbs-pagination.jquery.json" />
     <Content Include="Views\Sanpham\ctsp.cshtml" />
+    <Content Include="Views\Sanpham\Theosanpham.cshtml" />
+    <Content Include="Views\Nguoiban\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

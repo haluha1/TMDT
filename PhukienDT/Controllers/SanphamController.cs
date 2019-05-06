@@ -23,11 +23,14 @@ namespace PhukienDT.Controllers
         }
         
         // GET: Sanpham
-        public ActionResult Ctsp()
+        public ActionResult ctsp()
         {
             return View();
         }
-        
+        public ActionResult Theosanpham()
+        {
+            return View();
+        }
 
         #region AjaxAPI
         public JsonResult GetAllSanPham()
