@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+using Application.Interfaces;
 using Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,30 +11,40 @@ namespace PhukienDT.Controllers
 {
     public class SanphamController : Controller
     {
-		private ISanphamService _sanphamService;
+        private ISanphamService _sanphamService;
 
-		public SanphamController(ISanphamService sanphamService)
-		{
-			_sanphamService = sanphamService;
-		}
+        public SanphamController(ISanphamService sanphamService)
+        {
+            _sanphamService = sanphamService;
+        }
 
-		public ActionResult Index()
+        public ActionResult Index()
+        {
+            return View();
+        }
+        
+        // GET: Sanpham
+        public ActionResult ctsp()
+        {
+            return View();
+        }
+        public ActionResult Theosanpham()
         {
             return View();
         }
 
-		#region AjaxAPI
-		public JsonResult GetAllSanPham()
-		{
-			try
-			{
+        #region AjaxAPI
+        public JsonResult GetAllSanPham()
+        {
+            try
+            {
 
-				var data = _sanphamService.GetAll();
+                var data = _sanphamService.GetAll();
 
-				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
 
-				return Json(data, JsonRequestBehavior.AllowGet);
+                return Json(data, JsonRequestBehavior.AllowGet);
 
 			}
 			catch (Exception ex)

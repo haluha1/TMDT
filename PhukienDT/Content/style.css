@@ -156,6 +156,9 @@ span.psw {
     }
 }
 
-.hinh {
-    height: 100px;
+.ten {
+    z-index: 1; margin-top:-400px; margin-left:50px; color:white; font-weight:bold;
+}
+.khung {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 10);
 }

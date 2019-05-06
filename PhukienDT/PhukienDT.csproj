@@ -502,6 +502,7 @@
     <Content Include="Scripts\twbs-pagination\README.md" />
     <Content Include="Scripts\twbs-pagination\twbs-pagination.jquery.json" />
     <Content Include="Views\Sanpham\ctsp.cshtml" />
+    <Content Include="Views\Sanpham\Theosanpham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
