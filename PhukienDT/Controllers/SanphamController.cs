@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,34 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
+
+		[HttpPost]
+		public JsonResult SaveEntity(SanphamViewModel sanphamVm)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+					return Json(allErrors, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					if (sanphamVm.KeyId == 0) _sanphamService.Add(sanphamVm);
+					else _sanphamService.Update(sanphamVm);
+				}
+				if (_sanphamService.Save()) return Json(sanphamVm, JsonRequestBehavior.AllowGet);
+
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(Response, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+		}
+
 		#endregion
 	}
 }

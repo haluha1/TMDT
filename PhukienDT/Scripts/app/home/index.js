@@ -1,6 +1,7 @@
 ﻿homeController = function () {
     this.initialize = function () {
         loadData();
+        TestSave();
         //registerEvents();
     }
     var listFamilyRelationship = [];
@@ -412,188 +413,7 @@
         $('#btnSave').on('click', function (e) {
             if ($('#frmMaintainance').valid()) {
                 e.preventDefault();
-                var addressBookFk = $('#txtEmployee').data('addressbookid');
-                if (addressBookFk == '') {
-                    general.notify('Vui lòng chọn nhân viên trước !', 'error');
-                    return false;
-                }
-                //User data
-                UserData.Avatar = gAvatarImage;
-                if ($('#selProvinceAC').val() != "") UserData.City = $('#selProvinceAC option:selected').text();
-                if ($('#selDistrictAC').val() != "") UserData.District = $('#selDistrictAC option:selected').text();
-                UserData.Employee_FK = gId;
-                UserData.IsEmployee = true;
-                UserData.IdDate = $('#dtp_input2').val();
-                UserData.Street = $('#txtAccommodationCurrent').val();
-                UserData.TaxIdnumber = $('#txtTaxIDNumber').val();
-
-
-                //Employee Data
-                var id = $('#txtId').val();
-                var Idcard = $('#txtIdCard').val();
-                var employeeTypeFK = $('#selEmployeeTypeFK').val();
-                var birthplace = $('#selBirthplace option:selected').val();
-                var originFK = $('#selOriginFK option:selected').val();
-                var nationFK = $('#selNationFK option:selected').val();
-                var nationalityFK = $('#selNationality option:selected').val();
-                var iDDate = general.dateFormatJson(general.getDatePicker($('#dtIDDate')), false);
-                var permanentResidence = $('#txtPermanentResidence').val();
-                var wardPR = $('#selWardPR').val();
-                var districtPR = $('#selDistrictPR option:selected').val();
-                var provincePR = $('#selProvincePR option:selected').val();
-                var accommodationCurrent = $('#txtAccommodationCurrent').val();
-                var wardAC = $('#selWardAC').val();
-                var districtAC = $('#selDistrictAC option:selected').val();
-                var provinceAC = $('#selProvinceAC option:selected').val();
-                var infoContactPerson = $('#txtInfoContactPerson').val();
-                var phoneNumberContactPerson = $('#txtPhoneNumberContactPerson').val();
-                var aTMAccountName = $('#txtATMAccountName').val();
-                var iDAccount = $('#txtIDAccount').val();
-                var nOChildren = $('#txtNOChildren').val();
-                var numberOfProfile = $('#txtNumberOfProfile').val();
-                var numberOfContract = $('#txtNumberOfContract').val();
-                var laborContractType = $('#selLaborContractType').val();
-                var signDate = general.dateFormatJson(general.getDatePicker($('#dtSignDate')), false);
-                var timeExpireContract = general.dateFormatJson(general.getDatePicker($('#dtTimeExpireContract')), false);
-                var timeExpireProbation = general.dateFormatJson(general.getDatePicker($('#dtTimeExpireProbation')), false);
-                var startDate = general.dateFormatJson(general.getDatePicker($('#dtStartDate')), false);
-                var infoSaveFile = $('#txtInfoSaveFile').val();
-                var layOffDate = general.dateFormatJson(general.getDatePicker($('#dtLayOffDate')), false);
-                var literacy = $('#selLiteracy option:selected').val();
-                var iDSocialInsurance = $('#txtIDSocialInsurance').val();
-                var salarySocialInsurance = general.toFloat($('#txtSalarySocialInsurance').val());
-                var socialInsuranceDate = general.dateFormatJson(general.getDatePicker($('#txtSocialInsuranceDate')), false);
-                var salary = $('#txtSalary').val();
-                var numberOfDependents = $('#txtNumberOfDependents').val();
-                var isUnionMember = $("#chkIsUnionMember").is(':checked');
-                var travelAllowance = general.toFloat($('#txtTravelAllowance').val());
-                var positionAllowance = general.toFloat($('#txtPositionAllowance').val());
-                var seniorityAllowances = general.toFloat($('#txtSeniorityAllowances').val());
-                var otherAllowances = general.toFloat($('#txtOtherAllowances').val());
-
-
-                var religionFK = $('#selReligionFK option:selected').val();
-                var taxIdNumber = $('#txtTaxIDNumber').val();
-                var bankAccountNumber = $('#txtBankAccountNumber').val();
-                var departmentFK = $('#selDepartmentFK option:selected').val();
-                var positionFK = $('#selPositionFK option:selected').val();
-                var note = $('#txtNotes').val();
-
-
-
-                var a = $("#chkStatus").is(':checked');
-                if (a == true) status = 1;
-                else status = 0;
-
-                var FamilyC = $("input[name='optradio']:checked").val();
-
-
-
-                //FamilyRelationship Data
-                var listDataFamilyRelationship = [];
-                $.each($('#tbl-FamilyRelationship tr'), function (i, item) {
-                    var keyid = $(this).find('td:eq(0) input').val();
-                    var relativesName = $(this).find('td:eq(1) input').val();
-                    var yearOfBirth = $(this).find('td:eq(2) input').val();
-                    var gender = $(this).find('td:eq(3) select').val();
-                    //if (gender) gender = gender == "Nam" ? 0 : 1;
-                    var relationship = $(this).find('td:eq(4) input').val();
-                    var job = $(this).find('td:eq(5) input').val();
-                    var died = $(this).find('td:eq(6) label input').is(':checked');
-                    var data = {
-                        KeyId: keyid,
-                        EmployeeFK: gId,
-                        RelativesName: relativesName,
-                        YearOfBirth: yearOfBirth,
-                        Gender: gender,
-                        Relationship: relationship,
-                        Job: job,
-                        Died: died,
-                    };
-                    listDataFamilyRelationship.push(data);
-                });
-
-                //WorkingProcess Data
-                var listDataWorkingProcess = [];
-                $.each($('#tbl-WorkingProcess tr'), function (i, item) {
-                    var keyid = $(this).find('td:eq(0) input[type="hidden"]').val();
-                    var mobilizeDate = $(this).find('td:eq(0) input[type="text"]').val();
-                    var numberDesignation = $(this).find('td:eq(1) input').val();
-                    var oldWorkPlace = $(this).find('td:eq(2) input').val();
-                    var oldPosition = $(this).find('td:eq(3) input').val();
-
-                    var data = {
-                        KeyId: keyid,
-                        EmployeeFK: gId,
-                        MobilizeDate: mobilizeDate,
-                        NumberDesignation: numberDesignation,
-                        OldWorkPlace: oldWorkPlace,
-                        OldPosition: oldPosition
-                    };
-                    listDataWorkingProcess.push(data);
-                });
-
-                //Expertise Data
-                var listDataExpertise = [];
-                $.each($('#tbl-Expertise tr'), function (i, item) {
-                    var keyid = $(this).find('td:eq(0) input[type="hidden"]').val();
-                    var degree = $(this).find('td:eq(1) select').val();
-                    var major = $(this).find('td:eq(2) select').val();
-                    var trainingSystem = $(this).find('td:eq(3) select').val();
-
-                    var data = {
-                        KeyId: keyid,
-                        EmployeeFK: gId,
-                        DegreeFK: degree,
-                        MajorFK: major,
-                        TrainingSystemFK: trainingSystem
-                    };
-                    listDataExpertise.push(data);
-                });
-
-                //Language Data
-                var listDataLanguage = [];
-                $.each($('#tbl-Languages tr'), function (i, item) {
-                    var keyid = $(this).find('td:eq(0) input[type="hidden"]').val();
-                    var language = $(this).find('td:eq(1) select').val();
-                    var level = $(this).find('td:eq(2) select').val();
-                    var certificate = $(this).find('td:eq(3) input').val();
-
-                    var data = {
-                        KeyId: keyid,
-                        EmployeeFK: gId,
-                        LanguageFK: language,
-                        LevelFK: level,
-                        Certificate: certificate
-                    };
-                    listDataLanguage.push(data);
-                });
-
-                //Salary Data
-                var listDataSalary = [];
-                $.each($('#tbl-SalaryProcess tr'), function (i, item) {
-                    var keyid = $(this).find('td:eq(0) input[type="hidden"]').val();
-                    var fluctuationsDate = $(this).find('td:eq(1) input').val();
-                    var salaryBeforeInscrease = general.toFloat($(this).find('td:eq(2) input').val());
-                    var percentInscrease = $(this).find('td:eq(3) input').val();
-                    var amountInscrease = general.toFloat($(this).find('td:eq(4) input').val());
-                    var salaryAfterInscrease = general.toFloat($(this).find('td:eq(5) input').val());
-                    var note = $(this).find('td:eq(6) input').val();
-
-                    var data = {
-                        KeyId: keyid,
-                        EmployeeFK: gId,
-                        FluctuationsDate: fluctuationsDate,
-                        SalaryBeforeInscrease: salaryBeforeInscrease,
-                        PercentInscrease: percentInscrease,
-                        AmountInscrease: amountInscrease,
-                        SalaryAfterInscrease: salaryAfterInscrease,
-                        Note: note
-                    };
-                    listDataSalary.push(data);
-                });
-
-
+                
 
                 var data = {
                     AccommodationCurrent: accommodationCurrent,
@@ -1262,6 +1082,40 @@ function loadData(isPageChanged) {
         }
     });
 }
+
+function TestSave() {
+    var data = {
+        KeyId: 51,
+        masp: 51,
+        tensp: "Sp test",
+        maloai: 1,
+        mancc: 1,
+        dongia: 9999,
+        soluong: 1,
+        mota: "1",
+        tenhinh: "1",
+        khuyenmai: 0
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/Sanpham/SaveEntity",
+        data: { sanphamVm: data },
+        dataType: "json",
+        beforeSend: function () {
+            general.startLoading();
+        },
+        success: function (response) {
+            console.log(response);
+            general.stopLoading();
+        },
+        error: function (status) {
+            general.notify('Có lỗi trong khi ghi danh bạ!', 'error');
+            general.stopLoading();
+        }
+    });
+}
+
 function wrapPaging(recordCount, callBack, changePageSize) {
     var totalsize = Math.ceil(recordCount / general.configs.pageSize);
     //Unbind pagination if it existed or click change pagesize

@@ -91,7 +91,8 @@ namespace Data.EF
 
 		public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
 		{
-			return FindAll(includeProperties).SingleOrDefault(x => x.KeyId.Equals(id));
+
+			return FindAll(includeProperties).SingleOrDefault(e => (object)e.KeyId == (object)id);
 		}
 
 		public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
@@ -117,6 +118,7 @@ namespace Data.EF
 		public virtual void Update(T entity)
 		{
 			var entity2 = FindById(entity.KeyId);
+			
 			if (entity2 == null)
 			{
 				return;
