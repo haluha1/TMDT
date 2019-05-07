@@ -19,7 +19,7 @@ namespace Data.Entities
         public double tongtien { get; set; }
         public string thoigian { get; set; }
         public ICollection<Cthd> Cthdons { get; set; }
-		public virtual TaiKhoan TaiKhoanNavigation { get; set; }
+		public virtual Khachhang KhachHangNavigation { get; set; }
 
     }
 }

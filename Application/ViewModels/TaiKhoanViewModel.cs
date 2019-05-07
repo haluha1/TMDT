@@ -18,7 +18,7 @@ namespace Application.ViewModels
 		public string sotk { get; set; }
 		public string matkhau { get; set; }
 		public string thoigiandk { get; set; }
-
+		public string avatar { get; set; }
 
 
 		public RatingType UserType { get; set; }
@@ -27,9 +27,6 @@ namespace Application.ViewModels
 		public virtual NccViewModel NccNavigation { get; set; }
 		public virtual WebmasterViewModel WebmasterNavigation { get; set; }
 
-
-		public virtual ICollection<HoadonmuatinViewModel> Hoadonmuatins { get; set; }
-		public virtual ICollection<HoadonViewModel> Hoadons { get; set; }
-		public virtual GiohangViewModel GiohangNavigation { get; set; }
+		
 	}
 }

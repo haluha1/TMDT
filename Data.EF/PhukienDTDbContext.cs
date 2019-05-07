@@ -86,7 +86,7 @@ namespace Data.EF
 
 			modelBuilder.Entity<Hoadon>().HasKey(e => e.KeyId).ToTable("HoaDon");
 			modelBuilder.Entity<Hoadon>()
-			.HasRequired<TaiKhoan>(s => s.TaiKhoanNavigation)
+			.HasRequired<Khachhang>(s => s.KhachHangNavigation)
 			.WithMany(g => g.Hoadons)
 			.HasForeignKey<int>(s => s.makh);
 
@@ -95,12 +95,17 @@ namespace Data.EF
 			.HasRequired<Giatin>(s => s.GiatinNavigation)
 			.WithMany(g => g.Hoadonmuatins)
 			.HasForeignKey<int>(s => s.magiatin);
+
 			modelBuilder.Entity<Hoadonmuatin>()
-			.HasRequired<TaiKhoan>(s => s.TaiKhoanNavigation)
+			.HasRequired<Ncc>(s => s.NccNavigation)
 			.WithMany(g => g.Hoadonmuatins)
 			.HasForeignKey<int>(s => s.mancc);
 
 			modelBuilder.Entity<Khachhang>().HasKey(e => e.User_FK).ToTable("KhachHang");
+			modelBuilder.Entity<Khachhang>()
+							.HasOptional(s => s.GiohangNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.KhachHangBy);
+
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
 			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
@@ -117,10 +122,22 @@ namespace Data.EF
 			
 
 			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");
+
 			modelBuilder.Entity<Sanpham>()
 			.HasRequired<Loaisp>(s => s.LoaispNavigation)
 			.WithMany(g => g.Sanphams)
 			.HasForeignKey<int>(s => s.maloai);
+
+			modelBuilder.Entity<Sanpham>()
+			.HasMany<Khachhang>(s => s.KhachHangYeuThichs)
+			.WithMany(g => g.SanPhamYeuThichs)
+			.Map(cs =>
+			{
+				cs.MapLeftKey("SanPhamYeuThichRefId");
+				cs.MapRightKey("KhachHangRefId");
+				cs.ToTable("SanPhamYeuThich_KhachHang");
+			});
+
 			modelBuilder.Entity<Sanpham>()
 			.HasMany<Giohang>(s => s.Giohangs)
 			.WithMany(g => g.Sanphams)
@@ -141,9 +158,7 @@ namespace Data.EF
 			modelBuilder.Entity<TaiKhoan>()
 							.HasOptional(s => s.WebmasterNavigation) // Mark Address property optional in Student entity
 							.WithRequired(ad => ad.TaiKhoanBy);
-			modelBuilder.Entity<TaiKhoan>()
-							.HasOptional(s => s.GiohangNavigation) // Mark Address property optional in Student entity
-							.WithRequired(ad => ad.TaiKhoanBy);
+
 
 
 

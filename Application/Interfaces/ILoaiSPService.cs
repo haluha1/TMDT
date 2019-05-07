@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-	public interface ILoaiSPService
+	public interface ILoaiSPService : IDisposable
 	{
 		LoaispViewModel Add(LoaispViewModel loaispVm);
 

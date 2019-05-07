@@ -14,6 +14,6 @@ namespace Application.ViewModels
 		public int magiatin { get; set; }
 		public string thoigian { get; set; }
 		public virtual GiatinViewModel GiatinNavigation { get; set; }
-		public virtual TaiKhoanViewModel TaiKhoanNavigation { get; set; }
+		public virtual NccViewModel NccNavigation { get; set; }
 	}
 }
