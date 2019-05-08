@@ -159,7 +159,30 @@ span.psw {
 }
 
 .ten {
-    z-index: 1; margin-top:-400px; margin-left:50px; color:white; font-weight:bold;
+    position: absolute;
+    top: 0;
+    color:black;
+    font-weight:bold;
+}
+.single-product-type{
+    position: relative;
+    float: left;
+}
+.single-product-type :hover{
+    background-color:black;
+    color: white;
+}
+.yeuthich {
+    width: 180px;
+    margin-left: 30px;
+    height: 40px;
+    font-weight:bold;
+    color:black;
+    line-height: 2px;
+}
+.font {
+    font-weight:bold;
+    margin-left: 10px;
 }
 .khung {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 10);
