@@ -40,13 +40,13 @@ button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 0 0 0 65px;
+    margin: 8px 0;
     border: none;
     cursor: pointer;
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
-    width: 100px;
+    width:100px;
 }
 
     button:hover {
@@ -157,32 +157,8 @@ span.psw {
 }
 
 .ten {
-    top: 0px;
-    position: absolute;
-    color: white;
-    font-size: large;
-    font-weight:bold;
-    margin-top:40px;
-    margin-left:40px;
+    z-index: 1; margin-top:-400px; margin-left:50px; color:white; font-weight:bold;
 }
 .khung {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 10);
-    width: 240px;
-    height: 400px;
-}
-.loaisp:hover .ten {
-    background-color: black;
-    color:white;
-    font-weight:bold;
-    z-index:0;
-}
-#khampha {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    border-radius: 15px;
-    width: 200px;
-    font-size: 17px;
-    margin-top: 100px;
-    margin-left: 90px;
 }

@@ -55,6 +55,7 @@ namespace Data.EF
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
+			
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
 			modelBuilder.Entity<Cthd>().HasKey(e => e.KeyId).ToTable("CTHD");
@@ -148,7 +149,7 @@ namespace Data.EF
 
 
 			modelBuilder.Entity<Webmaster>().HasKey(e => e.User_FK).ToTable("WebMaster");
-
+			base.OnModelCreating(modelBuilder);
 		}
 	}
 }

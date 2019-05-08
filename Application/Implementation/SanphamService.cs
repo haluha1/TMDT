@@ -22,9 +22,17 @@ namespace Application.Implementation
 			_unitOfWork = unitOfWork;
 		}
 
-		public SanphamViewModel Add(SanphamViewModel loaispVm)
+		public SanphamViewModel Add(SanphamViewModel sanphamVm)
 		{
-			throw new NotImplementedException();
+			var sp = Mapper.Map<SanphamViewModel, Sanpham>(sanphamVm);
+			_repository.AddReturn(sp);
+			sanphamVm.KeyId = sp.KeyId;
+			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
+			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
+			//sp.Id = HP_EmployeeVm.Id;
+			//employee.UserBy.IsEmployee = true;
+			_unitOfWork.Commit();
+			return sanphamVm;
 		}
 
 		public void Delete(int id)
@@ -46,7 +54,14 @@ namespace Application.Implementation
 
 		public List<SanphamViewModel> GetAll(string keyword)
 		{
-			throw new NotImplementedException();
+			var query = _repository.FindAll().OrderBy(x => x.KeyId);
+			var data = new List<SanphamViewModel>();
+			foreach (var item in query)
+			{
+				var _data = Mapper.Map<Sanpham, SanphamViewModel>(item);
+				data.Add(_data);
+			}
+			return data;
 		}
 
 		public void Dispose()
@@ -56,7 +71,9 @@ namespace Application.Implementation
 
 		public SanphamViewModel GetById(int id)
 		{
-			throw new NotImplementedException();
+			//var data = _repository.FindById(id, p => p.UserBy.WardFKNavigation, p => p.LastupdatedBy, p => p.UserBy, p => p.DepartmentFkNavigation, p => p.PositionFkNavigation);
+			var data = _repository.FindById(id);
+			return Mapper.Map<Sanpham, SanphamViewModel>(data);
 		}
 
 		public SanphamViewModel GetBysId(string keyword)
@@ -69,9 +86,11 @@ namespace Application.Implementation
 			return _unitOfWork.Commit();
 		}
 
-		public void Update(SanphamViewModel loaispVm)
+		public void Update(SanphamViewModel sanphamVm)
 		{
-			throw new NotImplementedException();
+			var sp = Mapper.Map<SanphamViewModel, Sanpham>(sanphamVm);
+
+			_repository.Update(sp);
 		}
 	}
 }

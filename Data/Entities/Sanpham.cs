@@ -13,6 +13,20 @@ namespace Data.Entities
 		{
 		}
 
+		public Sanpham(int keyId, int masp, string tensp, int maloai, int mancc, double dongia, int soluong, string mota, string tenhinh, float khuyenmai)
+		{
+			KeyId = keyId;
+			this.masp = masp;
+			this.tensp = tensp;
+			this.maloai = maloai;
+			this.mancc = mancc;
+			this.dongia = dongia;
+			this.soluong = soluong;
+			this.mota = mota;
+			this.tenhinh = tenhinh;
+			this.khuyenmai = khuyenmai;
+		}
+
 		public int masp { get; set; }
         public string tensp { get; set; }
         public int maloai { get; set; }
