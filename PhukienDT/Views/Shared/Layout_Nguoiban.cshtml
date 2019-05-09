@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <title>@ViewBag.Title</title>
+    <link href="~/Scripts/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Style", required: false)
+</head>
+<body>
+
+    <div style="height:85px; background-color:black; color: white;width: 1372px;">
+        <div style="margin-left: 100px;float:left">
+            <img height="80px" src="..\img\logoden.png">
+        </div>
+        <div style="float:left; font-weight:bold; font-size:17px; margin-top:29px; margin-left: 20px">VALFRE- TRANG NGƯỜI BÁN</div>
+        <div style="">
+            <div style="margin-left: 500px;float:left;margin-top:28px">
+                <img height="30px" src="..\img\bell.png">
+            </div>
+            <div style="margin-left: 50px;float:left;margin-top:28px">
+                <img height="30px" src="..\img\menu.png">
+            </div>
+            <div style="margin-left: 20px;float:left;margin-top:-10px">
+                <img style="border-radius: 50%; height: 60px; margin: 20px; padding: 10px; text-align: center; width:60px" height="40px" src="..\img\logo3.png">
+            </div>
+            <div style="margin-left: 0px;float:left;margin-top:35px">
+                Tên merchant
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @*<footer>
+                <p>&copy; @datetime.now.year - my asp.net application</p>
+            </footer>*@
+    </div>
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>*@
+
+
+
+    <script src="../Scripts/mustache/mustache.js"></script>
+    <script src="../Scripts/twbs-pagination/jquery.twbsPagination.js"></script>
+    <script src="../Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="../Scripts/jquery-validation/dist/additional-methods.js"></script>
+    <script src="../Scripts/jquery-validation/dist/Localization/messages_vi.js"></script>
+    <script src="../Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="../Scripts/notifyjs/dist/notify.js"></script>
+    <script src="../Scripts/app/shared/general.js"></script>
+    <script src="../Scripts/app/shared/notificationgeneral.js"></script>
+    <script src="../Scripts/main.js"></script>
+    <script>
+        var notification = new ngeneralController();
+        notification.initialize();
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@{
+    ViewBag.Title = "Layout_Nguoiban";
+}
