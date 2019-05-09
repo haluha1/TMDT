@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - Infrastructure", "{0056CFAC-AA07-46E9-973D-925AF8840D0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{255DC78A-CDA4-454A-80CA-3A2C0557EB73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{F8855FAA-9537-44E7-9206-16CD279B452A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8855FAA-9537-44E7-9206-16CD279B452A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8855FAA-9537-44E7-9206-16CD279B452A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255DC78A-CDA4-454A-80CA-3A2C0557EB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255DC78A-CDA4-454A-80CA-3A2C0557EB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255DC78A-CDA4-454A-80CA-3A2C0557EB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255DC78A-CDA4-454A-80CA-3A2C0557EB73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,9 +63,10 @@ Global
 		{497E1D6B-15E4-4AE7-88C8-8FCD0101C0ED} = {9248D501-35E3-45C6-9692-961812585110}
 		{9AD377AE-DD72-4E01-A9C4-C3457F399C60} = {9248D501-35E3-45C6-9692-961812585110}
 		{F8855FAA-9537-44E7-9206-16CD279B452A} = {0056CFAC-AA07-46E9-973D-925AF8840D0F}
+		{255DC78A-CDA4-454A-80CA-3A2C0557EB73} = {0056CFAC-AA07-46E9-973D-925AF8840D0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {59EA1D2C-E704-4994-A11A-E35310019FFD}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {59EA1D2C-E704-4994-A11A-E35310019FFD}
 	EndGlobalSection
 EndGlobal

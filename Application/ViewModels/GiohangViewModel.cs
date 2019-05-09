@@ -13,6 +13,6 @@ namespace Application.ViewModels
 		public int soluong { get; set; }
 		public double thanhtien { get; set; }
 		public virtual ICollection<SanphamViewModel> Sanphams { get; set; }
-		public virtual TaiKhoanViewModel TaiKhoanBy { get; set; }
+		public virtual KhachhangViewModel KhachHangBy { get; set; }
 	}
 }

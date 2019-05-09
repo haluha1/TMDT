@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="../Content/Site.css" rel="stylesheet" />
 
     <title>@ViewBag.Title</title>
-    <link href="~/Scripts/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/bootstrap/dist/js/bootstrap.js"></script>
-    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="../Scripts/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.3.1.js"></script>
+    <script src="../Scripts/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="../Content/style.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Style", required: false)
 </head>
@@ -20,10 +20,10 @@
     <nav class="navbar nav-contain" style="margin-bottom:0">
         <div class="container-fluid">
             <div class="navbar-header col-sm-2">
-                <a class="navbar-brand" href="http://localhost:51415/Home/Index"><img style="height:90px; margin-left:60px; margin-top:-15px" src="..\img\logo2.png" /></a>
+                <a class="navbar-brand" href="../Home/Index"><img style="height:90px; margin-left:60px; margin-top:-15px" src="..\img\logo2.png" /></a>
             </div>
             <ul class="nav navbar-nav col-sm-4" style="margin-top: 15px;">
-                <li class="active"><a href="http://localhost:51415/Home/Index">Trang chủ</a></li>
+                <li class="active"><a href="../Home/Index">Trang chủ</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sản phẩm <span class="caret"></span></a>
                     <ul class="dropdown-menu" style="margin-top: 15px;">
@@ -34,22 +34,22 @@
                         <li><a href="#">Khác</a></li>
                     </ul>
                 </li>
-                <li><a href="http://localhost:51415/Home/About">Thông tin</a></li>
+                <li><a href="../Home/About">Thông tin</a></li>
             </ul>
             <div class="navbar-right col-sm-5" style="margin-top:10px">
-                <div class="col-sm-5" style="float:left; margin-top:10px">
-                    <input class="search" id="txtSearch" type="text" style="width:140%;" placeholder="Search..." />
+                <div class="col-sm-6" style="float:left; margin-top:10px">
+                    <input class="search" id="txtSearch" type="text" style="width:100%;" placeholder="Search..." />
                 </div>
                 <div class="col-sm-1" style="float:left;margin-top:10px;">
                     <img style="height:27px;margin-top:10px" src="..\img\search.png" />
                 </div>
-                <div class="col-sm-6" style="float:left;margin-top:20px">
+                <div class="col-sm-5" style="float:left;margin-top:20px">
                     <a class="col-sm-4 nav-a-right" href="#"><img class="nav-img-right" src="..\img\heart.png" /></a>
                     <a class="col-sm-4 nav-a-right" href="#"><img class="nav-img-right" src="..\img\bag.png" /></a>
-                    <a class="col-sm-4 nav-a-right" onclick="document.getElementById('user').style.display='block'"><img class="nav-img-right" src="..\img\login.png" /></a>
+                    <a class="col-sm-4 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="..\img\login.png" /></a>
                     <div id="user" class="modal">
 
-                        <form class="modal-content animate" action="/action_page.php">
+                        <form class="modal-content animate" id="frmMaintainance" action="#" onsubmit="return validateForm()" method="post">
                             <div class="imgcontainer">
                                 <span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
                                 <img style="width:25%; margin-top: -50px" src="..\img\logo3.png" alt="Avatar" class="avatar">
@@ -58,16 +58,16 @@
                             <div class="container">
                                 <div style="margin-left: 225px">
                                     <label for="uname"><b>Username</b></label>
-                                    <input type="text" placeholder="Enter Your Email" name="uname" required>
+                                    <input type="email" placeholder="Enter Your Email" id="txtEmail" name="uname" required>
                                 </div>
 
                                 <div style="margin-left: 225px">
                                     <label for="psw"><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Your Password" name="psw" required>
+                                    <input type="password" placeholder="Enter Your Password" id="txtPassword" name="psw" required>
                                 </div>
 
                                 <label style="margin-left: 225px">
-                                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
                                 </label>
 
                                 <div>
@@ -150,6 +150,8 @@
     <script>
         var notification = new ngeneralController();
         notification.initialize();
+        var main = new mainController();
+        main.initialize();
     </script>
 
 

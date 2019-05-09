@@ -26,9 +26,9 @@ namespace Data.EF
             //Tài khoản
             var taikhoans = new List<TaiKhoan>
             {
-            new TaiKhoan{matk=1,hoten="Nguyễn Văn An", email="ann@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", UserType=RatingType.Merchant},
-            new TaiKhoan{matk=2,hoten="Trần Ngọc Ngà", email="ngocnga@gmail.com", diachi="478 Lý Thái Tổ", sdt="0123456701", sotk="2222222222222", matkhau="123", thoigiandk="1/1/2019", UserType=RatingType.Webmaster},
-            new TaiKhoan{matk=3,hoten="Lê Thị Mai", email="maile@gmail.com", diachi="333 Hai Bà Trưng", sdt="0123456702", sotk="3333333333333", matkhau="123", thoigiandk="1/1/2019", UserType=RatingType.Customer},
+            new TaiKhoan{matk=1,hoten="Nguyễn Văn An", email="ann@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=RatingType.Merchant},
+            new TaiKhoan{matk=2,hoten="Trần Ngọc Ngà", email="ngocnga@gmail.com", diachi="478 Lý Thái Tổ", sdt="0123456701", sotk="2222222222222", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=RatingType.Webmaster},
+            new TaiKhoan{matk=3,hoten="Lê Thị Mai", email="maile@gmail.com", diachi="333 Hai Bà Trưng", sdt="0123456702", sotk="3333333333333", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=RatingType.Customer},
             };
             taikhoans.ForEach(s => context.TaiKhoans.Add(s));
             context.SaveChanges();

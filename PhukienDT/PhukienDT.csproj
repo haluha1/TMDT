@@ -454,7 +454,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -540,6 +542,10 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{f8855faa-9537-44e7-9206-16cd279b452a}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{255DC78A-CDA4-454A-80CA-3A2C0557EB73}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

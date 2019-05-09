@@ -14,7 +14,7 @@ namespace Data.Entities
         public int magiatin { get; set; }
         public string thoigian { get; set; }
 		public virtual Giatin GiatinNavigation { get; set; }
-		public virtual TaiKhoan TaiKhoanNavigation { get; set; }
+		public virtual Ncc NccNavigation { get; set; }
 
 	}
 }

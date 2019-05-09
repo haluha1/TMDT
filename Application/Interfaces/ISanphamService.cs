@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-	public interface ISanphamService
+	public interface ISanphamService : IDisposable
 	{
 		SanphamViewModel Add(SanphamViewModel loaispVm);
 

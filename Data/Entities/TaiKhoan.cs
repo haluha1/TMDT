@@ -21,17 +21,18 @@ namespace Data.Entities
         public string matkhau { get; set; }
         public string thoigiandk { get; set; }
 
+		public string avatar { get; set; }
 
-        public RatingType UserType { get; set; }
+		public RatingType UserType { get; set; }
 
         public virtual Khachhang KhachhangNavigation { get; set; }
 		public virtual Ncc NccNavigation { get; set; }
 		public virtual Webmaster WebmasterNavigation { get; set; }
 
 
-		public virtual ICollection<Hoadonmuatin> Hoadonmuatins { get; set; }
-		public virtual ICollection<Hoadon> Hoadons { get; set; }
-		public virtual Giohang GiohangNavigation { get; set; }
+		
+		
+		
 
 
 	}

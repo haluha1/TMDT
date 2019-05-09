@@ -14,6 +14,6 @@ namespace Application.ViewModels
 		public double tongtien { get; set; }
 		public string thoigian { get; set; }
 		public ICollection<CthdViewModel> Cthdons { get; set; }
-		public virtual TaiKhoanViewModel TaiKhoanNavigation { get; set; }
+		public virtual KhachhangViewModel KhachHangNavigation { get; set; }
 	}
 }
