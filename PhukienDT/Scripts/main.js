@@ -41,6 +41,32 @@ function currentSlide(n) {
     showSlides(slideIndex = n);
 }
 
+//$('#frmMaintainance').validate({
+//    errorClass: 'red',
+//    ignore: [],
+//    lang: 'vi',
+//    invalidHandler: function (event, validator) {
+//        var errors = validator.numberOfInvalids();
+//        if (errors) {
+//            var errorElement = validator.errorList[0].element;
+//            var errorElementTag = validator.errorList[0].element.labels[0].textContent;
+//            if (errorElement.type.includes("text")) {
+//                general.notify('Hãy nhập ' + errorElementTag, 'error');
+//            }
+//            if (errorElement.type.includes("select")) {
+//                general.notify('Hãy chọn ' + errorElementTag, 'error');
+//            }
+//        }
+//    },
+//    rules: {
+//        uname: {
+//            required: true
+//        },
+//        psw: {
+//            required: true
+//        }
+//    }
+//});
 
 function validateForm() {
 
@@ -60,19 +86,22 @@ function validateForm() {
         data: { LoginVm: data },
         success: function (response) {
             console.log(response);
-            var avatarSrc = response.Avatar == '' ? "../img/login.png" : response.Avatar;
-            general.notify('Xin chào ' + response.UserName + '!', 'success');
-            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-            $('#btnLogin').attr('onclick', '');
-            $('#user').css('display', 'none');
-            $('#frmMaintainance').trigger('reset');
-            general.stopLoading();
+            if (response.Status == "OK") {
+                var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                $('#btnLogin').attr('onclick', '');
+                $('#user').css('display', 'none');
+                $('#frmMaintainance').trigger('reset');
+                general.stopLoading();
+            }
+            else {
+                general.notify(response.Result + '!', 'error');
+            }
+            
         },
         error: function (status) {
-
             console.log(status);
-            
-            return true;
             general.notify('Email hoặc mật khẩu không đúng!', 'error');
             general.stopLoading();
         }
@@ -87,7 +116,6 @@ mainController = function () {
         registerEvents();
     }
     function registerEvents() {
-        
         $('#frmMaintainance').validate({
             errorClass: 'red',
             ignore: [],
@@ -106,88 +134,68 @@ mainController = function () {
                 }
             },
             rules: {
-                txtEmployee: {
+                txtEmail: {
+                    required: true,
+                    email: true
+                },
+                txtPassword: {
                     required: true
+                }
+            },
+            messages: {
+                txtEmail: {
+                    required: "Hãy nhập email!"
                 },
-                txtIdCard: {
-                    required: true
-                },
-                selDepartmentFK: {
-                    required: true
-                },
-                selPositionFK: {
-                    required: true
-                },
-                selOriginFK: {
-                    required: true
-                },
-                txtPhoneNumberContactPerson: {
-                    number: true
-                },
-                txtTaxIDNumber: {
-                    number: true
-                },
-                txtBankAccountNumber: {
-                    number: true
-                },
-                txtNOChildren: {
-                    number: true
-                },
-                txtSalarySocialInsurance: {
-                    required: true,
-                    number: true
-                },
-                txtSalary: {
-                    required: true,
-                    number: true
-                },
-                txtNumberOfDependents: {
-                    number: true
-                },
-                txtTravelAllowance: {
-                    number: true
-                },
-                txtPositionAllowance: {
-                    number: true
-                },
-                txtSeniorityAllowances: {
-                    number: true
-                },
-                txtOtherAllowances: {
-                    number: true
-                },
-                txtRelativesName: {
-                    required: true
-                },
-                txtRelationship: {
-                    required: true
-                },
-                txtYearOfBirth: {
-                    required: true,
-                    number: true
-                },
-                selDegree: {
-                    required: true,
-                },
-                selMajor: {
-                    required: true,
-                },
-                selTrainingSystem: {
-                    required: true,
-                },
-                selLanguage: {
-                    required: true,
-                },
-                selLevel: {
-                    required: true,
-                },
-                txtCertificate: {
-                    required: true,
+                txtPassword: {
+                    required: "Hãy nhập mật khẩu!"
                 }
             }
         });
-        
-        
+
+        $("#frmMaintainance").on('submit', function (e) {
+            if ($('#frmMaintainance').valid()) {
+                e.preventDefault();
+                var username = $('#txtEmail').val();
+                var password = $('#txtPassword').val();
+                var rememberMe = $('#chkRememberMe').prop('checked');
+
+                var data = {
+                    Username: username,
+                    Password: password,
+                    RememberMe: rememberMe
+                };
+
+                $.ajax({
+                    url: '/Home/Login',
+                    type: 'POST',
+                    data: { LoginVm: data },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.Status == "OK") {
+                            var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                            general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                            $('#btnLogin').attr('onclick', '');
+                            $('#user').css('display', 'none');
+                            $('#frmMaintainance').trigger('reset');
+                            general.stopLoading();
+                        }
+                        else {
+                            general.notify(response.Result + '!', 'error');
+                        }
+
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                        general.stopLoading();
+                    }
+                });
+            }
+
+        });
+
+
     }
 
     function resetFormMaintainance() {

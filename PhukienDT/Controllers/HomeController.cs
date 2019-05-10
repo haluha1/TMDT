@@ -81,11 +81,11 @@ namespace PhukienDT.Controllers
 						userSession.UserName = user.hoten;
 						userSession.Avatar = user.avatar;
 						Session.Add(CommonConstrants.USER_SESSION,userSession);
-						return Json(userSession, JsonRequestBehavior.AllowGet);
+						return Json( new { Result = userSession, Status = "OK" }, JsonRequestBehavior.AllowGet);
 					}
 					else
 					{
-						return Json(const_Error.WRONG_LOGIN, JsonRequestBehavior.AllowGet);
+						return Json( new { Result = const_Error.WRONG_LOGIN, Status = "ERROR" }, JsonRequestBehavior.AllowGet);
 					}
 				}
 			}

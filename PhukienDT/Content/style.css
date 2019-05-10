@@ -168,7 +168,7 @@ span.psw {
     position: relative;
     float: left;
 }
-.single-product-type :hover{
+.single-product-type:hover .ten{
     background-color:black;
     color: white;
 }
@@ -187,4 +187,6 @@ span.psw {
 .khung {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 10);
 }
-
+.red {
+	color: red;
+}
