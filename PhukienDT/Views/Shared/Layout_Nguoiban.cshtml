@@ -12,6 +12,7 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/bootstrap/dist/js/bootstrap.js"></script>
     <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Style", required: false)
 </head>
@@ -27,7 +28,7 @@
                 <img height="30px" src="..\img\bell.png">
             </div>
             <div style="margin-left: 50px;float:left;margin-top:28px">
-                <img height="30px" src="..\img\menu.png">
+                <img id="imgmenu" height="30px" src="..\img\menu.png">
             </div>
             <div style="margin-left: 20px;float:left;margin-top:-10px">
                 <img style="border-radius: 50%; height: 60px; margin: 20px; padding: 10px; text-align: center; width:60px" height="40px" src="..\img\logo3.png">
@@ -37,7 +38,32 @@
             </div>
         </div>
     </div>
-
+    <div style="width: 300px; height:240px; margin-left: 920px; ">
+        <a href="/Nguoiban/Sanpham">
+            <div class="row chinh">
+                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/sp.png" />
+                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
+            </div>
+        </a>
+        <a href="/Nguoiban/Donban">
+            <div class="row chinh">
+                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/h.png" />
+                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
+            </div>
+        </a>
+        <a href="/Nguoiban/Doanhthu">
+            <div class="row chinh">
+                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/t.png" />
+                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
+            </div>
+        </a>
+        <a href="/Nguoiban/Muatin">
+            <div class="row chinh">
+                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/b.jpg" />
+                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
+            </div>
+        </a>  
+    </div>
 
 
     <div class="container body-content">

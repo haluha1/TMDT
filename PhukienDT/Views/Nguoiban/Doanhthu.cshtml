@@ -4,5 +4,126 @@
     Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
 }
 
-<h2>Doanhthu</h2>
+<div class="row">
+    <div class="col-lg-4">
+        <div style="height:400px; background-color:antiquewhite">
+            <div class="row">
+                <img class="col-lg-6" style="border-radius:50%; width:90px; margin-left: 20px; margin-top:20px" src="~/img/khac/k49.jpg" />
+                <div class="col-lg-6" style=" margin-top:20px">
+                    <div class="textmenu">tên người bán</div>
+                    <div>ngày gia nhập</div>
+                </div>
+            </div>
+            <div style="margin-top: 30px; margin-left: 10px">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div style="float:left">đ</div>
+                        <div style="float:left; margin-top: -23px; margin-left: 5px"><h3>Tiền</h3></div>
+                    </div>
+                    <div class="col-lg-8">
+                        Sẽ thanh toán
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div style="float:left">đ</div>
+                        <div style="float:left; margin-top: -23px; margin-left: 5px"><h3>Tiền</h3></div>
+                    </div>
+                    <div class="col-lg-8">
+                        Đã thanh toán(tuần hiện tại)
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btnthemtk">+Thêm tài khoản</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div style="background-color:antiquewhite">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Sẽ thanh toán</a></li>
+                <li><a data-toggle="tab" href="#menu1">Đã thanh toán</a></li>
+            </ul>
 
+            <div class="form-group row">
+                <label for="txtFromdate" class="col-sm-2 col-form-label">Ngày bắt đầu<span class="star">*</span></label>
+                <div class="col-sm-4">
+                    <input type="text" id="txtFromdate" name="txtFromdate" autocomplete="off" class="form-control datepicker" placeholder="Chọn ngày bắt đầu" />
+                </div>
+                <label for="txtTodate" class="col-sm-2 col-form-label">Ngày kết thúc<span class="star">*</span></label>
+                <div class="col-sm-4">
+                    <input type="text" id="txtTodate" name="txtTodate" autocomplete="off" class="form-control datepicker" placeholder="Chọn ngày kết thúc" />
+                </div>
+            </div>
+
+            <hr />
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <th>Mã khách hàng</th>
+                                <th>Giá trị hóa đơn</th>
+                                <th>Tình trạng</th>
+                                <th>Xem chi tiết hóa đơn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    mã hd
+                                </td>
+                                <td>
+                                    mã kh
+                                </td>
+                                <td>
+                                    tổng hóa đơn
+                                </td>
+                                <td>
+                                    tình trạng hóa đơn
+                                </td>
+                                <td>
+                                    <a href="#">Xem</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <th>Mã khách hàng</th>
+                                <th>Giá trị hóa đơn</th>
+                                <th>Tình trạng</th>
+                                <th>Xem chi tiết hóa đơn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    mã hd
+                                </td>
+                                <td>
+                                    mã kh
+                                </td>
+                                <td>
+                                    tổng hóa đơn
+                                </td>
+                                <td>
+                                    tình trạng hóa đơn
+                                </td>
+                                <td>
+                                    <a href="#">Xem</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
