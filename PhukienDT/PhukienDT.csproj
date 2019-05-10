@@ -506,7 +506,12 @@
     <Content Include="Scripts\twbs-pagination\twbs-pagination.jquery.json" />
     <Content Include="Views\Sanpham\ctsp.cshtml" />
     <Content Include="Views\Sanpham\Theosanpham.cshtml" />
+    <Content Include="Views\Shared\Layout_Nguoiban.cshtml" />
     <Content Include="Views\Nguoiban\Index.cshtml" />
+    <Content Include="Views\Nguoiban\Sanpham.cshtml" />
+    <Content Include="Views\Nguoiban\Donban.cshtml" />
+    <Content Include="Views\Nguoiban\Doanhthu.cshtml" />
+    <Content Include="Views\Nguoiban\Muatin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

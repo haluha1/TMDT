@@ -1,36 +1,55 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
 }
+@section Scripts{
+    <script src="~/Scripts/app/home/index.js"></script>
 
-<div style="height:85px; background-color:black; color: white; margin-top:100px;width: 1372px; margin-left: -120px">
-    <div style="margin-left: 100px;float:left">
-        <img height="80px" src="..\img\logoden.png">
-    </div>
-    <div style="float:left; font-weight:bold; font-size:17px; margin-top:29px; margin-left: 20px">VALFRE- TRANG NGƯỜI BÁN</div>
-    <div style="">
-        <div style="margin-left: 500px;float:left;margin-top:28px">
-            <img height="30px" src="..\img\bell.png">
-        </div>
-        <div style="margin-left: 50px;float:left;margin-top:28px">
-            <img height="30px" src="..\img\menu.png">
-        </div>
-        <div style="margin-left: 20px;float:left;margin-top:-10px">
-            <img style="border-radius: 50%; height: 60px; margin: 20px; padding: 10px; text-align: center; width:60px" height="40px" src="..\img\logo3.png">
-        </div>
-        <div style="margin-left: 0px;float:left;margin-top:35px">
-            Tên merchant
-        </div>
+    <script>
+        var home = new homeController();
+        home.initialize();</script>
+}
+<link href="~/Content/style.css" rel="stylesheet" />
+<div style="width: 100%;text-align:center ">
+    <h1>Chào mừng đến với Valfre - Kênh Người bán</h1>
+</div>
+<div style="width: 100%;text-align:center; font-size: 20px ">
+    Valfre - Kênh Người bán là công cụ quản lý shop, giúp bạn dễ phân loại sản phẩm, theo dõi đơn hàng, chăm sóc khách hàng và đánh giá hoạt động của shop.
+    Là chủ shop, bạn vui lòng đọc kĩ và tuân thủ Chính sách.
+</div>
+<div style="margin-top:50px">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <a href="../Nguoiban/Sanpham">
+            <div class="col-lg-2">
+                <img style="border-radius:50%" width="150px" src="../img/sp.png" />
+                <div style="margin-left:25px; color:royalblue; margin-top: 10px; font-weight:bold; font-size: 18px ">Sản phẩm</div>
+            </div>
+        </a>
+        <a href="../Nguoiban/Donban">
+            <div class="col-lg-2">
+                <img style="border-radius:50%" width="150px" src="../img/h.png" />
+                <div style="margin-left:15px; color:royalblue; margin-top: 10px; font-weight:bold; font-size: 18px ">Đơn bán</div>
+            </div>
+        </a>
+        <a href="../Nguoiban/Doanhthu">
+            <div class="col-lg-2">
+                <img style="border-radius:50%" width="150px" src="../img/t.png" />
+                <div style="margin-left:15px; color:royalblue; margin-top: 10px; font-weight:bold; font-size: 18px ">Doanh thu</div>
+            </div>
+        </a>
+        <a href="../Nguoiban/Muatin">
+            <div class="col-lg-2">
+                <img style="border-radius:50%" width="150px" src="../img/b.jpg" />
+                <div style="margin-left:15px; color:royalblue; margin-top: 10px; font-weight:bold; font-size: 18px ">Mua tin</div>
+            </div>
+        </a>
+        <div class="col-lg-2"></div>
     </div>
 </div>
 
 <div>
-    <div style="background: #dddddd; border-radius: 50%; border: 2px solid #a1a1a1; height: 300px; margin: 20px; padding: 10px; text-align: center; width: 300px">
-        <h2 style=”font-size: 22px; margin-top: 33%;”>Tôi Sẽ Bo Tròn Tuyệt Đối Đoạn Văn Bản Này, Bạn Xem Như Này Đã Ưng Mắt Chưa</h2>
-    </div>
-    
-    <div>
 
-    </div>
 </div>
 

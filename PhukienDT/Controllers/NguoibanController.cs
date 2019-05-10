@@ -13,5 +13,21 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public ActionResult Sanpham()
+        {
+            return View();
+        }
+        public ActionResult Doanhthu()
+        {
+            return View();
+        }
+        public ActionResult Muatin()
+        {
+            return View();
+        }
+        public ActionResult Donban()
+        {
+            return View();
+        }
     }
 }
