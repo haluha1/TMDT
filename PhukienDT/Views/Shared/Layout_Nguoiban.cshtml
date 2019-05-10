@@ -17,54 +17,146 @@
     @RenderSection("Style", required: false)
 </head>
 <body>
-
-    <div style="height:85px; background-color:black; color: white;width: 1372px;">
-        <div style="margin-left: 100px;float:left">
-            <img height="80px" src="..\img\logoden.png">
+    <div class="row" style="height:85px; background-color:black; color: white;width: 1372px;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-1">
+            <a href="/Nguoiban/Index"><img height="80px" src="..\img\logoden.png"></a>
         </div>
-        <div style="float:left; font-weight:bold; font-size:17px; margin-top:29px; margin-left: 20px">VALFRE- TRANG NGƯỜI BÁN</div>
-        <div style="">
-            <div style="margin-left: 500px;float:left;margin-top:28px">
-                <img height="30px" src="..\img\bell.png">
+        <div class="col-lg-3" style="font-weight:bold; font-size:17px; margin-top:25px">VALFRE- TRANG NGƯỜI BÁN</div>
+        <div class="col-lg-2"></div>
+        <div style="margin-top:25px; margin-right: -50px" class="col-lg-1">
+            <img height="30px" src="..\img\bell.png">
+        </div>
+        <div style="margin-top:25px; z-index:10" class="col-lg-1">
+            <ul>
+                <li>
+                    <div id="imgmenu"><img height="30px" src="..\img\menu.png"></div>
+                    <ul>
+                        <li>
+                            <a href="/Nguoiban/Sanpham">
+                                <div class="row chinh">
+                                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/sp.png" />
+                                    <div id="chinh2" class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Nguoiban/Donban">
+                                <div class="row chinh">
+                                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/h.png" />
+                                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Nguoiban/Doanhthu">
+                                <div class="row chinh">
+                                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/t.png" />
+                                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Nguoiban/Muatin">
+                                <div class="row chinh">
+                                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/b.jpg" />
+                                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        @*<div style="margin-top:25px" class="col-lg-1">
+            <div id="imgmenu"><img height="30px" src="..\img\menu.png"></div>
+            <div id="divmenu" style="width: 300px; height:240px; margin-left: -100px; margin-top:30px; background-color:#D7D7D7 ">
+                <a href="/Nguoiban/Sanpham">
+                    <div class="row chinh">
+                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/sp.png" />
+                        <div id="chinh2" class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
+                    </div>
+                </a>
+                <a href="/Nguoiban/Donban">
+                    <div class="row chinh">
+                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/h.png" />
+                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
+                    </div>
+                </a>
+                <a href="/Nguoiban/Doanhthu">
+                    <div class="row chinh">
+                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/t.png" />
+                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
+                    </div>
+                </a>
+                <a href="/Nguoiban/Muatin">
+                    <div class="row chinh">
+                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/b.jpg" />
+                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
+                    </div>
+                </a>
             </div>
-            <div style="margin-left: 50px;float:left;margin-top:28px">
-                <img id="imgmenu" height="30px" src="..\img\menu.png">
-            </div>
-            <div style="margin-left: 20px;float:left;margin-top:-10px">
-                <img style="border-radius: 50%; height: 60px; margin: 20px; padding: 10px; text-align: center; width:60px" height="40px" src="..\img\logo3.png">
-            </div>
-            <div style="margin-left: 0px;float:left;margin-top:35px">
-                Tên merchant
-            </div>
+        </div>*@
+        <div style="margin-top:17px" class="col-lg-1">
+            <img style="border-radius: 50%; height: 40px; width:40px" src="..\img\logo3.png">
+        </div>
+        <div style="margin-top:25px" class="col-lg-2" style="color:red; font-weight:bold">
+            Tên merchant
         </div>
     </div>
-    <div style="width: 300px; height:240px; margin-left: 920px; ">
-        <a href="/Nguoiban/Sanpham">
-            <div class="row chinh">
-                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/sp.png" />
-                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
-            </div>
-        </a>
-        <a href="/Nguoiban/Donban">
-            <div class="row chinh">
-                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/h.png" />
-                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
-            </div>
-        </a>
-        <a href="/Nguoiban/Doanhthu">
-            <div class="row chinh">
-                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/t.png" />
-                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
-            </div>
-        </a>
-        <a href="/Nguoiban/Muatin">
-            <div class="row chinh">
-                <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/b.jpg" />
-                <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
-            </div>
-        </a>  
-    </div>
 
+
+    
+
+
+    @*<div style="height:85px; background-color:black; color: white;width: 1372px;">
+            <div style="margin-left: 100px;float:left">
+                <img height="80px" src="..\img\logoden.png">
+            </div>
+            <div style="float:left; font-weight:bold; font-size:17px; margin-top:29px; margin-left: 20px">VALFRE- TRANG NGƯỜI BÁN</div>
+            <div style="">
+                <div style="margin-left: 500px;float:left;margin-top:28px">
+                    <img height="30px" src="..\img\bell.png">
+                </div>
+                <div style="margin-left: 50px;float:left;margin-top:28px">
+                    <img id="imgmenu" height="30px" src="..\img\menu.png">
+
+                </div>
+                <div style="margin-left: 20px;float:left;margin-top:-10px">
+                    <img style="border-radius: 50%; height: 60px; margin: 20px; padding: 10px; text-align: center; width:60px" height="40px" src="..\img\logo3.png">
+                </div>
+                <div style="margin-left: 0px;float:left;margin-top:35px">
+                    Tên merchant
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 300px; height:240px; margin-left: 920px; ">
+            <a href="/Nguoiban/Sanpham">
+                <div class="row chinh">
+                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/sp.png" />
+                    <div id="chinh2" class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
+                </div>
+            </a>
+            <a href="/Nguoiban/Donban">
+                <div class="row chinh">
+                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/h.png" />
+                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
+                </div>
+            </a>
+            <a href="/Nguoiban/Doanhthu">
+                <div class="row chinh">
+                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/t.png" />
+                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
+                </div>
+            </a>
+            <a href="/Nguoiban/Muatin">
+                <div class="row chinh">
+                    <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="../img/b.jpg" />
+                    <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
+                </div>
+            </a>
+        </div>*@
 
     <div class="container body-content">
         @RenderBody()
