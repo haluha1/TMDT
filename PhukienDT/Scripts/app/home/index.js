@@ -1,6 +1,43 @@
-﻿homeController = function () {
+﻿
+var slideIndex;
+// KHai bào hàm hiển thị slide
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
+    //chuyển đến slide tiếp theo
+    slideIndex++;
+    //nếu đang ở slide cuối cùng thì chuyển về slide đầu
+    if (slideIndex > slides.length - 1) {
+        slideIndex = 0
+    }
+    //tự động chuyển đổi slide sau 5s
+    setTimeout(showSlides, 3000);
+}
+//mặc định hiển thị slide đầu tiên 
+showSlides(slideIndex = 0);
+
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+
+
+
+
+homeController = function () {
     this.initialize = function () {
-        //loadData();
+        loadData();
         //TestSave();
         registerEvents();
     }
@@ -77,8 +114,8 @@
     function likeProduct(that) {
 
         $.ajax({
-            type: "GET",
-            url: "/employee/GetById",
+            type: "POST",
+            url: "/Sanpham/Like",
             data: { id: that },
             dataType: "json",
             beforeSend: function () {
@@ -86,131 +123,10 @@
             },
             success: function (response) {
                 console.log(response);
-                var data = response;
-                UserData = data.UserBy;
-                gId = data.KeyId;
-                //getLastUpdateBy(data.LastupdatedByFk);
-                $('#txtId').val(data.Id);
-                if (data.UserBy != null)
-                    $('#txtEmployee').val(data.UserBy.FullName);
-                $('#txtEmployee').data('addressbookid', data.User_FK);
-                if (data.UserBy.Avatar) {
-                    gAvatarImage = data.UserBy.Avatar;
-                    //var isExist = UrlExists(gAvatarImage);
-                    //if (!isExist) $('#imgAvatar').css('background-image', 'url("admin-side/images/imagenotfound")');
+                if (response.Status == "OK") {
+                    general.notify(response.Result, 'success');
                 }
-                else gAvatarImage = "admin-side/images/user.png";
 
-                $('#imgAvatar').css('background-image', 'url("' + gAvatarImage + '")');
-
-
-
-
-
-                var gender = "";
-                if (data.UserBy.Gender == 0) gender = "Nam";
-                if (data.UserBy.Gender == 1) gender = "Nữ";
-                if (data.UserBy.Gender == 2) gender = "Khác";
-                $('#txtGender').val(gender);
-                $('#txtDOB').val(general.dateFormatJson(data.UserBy.Dob, true));
-                $('#txtIDNumber').val(data.UserBy.IdNumber);
-                $('#txtPhoneNumber').val(data.UserBy.PhoneNumber);
-                $('#txtEmail').val(data.UserBy.Email);
-
-
-                $('#txtIdCard').val(data.IdCard);
-                $('#selBirthplace').val(data.Birthplace);
-                $('#selEmployeeTypeFK').val(data.EmployeeTypeFK);
-                $('#selOriginFK').val(data.OriginFk);
-                $('#selNationFK').val(data.NationFk);
-                $('#selNationality').val(data.NationalityFk);
-
-                if (data.IDDate)
-                    general.setDatePicker($('#dtIDDate'), general.dateFormatJson(data.IDDate, false));
-                $('#txtPermanentResidence').val(data.PermanentResidence);
-
-
-                $('#selProvincePR').val(data.ProvincePRFk);
-                loadDistrict(data.ProvincePRFk, $('#selDistrictPR'), data.DistrictPRFK);
-                loadWard(data.DistrictPRFK, $('#selWardPR'), data.WardPRFK);
-
-
-                $('#txtAccommodationCurrent').val(data.AccommodationCurrent);
-
-
-                $('#selProvinceAC').val(data.ProvinceACFk);
-                loadDistrict(data.ProvinceACFk, $('#selDistrictAC'), data.DistrictACFK);
-                loadWard(data.DistrictACFK, $('#selWardAC'), data.WardACFK);
-
-
-
-                $('#txtInfoContactPerson').val(data.InfoContactPerson);
-                $('#txtPhoneNumberContactPerson').val(data.PhoneNumberContactPerson);
-                $('#txtATMAccountName').val(data.BankName);
-                $('#txtIDAccount').val(data.IDAccount);
-
-
-
-                $('#selReligionFK').val(data.ReligionFk);
-                $('#selDepartmentFK').val(data.Department_FK);
-                $('#selPositionFK').val(data.PositionFk);
-                $('#txtTaxIDNumber').val(data.TaxIdnumber);
-                $('#txtBankAccountNumber').val(data.BankAccountNumber);
-                $('#txtNotes').val(data.Note);
-                if (data.LastupdatedByFk != null)
-                    $('#txtLastUpdatedByFK').val(data.LastupdatedBy.FullName);
-                $('#dtDateModified').val(general.dateFormatJson(data.DateModified, true));
-                if (data.Status == 1)
-                    $('#chkStatus').prop('checked', true);
-                else
-                    $('#chkStatus').prop('checked', false);
-
-
-                $("[name='optradio']").prop("checked", false);
-                var FamilyC = data.FamilyCircumstances;
-                if (FamilyC) {
-                    var rdo = $('*[name="optradio"]');
-                    $.each(rdo, function (keyT, valT) {
-                        if ((valT.value == $.trim(FamilyC)) && ($.trim(FamilyC) != '') && ($.trim(FamilyC) != null))
-                            $('*[name="optradio"][value="' + (FamilyC) + '"]').prop('checked', true);
-                    });
-                }
-                $('#txtNOChildren').val(data.NOChildren);
-
-
-
-                loadFamilyCircumstances(data.KeyId);
-                loadHpWorkingProcessdetail(data.KeyId);
-                loadHpExpertiseDetail(data.KeyId);
-                loadHpLanguageDetail(data.KeyId);
-                loadHpSalaryDetail(data.KeyId);
-
-
-
-                $('#txtNumberOfProfile').val(data.NumberOfProfile);
-                $('#txtNumberOfContract').val(data.NumberOfContract);
-                $('#selLaborContractType').val(data.LaborContractType);
-                if (data.SignContractDate) general.setDatePicker($('#dtSignDate'), data.SignContractDate);
-                if (data.TimeExpireContract) general.setDatePicker($('#dtTimeExpireContract'), data.TimeExpireContract);
-                if (data.TimeExpireProbation) general.setDatePicker($('#dtTimeExpireProbation'), data.TimeExpireProbation);
-                if (data.StartDate) general.setDatePicker($('#dtStartDate'), data.StartDate);
-                $('#txtInfoSaveFile').val(data.InfoSaveFile);
-                if (data.LayOffDate) general.setDatePicker($('#dtLayOffDate'), data.LayOffDate);
-
-                $('#selLiteracy').val(data.LiteracyFk);
-
-                $('#txtIDSocialInsurance').val(data.IDSocialInsurance);
-                $('#txtSalarySocialInsurance').val(general.toMoney(data.SalarySocialInsurance));
-                if (data.SocialInsuranceDate) general.setDatePicker($('#txtSocialInsuranceDate'), data.SocialInsuranceDate);
-                $('#txtSalary').val(general.toMoney(data.Salary));
-                $('#txtNumberOfDependents').val(data.NumberOfDependents);
-                $('#chkIsUnionMember').prop('checked', data.IsUnionMember);
-                $('#txtTravelAllowance').val(general.toMoney(data.TravelAllowance));
-                $('#txtPositionAllowance').val(general.toMoney(data.PositionAllowance));
-                $('#txtSeniorityAllowances').val(general.toMoney(data.SeniorityAllowances));
-                $('#txtOtherAllowances').val(general.toMoney(data.OtherAllowances));
-                $('#modal-add-edit').modal('show');
-                general.stopLoading();
 
             },
             error: function (status) {
@@ -242,15 +158,56 @@ function loadData(isPageChanged) {
     var render = "";
     $.ajax({
         type: 'GET',
-        url: '/Sanpham/GetAllSanPham',
+        url: '/Sanpham/GetNewProduct',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: 1,
+            pageSize: 8
+        },
         success: function (response) {
             console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render += '<div class="row row-space">'
+                }
+                var imgsrc = "";
+                switch (item.LoaispNavigation.KeyId) {
+                    case 2: {
+                        imgsrc = "/img/Bao/" + item.tenhinh;
+                        break;
+                    }
+                    case 3: {
+                        imgsrc = "/img/Ring/" + item.tenhinh;
+                        break;
+                    }
+                    case 4: {
+                        imgsrc = "/img/Khac/" + item.tenhinh;
+                        break;
+                    }
+                    default: {
+                        imgsrc = "/img/" + item.tenhinh;
+                        break;
+                    }
+                }
 
-            //$('#lblTotalRecords').text(response.RowCount);
-            //$('#tbl-content').html(render);
-            //wrapPaging(response.RowCount, function () {
+                render += Mustache.render(template, {
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    Price: item.dongia,
+                    img: imgsrc
+                });
+                //end
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render += '</div>'
+                }
+
+            });
+            //$('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product').html(render);
+            //wrapPaging(response.PageCount, function () {
             //    loadData();
             //}, isPageChanged);
         },

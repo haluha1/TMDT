@@ -9,37 +9,6 @@ window.onclick = function (event) {
 
 
 
-var slideIndex;
-// KHai bào hàm hiển thị slide
-function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
-    //chuyển đến slide tiếp theo
-    slideIndex++;
-    //nếu đang ở slide cuối cùng thì chuyển về slide đầu
-    if (slideIndex > slides.length - 1) {
-        slideIndex = 0
-    }
-    //tự động chuyển đổi slide sau 5s
-    setTimeout(showSlides, 3000);
-}
-//mặc định hiển thị slide đầu tiên 
-showSlides(slideIndex = 0);
-
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
 
 //$('#frmMaintainance').validate({
 //    errorClass: 'red',
@@ -87,7 +56,7 @@ function validateForm() {
         success: function (response) {
             console.log(response);
             if (response.Status == "OK") {
-                var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
                 general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
                 $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
                 $('#btnLogin').attr('onclick', '');
@@ -109,9 +78,10 @@ function validateForm() {
     return false;
 }
 
-mainController = function () {
+var mainController = function () {
     this.initialize = function () {
         loadData();
+        Rating();
         //TestSave();
         registerEvents();
     }
@@ -195,6 +165,9 @@ mainController = function () {
 
         });
 
+        $('#btnSearch').on('click', function () {
+            sendEmail();
+        });
 
     }
 
@@ -210,12 +183,53 @@ function loadData(isPageChanged) {
         type: 'POST',
         success: function (response) {
             console.log(response);
-            if (response) {
-                var avatarSrc = response.Avatar == '' ? "../img/login.png" : response.Avatar;
-                general.notify('Xin chào ' + response.UserName + '!', 'success');
+            if (response.Status == "OK") {
+                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
+                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
                 $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
                 $('#btnLogin').attr('onclick', '');
             }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+}
+
+function sendEmail() {
+    $.ajax({
+        url: '/Home/ConfirmEmail',
+        type: 'POST',
+        data: {
+            toEmailAddress: "blackpigkun@gmail.com",
+            subject: "Active code",
+            content: "Code nè"
+        },
+        success: function (response) {
+            console.log(response);
+            
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+}
+
+function Rating() {
+    var data = {
+        KeyId: 0,
+        RatingFK: 1,
+        makh: 3,
+        diem: 10,
+        comment: "abc"
+
+    };
+    $.ajax({
+        url: '/Sanpham/Rating',
+        type: 'POST',
+        success: function (response) {
+            console.log(response);
+
         },
         error: function (status) {
             console.log(status);

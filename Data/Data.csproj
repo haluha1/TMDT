@@ -59,6 +59,7 @@
     <Compile Include="Entities\Sanpham.cs" />
     <Compile Include="Entities\TaiKhoan.cs" />
     <Compile Include="Entities\Webmaster.cs" />
+    <Compile Include="Enum\UserType.cs" />
     <Compile Include="Enum\RatingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

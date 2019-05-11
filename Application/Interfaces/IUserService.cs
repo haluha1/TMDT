@@ -1,4 +1,5 @@
 ﻿using Application.ViewModels;
+using Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace Application.Interfaces
 	public interface IUserService : IDisposable
 	{
 		bool Login(LoginViewModel LoginVm);
+
+		TaiKhoan GetUser(int id);
+		TaiKhoanViewModel GetById(int id);
 
 		TaiKhoanViewModel GetByEmail(string email);
 

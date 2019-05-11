@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    public class Giohang : DomainEntity<int>
+    public class Giohang
     {
-        public int makh { get; set; }
+        public int KeyId { get; set; }
         public int soluong { get; set; }
         public double thanhtien { get; set; }
 		public virtual ICollection<Sanpham> Sanphams { get; set; }

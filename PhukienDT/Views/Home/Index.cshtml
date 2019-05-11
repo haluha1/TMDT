@@ -2,25 +2,35 @@
     ViewBag.Title = "Trang chủ";
 }
 @section Scripts{
-    <script src="~/Scripts/app/home/index.js"></script>
+    <script src="/Scripts/app/home/index.js"></script>
 
     <script>
         var home = new homeController();
-        home.initialize();</script>
+        home.initialize();
+    </script>
 }
-<link href="~/Content/style.css" rel="stylesheet" />
+@*<div class="form-group row">
+                            <label for="txtFromdate" class="col-sm-2 col-form-label">Ngày bắt đầu<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtFromdate" name="txtFromdate" autocomplete="off" class="form-control datepicker" placeholder="Chọn ngày bắt đầu" />
+                            </div>
+                            <label for="txtTodate" class="col-sm-2 col-form-label">Ngày kết thúc<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtTodate" name="txtTodate" autocomplete="off" class="form-control datepicker" placeholder="Chọn ngày kết thúc" />
+                            </div>                
+</div>*@
 <!--- Hình --->
 <div class="slideshow-container">
     <div class="mySlides fade">
-        <img src="..\img\nen1.png" style="margin-left:-450px; width:1374px; height:505px">
+        <img src="/img/nen1.png" style="margin-left:-450px; width:1374px; height:505px">
     </div>
 
     <div class="mySlides fade">
-        <img src="..\img\nen2.png" style="margin-left:-450px; width:1374px; height:505px">
+        <img src="/img/nen2.png" style="margin-left:-450px; width:1374px; height:505px">
     </div>
 
     <div class="mySlides fade">
-        <img src="..\img\nen3.png" style="margin-left:-450px; width:1374px; height:505px">
+        <img src="/img/nen3.png" style="margin-left:-450px; width:1374px; height:505px">
     </div>
 </div>
 <br>
@@ -34,16 +44,16 @@
 <div style="margin-left:20px">
 
     <div class="single-product-type">
-        <a href="../Sanpham/Theosanpham">
-            <img style="width:530px; z-index: 2" src="..\img\oplung.png">
+        <a href="/Sanpham/Index/1">
+            <img style="width:530px; z-index: 2" src="/img/oplung.png">
         </a>
         <div class="ten" style="margin-left:30px; margin-top:30px">
             Ốp điện thoại
         </div>
     </div>
     <div style="margin-left:30px" class="single-product-type">
-        <a href="#">
-            <img style="width:530px; height: 399px;" src="..\img\bao.png">
+        <a href="/Sanpham/Index/2">
+            <img style="width:530px; height: 399px;" src="/img/bao.png">
         </a>
         <div class="ten" style="margin-left:404px; margin-top:30px">
             Bao Airpod
@@ -53,8 +63,8 @@
 </div>
 <div style="margin-left:20px; clear:both; ">
     <div style="margin-top: 30px" class="single-product-type">
-        <a href="#">
-            <img style="width:530px;" src="..\img\baomtb.png">
+        <a href="/Sanpham/Index/3">
+            <img style="width:530px;" src="/img/baomtb.png">
         </a>
         <div class="ten" style="margin-left:30px; margin-top:30px">
             Bao da máy tính bảng
@@ -62,8 +72,8 @@
     </div>
 
     <div style="margin-left:30px;margin-top: 30px " class="single-product-type">
-        <a href="#">
-            <img style="width:530px;" src="..\img\khac.png">
+        <a href="/Sanpham/Index/4">
+            <img style="width:530px;" src="/img/khac.png">
         </a>
         <div class="ten" style="margin-left:330px; margin-top:30px">
             Các loại phụ kiện khác
@@ -85,135 +95,65 @@
     <div style="margin-left: -70px">
         <div style="float:left">
             <a href="#">
-                <img style="width:180px" src="..\img\44.png">
+                <img style="width:180px" src="/img/44.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-left: 20px" src="..\img\46.png">
+                <img style="width:180px; margin-left: 20px" src="/img/46.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-top:200px; margin-left:-380px" src="..\img\20.png">
+                <img style="width:180px; margin-top:200px; margin-left:-380px" src="/img/20.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-top:200px; margin-left:-180px" src="..\img\9.png">
+                <img style="width:180px; margin-top:200px; margin-left:-180px" src="/img/9.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:380px; margin-left: 20px" src="..\img\14.png">
+                <img style="width:380px; margin-left: 20px" src="/img/14.png">
             </a>
         </div>
     </div>
     <div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-left: 20px" src="..\img\44.png">
+                <img style="width:180px; margin-left: 20px" src="/img/44.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-top: -605px; margin-left:930px" src="..\img\46.png">
+                <img style="width:180px; margin-top: -605px; margin-left:930px" src="/img/46.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-top:-245px; margin-left:730px" src="..\img\20.png">
+                <img style="width:180px; margin-top:-245px; margin-left:730px" src="/img/20.png">
             </a>
         </div>
         <div style="float:left">
             <a href="#">
-                <img style="width:180px; margin-top:-285px; margin-left: 930px" src="..\img\9.png">
+                <img style="width:180px; margin-top:-285px; margin-left: 930px" src="/img/9.png">
             </a>
         </div>
     </div>
 </div>
 
 <hr />
-<div>SẢN PHẨM</div>
-<div>
-    <div class="row">
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\5.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\6.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-        </div>
-        <div  class="col-lg-3">
-            <img style="width:100%" src="..\img\7.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
 
-        </div>
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\8.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
+<div id="new-Product"></div>
+<script id="table-template" type="x-tmpl-mustache">
+    <div class="col-lg-3">
+        <img style="width:100%" src="{{img}}">
+        <div class="font">{{ProductName}}</div>
+            <div class="font">{{Price}}</div>
+        <div>
+            <button class="yeuthich btn-danger" data-id="{{ProductID}}">Thêm vào yêu thích</button>
+            <button class="yeuthich btn-danger" data-id="{{ProductID}}">Mua ngay</button>
         </div>
     </div>
-</div>
-<div style="margin-top:30px">
-    <div class="row">
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\5.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\6.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\7.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-
-        </div>
-        <div class="col-lg-3">
-            <img style="width:100%" src="..\img\8.png">
-            <div class="font">Tên</div>
-            <div class="font">Giá</div>
-            <div>
-                <button class="yeuthich btn-danger">Thêm vào yêu thích</button>
-                <button class="yeuthich btn-danger">Mua ngay</button>
-            </div>
-        </div>
-    </div>
-</div>
+</script>

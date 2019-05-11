@@ -10,7 +10,20 @@ namespace Data.Entities
 {
     public class Rating : DomainEntity<int>
     {
-        public int marating { get; set; }
+		//public Rating()
+		//{
+		//}
+
+		//public Rating(int keyId, int marating, int soluongrate, float diemtb, RatingType ratingFor)
+		//{
+		//	KeyId = keyId;
+		//	this.marating = marating;
+		//	this.soluongrate = soluongrate;
+		//	this.diemtb = diemtb;
+		//	RatingFor = ratingFor;
+		//}
+
+		public int marating { get; set; }
         public int soluongrate { get; set; }
         public float diemtb { get; set; }
 		public RatingType RatingFor { get; set; }

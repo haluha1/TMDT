@@ -77,6 +77,9 @@ namespace Data.EF
 			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
 			.WithMany(g => g.CtRatings)
 			.HasForeignKey<int>(s => s.makh);
+			
+
+
 
 			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
@@ -111,14 +114,14 @@ namespace Data.EF
 			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
 			modelBuilder.Entity<Rating>().HasKey(e => e.KeyId).ToTable("Rating");
 			modelBuilder.Entity<Rating>()
-							.HasOptional(s => s.RatingSpNavigation) // Mark Address property optional in Student entity
-							.WithRequired(ad => ad.RatingBy);
-			modelBuilder.Entity<Rating>()
 							.HasOptional(s => s.RatingNccNavigation) // Mark Address property optional in Student entity
 							.WithRequired(ad => ad.RatingBy);
+			modelBuilder.Entity<Rating>()
+							.HasOptional(s => s.RatingSpNavigation) // Mark Address property optional in Student entity
+							.WithRequired(ad => ad.RatingBy);
 
-			modelBuilder.Entity<RatingNcc>().HasKey(e => e.KeyId).ToTable("RatingNCC");
-			modelBuilder.Entity<RatingSp>().HasKey(e => e.KeyId).ToTable("RatingSP");
+			modelBuilder.Entity<RatingNcc>().HasKey(e => e.Rating_FK).ToTable("RatingNCC");
+			modelBuilder.Entity<RatingSp>().HasKey(e => e.Rating_FK).ToTable("RatingSP");
 			
 
 			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");
