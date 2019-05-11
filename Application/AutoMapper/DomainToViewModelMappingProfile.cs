@@ -22,8 +22,7 @@ namespace Application.AutoMapper
 			////.ForMember(m => m.StudentNavigation, opt => opt.Ignore())
 
 			CreateMap<Cthd, CthdViewModel>();
-			CreateMap<CtRating, CtRatingViewModel>().ForPath(m => m.KhachhangNavigation.CtRatings, opt => opt.Ignore())
-													.ForPath(m => m.RatingNavigation.CtRatings, opt => opt.Ignore());
+			CreateMap<CtRating, CtRatingViewModel>();
 			CreateMap<Giatin, GiatinViewModel>();
 			CreateMap<Giohang, GiohangViewModel>();
 			CreateMap<Hoadon, HoadonViewModel>();
@@ -32,9 +31,6 @@ namespace Application.AutoMapper
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());
 			CreateMap<Mucduytri, MucduytriViewModel>();
 			CreateMap<Ncc, NccViewModel>();
-			CreateMap<Rating, RatingViewModel>();
-			CreateMap<RatingNcc, RatingNccViewModel>();
-			CreateMap<RatingSp, RatingSpViewModel>();
 			CreateMap<Sanpham, SanphamViewModel>();
 			CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();

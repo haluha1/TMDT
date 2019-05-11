@@ -15,5 +15,6 @@ namespace Application.ViewModels
 		
 		public virtual TaiKhoanViewModel TaiKhoanBy { get; set; }
 		public virtual ICollection<HoadonmuatinViewModel> Hoadonmuatins { get; set; }
+		
 	}
 }

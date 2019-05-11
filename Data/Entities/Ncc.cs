@@ -16,6 +16,7 @@ namespace Data.Entities
         public string gioithieu { get; set; }
         public int sltinton { get; set; }
 
+		
 		public virtual ICollection<Hoadonmuatin> Hoadonmuatins { get; set; }
 		public virtual TaiKhoan TaiKhoanBy { get; set; }
     }

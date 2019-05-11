@@ -23,5 +23,6 @@ namespace Application.ViewModels
 		public virtual NccViewModel NccNavigation { get; set; }
 		public virtual ICollection<GiohangViewModel> Giohangs { get; set; }
 		public virtual ICollection<KhachhangViewModel> KhachHangYeuThichs { get; set; }
+		
 	}
 }

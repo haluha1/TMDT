@@ -53,9 +53,6 @@
     <Compile Include="Entities\Loaisp.cs" />
     <Compile Include="Entities\Mucduytri.cs" />
     <Compile Include="Entities\Ncc.cs" />
-    <Compile Include="Entities\Rating.cs" />
-    <Compile Include="Entities\RatingNcc.cs" />
-    <Compile Include="Entities\RatingSp.cs" />
     <Compile Include="Entities\Sanpham.cs" />
     <Compile Include="Entities\TaiKhoan.cs" />
     <Compile Include="Entities\Webmaster.cs" />

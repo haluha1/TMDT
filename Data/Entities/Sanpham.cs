@@ -41,6 +41,7 @@ namespace Data.Entities
 		public virtual Ncc NccNavigation { get; set; }
 		public virtual ICollection<Giohang> Giohangs { get; set; }
 		public virtual ICollection<Khachhang> KhachHangYeuThichs { get; set; }
+		
 
 	}
 }

@@ -9,11 +9,13 @@ namespace Application.ViewModels
 	public class CtRatingViewModel
 	{
 		public int KeyId { get; set; }
-		public int RatingFK { get; set; }
+		
 		public int makh { get; set; }
 		public float diem { get; set; }
 		public string comment { get; set; }
-		public virtual RatingViewModel RatingNavigation { get; set; }
+		public int? mancc { get; set; }
+		public int? masp { get; set; }
+
 		public virtual KhachhangViewModel KhachhangNavigation { get; set; }
 	}
 }

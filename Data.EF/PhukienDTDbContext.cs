@@ -40,9 +40,7 @@ namespace Data.EF
 		public DbSet<Loaisp> Loaisps { get; set; }
 		public DbSet<Mucduytri> Mucduytris { get; set; }
 		public DbSet<Ncc> Nccs { get; set; }
-		public DbSet<Rating> Ratings { get; set; }
-		public DbSet<RatingNcc> RatingNccs { get; set; }
-		public DbSet<RatingSp> RatingSps { get; set; }
+		
 		public DbSet<Sanpham> Sanphams { get; set; }
 		public DbSet<TaiKhoan> TaiKhoans { get; set; }
 		public DbSet<Webmaster> Webmasters { get; set; }
@@ -69,14 +67,7 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.masp);
 
 			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
-			modelBuilder.Entity<CtRating>()
-			.HasRequired<Rating>(s => s.RatingNavigation)
-			.WithMany(g => g.CtRatings)
-			.HasForeignKey<int>(s => s.RatingFK);
-			modelBuilder.Entity<CtRating>()
-			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
-			.WithMany(g => g.CtRatings)
-			.HasForeignKey<int>(s => s.makh);
+			
 			
 
 
@@ -112,16 +103,7 @@ namespace Data.EF
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
 			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
-			modelBuilder.Entity<Rating>().HasKey(e => e.KeyId).ToTable("Rating");
-			modelBuilder.Entity<Rating>()
-							.HasOptional(s => s.RatingNccNavigation) // Mark Address property optional in Student entity
-							.WithRequired(ad => ad.RatingBy);
-			modelBuilder.Entity<Rating>()
-							.HasOptional(s => s.RatingSpNavigation) // Mark Address property optional in Student entity
-							.WithRequired(ad => ad.RatingBy);
-
-			modelBuilder.Entity<RatingNcc>().HasKey(e => e.Rating_FK).ToTable("RatingNCC");
-			modelBuilder.Entity<RatingSp>().HasKey(e => e.Rating_FK).ToTable("RatingSP");
+			
 			
 
 			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");

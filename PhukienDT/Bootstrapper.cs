@@ -33,7 +33,7 @@ namespace PhukienDT
 			container.RegisterType<ILoaiSPService, LoaiSPService>();
 			container.RegisterType<ISanphamService, SanphamService>();
 			container.RegisterType<IUserService, UserService>();
-			container.RegisterType<IRatingService, RatingService>();
+			//container.RegisterType<IRatingService, RatingService>();
 			//container.RegisterType<ICtRatingService, CtRatingService>();
 
 			//Controller

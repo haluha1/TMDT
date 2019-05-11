@@ -69,9 +69,6 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MucduytriViewModel.cs" />
     <Compile Include="ViewModels\NccViewModel.cs" />
-    <Compile Include="ViewModels\RatingNccViewModel.cs" />
-    <Compile Include="ViewModels\RatingSpViewModel.cs" />
-    <Compile Include="ViewModels\RatingViewModel.cs" />
     <Compile Include="ViewModels\SanphamViewModel.cs" />
     <Compile Include="ViewModels\TaiKhoanViewModel.cs" />
     <Compile Include="ViewModels\UserLoginViewModel.cs" />
