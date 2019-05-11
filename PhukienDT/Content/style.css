@@ -168,7 +168,7 @@ span.psw {
     position: relative;
     float: left;
 }
-.single-product-type :hover{
+.single-product-type:hover .ten{
     background-color:black;
     color: white;
 }
@@ -264,3 +264,9 @@ ul {
 
                 ul li ul li:hover {
                 }
+.red {
+	color: red;
+}
+.row-space {
+	margin-bottom: 30px;
+}

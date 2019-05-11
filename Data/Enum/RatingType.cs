@@ -8,8 +8,7 @@ namespace Data.Enum
 {
 	public enum RatingType
 	{
-		Customer,
-		Merchant,
-		Webmaster
+		Product,
+		Merchant
 	}
 }

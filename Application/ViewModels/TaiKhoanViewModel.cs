@@ -21,7 +21,7 @@ namespace Application.ViewModels
 		public string avatar { get; set; }
 
 
-		public RatingType UserType { get; set; }
+		public UserType UserType { get; set; }
 
 		public virtual KhachhangViewModel KhachhangNavigation { get; set; }
 		public virtual NccViewModel NccNavigation { get; set; }

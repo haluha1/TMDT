@@ -9,38 +9,33 @@ window.onclick = function (event) {
 
 
 
-var slideIndex;
-// KHai bào hàm hiển thị slide
-function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
 
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
-    //chuyển đến slide tiếp theo
-    slideIndex++;
-    //nếu đang ở slide cuối cùng thì chuyển về slide đầu
-    if (slideIndex > slides.length - 1) {
-        slideIndex = 0
-    }
-    //tự động chuyển đổi slide sau 5s
-    setTimeout(showSlides, 3000);
-}
-//mặc định hiển thị slide đầu tiên 
-showSlides(slideIndex = 0);
-
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
+//$('#frmMaintainance').validate({
+//    errorClass: 'red',
+//    ignore: [],
+//    lang: 'vi',
+//    invalidHandler: function (event, validator) {
+//        var errors = validator.numberOfInvalids();
+//        if (errors) {
+//            var errorElement = validator.errorList[0].element;
+//            var errorElementTag = validator.errorList[0].element.labels[0].textContent;
+//            if (errorElement.type.includes("text")) {
+//                general.notify('Hãy nhập ' + errorElementTag, 'error');
+//            }
+//            if (errorElement.type.includes("select")) {
+//                general.notify('Hãy chọn ' + errorElementTag, 'error');
+//            }
+//        }
+//    },
+//    rules: {
+//        uname: {
+//            required: true
+//        },
+//        psw: {
+//            required: true
+//        }
+//    }
+//});
 
 function validateForm() {
 
@@ -60,19 +55,22 @@ function validateForm() {
         data: { LoginVm: data },
         success: function (response) {
             console.log(response);
-            var avatarSrc = response.Avatar == '' ? "../img/login.png" : response.Avatar;
-            general.notify('Xin chào ' + response.UserName + '!', 'success');
-            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-            $('#btnLogin').attr('onclick', '');
-            $('#user').css('display', 'none');
-            $('#frmMaintainance').trigger('reset');
-            general.stopLoading();
+            if (response.Status == "OK") {
+                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
+                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                $('#btnLogin').attr('onclick', '');
+                $('#user').css('display', 'none');
+                $('#frmMaintainance').trigger('reset');
+                general.stopLoading();
+            }
+            else {
+                general.notify(response.Result + '!', 'error');
+            }
+            
         },
         error: function (status) {
-
             console.log(status);
-            
-            return true;
             general.notify('Email hoặc mật khẩu không đúng!', 'error');
             general.stopLoading();
         }
@@ -80,14 +78,14 @@ function validateForm() {
     return false;
 }
 
-mainController = function () {
+var mainController = function () {
     this.initialize = function () {
         loadData();
+        Rating();
         //TestSave();
         registerEvents();
     }
     function registerEvents() {
-        
         $('#frmMaintainance').validate({
             errorClass: 'red',
             ignore: [],
@@ -106,88 +104,71 @@ mainController = function () {
                 }
             },
             rules: {
-                txtEmployee: {
+                txtEmail: {
+                    required: true,
+                    email: true
+                },
+                txtPassword: {
                     required: true
+                }
+            },
+            messages: {
+                txtEmail: {
+                    required: "Hãy nhập email!"
                 },
-                txtIdCard: {
-                    required: true
-                },
-                selDepartmentFK: {
-                    required: true
-                },
-                selPositionFK: {
-                    required: true
-                },
-                selOriginFK: {
-                    required: true
-                },
-                txtPhoneNumberContactPerson: {
-                    number: true
-                },
-                txtTaxIDNumber: {
-                    number: true
-                },
-                txtBankAccountNumber: {
-                    number: true
-                },
-                txtNOChildren: {
-                    number: true
-                },
-                txtSalarySocialInsurance: {
-                    required: true,
-                    number: true
-                },
-                txtSalary: {
-                    required: true,
-                    number: true
-                },
-                txtNumberOfDependents: {
-                    number: true
-                },
-                txtTravelAllowance: {
-                    number: true
-                },
-                txtPositionAllowance: {
-                    number: true
-                },
-                txtSeniorityAllowances: {
-                    number: true
-                },
-                txtOtherAllowances: {
-                    number: true
-                },
-                txtRelativesName: {
-                    required: true
-                },
-                txtRelationship: {
-                    required: true
-                },
-                txtYearOfBirth: {
-                    required: true,
-                    number: true
-                },
-                selDegree: {
-                    required: true,
-                },
-                selMajor: {
-                    required: true,
-                },
-                selTrainingSystem: {
-                    required: true,
-                },
-                selLanguage: {
-                    required: true,
-                },
-                selLevel: {
-                    required: true,
-                },
-                txtCertificate: {
-                    required: true,
+                txtPassword: {
+                    required: "Hãy nhập mật khẩu!"
                 }
             }
         });
-        
-        
+
+        $("#frmMaintainance").on('submit', function (e) {
+            if ($('#frmMaintainance').valid()) {
+                e.preventDefault();
+                var username = $('#txtEmail').val();
+                var password = $('#txtPassword').val();
+                var rememberMe = $('#chkRememberMe').prop('checked');
+
+                var data = {
+                    Username: username,
+                    Password: password,
+                    RememberMe: rememberMe
+                };
+
+                $.ajax({
+                    url: '/Home/Login',
+                    type: 'POST',
+                    data: { LoginVm: data },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.Status == "OK") {
+                            var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                            general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                            $('#btnLogin').attr('onclick', '');
+                            $('#user').css('display', 'none');
+                            $('#frmMaintainance').trigger('reset');
+                            general.stopLoading();
+                        }
+                        else {
+                            general.notify(response.Result + '!', 'error');
+                        }
+
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                        general.stopLoading();
+                    }
+                });
+            }
+
+        });
+
+        $('#btnSearch').on('click', function () {
+            sendEmail();
+        });
+
     }
 
     function resetFormMaintainance() {
@@ -202,12 +183,53 @@ function loadData(isPageChanged) {
         type: 'POST',
         success: function (response) {
             console.log(response);
-            if (response) {
-                var avatarSrc = response.Avatar == '' ? "../img/login.png" : response.Avatar;
-                general.notify('Xin chào ' + response.UserName + '!', 'success');
+            if (response.Status == "OK") {
+                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
+                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
                 $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
                 $('#btnLogin').attr('onclick', '');
             }
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+}
+
+function sendEmail() {
+    $.ajax({
+        url: '/Home/ConfirmEmail',
+        type: 'POST',
+        data: {
+            toEmailAddress: "blackpigkun@gmail.com",
+            subject: "Active code",
+            content: "Code nè"
+        },
+        success: function (response) {
+            console.log(response);
+            
+        },
+        error: function (status) {
+            console.log(status);
+        }
+    });
+}
+
+function Rating() {
+    var data = {
+        KeyId: 0,
+        RatingFK: 1,
+        makh: 3,
+        diem: 10,
+        comment: "abc"
+
+    };
+    $.ajax({
+        url: '/Sanpham/Rating',
+        type: 'POST',
+        success: function (response) {
+            console.log(response);
+
         },
         error: function (status) {
             console.log(status);

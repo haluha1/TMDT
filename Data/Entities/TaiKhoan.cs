@@ -23,7 +23,7 @@ namespace Data.Entities
 
 		public string avatar { get; set; }
 
-		public RatingType UserType { get; set; }
+		public UserType UserType { get; set; }
 
         public virtual Khachhang KhachhangNavigation { get; set; }
 		public virtual Ncc NccNavigation { get; set; }

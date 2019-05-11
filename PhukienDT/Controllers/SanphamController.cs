@@ -1,26 +1,46 @@
 using Application.Interfaces;
 using Application.ViewModels;
+using AutoMapper;
+using Data.Entities;
+using Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Utilities.Constants;
 
 namespace PhukienDT.Controllers
 {
     public class SanphamController : Controller
     {
         private ISanphamService _sanphamService;
+		private IUserService _userService;
+		private IRatingService _ratingService;
 
-        public SanphamController(ISanphamService sanphamService)
-        {
-            _sanphamService = sanphamService;
-        }
+		public SanphamController(ISanphamService sanphamService, IUserService userService, IRatingService ratingService)
+		{
+			_sanphamService = sanphamService;
+			_userService = userService;
+			_ratingService = ratingService;
+		}
 
-        public ActionResult Index()
+		public ActionResult Index(int? id)
         {
-            return View();
+			if (id==null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			else
+			{
+				var model = _sanphamService.GetAll().Where(x => x.maloai == id).ToList();
+				IEnumerable<SanphamViewModel> sp;
+				sp = model;
+				return View(model);
+
+			}
+            
         }
         
         // GET: Sanpham
@@ -54,6 +74,79 @@ namespace PhukienDT.Controllers
 			}
 		}
 
+		public JsonResult GetNewProduct(int page, int pageSize)
+		{
+			try
+			{
+
+				var data = _sanphamService.GetAll().Skip((page - 1) * pageSize).Take(pageSize);
+
+				
+				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+				return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+		}
+
+		public JsonResult GetByType(int id, string keyword, int page, int pageSize)
+		{
+			try
+			{
+
+				var data = _sanphamService.GetAll().Where(x=>x.LoaispNavigation.KeyId==id);
+				if (!string.IsNullOrEmpty(keyword))
+				{
+					var keysearch = keyword.Trim().ToUpper();
+					data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword));
+				}
+				int totalRow = data.Count();
+				data = data.Skip((page - 1) * pageSize).Take(pageSize);
+				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+				return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+		}
+		[HttpPost]
+		public JsonResult Like(int id)
+		{
+			try
+			{
+				if (Session[CommonConstrants.USER_SESSION] != null)
+				{
+					var spVm = _sanphamService.GetById(id);
+					var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
+					Sanpham sp = Mapper.Map<SanphamViewModel, Sanpham>(spVm);
+					user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
+					_sanphamService.Save();
+					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					return Json(new { Result = const_Error.NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+				}
+				
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+		}
+
 		[HttpPost]
 		public JsonResult SaveEntity(SanphamViewModel sanphamVm)
 		{
@@ -81,6 +174,27 @@ namespace PhukienDT.Controllers
 			}
 		}
 
+		[HttpPost]
+		public JsonResult Rating()
+		{
+			try
+			{
+				
+					var RatingVm = _ratingService.GetAll().Where(x=>x.RatingNccNavigation.mancc==1).FirstOrDefault();
+					
+					Rating sp = Mapper.Map<RatingViewModel, Rating>(RatingVm);
+					//user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
+					_sanphamService.Save();
+					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+
+
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+		}
 		#endregion
 	}
 }

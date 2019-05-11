@@ -27,6 +27,19 @@ namespace Application.Implementation
 			GC.SuppressFinalize(this);
 		}
 
+		public TaiKhoan GetUser(int id)
+		{
+			return _repository.FindAll().SingleOrDefault(x => x.KeyId == id);
+
+		}
+
+		public TaiKhoanViewModel GetById(int id)
+		{
+			var item = _repository.FindAll().SingleOrDefault(x => x.KeyId == id);
+			return Mapper.Map<TaiKhoan, TaiKhoanViewModel>(item);
+
+		}
+
 		public TaiKhoanViewModel GetByEmail(string email)
 		{
 			var item = _repository.FindAll().SingleOrDefault(x => x.email == email);

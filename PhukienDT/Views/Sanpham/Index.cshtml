@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Application.ViewModels.SanphamViewModel>
+@{
+    ViewBag.Title = @Html.DisplayFor(Model => Model.FirstOrDefault().LoaispNavigation.tenloai);
+}
+@section Style{
+
+}
+@section Scripts{
+    <script src="/Scripts/app/sanpham/index.js"></script>
+    <script>
+        var sp = new sanphamController();
+        sp.initialize();
+    </script>
+}
+<h2>Theo @Html.DisplayNameFor(Model => Model.LoaispNavigation.tenloai)</h2>
+<h4 style="margin-top:50px">
+    <a href="../Home/Index">TRANG CHỦ/</a>
+    @Html.DisplayFor(Model => Model.FirstOrDefault().LoaispNavigation.tenloai)
+</h4>
+<hr />
+<div id="Product-wrapper"></div>
+<!--Pagination-->
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+            <select id="ddlShowPage">
+                <option value="12" selected="selected">12</option>
+                <option value="24">24</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+            </select>
+            <span class="item-per-page">
+                bản ghi/trang.
+            </span>
+            Tổng số bản ghi: <strong id="lblTotalRecords"></strong>
+        </div>
+    </div><div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+            <ul id="paginationUL"></ul>
+        </div>
+    </div>
+</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <div class="col-lg-3">
+        <img style="width:100%" src="{{img}}">
+        <div class="font">{{ProductName}}</div>
+            <div class="font">{{Price}}</div>
+        <div>
+            <button class="yeuthich btn-danger" data-id="{{ProductID}}">Thêm vào yêu thích</button>
+            <button class="yeuthich btn-danger" data-id="{{ProductID}}">Mua ngay</button>
+        </div>
+    </div>
+</script>

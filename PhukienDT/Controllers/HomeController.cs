@@ -1,7 +1,9 @@
 ﻿using Application.Interfaces;
 using Application.ViewModels;
+using Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -74,18 +76,13 @@ namespace PhukienDT.Controllers
 					if (result)
 					{
 						var user = _userService.GetByEmail(LoginVm.Username);
-						var userSession = new UserLoginViewModel();
-						userSession.KeyId = user.KeyId;
-						userSession.UserID = user.matk;
-						userSession.Email = user.email;
-						userSession.UserName = user.hoten;
-						userSession.Avatar = user.avatar;
+						var userSession = new UserLoginViewModel(user);
 						Session.Add(CommonConstrants.USER_SESSION,userSession);
-						return Json(userSession, JsonRequestBehavior.AllowGet);
+						return Json( new { Result = userSession, Status = "OK" }, JsonRequestBehavior.AllowGet);
 					}
 					else
 					{
-						return Json(const_Error.WRONG_LOGIN, JsonRequestBehavior.AllowGet);
+						return Json( new { Result = const_Error.WRONG_LOGIN, Status = "ERROR" }, JsonRequestBehavior.AllowGet);
 					}
 				}
 			}
@@ -103,18 +100,35 @@ namespace PhukienDT.Controllers
 			{
 				if (Session[CommonConstrants.USER_SESSION]==null)
 				{
-					return Json("", JsonRequestBehavior.AllowGet);
+					return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 					
 				}
 				else
 				{
-					return Json(Session[CommonConstrants.USER_SESSION], JsonRequestBehavior.AllowGet);
+					return Json(new { Result = Session[CommonConstrants.USER_SESSION], Status = "OK" }, JsonRequestBehavior.AllowGet);
 				}
 			}
 			catch (Exception ex)
 			{
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+		}
+		[HttpPost]
+		public JsonResult ConfirmEmail(string toEmailAddress, string subject, string content)
+		{
+			try
+			{
+				string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
+				MailContent = MailContent.Replace("{{Code}}", "Active");
+
+				new MailHelper().SendMail(toEmailAddress, "Register Code", MailContent);
+				return Json("OK", JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
 	}

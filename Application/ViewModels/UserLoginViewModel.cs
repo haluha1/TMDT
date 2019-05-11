@@ -3,11 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using Utilities.Constants;
 
 namespace Application.ViewModels
 {
 	public class UserLoginViewModel
 	{
+		public UserLoginViewModel(TaiKhoanViewModel TaiKhoanVm)
+		{
+			KeyId = TaiKhoanVm.KeyId;
+			UserID = TaiKhoanVm.matk;
+			Email = TaiKhoanVm.email;
+			UserName = TaiKhoanVm.hoten;
+			Avatar = TaiKhoanVm.avatar;
+		}
+
+		private UserLoginViewModel() { }
+		public static UserLoginViewModel Current
+		{
+			get
+			{
+				UserLoginViewModel session = (UserLoginViewModel)HttpContext.Current.Session[CommonConstrants.USER_SESSION];
+				if (session == null)
+				{
+					session = new UserLoginViewModel();
+					HttpContext.Current.Session[CommonConstrants.USER_SESSION] = session;
+				}
+				return session;
+			}
+		}
 		public int KeyId { get; set; }
 		public int UserID { get; set; }
 		public string Email { get; set; }
