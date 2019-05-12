@@ -10,12 +10,12 @@ namespace Data.EF
 {
 	public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<PhukienDTDbContext>
 	{
-        public DbInitializer()
-        {
-            Seed(PhukienDTDbContext.Instance);
-        }
+		public DbInitializer()
+		{
+			
+		}
 
-        protected override void Seed(PhukienDTDbContext context)
+		protected override void Seed(PhukienDTDbContext context)
 		{
             //Loại sản phẩm
 			var loaisps = new List<Loaisp>

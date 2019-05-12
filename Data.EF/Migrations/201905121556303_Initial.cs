@@ -8,6 +8,18 @@ namespace Data.EF.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.ActiveCode",
+                c => new
+                    {
+                        KeyId = c.Int(nullable: false, identity: true),
+                        User_FK = c.Int(nullable: false),
+                        code = c.String(),
+                        DateCreate = c.DateTime(nullable: false),
+                        CodeType = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.KeyId);
+            
+            CreateTable(
                 "dbo.CtGioHang",
                 c => new
                     {
@@ -70,6 +82,7 @@ namespace Data.EF.Migrations
                         makh = c.Int(nullable: false),
                         tongtien = c.Double(nullable: false),
                         thoigian = c.String(),
+                        tinhtrang = c.String(),
                     })
                 .PrimaryKey(t => t.KeyId)
                 .ForeignKey("dbo.KhachHang", t => t.makh, cascadeDelete: true)
@@ -96,7 +109,7 @@ namespace Data.EF.Migrations
                 c => new
                     {
                         KeyId = c.Int(nullable: false, identity: true),
-                        masp = c.Int(nullable: false),
+                        masp = c.String(),
                         tensp = c.String(),
                         maloai = c.Int(nullable: false),
                         mancc = c.Int(nullable: false),
@@ -280,6 +293,7 @@ namespace Data.EF.Migrations
             DropTable("dbo.KhachHang");
             DropTable("dbo.GioHang");
             DropTable("dbo.CtGioHang");
+            DropTable("dbo.ActiveCode");
         }
     }
 }

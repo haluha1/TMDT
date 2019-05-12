@@ -1,4 +1,5 @@
 ﻿
+using Data.EF.Migrations;
 using Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace Data.EF
 		#region creare DbSet
 		//public DbSet<Student> Students { get; set; }
 		#endregion
+		public DbSet<ActiveCode> ActiveCodes { get; set; }
 		public DbSet<Cthd> Cthds { get; set; }
 		public DbSet<CtRating> CtRatings { get; set; }
 		public DbSet<Giatin> Giatins { get; set; }
@@ -61,6 +63,8 @@ namespace Data.EF
 		{
 			
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+			modelBuilder.Entity<ActiveCode>().HasKey(e => e.KeyId).ToTable("ActiveCode");
 
 			modelBuilder.Entity<Cthd>().HasKey(e => e.KeyId).ToTable("CTHD");
 			modelBuilder.Entity<Cthd>()

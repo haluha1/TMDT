@@ -37,54 +37,17 @@ window.onclick = function (event) {
 //    }
 //});
 
-function validateForm() {
-
-    var username = $('#txtEmail').val();
-    var password = $('#txtPassword').val();
-    var rememberMe = $('#chkRememberMe').prop('checked');
-
-    var data = {
-        Username: username,
-        Password: password,
-        RememberMe: rememberMe
-    };
-
-    $.ajax({
-        url: '/Home/Login',
-        type: 'POST',
-        data: { LoginVm: data },
-        success: function (response) {
-            console.log(response);
-            if (response.Status == "OK") {
-                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
-                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                $('#btnLogin').attr('onclick', '');
-                $('#user').css('display', 'none');
-                $('#frmMaintainance').trigger('reset');
-                general.stopLoading();
-            }
-            else {
-                general.notify(response.Result + '!', 'error');
-            }
-            
-        },
-        error: function (status) {
-            console.log(status);
-            general.notify('Email hoặc mật khẩu không đúng!', 'error');
-            general.stopLoading();
-        }
-    });
-    return false;
-}
-
 var mainController = function () {
     this.initialize = function () {
         loadData();
         Rating();
         //TestSave();
         registerEvents();
+        resetFormMaintainance();
+        //$('#areaSignUp').fadeOut();
+        //$('#areaSignIn').fadeIn();
     }
+    var gIsSignInOn = true;
     function registerEvents() {
         $('#frmMaintainance').validate({
             errorClass: 'red',
@@ -121,59 +84,46 @@ var mainController = function () {
                 }
             }
         });
-
-        $("#frmMaintainance").on('submit', function (e) {
-            if ($('#frmMaintainance').valid()) {
-                e.preventDefault();
-                var username = $('#txtEmail').val();
-                var password = $('#txtPassword').val();
-                var rememberMe = $('#chkRememberMe').prop('checked');
-
-                var data = {
-                    Username: username,
-                    Password: password,
-                    RememberMe: rememberMe
-                };
-
-                $.ajax({
-                    url: '/Home/Login',
-                    type: 'POST',
-                    data: { LoginVm: data },
-                    success: function (response) {
-                        console.log(response);
-                        if (response.Status == "OK") {
-                            var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
-                            general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                            $('#btnLogin').attr('onclick', '');
-                            $('#user').css('display', 'none');
-                            $('#frmMaintainance').trigger('reset');
-                            general.stopLoading();
-                        }
-                        else {
-                            general.notify(response.Result + '!', 'error');
-                        }
-
-                    },
-                    error: function (status) {
-                        console.log(status);
-                        general.notify('Email hoặc mật khẩu không đúng!', 'error');
-                        general.stopLoading();
-                    }
-                });
-            }
-
-        });
+        
 
         $('#btnSearch').on('click', function () {
             sendEmail();
+        });
+
+        $('#btnRegister').on('click', function (e) {
+            if (gIsSignInOn == true) {
+                var template = $('#SingUp-template').html();
+                $('#form-body').fadeOut();
+                $('#form-body').html(template);
+                $('#form-body').fadeIn();
+                resetFormMaintainance();
+                gIsSignInOn = false;
+            }
+            else {
+                Register(e);
+            }
+        });
+
+        $('#btnSubmit').on('click', function (e) {
+            if (gIsSignInOn == true) {
+                Login(e);
+            }
+            else {
+                var template = $('#SignIn-template').html();
+                $('#form-body').fadeOut();
+                $('#form-body').html(template);
+                $('#form-body').fadeIn();
+                resetFormMaintainance();
+                gIsSignInOn = true;
+                
+            }
         });
 
     }
 
     function resetFormMaintainance() {
         $('#frmMaintainance').trigger('reset');
-
+        $('#frmMaintainance').validate().resetForm();
     }
 }
 
@@ -194,6 +144,103 @@ function loadData(isPageChanged) {
             console.log(status);
         }
     });
+}
+
+function Login(e) {
+    if ($('#frmMaintainance').valid()) {
+        e.preventDefault();
+        var username = $('#txtEmail').val();
+        var password = $('#txtPassword').val();
+        var rememberMe = $('#chkRememberMe').prop('checked');
+
+        var data = {
+            Username: username,
+            Password: password,
+            RememberMe: rememberMe
+        };
+
+        $.ajax({
+            url: '/Home/Login',
+            type: 'POST',
+            data: { LoginVm: data },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+                    var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                    $('#btnLogin').attr('onclick', '');
+                    $('#user').css('display', 'none');
+                    $('#frmMaintainance').trigger('reset');
+                    general.stopLoading();
+                }
+                else {
+                    general.notify(response.Result + '!', 'error');
+                }
+
+            },
+            error: function (status) {
+                console.log(status);
+                general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                general.stopLoading();
+            }
+        });
+    }
+}
+
+
+function Register(e) {
+    if ($('#frmMaintainance').valid()) {
+        e.preventDefault();
+        var Hoten = $('#txtname').val();
+        var Email = $('#txtEmaildk').val();
+        var Password = $('#txtpass').val();
+        var Diachi = $('#txtaddress').val();
+        var Sdt = $('#txtsdt').val();
+        var STK = $('#txtstk').val();
+        var userType = $('input[name=userType]:checked').val()
+        var rememberMe = $('#chkRememberMe').prop('checked');
+
+        var data = {
+            KeyId: 0,
+            matk: 0,
+            hoten: Hoten,
+            email: Email,
+            diachi: Diachi,
+            sdt: Sdt,
+            sotk: STK,
+            matkhau: Password,
+            avatar: "",
+            UserType: userType
+        };
+
+        $.ajax({
+            url: '/Home/Register',
+            type: 'POST',
+            data: { TaikhoanVm: data },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+                    var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                    $('#btnLogin').attr('onclick', '');
+                    $('#user').css('display', 'none');
+                    $('#frmMaintainance').trigger('reset');
+                    general.stopLoading();
+                }
+                else {
+                    general.notify(response.Result + '!', 'error');
+                }
+
+            },
+            error: function (status) {
+                console.log(status);
+                general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                general.stopLoading();
+            }
+        });
+    }
 }
 
 function sendEmail() {
