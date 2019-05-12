@@ -18,6 +18,7 @@ namespace Data.EF.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            DbInitializer dbInitializer = new DbInitializer();
         }
     }
 }

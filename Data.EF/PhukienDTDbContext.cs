@@ -154,11 +154,6 @@ namespace Data.EF
 			modelBuilder.Entity<TaiKhoan>()
 							.HasOptional(s => s.WebmasterNavigation) // Mark Address property optional in Student entity
 							.WithRequired(ad => ad.TaiKhoanBy);
-
-
-
-
-
 			modelBuilder.Entity<Webmaster>().HasKey(e => e.User_FK).ToTable("WebMaster");
 			base.OnModelCreating(modelBuilder);
 		}

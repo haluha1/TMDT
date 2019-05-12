@@ -52,6 +52,19 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public JsonResult GetCTSP(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #region AjaxAPI
         public JsonResult GetAllSanPham()
@@ -173,8 +186,6 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
-
-		
-		#endregion
+       	#endregion
 	}
 }
