@@ -13,7 +13,7 @@ namespace PhukienDT.Controllers
 {
     public class RatingController : Controller
     {
-		private IRatingService _ratingService;
+		/*private IRatingService _ratingService;
 		private IUserService _userService;
 		private ISanphamService _sanphamService;
 
@@ -66,6 +66,6 @@ namespace PhukienDT.Controllers
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
 				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
-		}
+		}*/
 	}
 }

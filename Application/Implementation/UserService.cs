@@ -34,7 +34,6 @@ namespace Application.Implementation
 			return _repository.FindAll().SingleOrDefault(x => x.KeyId == id);
 
 		}
-
 		public TaiKhoanViewModel GetById(int id)
 		{
 			var item = _repository.FindAll().SingleOrDefault(x => x.KeyId == id);

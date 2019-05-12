@@ -174,7 +174,7 @@ function loadData(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.maloai,
+                    ProductType: item.tenloai,
                     Quanlity: item.soluong
                 });
                 

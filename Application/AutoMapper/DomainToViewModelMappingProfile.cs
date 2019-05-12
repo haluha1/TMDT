@@ -13,19 +13,27 @@ namespace Application.AutoMapper
 	{
 		public DomainToViewModelMappingProfile()
 		{
-            //CreateMap<Student, StudentViewModel>().AfterMap((src, dest) =>
-            //{
-            //    foreach (var i in dest.Enrollments)
-            //        i.StudentNavigation = null;
-            //}); ;
-            //CreateMap<Enrollment, EnrollmentViewModel>();
-            //CreateMap<Course, CourseViewModel>();
-            ////.ForMember(m => m.StudentNavigation, opt => opt.Ignore())
-
-            CreateMap<Cthd, CthdViewModel>();
+			//CreateMap<Student, StudentViewModel>().AfterMap((src, dest) =>
+			//{
+			//    foreach (var i in dest.Enrollments)
+			//        i.StudentNavigation = null;
+			//}); ;
+			//CreateMap<Enrollment, EnrollmentViewModel>();
+			//CreateMap<Course, CourseViewModel>();
+			////.ForMember(m => m.StudentNavigation, opt => opt.Ignore())
+			
+			CreateMap<Cthd, CthdViewModel>();
 			CreateMap<CtRating, CtRatingViewModel>();
 			CreateMap<Giatin, GiatinViewModel>();
-			CreateMap<Giohang, GiohangViewModel>();
+			CreateMap<Giohang, GiohangViewModel>().MaxDepth(1).AfterMap((src, dest) =>
+			{
+
+				foreach (var i in dest.CtGiohangs)
+				{
+					i.GiohangNavigation = null;
+				}
+
+			});
 			CreateMap<Hoadon, HoadonViewModel>().MaxDepth(1).AfterMap((src, dest) =>
             {
                 dest.KhachHangNavigation.Hoadons = null;
@@ -40,7 +48,7 @@ namespace Application.AutoMapper
 
             });
             CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
-			CreateMap<CtGiohang, CtGiohangViewModel>();
+			CreateMap<CtGiohang, CtGiohangViewModel>().ForMember(m=>m.GiohangNavigation, opt=>opt.Ignore());
 			
 			CreateMap<Khachhang, KhachhangViewModel>();
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());

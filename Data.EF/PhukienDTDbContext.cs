@@ -1,5 +1,5 @@
 ﻿
-using Data.EF.Migrations;
+
 using Data.Entities;
 using System;
 using System.Collections.Generic;

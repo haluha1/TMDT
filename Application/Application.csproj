@@ -63,6 +63,7 @@
     <Compile Include="ViewModels\CtGiohangViewModel.cs" />
     <Compile Include="ViewModels\CthdViewModel.cs" />
     <Compile Include="ViewModels\CtRatingViewModel.cs" />
+    <Compile Include="ViewModels\GHViewModel.cs" />
     <Compile Include="ViewModels\GiatinViewModel.cs" />
     <Compile Include="ViewModels\GiohangViewModel.cs" />
     <Compile Include="ViewModels\HoadonmuatinViewModel.cs" />

@@ -18,6 +18,29 @@
 
         //loadReligion();
         general.configs.pageSize = 12;
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+
+            switch (target) {
+                case "#home":
+                    loadDataHd(true);
+                    break;
+                case "#menu1":
+                    loadDataChoxacnhan(true);
+                    break;
+                case "#menu2":
+                    loadDataGiaohang(true);
+                    break;
+                case "#menu3":
+                    loadDataHoanthanh(true);
+                    break;
+                case "#menu4":
+                    loadDataHuy(true);
+                    break;
+            };
+        });
+
         $('#frmMaintainance').validate({
             errorClass: 'red',
             ignore: [],
@@ -154,14 +177,194 @@ function loadDataHd(isPageChanged) {
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
-                    render2 += '</div>'
+                    render += '</div>'
                 }
 
             });
             $('#lblTotalRecords').text(response.PageCount);
             $('#new-Product').html(render);
             wrapPaging(response.PageCount, function () {
-                loadDataHet();
+                loadDataHd();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+function loadDataChoxacnhan(isPageChanged) {
+    var template1 = $('#table-template1').html();
+    var render1 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllHoadonChoxacnhan',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render1 += '<div class="row row-space">'
+                }
+
+                render1 += Mustache.render(template1, {
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
+                    Total: item.tongtien,
+                    //img: imgsrc,
+                    Trangthai: item.tinhtrang,
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render1 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product1').html(render1);
+            wrapPaging(response.PageCount, function () {
+                loadDataChoxacnhan();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+function loadDataGiaohang(isPageChanged) {
+    var template2 = $('#table-template2').html();
+    var render2 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllHoadonGiaohang',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render2 += '<div class="row row-space">'
+                }
+
+                render2 += Mustache.render(template2, {
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
+                    Total: item.tongtien,
+                    //img: imgsrc,
+                    Trangthai: item.tinhtrang,
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render2 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product2').html(render2);
+            wrapPaging(response.PageCount, function () {
+                loadDataGiaohang();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+function loadDataHoanthanh(isPageChanged) {
+    var template3 = $('#table-template3').html();
+    var render3 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllHoadonHoanthanh',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render3 += '<div class="row row-space">'
+                }
+
+                render3 += Mustache.render(template3, {
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
+                    Total: item.tongtien,
+                    //img: imgsrc,
+                    Trangthai: item.tinhtrang,
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render3 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product3').html(render3);
+            wrapPaging(response.PageCount, function () {
+                loadDataHoanthanh();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+function loadDataHuy(isPageChanged) {
+    var template4 = $('#table-template4').html();
+    var render4 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllHoadonHuy',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render4 += '<div class="row row-space">'
+                }
+
+                render4 += Mustache.render(template4, {
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
+                    Total: item.tongtien,
+                    //img: imgsrc,
+                    Trangthai: item.tinhtrang,
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render4 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product4').html(render4);
+            wrapPaging(response.PageCount, function () {
+                loadDataHuy();
             }, isPageChanged);
         },
         error: function (status) {

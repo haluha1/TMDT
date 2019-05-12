@@ -61,23 +61,26 @@
 							</div>
 
 							<div class="container">
-								<div style="margin-left: 225px">
-									<label for="txtEmail"><b>Username</b></label>
-									<div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
-								</div>
+                                <div id="form-body">
+                                    <div style="margin-left: 225px">
+                                        <label for="txtEmail"><b>Username</b></label>
+                                        <div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
+                                    </div>
 
-								<div style="margin-left: 225px">
-									<label for="txtPassword"><b>Password</b></label>
-									<div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
-								</div>
+                                    <div style="margin-left: 225px">
+                                        <label for="txtPassword"><b>Password</b></label>
+                                        <div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
+                                    </div>
 
-								<label style="margin-left: 225px">
-									<input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
-								</label>
+                                    <label style="margin-left: 225px">
+                                        <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
+                                    </label>
 
-								<div>
-									<span class="psw"> <a href="#">Forgot password?</a></span>
-								</div>
+                                    <div>
+                                        <span class="psw"> <a href="#">Forgot password?</a></span>
+                                    </div>
+                                </div>
+								
 
 
 
@@ -151,7 +154,7 @@
                         <label for="sdt" style="margin-top:20px; font-size:16px" " ><b>Số điện thoại</b></label>
                     </div>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="Nhập số điện thoại" id="txtsdt" name="sdt" required>
+                        <input type="text" placeholder="Nhập số điện thoại" id="txtsdt" name="sdt" maxlength="12" required>
                     </div>
                 </div>
                 <div class="row">
@@ -161,7 +164,7 @@
                         <label for="stk" style="margin-top:20px; font-size:16px" "><b>Số tài khoản</b></label>
                     </div>
                     <div class="col-lg-9">
-                        <input type="text" placeholder="Nhập số tài khoản" id="txtstk" name="stk" required>
+                        <input type="text" placeholder="Nhập số tài khoản" id="txtstk" maxlength="20" name="stk" required>
                     </div>
                 </div>
                 <div class="row">
@@ -169,7 +172,7 @@
 
                     </div>
                     <div class=" col-lg-2">
-                        <input type="radio" name="userType" value="0" />
+                        <input type="radio" name="userType" value="0" checked />
                         <label for="nguoimua"><b> Người mua </b></label>
                     </div>
                     <div class="col-lg-6">

@@ -1,4 +1,4 @@
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
 using Data.Entities;
@@ -76,12 +76,24 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GetGioHang(int id)
+        public JsonResult GetGioHang()
         {
             try
             {
-                var data = _sanphamService.GetById(id);
-                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+				if (UserLoginViewModel.Current.KeyId == 0)
+				{
+					return Json(new { Result = "Vui lòng đăng nhập!", Status="FAIL" }, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+
+					var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
+					GHViewModel gh = new GHViewModel(user);
+					//var gh = Mapper.Map<GHViewModel, GHViewModel>(ghh);
+					return Json(new { Result = gh, Status="OK" }, JsonRequestBehavior.AllowGet);
+				}
+
+                
             }
             catch (Exception ex)
             {
