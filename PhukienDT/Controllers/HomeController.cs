@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Utilities;
 using Utilities.Constants;
 
 namespace PhukienDT.Controllers
@@ -60,6 +61,40 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
+		[HttpPost]
+		public JsonResult Register(TaiKhoanViewModel TaikhoanVm)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+					return Json(allErrors, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					var s = UtilityFunction.RandomString(6, false);
+					string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
+					MailContent = MailContent.Replace("{{Code}}", s);
+
+					new MailHelper().SendMail(TaikhoanVm.email, "Register Code", MailContent);
+					_userService.Register(TaikhoanVm,s);
+					
+
+
+				}
+				if (_userService.Save()) return Json(new { Result = TaikhoanVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
+
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(Response, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+		}
+
 		[HttpPost]
 		public JsonResult Login(LoginViewModel LoginVm)
 		{
@@ -131,6 +166,5 @@ namespace PhukienDT.Controllers
 				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
-		
-	}
+    }
 }

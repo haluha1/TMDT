@@ -1,60 +1,11 @@
-﻿
-var slideIndex;
-// KHai bào hàm hiển thị slide
-function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
-    //chuyển đến slide tiếp theo
-    slideIndex++;
-    //nếu đang ở slide cuối cùng thì chuyển về slide đầu
-    if (slideIndex > slides.length - 1) {
-        slideIndex = 0
-    }
-    //tự động chuyển đổi slide sau 5s
-    setTimeout(showSlides, 3000);
-}
-//mặc định hiển thị slide đầu tiên 
-showSlides(slideIndex = 0);
-
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-
-
-
-
-homeController = function () {
+﻿var donbanController = function () {
     this.initialize = function () {
-        loadData();
-        TestSave();
+        loadDataHd();
+        //TestSave();
         registerEvents();
     }
-    var listFamilyRelationship = [];
-    var listWorkingProcessDetail = [];
-    var listExpertiseDetail = [];
-    var listLanguageDetail = [];
-    var listSalaryDetail = [];
-    var gId = 0;
-    var userName;
-    var gEmployeeId;
+
     function registerEvents() {
-        if ((typeof $.cookie("cart") === 'undefined') || $.cookie("cart") == null) {
-            var cart = [];
-            $.cookie("cart", cart);
-            //JSON.parse($.cookie('cart'));
-        }
         //$('.yearpicker').datepicker({
         //    format: "yyyy",
         //    //todayBtn: "linked",
@@ -64,12 +15,9 @@ homeController = function () {
         //    startView: 2,
         //    minViewMode: 2
         //});
-        
+
         //loadReligion();
-		$('body').on('click', '.buy', function (e) {
-			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
-		});
-        
+        general.configs.pageSize = 12;
         $('#frmMaintainance').validate({
             errorClass: 'red',
             ignore: [],
@@ -88,7 +36,7 @@ homeController = function () {
                 }
             },
             rules: {
-                
+
                 txtCertificate: {
                     required: true,
                 }
@@ -100,12 +48,17 @@ homeController = function () {
             general.configs.pageIndex = 1;
             loadData(true);
         });
-        
 
-        
 
-        
-        
+        $('body').on('click', '.yeuthich', function (e) {
+            e.preventDefault();
+            $(this).prop('disabled', true);
+            var that = $(this).data('id');
+            likeProduct(that);
+        });
+
+
+
 
     }
     //function UrlExists(url) {
@@ -114,10 +67,30 @@ homeController = function () {
     //    http.send();
     //    return http.status != 404;
     //}
-    
+    function likeProduct(that) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Hoadon/Like",
+            data: { id: that },
+            dataType: "json",
+            beforeSend: function () {
+                general.startLoading();
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+                    general.notify(response.Result, 'success');
+                }
 
 
-
+            },
+            error: function (status) {
+                general.notify('Có lỗi xảy ra', 'error');
+                general.stopLoading();
+            }
+        });
+    }
 
     function loadSTT(that) {
         $that = that;
@@ -133,18 +106,19 @@ homeController = function () {
     }
 }
 
-function loadData(isPageChanged) {
+
+function loadDataHd(isPageChanged) {
     var template = $('#table-template').html();
     var render = "";
     $.ajax({
         type: 'GET',
-        url: '/Sanpham/GetNewProduct',
+        url: '/Hoadon/GetAllHoadon',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: {
             keyword: $('#txtKeyword').val(),
-            page: 1,
-            pageSize: 8
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
         },
         success: function (response) {
             console.log(response);
@@ -153,91 +127,74 @@ function loadData(isPageChanged) {
                 if (i % 4 == 0 && i % 2 == 0) {
                     render += '<div class="row row-space">'
                 }
-                var imgsrc = "";
-                switch (item.LoaispNavigation.KeyId) {
-                    case 2: {
-                        imgsrc = "/img/Bao/" + item.tenhinh;
-                        break;
-                    }
-                    case 3: {
-                        imgsrc = "/img/Ring/" + item.tenhinh;
-                        break;
-                    }
-                    case 4: {
-                        imgsrc = "/img/Khac/" + item.tenhinh;
-                        break;
-                    }
-                    default: {
-                        imgsrc = "/img/" + item.tenhinh;
-                        break;
-                    }
-                }
-
+                //var imgsrc = "";
+                //switch (item.LoaispNavigation.KeyId) {
+                //    case 2: {
+                //        imgsrc = "/img/Bao/" + item.tenhinh;
+                //        break;
+                //    }
+                //    case 3: {
+                //        imgsrc = "/img/Ring/" + item.tenhinh;
+                //        break;
+                //    }
+                //    case 4: {
+                //        imgsrc = "/img/Khac/" + item.tenhinh;
+                //        break;
+                //    }
+                //    default: {
+                //        imgsrc = "/img/" + item.tenhinh;
+                //        break;
+                //    }
+                //}
                 render += Mustache.render(template, {
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    Price: item.dongia,
-                    img: imgsrc
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
+                    Total: item.tongtien,
+                    //img: imgsrc,
+                    Trangthai: item.tinhtrang,
                 });
-                //end
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
-                    render += '</div>'
+                    render2 += '</div>'
                 }
 
             });
-            //$('#lblTotalRecords').text(response.PageCount);
+            $('#lblTotalRecords').text(response.PageCount);
             $('#new-Product').html(render);
-            //wrapPaging(response.PageCount, function () {
-            //    loadData();
-            //}, isPageChanged);
+            wrapPaging(response.PageCount, function () {
+                loadDataHet();
+            }, isPageChanged);
         },
         error: function (status) {
             console.log(status);
-            //general.notify('Không thể load dữ liệu', 'error');
+            general.notify('Không thể load dữ liệu', 'error');
         }
     });
 }
 
 function TestSave() {
-    // San pham
-    //var data = {
-    //    KeyId: 51,
-    //    masp: 51,
-    //    tensp: "Sp test",
-    //    maloai: 1,
-    //    mancc: 1,
-    //    dongia: 9999,
-    //    soluong: 1,
-    //    mota: "1",
-    //    tenhinh: "1",
-    //    khuyenmai: 0
-    //};
+    var data = {
+        KeyId: 51,
+        masp: 51,
+        tensp: "Sp test",
+        maloai: 1,
+        mancc: 1,
+        dongia: 9999,
+        soluong: 1,
+        mota: "1",
+        tenhinh: "1",
+        khuyenmai: 0
+    };
 
-    //Rating
-    //data = {
-    //    KeyId: 0,
-    //    makh: 3,
-    //    diem: 10,
-    //    comment: "abc",
-    //    RatingFor: 0, //0: Product  -  1: Merchant
-    //    mancc: null,
-    //    masp: 1
-    //};
-
-    var myAry = [1, 2, 3];
     $.ajax({
         type: "POST",
-        url: "/KhachHang/AddToCart",
-        data: { id: 1 },
+        url: "/Hoadon/SaveEntity",
+        data: { sanphamVm: data },
         dataType: "json",
         beforeSend: function () {
             general.startLoading();
         },
         success: function (response) {
             console.log(response);
-            if (response == "NOT LOGIN!") {
-                $.cookie('cart', JSON.stringify(myAry));
-            }
             general.stopLoading();
         },
         error: function (status) {
@@ -269,14 +226,4 @@ function wrapPaging(recordCount, callBack, changePageSize) {
                 setTimeout(callBack(), 200);
             }
         });
-}
-
-function CreateRandomString() {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < 6; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
 }

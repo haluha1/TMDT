@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\HoadonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\NguoibanController.cs" />
@@ -270,6 +271,8 @@
     <Content Include="img\search.png" />
     <Content Include="Models\template.html" />
     <Content Include="Scripts\app\home\index.js" />
+    <Content Include="Scripts\app\nguoiban\donban.js" />
+    <Content Include="Scripts\app\nguoiban\index.js" />
     <Content Include="Scripts\app\sanpham\index.js" />
     <Content Include="Scripts\app\shared\autocomplete.js" />
     <Content Include="Scripts\app\shared\autocompletejs.js" />
@@ -888,7 +891,6 @@
     <Content Include="Scripts\twbs-pagination\README.md" />
     <Content Include="Scripts\twbs-pagination\twbs-pagination.jquery.json" />
     <Content Include="Views\Sanpham\ctsp.cshtml" />
-    <Content Include="Views\Sanpham\Theosanpham.cshtml" />
     <Content Include="Views\Shared\Layout_Nguoiban.cshtml" />
     <Content Include="Views\Nguoiban\Index.cshtml" />
     <Content Include="Views\Nguoiban\Sanpham.cshtml" />
@@ -902,7 +904,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\KhachHang\" />
+    <Folder Include="Views\Hoadon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

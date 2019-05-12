@@ -10,11 +10,18 @@ namespace Data.EF
 {
 	public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<PhukienDTDbContext>
 	{
+<<<<<<< HEAD
         public DbInitializer()
         {
         }
+=======
+		public DbInitializer()
+		{
+			
+		}
+>>>>>>> 9b06fd4ba401c8d3416cc9925bd2a8636cffb683
 
-        protected override void Seed(PhukienDTDbContext context)
+		protected override void Seed(PhukienDTDbContext context)
 		{
             //Loại sản phẩm
 			var loaisps = new List<Loaisp>
@@ -30,9 +37,29 @@ namespace Data.EF
             //Tài khoản
             var taikhoans = new List<TaiKhoan>
             {
-            new TaiKhoan{matk=1,hoten="Nguyễn Văn An", email="ann@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=UserType.Merchant},
-            new TaiKhoan{matk=2,hoten="Trần Ngọc Ngà", email="ngocnga@gmail.com", diachi="478 Lý Thái Tổ", sdt="0123456701", sotk="2222222222222", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=UserType.Webmaster},
-            new TaiKhoan{matk=3,hoten="Lê Thị Mai", email="maile@gmail.com", diachi="333 Hai Bà Trưng", sdt="0123456702", sotk="3333333333333", matkhau="123", thoigiandk="1/1/2019", avatar="", UserType=UserType.Customer},
+            new TaiKhoan{matk=1,hoten="Nguyễn Văn An", email="ngochuyen1309@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=2,hoten="Nguyễn Văn An", email="ann1@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=3,hoten="Nguyễn Văn An", email="ann2@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=4,hoten="Nguyễn Văn An", email="ann3@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=5,hoten="Nguyễn Văn An", email="ann4@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava5.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=6,hoten="Nguyễn Văn An", email="ann5@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=7,hoten="Nguyễn Văn An", email="ann6@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=8,hoten="Nguyễn Văn An", email="ann7@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=9,hoten="Nguyễn Văn An", email="ann8@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Merchant},
+            new TaiKhoan{matk=10,hoten="Nguyễn Văn An", email="ann9@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava5.png", UserType=UserType.Merchant},
+
+            new TaiKhoan{matk=11,hoten="Trần Ngọc Ngà", email="ngocnga@gmail.com", diachi="478 Lý Thái Tổ", sdt="0123456701", sotk="2222222222222", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Webmaster},
+
+            new TaiKhoan{matk=12,hoten="Lê Thị Mai", email="maile@gmail.com", diachi="333 Hai Bà Trưng", sdt="0123456702", sotk="3333333333333", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=13,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=14,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=15,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=16,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=17,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava5.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=18,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=19,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=20,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
+            new TaiKhoan{matk=21,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
             };
             taikhoans.ForEach(s => context.TaiKhoans.Add(s));
             context.SaveChanges();
@@ -64,7 +91,11 @@ namespace Data.EF
             //Sản phẩm
             var sanphams = new List<Sanpham>
             {
+<<<<<<< HEAD
                 new Sanpham{masp="1",tensp="Ốp Chống Bẩn GIành Cho Iphone 6 6S - iphone 6/6s",maloai=1,mancc=1,dongia=49000,soluong=100,mota="ốp lưng iphone apple silicone case là là một sản phảm đột phá nhờ công nghệ chống bám bẩn bên ngoài và lớp nhung mềm mại bên trong. Bảo vệ chiếc iphone của bạn tránh bị trầy xước hoặc giảm thiểu tối đa lực tsac động, khi vô tình rơi rớt",tenhinh="1.png",khuyenmai=0},
+=======
+                new Sanpham{masp="1",tensp="Ốp Chống Bẩn GIành Cho Iphone 6 6S",maloai=1,mancc=1,dongia=49000,soluong=100,mota="ốp lưng iphone apple silicone case là là một sản phảm đột phá nhờ công nghệ chống bám bẩn bên ngoài và lớp nhung mềm mại bên trong. Bảo vệ chiếc iphone của bạn tránh bị trầy xước hoặc giảm thiểu tối đa lực tsac động, khi vô tình rơi rớt",tenhinh="1.png",khuyenmai=0},
+>>>>>>> 9b06fd4ba401c8d3416cc9925bd2a8636cffb683
                 new Sanpham{masp="2",tensp="Ốp hoạt hình",maloai=1,mancc=1,dongia=40000,soluong=100,mota="Đây là sp thứ 2",tenhinh="2.png",khuyenmai=0},
                 new Sanpham{masp="3",tensp="Ốp hình nước ngọt pepsi",maloai=1,mancc=2,dongia=60000,soluong=100,mota="Đây là sp thứ 3",tenhinh="3.png",khuyenmai=0},
                 new Sanpham{masp="4",tensp="Ốp hình hàn quốc",maloai=1,mancc=3,dongia=60000,soluong=100,mota="Đây là sp thứ 4",tenhinh="4.png",khuyenmai=0},
@@ -114,7 +145,11 @@ namespace Data.EF
                 new Sanpham{masp="48",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="48.png",khuyenmai=0},
                 new Sanpham{masp="49",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=55000,soluong=100,mota="Đây là sp thứ 1",tenhinh="49.png",khuyenmai=0},
                 new Sanpham{masp="50",tensp="Ốp nhám vô diện",maloai=1,mancc=1,dongia=70000,soluong=100,mota="Đây là sp thứ 1",tenhinh="50.png",khuyenmai=0},
+<<<<<<< HEAD
                  new Sanpham{masp="r1",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r1.png",khuyenmai=0},
+=======
+                new Sanpham{masp="r1",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r1.png",khuyenmai=0},
+>>>>>>> 9b06fd4ba401c8d3416cc9925bd2a8636cffb683
                 new Sanpham{masp="r2",tensp="Ring Gà Con ",maloai=3,mancc=1,dongia=50000,soluong=100,mota="Đây là sp thứ 2",tenhinh="r2.png",khuyenmai=0},
                 new Sanpham{masp="r3",tensp="Ring Gấu Đen Dễ Thương ",maloai=3,mancc=3,dongia=95000,soluong=100,mota="Đây là sp thứ 3",tenhinh="r3.png",khuyenmai=0},
                 new Sanpham{masp="r4",tensp="Ring Gấu Hồng Kute ",maloai=3,mancc=1,dongia=80000,soluong=100,mota="Đây là sp thứ 4",tenhinh="r4.png",khuyenmai=0},
@@ -216,6 +251,25 @@ namespace Data.EF
                 new Giatin{magiatin=3, soluongtin=15, gia=13000 }
             };
             giatins.ForEach(s => context.Giatins.Add(s));
+            context.SaveChanges();
+
+            //Hóa đơn
+            var hoadons = new List<Hoadon>
+            {
+                new Hoadon{mahd=1, makh=3, tongtien=49000, thoigian="5/11/2019" },
+                new Hoadon{mahd=2, makh=3, tongtien=110000, thoigian="6/11/2019" }
+            };
+            hoadons.ForEach(s => context.Hoadons.Add(s));
+            context.SaveChanges();
+
+            //Chi tiết hóa đơn
+            var cthds = new List<Cthd>
+            {
+                new Cthd{mahd =1, masp =1, soluong = 1, thanhtien = 49000 },
+                new Cthd{mahd =2, masp = 5, soluong = 1, thanhtien = 60000 },
+                new Cthd{mahd =2, masp = 52, soluong = 1, thanhtien = 50000 }
+            };
+            cthds.ForEach(s => context.Cthds.Add(s));
             context.SaveChanges();
 
             //var courses = new List<Course>

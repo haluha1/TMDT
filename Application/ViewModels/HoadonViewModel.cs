@@ -13,7 +13,8 @@ namespace Application.ViewModels
 		public int makh { get; set; }
 		public double tongtien { get; set; }
 		public string thoigian { get; set; }
-		public ICollection<CthdViewModel> Cthdons { get; set; }
+        public string tinhtrang { get; set; }
+        public ICollection<CthdViewModel> Cthdons { get; set; }
 		public virtual KhachhangViewModel KhachHangNavigation { get; set; }
 	}
 }

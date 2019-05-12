@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ActiveCode.cs" />
     <Compile Include="Entities\CtGiohang.cs" />
     <Compile Include="Entities\Cthd.cs" />
     <Compile Include="Entities\CtRating.cs" />
@@ -57,6 +58,8 @@
     <Compile Include="Entities\Sanpham.cs" />
     <Compile Include="Entities\TaiKhoan.cs" />
     <Compile Include="Entities\Webmaster.cs" />
+    <Compile Include="Enum\CodeType.cs" />
+    <Compile Include="Enum\CodeStatus.cs" />
     <Compile Include="Enum\UserType.cs" />
     <Compile Include="Enum\RatingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
