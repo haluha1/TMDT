@@ -7,7 +7,7 @@
         //TestSave();
         registerEvents();
     }
-   
+
     function registerEvents() {
         //$('.yearpicker').datepicker({
         //    format: "yyyy",
@@ -136,6 +136,7 @@ function loadData(isPageChanged) {
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
         },
+        beforeSend: function() { general.startLoading(); },
         success: function (response) {
             console.log(response);
             $.each(response.Result, function (i, item) {
@@ -177,6 +178,7 @@ function loadData(isPageChanged) {
             });
             $('#lblTotalRecords').text(response.PageCount);
             $('#Product-wrapper').html(render);
+            general.stopLoading();
             wrapPaging(response.PageCount, function () {
                 loadData();
             }, isPageChanged);

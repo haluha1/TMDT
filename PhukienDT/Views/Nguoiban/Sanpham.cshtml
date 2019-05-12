@@ -3,13 +3,15 @@
     ViewBag.Title = "Sanpham";
     Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
 }
-@section Scripts{
-    <script src="~/Scripts/app/home/index.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+@section Scripts1{
+    <script src="/Scripts/app/nguoiban/index.js"></script>
+    <script>
+        var sanpham = new nguoibanController();
+        sanpham.initialize();
+    </script>
 }
 @section Style{
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
 }
 
 <ul class="nav nav-tabs">
@@ -24,9 +26,9 @@
         <div><h3 style="color:red">Tổng số lượng sản phẩm</h3></div>
         <div class="row">
             <div class="col-lg-6">
-                <input type="text" placeholder="Tìm sản phẩm...">
+                <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
                 <div>
-                    <img style="height:27px;margin-top:-85px; margin-left: 290px" src="..\img\search.png" />
+                    <img style="height:27px;margin-top:-85px; margin-left: 290px" src="/img/search.png" />
                 </div>
             </div>
             <div class="col-lg-2"></div>
@@ -100,40 +102,10 @@
                         <th>Đơn giá</th>
                         <th>Kho hàng</th>
                         <th>Đã bán</th>
+                        <th>Còn lại</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp</div>
-                        </td>
-                        <td>
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                    <option value="0">Ốp điện thoại</option>
-                                    <option value="1">Bao máy tính bảng</option>
-                                    <option value="2">Ring- bóp</option>
-                                    <option value="3">Khác</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            tiền
-                        </td>
-                        <td>
-                            sl đang có
-                        </td>
-                        <td>
-                            sl đã bán
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-
+                <tbody id="new-Product">
                 </tbody>
             </table>
         </div>
@@ -146,7 +118,7 @@
         <div>
             <input type="text" placeholder="Tìm sản phẩm...">
             <div>
-                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
+                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
         </div>
         <div>
@@ -157,45 +129,10 @@
                         <th>Loại sản phẩm</th>
                         <th>Đơn giá</th>
                         <th>Kho hàng</th>
-                        <th>Đã bán</th>
                         <th>Còn lại</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp</div>
-                        </td>
-                        <td>
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                    <option value="0">Ốp điện thoại</option>
-                                    <option value="1">Bao máy tính bảng</option>
-                                    <option value="2">Ring- bóp</option>
-                                    <option value="3">Khác</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            tiền
-                        </td>
-                        <td>
-                            sl đang có
-                        </td>
-                        <td>
-                            sl đã bán
-                        </td>
-                        <td>
-                            sl còn lại
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-
+                <tbody id="new-Product1">
                 </tbody>
             </table>
         </div>
@@ -208,7 +145,7 @@
         <div>
             <input type="text" placeholder="Tìm sản phẩm...">
             <div>
-                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
+                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
         </div>
         <div>
@@ -218,42 +155,9 @@
                         <th>Tên sản phẩm</th>
                         <th>Loại sản phẩm</th>
                         <th>Đơn giá</th>
-                        <th>Kho hàng</th>
-                        <th>Đã bán</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp</div>
-                        </td>
-                        <td>
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                    <option value="0">Ốp điện thoại</option>
-                                    <option value="1">Bao máy tính bảng</option>
-                                    <option value="2">Ring- bóp</option>
-                                    <option value="3">Khác</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            tiền
-                        </td>
-                        <td>
-                            sl đang có
-                        </td>
-                        <td>
-                            sl đã bán
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-
+                <tbody id="new-Product2">    
                 </tbody>
             </table>
         </div>
@@ -266,7 +170,7 @@
         <div>
             <input type="text" placeholder="Tìm sản phẩm...">
             <div>
-                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
+                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
         </div>
         <div>
@@ -277,58 +181,125 @@
                         <th>Loại sản phẩm</th>
                         <th>Đơn giá</th>
                         <th>Kho hàng</th>
-                        <th>Đã bán</th>
+                        <th>Còn lại</th>
                         <th>Ghi chú</th>
-                        <th>Gỡ khóa</th>
+                        <th>
+                            Gỡ khóa(Chỉ áp dụng 1 lần duy nhất)
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp</div>
-                        </td>
-                        <td>
-                            <div class="custom-select" style="width:200px;">
-                                <select>
-                                    <option value="0">Ốp điện thoại</option>
-                                    <option value="1">Bao máy tính bảng</option>
-                                    <option value="2">Ring- bóp</option>
-                                    <option value="3">Khác</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            tiền
-                        </td>
-                        <td>
-                            sl đang có
-                        </td>
-                        <td>
-                            sl đã bán
-                        </td>
-                        <td>
-                            ghi chú lý do khóa và số lần bị khóa
-                        </td>
-                        <td>
-                            <button>Gỡ</button>
-                            <div>Chỉ áp dụng 1 lần duy nhất</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-
+                <tbody id="new-Product3">
+                    
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
+<div id="Product-wrapper"></div>
+<!--Pagination-->
+<div class="row">
+        <div class="col-sm-5">
+            <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                <select id="ddlShowPage">
+                    <option value="12" selected="selected">12</option>
+                    <option value="24">24</option>
+                    <option value="36">36</option>
+                    <option value="48">48</option>
+                </select>
+                <span class="item-per-page">
+                    bản ghi/trang.
+                </span>
+                Tổng số bản ghi: <strong id="lblTotalRecords"></strong>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                <ul id="paginationUL"></ul>
+            </div>
+        </div>
+</div>
 
-<div>phân trang</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div style="float:left"><img width="50px" src="{{img}}" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{ProductName}}</div>
+        </td>
+        <td>
+            {{ProductType}}
+        </td>
+        <td>
+            {{Price}}
+        </td>
+        <td>
+            {{Quanlity}}
+        </td>
+        <td>
+            sl đã bán
+        </td>
+        <td>
+            sl còn lại
+        </td>
+    </tr>
+</script>
+<script id="table-template1" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div style="float:left"><img width="50px" src="{{img}}" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{ProductName}}</div>
+        </td>
+        <td>
+            {{ProductType}}
+        </td>
+        <td>
+            {{Price}}
+        </td>
+        <td>
+            {{Quanlity}}
+        </td>
+    </tr>
+</script>
+<script id="table-template2" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div style="float:left"><img width="50px" src="{{img}}" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{ProductName}}</div>
+        </td>
+        <td>
+            {{ProductType}}
+        </td>
+        <td>
+            {{Price}}
+        </td>
+    </tr>
+</script>
+<script id="table-template3" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div style="float:left"><img width="50px" src="{{img}}" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{ProductName}}</div>
+        </td>
+        <td>
+            {{ProductType}}
+        </td>
+        <td>
+            {{Price}}
+        </td>
+        <td>
+            {{Quanlity}}
+        </td>
+        <td>
+            sl còn lại
+        </td>
+        <td>
+            ghi chú lý do khóa và số lần bị khóa
+        </td>
+        <td>
+            <button id="gokhoa">Gỡ</button>
+        </td>
+    </tr>
+</script>
 
 
 

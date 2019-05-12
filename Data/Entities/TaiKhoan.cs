@@ -12,7 +12,25 @@ namespace Data.Entities
 {
     public class TaiKhoan : DomainEntity<int>
     {
-        public int matk { get; set; }
+		public TaiKhoan()
+		{
+		}
+
+		public TaiKhoan(int keyId, int matk, string hoten, string email, string diachi, string sdt, string sotk, string matkhau, string thoigiandk, string avatar, UserType userType)
+		{
+			this.matk = matk;
+			this.hoten = hoten;
+			this.email = email;
+			this.diachi = diachi;
+			this.sdt = sdt;
+			this.sotk = sotk;
+			this.matkhau = matkhau;
+			this.thoigiandk = thoigiandk;
+			this.avatar = avatar;
+			UserType = userType;
+		}
+
+		public int matk { get; set; }
         public string hoten { get; set; }
         public string email { get; set; }
         public string diachi { get; set; }
