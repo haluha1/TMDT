@@ -40,6 +40,8 @@ namespace Application.AutoMapper
 
             });
             CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
+			CreateMap<CtGiohang, CtGiohangViewModel>();
+			
 			CreateMap<Khachhang, KhachhangViewModel>();
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());
 			CreateMap<Mucduytri, MucduytriViewModel>();
@@ -48,6 +50,21 @@ namespace Application.AutoMapper
             CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();
 
+			
+			CreateMap<RatingViewModel, RatingViewModel>().AfterMap((src, dest) =>
+			{
+				if (dest.CtRatings != null)
+				{
+					foreach (var i in dest.CtRatings)
+					{
+						i.KhachhangNavigation.CtRatings = null;
+						i.KhachhangNavigation.GiohangNavigation = null;
+						i.KhachhangNavigation.SanPhamYeuThichs = null;
+						i.KhachhangNavigation.TaiKhoanBy.KhachhangNavigation = null;
+					}
+						
+				}
+			}); ;
 		}
 	}
 }

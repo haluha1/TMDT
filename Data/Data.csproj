@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CtGiohang.cs" />
     <Compile Include="Entities\Cthd.cs" />
     <Compile Include="Entities\CtRating.cs" />
     <Compile Include="Entities\Function.cs" />

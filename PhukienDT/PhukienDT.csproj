@@ -171,7 +171,9 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HoadonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\NguoibanController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Ctsp.aspx.cs">
       <DependentUpon>Ctsp.aspx</DependentUpon>
@@ -621,6 +623,14 @@
     <Content Include="Scripts\bootstrap\js\tooltip.js" />
     <Content Include="Scripts\bootstrap\js\transition.js" />
     <Content Include="Scripts\bootstrap\package.js" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\.gitignore" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\Gruntfile.js" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\jquery.cookie.js" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\MIT-LICENSE.txt" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\index.html" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\malformed_cookie.html" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\server.js" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\tests.js" />
     <Content Include="Scripts\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery-validation\dist\additional-methods.js" />
@@ -806,6 +816,16 @@
     <Content Include="Scripts\bootstrap-datetimepicker-master\LICENSE" />
     <Content Include="Scripts\bootstrap-datetimepicker-master\package.json" />
     <Content Include="Scripts\bootstrap-datetimepicker-master\README.md" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\.jshintrc" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\.tm_properties" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\.travis.yml" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\bower.json" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\CHANGELOG.md" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\component.json" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\CONTRIBUTING.md" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\cookie.jquery.json" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\package.json" />
+    <Content Include="Scripts\carhartl-jquery-cookie-92b7715\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -50,6 +50,19 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public JsonResult GetCTSP(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #region AjaxAPI
         public JsonResult GetAllSanPham(string keyword, int page, int pageSize)
@@ -161,7 +174,7 @@ namespace PhukienDT.Controllers
 			try
 			{
 
-				var data = _sanphamService.GetAll().Skip((page - 1) * pageSize).Take(pageSize);
+				var data = _sanphamService.GetAll().OrderByDescending(x=>x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
 
 				
 				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };

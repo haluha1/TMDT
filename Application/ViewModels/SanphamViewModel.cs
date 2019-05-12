@@ -21,7 +21,7 @@ namespace Application.ViewModels
 		public virtual LoaispViewModel LoaispNavigation { get; set; }
 		public virtual ICollection<CthdViewModel> Cthds { get; set; }
 		public virtual NccViewModel NccNavigation { get; set; }
-		public virtual ICollection<GiohangViewModel> Giohangs { get; set; }
+		public virtual ICollection<CtGiohangViewModel> CtGiohangs { get; set; }
 		public virtual ICollection<KhachhangViewModel> KhachHangYeuThichs { get; set; }
 		
 	}
