@@ -18,7 +18,7 @@
     <li class="active"><a data-toggle="tab" href="#home">Tất cả</a></li>
     <li><a data-toggle="tab" href="#menu1">Còn hàng</a></li>
     <li><a data-toggle="tab" href="#menu2">Hết hàng</a></li>
-    <li><a data-toggle="tab" href="#menu3">Đã bị khóa</a></li>
+    @*<li><a data-toggle="tab" href="#menu3">Đã bị khóa</a></li>*@
 </ul>
 <hr />
 <div class="tab-content">
@@ -116,7 +116,7 @@
             <div class="col-lg-8"><h3 style="color:red">Số lượng sản phẩm còn</h3></div>
         </div>
         <div>
-            <input type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
             <div>
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
@@ -143,7 +143,7 @@
             <div class="col-lg-8"><h3 style="color:red">Số lượng sản phẩm hết</h3></div>
         </div>
         <div>
-            <input type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
             <div>
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
@@ -163,12 +163,12 @@
         </div>
 
     </div>
-    <div id="menu3" class="tab-pane fade">
+    @*<div id="menu3" class="tab-pane fade">
         <div class="row">
             <div class="col-lg-8"><h3 style="color:red">Số lượng sản phẩm khóa</h3></div>
         </div>
         <div>
-            <input type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
             <div>
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
@@ -193,7 +193,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>*@
 </div>
 
 <div id="Product-wrapper"></div>
