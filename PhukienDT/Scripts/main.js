@@ -122,6 +122,13 @@ var mainController = function () {
             }
         });
 
+		$('body').on('click', '.yeuthich', function (e) {
+			e.preventDefault();
+			$(this).prop('disabled', true);
+			var that = $(this).data('id');
+			likeProduct(that);
+		});	
+
         $("#frmMaintainance").on('submit', function (e) {
             if ($('#frmMaintainance').valid()) {
                 e.preventDefault();
@@ -175,6 +182,29 @@ var mainController = function () {
         $('#frmMaintainance').trigger('reset');
 
     }
+}
+
+function likeProduct(that) {
+	$.ajax({
+		type: "POST",
+		url: "/Sanpham/Like",
+		data: { id: that },
+		dataType: "json",
+		beforeSend: function () {
+			general.startLoading();
+		},
+		success: function (response) {
+			console.log(response);
+			if (response.Status == "OK") {
+				general.notify(response.Result, 'Thêm thành công');
+			}
+
+		},
+		error: function (status) {
+			general.notify('Có lỗi xảy ra', 'error');
+			general.stopLoading();
+		}
+	});
 }
 
 function loadData(isPageChanged) {

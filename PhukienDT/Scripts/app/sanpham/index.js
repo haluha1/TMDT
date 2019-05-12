@@ -62,7 +62,7 @@
 
 		$('body').on('click', '.mua', function (e) {
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
-		});
+		});		
 		$('body').on('click', '.themgiohang', function (e) {
 			window.location.href = "/Sanpham/Giohang/" +  window.location.href.split('/').reverse()[0];;
 		});

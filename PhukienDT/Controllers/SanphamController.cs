@@ -177,7 +177,7 @@ namespace PhukienDT.Controllers
 		{
 			try
 			{
-				if (Session[CommonConstrants.USER_SESSION] != null)
+				if (Session[CommonConstrants.USER_SESSION] != null || UserLoginViewModel.Current.KeyId!=0)
 				{
 					var spVm = _sanphamService.GetById(id);
 					var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
@@ -188,7 +188,7 @@ namespace PhukienDT.Controllers
 				}
 				else
 				{
-					return Json(new { Result = const_Error.NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = const_Error.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 				}
 				
 			}

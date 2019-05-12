@@ -10,5 +10,6 @@ namespace Utilities.Constants
 	{
 		public static string WRONG_LOGIN = "Email hoặc tài khoản không đúng!";
 		public static string NOT_LOGIN = "NOT LOGIN!";
-	}
+        public static string LIKE_NOT_LOGIN = "Vui lòng đăng nhập!";
+    }
 }

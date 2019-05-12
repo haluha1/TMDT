@@ -13,7 +13,7 @@ namespace Data.Entities
 		{
 		}
 
-		public Sanpham(int keyId, int masp, string tensp, int maloai, int mancc, double dongia, int soluong, string mota, string tenhinh, float khuyenmai)
+		public Sanpham(int keyId, string masp, string tensp, int maloai, int mancc, double dongia, int soluong, string mota, string tenhinh, float khuyenmai)
 		{
 			KeyId = keyId;
 			this.masp = masp;
@@ -27,7 +27,7 @@ namespace Data.Entities
 			this.khuyenmai = khuyenmai;
 		}
 
-		public int masp { get; set; }
+		public string masp { get; set; }
         public string tensp { get; set; }
         public int maloai { get; set; }
         public int mancc { get; set; }

@@ -98,7 +98,7 @@ namespace PhukienDT.Controllers
 		{
 			try
 			{
-				if (Session[CommonConstrants.USER_SESSION]==null)
+				if (Session[CommonConstrants.USER_SESSION]==null || UserLoginViewModel.Current.KeyId==0)
 				{
 					return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 					
