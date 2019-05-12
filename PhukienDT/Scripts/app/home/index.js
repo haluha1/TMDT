@@ -38,7 +38,7 @@ function currentSlide(n) {
 homeController = function () {
     this.initialize = function () {
         loadData();
-        //TestSave();
+        TestSave();
         registerEvents();
     }
     var listFamilyRelationship = [];
@@ -50,6 +50,11 @@ homeController = function () {
     var userName;
     var gEmployeeId;
     function registerEvents() {
+        if ((typeof $.cookie("cart") === 'undefined') || $.cookie("cart") == null) {
+            var cart = [];
+            $.cookie("cart", cart);
+            //JSON.parse($.cookie('cart'));
+        }
         //$('.yearpicker').datepicker({
         //    format: "yyyy",
         //    //todayBtn: "linked",
@@ -219,29 +224,45 @@ function loadData(isPageChanged) {
 }
 
 function TestSave() {
-    var data = {
-        KeyId: 51,
-        masp: 51,
-        tensp: "Sp test",
-        maloai: 1,
-        mancc: 1,
-        dongia: 9999,
-        soluong: 1,
-        mota: "1",
-        tenhinh: "1",
-        khuyenmai: 0
-    };
+    // San pham
+    //var data = {
+    //    KeyId: 51,
+    //    masp: 51,
+    //    tensp: "Sp test",
+    //    maloai: 1,
+    //    mancc: 1,
+    //    dongia: 9999,
+    //    soluong: 1,
+    //    mota: "1",
+    //    tenhinh: "1",
+    //    khuyenmai: 0
+    //};
 
+    //Rating
+    //data = {
+    //    KeyId: 0,
+    //    makh: 3,
+    //    diem: 10,
+    //    comment: "abc",
+    //    RatingFor: 0, //0: Product  -  1: Merchant
+    //    mancc: null,
+    //    masp: 1
+    //};
+
+    var myAry = [1, 2, 3];
     $.ajax({
         type: "POST",
-        url: "/Sanpham/SaveEntity",
-        data: { sanphamVm: data },
+        url: "/KhachHang/AddToCart",
+        data: { id: 1 },
         dataType: "json",
         beforeSend: function () {
             general.startLoading();
         },
         success: function (response) {
             console.log(response);
+            if (response == "NOT LOGIN!") {
+                $.cookie('cart', JSON.stringify(myAry));
+            }
             general.stopLoading();
         },
         error: function (status) {

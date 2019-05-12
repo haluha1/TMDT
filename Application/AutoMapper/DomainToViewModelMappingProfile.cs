@@ -13,7 +13,8 @@ namespace Application.AutoMapper
 	{
 		public DomainToViewModelMappingProfile()
 		{
-			//CreateMap<Student, StudentViewModel>().AfterMap((src, dest) => {
+			//CreateMap<Student, StudentViewModel>().AfterMap((src, dest) =>
+			//{
 			//	foreach (var i in dest.Enrollments)
 			//		i.StudentNavigation = null;
 			//}); ;
@@ -25,6 +26,7 @@ namespace Application.AutoMapper
 			CreateMap<CtRating, CtRatingViewModel>();
 			CreateMap<Giatin, GiatinViewModel>();
 			CreateMap<Giohang, GiohangViewModel>();
+			CreateMap<CtGiohang, CtGiohangViewModel>();
 			CreateMap<Hoadon, HoadonViewModel>();
 			CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
 			CreateMap<Khachhang, KhachhangViewModel>();
@@ -35,6 +37,21 @@ namespace Application.AutoMapper
 			CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();
 
+			
+			CreateMap<RatingViewModel, RatingViewModel>().AfterMap((src, dest) =>
+			{
+				if (dest.CtRatings != null)
+				{
+					foreach (var i in dest.CtRatings)
+					{
+						i.KhachhangNavigation.CtRatings = null;
+						i.KhachhangNavigation.GiohangNavigation = null;
+						i.KhachhangNavigation.SanPhamYeuThichs = null;
+						i.KhachhangNavigation.TaiKhoanBy.KhachhangNavigation = null;
+					}
+						
+				}
+			}); ;
 		}
 	}
 }

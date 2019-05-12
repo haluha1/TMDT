@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Application.ViewModels
 		public int makh { get; set; }
 		public float diem { get; set; }
 		public string comment { get; set; }
+		public RatingType RatingFor { get; set; }
 		public int? mancc { get; set; }
 		public int? masp { get; set; }
 

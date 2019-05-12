@@ -39,7 +39,7 @@ namespace Data.Entities
 		public virtual Loaisp LoaispNavigation { get; set; }
 		public virtual ICollection<Cthd> Cthds { get; set; }
 		public virtual Ncc NccNavigation { get; set; }
-		public virtual ICollection<Giohang> Giohangs { get; set; }
+		public virtual ICollection<CtGiohang> CtGiohangs { get; set; }
 		public virtual ICollection<Khachhang> KhachHangYeuThichs { get; set; }
 		
 

@@ -10,8 +10,22 @@ namespace Data.Entities
 {
     public class CtRating : DomainEntity<int>
     {
-        
-        public int makh { get; set; }
+		public CtRating()
+		{
+		}
+
+		public CtRating(int keyId, int makh, float diem, string comment, RatingType ratingFor, int? mancc, int? masp)
+		{
+			KeyId = keyId;
+			this.makh = makh;
+			this.diem = diem;
+			this.comment = comment;
+			RatingFor = ratingFor;
+			this.mancc = mancc;
+			this.masp = masp;
+		}
+
+		public int makh { get; set; }
         public float diem { get; set; }
         public string comment { get; set; }
 

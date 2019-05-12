@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿
+using Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,10 @@ namespace Data.EF
 {
 	public class PhukienDTDbContext : DbContext
 	{
+		static PhukienDTDbContext()
+		{
+			Database.SetInitializer<PhukienDTDbContext>(null);
+		}
 		private static PhukienDTDbContext _context;
 		public static PhukienDTDbContext Instance
 		{
@@ -25,7 +30,7 @@ namespace Data.EF
 		}
 		public PhukienDTDbContext() : base("PhukienDTDbContext")
 		{
-
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhukienDTDbContext, Configuration>());
 		}
 		#region creare DbSet
 		//public DbSet<Student> Students { get; set; }
@@ -33,6 +38,7 @@ namespace Data.EF
 		public DbSet<Cthd> Cthds { get; set; }
 		public DbSet<CtRating> CtRatings { get; set; }
 		public DbSet<Giatin> Giatins { get; set; }
+		public DbSet<CtGiohang> CtGiohangs { get; set; }
 		public DbSet<Giohang> Giohangs { get; set; }
 		public DbSet<Hoadon> Hoadons { get; set; }
 		public DbSet<Hoadonmuatin> Hoadonmuatins { get; set; }
@@ -67,15 +73,28 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.masp);
 
 			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
-			
-			
+			modelBuilder.Entity<CtRating>()
+			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
+			.WithMany(g => g.CtRatings)
+			.HasForeignKey<int>(s => s.makh);
+
 
 
 
 			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
 			modelBuilder.Entity<Giohang>().HasKey(e => e.KeyId).ToTable("GioHang");
-			
+
+			modelBuilder.Entity<CtGiohang>().HasKey(e => e.KeyId).ToTable("CtGioHang");
+			modelBuilder.Entity<CtGiohang>()
+			.HasRequired<Giohang>(s => s.GiohangNavigation)
+			.WithMany(g => g.CtGiohangs)
+			.HasForeignKey<int>(s => s.Giohang_FK);
+
+			modelBuilder.Entity<CtGiohang>()
+			.HasRequired<Sanpham>(s => s.SanphamNavigation)
+			.WithMany(g => g.CtGiohangs)
+			.HasForeignKey<int>(s => s.masp);
 
 
 			modelBuilder.Entity<Hoadon>().HasKey(e => e.KeyId).ToTable("HoaDon");
@@ -123,15 +142,7 @@ namespace Data.EF
 				cs.ToTable("SanPhamYeuThich_KhachHang");
 			});
 
-			modelBuilder.Entity<Sanpham>()
-			.HasMany<Giohang>(s => s.Giohangs)
-			.WithMany(g => g.Sanphams)
-			.Map(cs =>
-			{
-				cs.MapLeftKey("SanPhamRefId");
-				cs.MapRightKey("GiaHangRefId");
-				cs.ToTable("SanPhamGioHang");
-			});
+			
 
 			modelBuilder.Entity<TaiKhoan>().HasKey(e => e.KeyId).ToTable("TaiKhoan");
 			modelBuilder.Entity<TaiKhoan>()

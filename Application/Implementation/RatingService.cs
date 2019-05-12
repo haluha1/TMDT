@@ -13,18 +13,18 @@ namespace Application.Implementation
 {
 	public class RatingService : IRatingService
 	{
-		private IRepository<Rating, int> _repository;
+		private IRepository<CtRating, int> _repository;
 		private IUnitOfWork _unitOfWork;
 
-		public RatingService(IRepository<Rating, int> repository, IUnitOfWork unitOfWork)
+		public RatingService(IRepository<CtRating, int> repository, IUnitOfWork unitOfWork)
 		{
 			_repository = repository;
 			_unitOfWork = unitOfWork;
 		}
 
-		public RatingViewModel Add(RatingViewModel ratingVm)
+		public CtRatingViewModel Add(CtRatingViewModel ratingVm)
 		{
-			var rating = Mapper.Map<RatingViewModel, Rating>(ratingVm);
+			var rating = Mapper.Map<CtRatingViewModel, CtRating>(ratingVm);
 			_repository.AddReturn(rating);
 			ratingVm.KeyId = rating.KeyId;
 			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
@@ -45,29 +45,29 @@ namespace Application.Implementation
 			GC.SuppressFinalize(this);
 		}
 
-		public List<RatingViewModel> GetAll()
+		public List<CtRatingViewModel> GetAll()
 		{
 			var query = _repository.FindAll();
-			var data = new List<RatingViewModel>();
+			var data = new List<CtRatingViewModel>();
 			foreach (var item in query)
 			{
-				var _data = Mapper.Map<Rating, RatingViewModel>(item);
+				var _data = Mapper.Map<CtRating, CtRatingViewModel>(item);
 				data.Add(_data);
 			}
 			return data;
 		}
 
-		public List<RatingViewModel> GetAll(string keyword)
+		public List<CtRatingViewModel> GetAll(string keyword)
 		{
 			throw new NotImplementedException();
 		}
 
-		public RatingViewModel GetById(int id)
+		public CtRatingViewModel GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public RatingViewModel GetBysId(string keyword)
+		public CtRatingViewModel GetBysId(string keyword)
 		{
 			throw new NotImplementedException();
 		}
@@ -77,7 +77,7 @@ namespace Application.Implementation
 			return _unitOfWork.Commit();
 		}
 
-		public void Update(RatingViewModel ratingVm)
+		public void Update(CtRatingViewModel ratingVm)
 		{
 			throw new NotImplementedException();
 		}

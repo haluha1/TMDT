@@ -11,7 +11,7 @@ namespace Application.ViewModels
 		public int KeyId { get; set; }
 		public int soluong { get; set; }
 		public double thanhtien { get; set; }
-		public virtual ICollection<SanphamViewModel> Sanphams { get; set; }
+		public virtual ICollection<CtGiohangViewModel> CtGiohangs { get; set; }
 		public virtual KhachhangViewModel KhachHangBy { get; set; }
 	}
 }

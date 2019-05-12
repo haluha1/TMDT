@@ -9,19 +9,19 @@ namespace Application.Interfaces
 {
 	public interface IRatingService : IDisposable
 	{
-		RatingViewModel Add(RatingViewModel ratingVm);
+		CtRatingViewModel Add(CtRatingViewModel CtRatingVm);
 
-		void Update(RatingViewModel ratingVm);
+		void Update(CtRatingViewModel CtRatingVm);
 
 		void Delete(int id);
 
-		List<RatingViewModel> GetAll();
+		List<CtRatingViewModel> GetAll();
 
-		List<RatingViewModel> GetAll(string keyword);
+		List<CtRatingViewModel> GetAll(string keyword);
 
-		RatingViewModel GetBysId(string keyword);
+		CtRatingViewModel GetBysId(string keyword);
 
-		RatingViewModel GetById(int id);
+		CtRatingViewModel GetById(int id);
 
 
 		bool Save();

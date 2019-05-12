@@ -79,7 +79,7 @@ namespace PhukienDT.Controllers
 			try
 			{
 
-				var data = _sanphamService.GetAll().Skip((page - 1) * pageSize).Take(pageSize);
+				var data = _sanphamService.GetAll().OrderByDescending(x=>x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
 
 				
 				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
@@ -174,27 +174,7 @@ namespace PhukienDT.Controllers
 			}
 		}
 
-		[HttpPost]
-		public JsonResult Rating()
-		{
-			try
-			{
-				
-					var RatingVm = _ratingService.GetAll().Where(x=>x.RatingNccNavigation.mancc==1).FirstOrDefault();
-					
-					Rating sp = Mapper.Map<RatingViewModel, Rating>(RatingVm);
-					//user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
-					_sanphamService.Save();
-					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
-
-
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
-			}
-		}
+		
 		#endregion
 	}
 }

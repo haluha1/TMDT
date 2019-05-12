@@ -11,5 +11,6 @@ namespace Utilities.Constants
 		public static string USER_SESSION = "USER_SESSION";
 		public static string USER_CART = "CART_SESSION";
 		public static string LIKE_PRODUCT = "Đã thêm vào sản phẩm yêu thích!";
+		public static string RATING_OK = "Cảm ơn sự đánh giá của bạn!";
 	}
 }
