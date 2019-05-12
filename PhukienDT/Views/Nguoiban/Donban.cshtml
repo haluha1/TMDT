@@ -69,7 +69,6 @@
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
                         <th>Xử lý</th>
-                        <th>Chi tiết đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody id="new-Product1">
@@ -95,7 +94,6 @@
                             <th>Tổng đơn hàng</th>
                             <th>Tình trạng</th>
                             <th>Xử lý</th>
-                            <th>Chi tiết đơn hàng</th>
                         </tr>
                     </thead>
                     <tbody id="new-Product2">
@@ -122,7 +120,6 @@
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
-                        <th>Chi tiết đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody id="new-Product3"> 
@@ -148,7 +145,6 @@
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
-                        <th>Chi tiết đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody id="new-Product4">
@@ -198,7 +194,22 @@
             {{Trangthai}}
         </td>
         <td>
-            <button>Xem</button>
+            <a class="col-sm-4 nav-a-right" id="btnthemsanpham" onclick="document.getElementById('user').style.display='block'"><button> Xem</button></a>
+            <div id="user" class="modal">
+                <form class="modal-content animate" id="frmMaintainance" action="#" onsubmit="return validateForm()" method="post">
+                    <span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody id=""></tbody>
+                    </table>
+            </div>
         </td>
     </tr>
 </script>
@@ -221,9 +232,6 @@
             <button>Giao hàng</button>
             <button>Hủy</button>
         </td>
-        <td>
-            <button>Xem</button>
-        </td>
     </tr>
 </script>
 <script id="table-template2" type="x-tmpl-mustache">
@@ -245,9 +253,6 @@
         <td>
             {{Trangthai}}
         </td>
-        <td>
-            <button>Xem</button>
-        </td>
     </tr>
 </script>
 <script id="table-template3" type="x-tmpl-mustache">
@@ -265,9 +270,6 @@
         <td>
             {{Trangthai}}
         </td>
-        <td>
-            <button>Xem</button>
-        </td>
     </tr>
 </script>
 <script id="table-template4" type="x-tmpl-mustache">
@@ -284,9 +286,6 @@
         </td>
         <td>
             {{Trangthai}}
-        </td>
-        <td>
-            <button>Xem</button>
         </td>
     </tr>
 </script>
