@@ -73,12 +73,17 @@ namespace PhukienDT.Controllers
 				}
 				else
 				{
-					_userService.Register(TaikhoanVm);
 					var s = UtilityFunction.RandomString(6, false);
+					string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
+					MailContent = MailContent.Replace("{{Code}}", s);
+
+					new MailHelper().SendMail(TaikhoanVm.email, "Register Code", MailContent);
+					_userService.Register(TaikhoanVm,s);
+					
 
 
 				}
-				if (_userService.Save()) return Json(TaikhoanVm, JsonRequestBehavior.AllowGet);
+				if (_userService.Save()) return Json(new { Result = TaikhoanVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
 
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
 				return Json(Response, JsonRequestBehavior.AllowGet);
@@ -161,6 +166,5 @@ namespace PhukienDT.Controllers
 				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
-		
-	}
+    }
 }

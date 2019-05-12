@@ -14,13 +14,15 @@ namespace Application.Implementation
 	public class UserService : IUserService
 	{
 		private IRepository<TaiKhoan, int> _repository;
+		private IRepository<ActiveCode, int> _repositoryCode;
 		private IUnitOfWork _unitOfWork;
 
-		public UserService(IRepository<TaiKhoan, int> repository, IUnitOfWork unitOfWork)
+		public UserService(IRepository<TaiKhoan, int> repository, IUnitOfWork unitOfWork, IRepository<ActiveCode, int> repositoryCode)
 		{
 			_repository = repository;
 			_unitOfWork = unitOfWork;
-		}
+			_repositoryCode = repositoryCode;
+	}
 
 		public void Dispose()
 		{
@@ -46,14 +48,25 @@ namespace Application.Implementation
 			return Mapper.Map<TaiKhoan, TaiKhoanViewModel>(item);
 
 		}
-		public TaiKhoanViewModel Register(TaiKhoanViewModel TaiKhoanVm)
+		public TaiKhoanViewModel Register(TaiKhoanViewModel TaiKhoanVm, string s)
 		{
 			var taiKhoan = Mapper.Map<TaiKhoanViewModel, TaiKhoan>(TaiKhoanVm);
 			var today = DateTime.Today.ToShortDateString();
 			taiKhoan.thoigiandk = today;
+
+			//_repository.FindAllNoTracking().Where(x => { x.email == TaiKhoanVm.email || x.sdt == TaiKhoanVm.sdt});
+
 			_repository.AddReturn(taiKhoan);
 			taiKhoan.matk = taiKhoan.KeyId;
 			TaiKhoanVm.KeyId = taiKhoan.KeyId;
+
+			ActiveCode newCode = new ActiveCode();
+			newCode.code = s;
+			newCode.CodeType = Data.Enum.CodeType.Active;
+			newCode.DateCreate = DateTime.Now;
+			newCode.User_FK = taiKhoan.KeyId;
+			_repositoryCode.Add(newCode);
+
 			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
 			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
 			//sp.Id = HP_EmployeeVm.Id;

@@ -13,11 +13,11 @@ namespace Data.EF
 {
 	public class PhukienDTDbContext : DbContext
 	{
-		static PhukienDTDbContext()
-		{
-			Database.SetInitializer<PhukienDTDbContext>(null);
-		}
-		private static PhukienDTDbContext _context;
+        static PhukienDTDbContext()
+        {
+            Database.SetInitializer<PhukienDTDbContext>(null);
+        }
+        private static PhukienDTDbContext _context;
 		public static PhukienDTDbContext Instance
 		{
 			get
@@ -36,6 +36,7 @@ namespace Data.EF
 		#region creare DbSet
 		//public DbSet<Student> Students { get; set; }
 		#endregion
+		public DbSet<ActiveCode> ActiveCodes { get; set; }
 		public DbSet<Cthd> Cthds { get; set; }
 		public DbSet<CtRating> CtRatings { get; set; }
 		public DbSet<Giatin> Giatins { get; set; }
@@ -63,6 +64,8 @@ namespace Data.EF
 			
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+			modelBuilder.Entity<ActiveCode>().HasKey(e => e.KeyId).ToTable("ActiveCode");
+
 			modelBuilder.Entity<Cthd>().HasKey(e => e.KeyId).ToTable("CTHD");
 			modelBuilder.Entity<Cthd>()
 			.HasRequired<Hoadon>(s => s.HoadonNavigation)
@@ -74,15 +77,15 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.masp);
 
 			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
-			modelBuilder.Entity<CtRating>()
-			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
-			.WithMany(g => g.CtRatings)
-			.HasForeignKey<int>(s => s.makh);
+            modelBuilder.Entity<CtRating>()
+            .HasRequired<Khachhang>(s => s.KhachhangNavigation)
+            .WithMany(g => g.CtRatings)
+            .HasForeignKey<int>(s => s.makh);
 
 
 
 
-			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
+            modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
 			modelBuilder.Entity<Giohang>().HasKey(e => e.KeyId).ToTable("GioHang");
 
@@ -155,11 +158,6 @@ namespace Data.EF
 			modelBuilder.Entity<TaiKhoan>()
 							.HasOptional(s => s.WebmasterNavigation) // Mark Address property optional in Student entity
 							.WithRequired(ad => ad.TaiKhoanBy);
-
-
-
-
-
 			modelBuilder.Entity<Webmaster>().HasKey(e => e.User_FK).ToTable("WebMaster");
 			base.OnModelCreating(modelBuilder);
 		}

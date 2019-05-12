@@ -14,6 +14,7 @@ namespace Data.Entities
 		public string code { get; set; }
 		public DateTime DateCreate { get; set; }
 		public CodeType CodeType { get; set; }
+		public CodeStatus CodeStatus { get; set; }
 
 
 	}

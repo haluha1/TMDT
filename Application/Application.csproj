@@ -49,10 +49,12 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Implementation\HoadonService.cs" />
     <Compile Include="Implementation\LoaiSPService.cs" />
     <Compile Include="Implementation\RatingService.cs" />
     <Compile Include="Implementation\SanphamService.cs" />
     <Compile Include="Implementation\UserService.cs" />
+    <Compile Include="Interfaces\IHoadonService.cs" />
     <Compile Include="Interfaces\ILoaiSPService.cs" />
     <Compile Include="Interfaces\IRatingService.cs" />
     <Compile Include="Interfaces\ISanphamService.cs" />

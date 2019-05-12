@@ -59,6 +59,7 @@
     <Compile Include="Entities\TaiKhoan.cs" />
     <Compile Include="Entities\Webmaster.cs" />
     <Compile Include="Enum\CodeType.cs" />
+    <Compile Include="Enum\CodeStatus.cs" />
     <Compile Include="Enum\UserType.cs" />
     <Compile Include="Enum\RatingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
