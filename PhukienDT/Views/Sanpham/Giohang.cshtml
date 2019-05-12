@@ -1,0 +1,58 @@
+﻿
+@{
+	ViewBag.Title = "Giohang";
+}
+@section Scripts{
+	<script src="/Scripts/app/sanpham/index.js"></script>
+	<script>
+		var sp = new sanphamController();
+		sp.initialize();
+	</script>
+}
+<h2> Giỏ Hàng  </h2>
+<h4 style="margin-top:50px">
+	<a href="http://localhost:51415/Home/Index">Trang Chủ /Giỏ Hàng </a>
+</h4>
+<div style="margin-top:100px " id="Product-wrapper"></div>
+<script id="table-template" type="x-tmpl-mustache">
+	<div class="row">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Tên sản phẩm</th>
+					<th>Loại sản phẩm</th>
+					<th>Đơn giá</th>
+					<th>Số Lượng </th>
+					<th>Thành Tiền </th>
+					<th> Xóa</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<div style="float:left"><img width="50px" src="{{IMG}}" /></div>
+						<div style="float:left; margin-left: 10px; font-weight:bold;">{{Tensp}}</div>
+					</td>
+					<td>
+						{{Loaisp}}
+					</td>
+					<td>
+						{{Dongia}}
+					</td>
+					<td>
+						<input type="number" min="1" width=20px />
+					</td>
+					<td>
+						thành tiền
+					</td>
+					<td> <button>xóa</button></td>
+
+				</tr>
+
+			</tbody>
+		</table>
+		<br /> Tổng Tiền :
+	</div>
+	</script>
+
+

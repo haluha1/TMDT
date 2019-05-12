@@ -86,9 +86,50 @@ var mainController = function () {
         });
         
 
+<<<<<<< HEAD
+		$('body').on('click', '.yeuthich', function (e) {
+			e.preventDefault();
+			$(this).prop('disabled', true);
+			var that = $(this).data('id');
+			likeProduct(that);
+		});	
+
+        $("#frmMaintainance").on('submit', function (e) {
+            if ($('#frmMaintainance').valid()) {
+                e.preventDefault();
+                var username = $('#txtEmail').val();
+                var password = $('#txtPassword').val();
+                var rememberMe = $('#chkRememberMe').prop('checked');
+
+                var data = {
+                    Username: username,
+                    Password: password,
+                    RememberMe: rememberMe
+                };
+
+                $.ajax({
+                    url: '/Home/Login',
+                    type: 'POST',
+                    data: { LoginVm: data },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.Status == "OK") {
+                            var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
+                            general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                            $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                            $('#btnLogin').attr('onclick', '');
+                            $('#user').css('display', 'none');
+                            $('#frmMaintainance').trigger('reset');
+                            general.stopLoading();
+                        }
+                        else {
+                            general.notify(response.Result + '!', 'error');
+                        }
+=======
         $('#btnSearch').on('click', function () {
             sendEmail();
         });
+>>>>>>> 9b06fd4ba401c8d3416cc9925bd2a8636cffb683
 
         $('body').on('click', '#btnActive', function (e) {
             confirmRegister(e);
@@ -129,6 +170,29 @@ var mainController = function () {
         $('#frmMaintainance').trigger('reset');
         $('#frmMaintainance').validate().resetForm();
     }
+}
+
+function likeProduct(that) {
+	$.ajax({
+		type: "POST",
+		url: "/Sanpham/Like",
+		data: { id: that },
+		dataType: "json",
+		beforeSend: function () {
+			general.startLoading();
+		},
+		success: function (response) {
+			console.log(response);
+			if (response.Status == "OK") {
+				general.notify(response.Result, 'Thêm thành công');
+			}
+
+		},
+		error: function (status) {
+			general.notify('Có lỗi xảy ra', 'error');
+			general.stopLoading();
+		}
+	});
 }
 
 function loadData(isPageChanged) {

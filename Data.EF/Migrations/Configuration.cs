@@ -1,28 +1,26 @@
 ﻿namespace Data.EF.Migrations
 {
+
 	using Data.Entities;
 	using Data.Enum;
-	using System;
 	using System.Collections.Generic;
-	using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+	using System.Data.Entity.Migrations;
+	using System.Runtime.Remoting.Contexts;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Data.EF.PhukienDTDbContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
+	internal sealed class Configuration : DbMigrationsConfiguration<Data.EF.PhukienDTDbContext>
+	{
+		public Configuration()
+		{
+			AutomaticMigrationsEnabled = false;
+		}
 
-        protected override void Seed(Data.EF.PhukienDTDbContext context)
-        {
+		protected override void Seed(Data.EF.PhukienDTDbContext context)
+		{
 
-
-			//  This method will be called after migrating to the latest version.
 
 			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
 			//  to avoid creating duplicate seed data.
+			//Loại sản phẩm
 			var loaisps = new List<Loaisp>
 			{
 			new Loaisp{maloai=1,tenloai="Ốp lưng"},
@@ -120,6 +118,86 @@
 				new Sanpham{masp="48",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="48.png",khuyenmai=0},
 				new Sanpham{masp="49",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=55000,soluong=100,mota="Đây là sp thứ 1",tenhinh="49.png",khuyenmai=0},
 				new Sanpham{masp="50",tensp="Ốp nhám vô diện",maloai=1,mancc=1,dongia=70000,soluong=100,mota="Đây là sp thứ 1",tenhinh="50.png",khuyenmai=0},
+				 new Sanpham{masp="r1",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r1.png",khuyenmai=0},
+				new Sanpham{masp="r2",tensp="Ring Gà Con ",maloai=3,mancc=1,dongia=50000,soluong=100,mota="Đây là sp thứ 2",tenhinh="r2.png",khuyenmai=0},
+				new Sanpham{masp="r3",tensp="Ring Gấu Đen Dễ Thương ",maloai=3,mancc=3,dongia=95000,soluong=100,mota="Đây là sp thứ 3",tenhinh="r3.png",khuyenmai=0},
+				new Sanpham{masp="r4",tensp="Ring Gấu Hồng Kute ",maloai=3,mancc=1,dongia=80000,soluong=100,mota="Đây là sp thứ 4",tenhinh="r4.png",khuyenmai=0},
+				new Sanpham{masp="r5",tensp="Ring Que Kem",maloai=3,mancc=3,dongia=60000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r5.png",khuyenmai=0},
+				new Sanpham{masp="r6",tensp="Ring Trái Tim ",maloai=3,mancc=1,dongia=50000,soluong=100,mota="Đây là sp thứ 6",tenhinh="r6.png",khuyenmai=0},
+				new Sanpham{masp="r7",tensp="Ring Ốp La ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 7",tenhinh="r7.png",khuyenmai=0},
+				new Sanpham{masp="r8",tensp="Ring Shin Bút Chì ",maloai=3,mancc=2,dongia=100000,soluong=100,mota="Đây là sp thứ 8",tenhinh="r8.png",khuyenmai=0},
+				new Sanpham{masp="r9",tensp="Ring Gấu Trắng  ",maloai=3,mancc=2,dongia=94000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r9.png",khuyenmai=0},
+				new Sanpham{masp="r10",tensp="Ring Gấu Nâu ",maloai=3,mancc=3,dongia=80000,soluong=100,mota="Đây là sp thứ 10",tenhinh="r10.png",khuyenmai=0},
+				new Sanpham{masp="r11",tensp="Ring Kem Dưa Hấu ",maloai=3,mancc=1,dongia=70000,soluong=100,mota="Đây là sp thứ 11",tenhinh="r11.png",khuyenmai=0},
+				new Sanpham{masp="r12",tensp="Ring Mèo Vàng ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 12",tenhinh="r12.png",khuyenmai=0},
+				new Sanpham{masp="r13",tensp="Ring Icon Đáng Yêu ",maloai=3,mancc=3,dongia=40000,soluong=100,mota="Đây là sp thứ 13",tenhinh="r13.png",khuyenmai=0},
+				new Sanpham{masp="r14",tensp="Ring Mèo Meo ",maloai=3,mancc=2,dongia=70000,soluong=100,mota="Đây là sp thứ 14",tenhinh="r14.png",khuyenmai=0},
+				new Sanpham{masp="r15",tensp="Ring Gấu Poodle ",maloai=3,mancc=1,dongia=60000,soluong=100,mota="Đây là sp thứ 15",tenhinh="r15.png",khuyenmai=0},
+				new Sanpham{masp="r16",tensp="Ring Mặt Mèo ",maloai=3,mancc=2,dongia=90000,soluong=100,mota="Đây là sp thứ 16",tenhinh="r16.png",khuyenmai=0},
+				new Sanpham{masp="r17",tensp="Ring Trái Tim có cánh ",maloai=3,mancc=3,dongia=90000,soluong=100,mota="Đây là sp thứ 17",tenhinh="r17.png",khuyenmai=0},
+				new Sanpham{masp="r18",tensp="Ring Cầu Vồng ",maloai=3,mancc=3,dongia=140000,soluong=100,mota="Đây là sp thứ 18",tenhinh="r18.png",khuyenmai=0},
+				new Sanpham{masp="r19",tensp="Ring Xương Rồng ",maloai=3,mancc=1,dongia=80000,soluong=100,mota="Đây là sp thứ 19",tenhinh="r19.png",khuyenmai=0},
+				new Sanpham{masp="r20",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 20",tenhinh="r20.png",khuyenmai=0},
+				new Sanpham{masp="a1",tensp="Bao AirPod Jordan 23 ",maloai=2,mancc=1,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a1.png",khuyenmai=0},
+				new Sanpham{masp="a2",tensp="Bao AirPod Trái Tim ",maloai=2,mancc=2,dongia=130000,soluong=100,mota="Đây là sp thứ 2",tenhinh="a2.png",khuyenmai=0},
+				new Sanpham{masp="a3",tensp="Bao AirPod Doraemon ",maloai=2,mancc=1,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a3.png",khuyenmai=0},
+				new Sanpham{masp="a4",tensp="Bao AirPod Caption ",maloai=2,mancc=2,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a4.png",khuyenmai=0},
+				new Sanpham{masp="a5",tensp="Bao AirPod Khủng Long ",maloai=2,mancc=3,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a5.png",khuyenmai=0},
+				new Sanpham{masp="a6",tensp="Bao AirPod Trái Tim  ",maloai=2,mancc=1,dongia=160000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a6.png",khuyenmai=0},
+				new Sanpham{masp="a7",tensp="Bao AirPod Hoạt Hình ",maloai=2,mancc=2,dongia=180000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a7.png",khuyenmai=0},
+				new Sanpham{masp="a8",tensp="Bao AirPod Mèo  ",maloai=2,mancc=3,dongia=210000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a8.png",khuyenmai=0},
+				new Sanpham{masp="a9",tensp="Bao AirPod Vịt Donald ",maloai=2,mancc=1,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a9.png",khuyenmai=0},
+				new Sanpham{masp="a10",tensp="Bao AirPod Voi Kute ",maloai=2,mancc=2,dongia=100000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a10.png",khuyenmai=0},
+				new Sanpham{masp="a11",tensp="Bao AirPod Trái Tim  ",maloai=2,mancc=3,dongia=170000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a11.png",khuyenmai=0},
+				new Sanpham{masp="a12",tensp="Bao AirPod Hoa  ",maloai=2,mancc=1,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a12.png",khuyenmai=0},
+				new Sanpham{masp="a13",tensp="Bao AirPod Chim Cánh Cụt ",maloai=2,mancc=2,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a13.png",khuyenmai=0},
+				new Sanpham{masp="a14",tensp="Bao AirPod BatMan ",maloai=2,mancc=3,dongia=130000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a14.png",khuyenmai=0},
+				new Sanpham{masp="a15",tensp="Bao AirPod Hamburger",maloai=2,mancc=1,dongia=135000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a15.png",khuyenmai=0},
+				new Sanpham{masp="a16",tensp="Bao AirPod Dâu ",maloai=2,mancc=2,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a16.png",khuyenmai=0},
+				new Sanpham{masp="a17",tensp="Bao AirPod Pop Corn ",maloai=2,mancc=3,dongia=170000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a17.png",khuyenmai=0},
+				new Sanpham{masp="a18",tensp="Bao AirPod Mac Donald ",maloai=2,mancc=1,dongia=160000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a18.png",khuyenmai=0},
+				new Sanpham{masp="a19",tensp="Bao AirPod Ếch Ộp ",maloai=2,mancc=2,dongia=130000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a19.png",khuyenmai=0},
+				new Sanpham{masp="a20",tensp="Bao AirPod Vịt Đáng Yêu ",maloai=2,mancc=3,dongia=125000,soluong=100,mota="Đây là sp thứ 1",tenhinh="a20.png",khuyenmai=0},
+				new Sanpham{masp="p1",tensp="Pop Mèo Xám ",maloai=3,mancc=2,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p1.png",khuyenmai=0},
+				new Sanpham{masp="p2",tensp="Pop Bánh Ngọt ",maloai=3,mancc=3,dongia=130000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p2.png",khuyenmai=0},
+				new Sanpham{masp="p3",tensp="Pop Biểu Tượng  ",maloai=3,mancc=1,dongia=110000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p3.png",khuyenmai=0},
+				new Sanpham{masp="p4",tensp="Pop Dễ Thương ",maloai=3,mancc=3,dongia=100000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p4.png",khuyenmai=0},
+				new Sanpham{masp="p5",tensp="Pop Galaxy ",maloai=3,mancc=2,dongia=60000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p5.png",khuyenmai=0},
+				new Sanpham{masp="p6",tensp="Pop Maruko  ",maloai=3,mancc=1,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p6.png",khuyenmai=0},
+				new Sanpham{masp="p7",tensp="Pop Shin Cậu Bé Bút Chì ",maloai=3,mancc=3,dongia=135000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p7.png",khuyenmai=0},
+				new Sanpham{masp="p8",tensp="Pop Icon Khủng Long  ",maloai=3,mancc=1,dongia=170000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p8.png",khuyenmai=0},
+				new Sanpham{masp="p9",tensp="Pop Chuột Dễ Thương  ",maloai=3,mancc=2,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p9.png",khuyenmai=0},
+				new Sanpham{masp="p10",tensp="Pop Hihi",maloai=3,mancc=3,dongia=110000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p10.png",khuyenmai=0},
+				new Sanpham{masp="p11",tensp="Pop Haha ",maloai=3,mancc=1,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p11.png",khuyenmai=0},
+				new Sanpham{masp="p12",tensp="Pop Hoho ",maloai=3,mancc=3,dongia=110000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p12.png",khuyenmai=0},
+				new Sanpham{masp="p13",tensp="Pop Quái Vật Xanh ",maloai=3,mancc=4,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p13.png",khuyenmai=0},
+				new Sanpham{masp="p14",tensp="Pop Khủng Long ",maloai=3,mancc=1,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p14.png",khuyenmai=0},
+				new Sanpham{masp="p15",tensp="Pop Heo Đáng Yêu ",maloai=3,mancc=2,dongia=160000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p15.png",khuyenmai=0},
+				new Sanpham{masp="p16",tensp="Pop Chị Ong Vàng ",maloai=3,mancc=3,dongia=170000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p16.png",khuyenmai=0},
+				new Sanpham{masp="p17",tensp="Pop Iron Man ",maloai=3,mancc=2,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p17.png",khuyenmai=0},
+				new Sanpham{masp="p18",tensp="Pop Batman ",maloai=3,mancc=3,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p18.png",khuyenmai=0},
+				new Sanpham{masp="p19",tensp="Pop Gấu Hồng ",maloai=3,mancc=1,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p19.png",khuyenmai=0},
+				new Sanpham{masp="p20",tensp="Pop Đầu Gấu ",maloai=3,mancc=2,dongia=160000,soluong=100,mota="Đây là sp thứ 1",tenhinh="p20.png",khuyenmai=0},
+				new Sanpham{masp="k1",tensp="Dây Đeo Marvel ",maloai=4,mancc=2,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k1.png",khuyenmai=0},
+				new Sanpham{masp="k2",tensp="Dây Đeo Con Mắt ",maloai=4,mancc=4,dongia=130000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k2.png",khuyenmai=0},
+				new Sanpham{masp="k3",tensp="Dây Đeo Trái Dâu ",maloai=4,mancc=1,dongia=120000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k3.png",khuyenmai=0},
+				new Sanpham{masp="k4",tensp="Dây Đeo Đầu Gấu ",maloai=4,mancc=2,dongia=140000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k4.png",khuyenmai=0},
+				new Sanpham{masp="k5",tensp="Dây Đeo Mèo Con ",maloai=4,mancc=3,dongia=199000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k5.png",khuyenmai=0},
+				new Sanpham{masp="k6",tensp="Dây Đeo Bò Sữa  ",maloai=4,mancc=6,dongia=158000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k6.png",khuyenmai=0},
+				new Sanpham{masp="k7",tensp="Dây Đeo Stick  ",maloai=4,mancc=3,dongia=151000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k7.png",khuyenmai=0},
+				new Sanpham{masp="k8",tensp="Dây Đeo Tororo ",maloai=4,mancc=5,dongia=144000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k8.png",khuyenmai=0},
+				new Sanpham{masp="k9",tensp="Dây Đeo Love  ",maloai=4,mancc=3,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k9.png",khuyenmai=0},
+				new Sanpham{masp="k10",tensp="Dây Đeo Người Nhện ",maloai=4,mancc=1,dongia=175000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k10.png",khuyenmai=0},
+				new Sanpham{masp="k11",tensp="Dây Đeo Moschino ",maloai=4,mancc=2,dongia=182000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k11.png",khuyenmai=0},
+				new Sanpham{masp="k12",tensp="Dây Đeo Captain ",maloai=4,mancc=3,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k12.png",khuyenmai=0},
+				new Sanpham{masp="k13",tensp="Dây Đeo Trái Dâu ",maloai=4,mancc=2,dongia=114000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k13.png",khuyenmai=0},
+				new Sanpham{masp="k14",tensp="Dây Đeo Cà Rốt ",maloai=4,mancc=1,dongia=150000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k14.png",khuyenmai=0},
+				new Sanpham{masp="k15",tensp="Dây Đeo Mặt Cười  ",maloai=4,mancc=3,dongia=155000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k15.png",khuyenmai=0},
+				new Sanpham{masp="k16",tensp="Dây Đeo Hoạt Hình ",maloai=4,mancc=4,dongia=113000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k16.png",khuyenmai=0},
+				new Sanpham{masp="k17",tensp="Dây Đeo Hihi ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k17.png",khuyenmai=0},
+				new Sanpham{masp="k18",tensp="Dây Đeo Smile ",maloai=4,mancc=1,dongia=186000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k18.png",khuyenmai=0},
+				new Sanpham{masp="k19",tensp="Dây Đeo Supreme ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k19.png",khuyenmai=0},
+				new Sanpham{masp="k20",tensp="Dây Đeo Trứng Gà ",maloai=4,mancc=3,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k20.png",khuyenmai=0},
 			};
 			sanphams.ForEach(s => context.Sanphams.AddOrUpdate(s));
 			context.SaveChanges();
@@ -146,4 +224,6 @@
 
 		}
 	}
+
+
 }

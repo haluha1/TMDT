@@ -46,11 +46,50 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public ActionResult Rating()
+        {
+            return View();
+        }
+
+        public ActionResult Sanphamyt()
+        {
+            return View();
+        }
+        public ActionResult Giohang()
+        {
+            return View();
+        }
         public ActionResult Theosanpham()
         {
             return View();
         }
         public JsonResult GetCTSP(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetGioHang(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetSPYT(int id)
         {
             try
             {
@@ -220,7 +259,7 @@ namespace PhukienDT.Controllers
 		{
 			try
 			{
-				if (Session[CommonConstrants.USER_SESSION] != null)
+				if (Session[CommonConstrants.USER_SESSION] != null || UserLoginViewModel.Current.KeyId!=0)
 				{
 					var spVm = _sanphamService.GetById(id);
 					var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
@@ -231,7 +270,7 @@ namespace PhukienDT.Controllers
 				}
 				else
 				{
-					return Json(new { Result = const_Error.NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = const_Error.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 				}
 				
 			}

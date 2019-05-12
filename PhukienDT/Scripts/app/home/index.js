@@ -66,6 +66,9 @@ homeController = function () {
         //});
         
         //loadReligion();
+		$('body').on('click', '.buy', function (e) {
+			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
+		});
         
         $('#frmMaintainance').validate({
             errorClass: 'red',
@@ -99,12 +102,7 @@ homeController = function () {
         });
         
 
-        $('body').on('click', '.yeuthich', function (e) {
-            e.preventDefault();
-            $(this).prop('disabled', true);
-            var that = $(this).data('id');
-            likeProduct(that);
-        });
+        
 
         
         
@@ -116,30 +114,7 @@ homeController = function () {
     //    http.send();
     //    return http.status != 404;
     //}
-    function likeProduct(that) {
-
-        $.ajax({
-            type: "POST",
-            url: "/Sanpham/Like",
-            data: { id: that },
-            dataType: "json",
-            beforeSend: function () {
-                general.startLoading();
-            },
-            success: function (response) {
-                console.log(response);
-                if (response.Status == "OK") {
-                    general.notify(response.Result, 'success');
-                }
-
-
-            },
-            error: function (status) {
-                general.notify('Có lỗi xảy ra', 'error');
-                general.stopLoading();
-            }
-        });
-    }
+    
 
 
 

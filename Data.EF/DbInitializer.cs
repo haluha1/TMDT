@@ -10,10 +10,10 @@ namespace Data.EF
 {
 	public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<PhukienDTDbContext>
 	{
-		public DbInitializer()
-		{
-			
-		}
+
+        public DbInitializer()
+        {
+        }
 
 		protected override void Seed(PhukienDTDbContext context)
 		{
@@ -85,7 +85,9 @@ namespace Data.EF
             //Sản phẩm
             var sanphams = new List<Sanpham>
             {
-                new Sanpham{masp="1",tensp="Ốp Chống Bẩn GIành Cho Iphone 6 6S",maloai=1,mancc=1,dongia=49000,soluong=100,mota="ốp lưng iphone apple silicone case là là một sản phảm đột phá nhờ công nghệ chống bám bẩn bên ngoài và lớp nhung mềm mại bên trong. Bảo vệ chiếc iphone của bạn tránh bị trầy xước hoặc giảm thiểu tối đa lực tsac động, khi vô tình rơi rớt",tenhinh="1.png",khuyenmai=0},
+
+                new Sanpham{masp="1",tensp="Ốp Chống Bẩn GIành Cho Iphone 6 6S - iphone 6/6s",maloai=1,mancc=1,dongia=49000,soluong=100,mota="ốp lưng iphone apple silicone case là là một sản phảm đột phá nhờ công nghệ chống bám bẩn bên ngoài và lớp nhung mềm mại bên trong. Bảo vệ chiếc iphone của bạn tránh bị trầy xước hoặc giảm thiểu tối đa lực tsac động, khi vô tình rơi rớt",tenhinh="1.png",khuyenmai=0},
+
                 new Sanpham{masp="2",tensp="Ốp hoạt hình",maloai=1,mancc=1,dongia=40000,soluong=100,mota="Đây là sp thứ 2",tenhinh="2.png",khuyenmai=0},
                 new Sanpham{masp="3",tensp="Ốp hình nước ngọt pepsi",maloai=1,mancc=2,dongia=60000,soluong=100,mota="Đây là sp thứ 3",tenhinh="3.png",khuyenmai=0},
                 new Sanpham{masp="4",tensp="Ốp hình hàn quốc",maloai=1,mancc=3,dongia=60000,soluong=100,mota="Đây là sp thứ 4",tenhinh="4.png",khuyenmai=0},
@@ -135,7 +137,9 @@ namespace Data.EF
                 new Sanpham{masp="48",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="48.png",khuyenmai=0},
                 new Sanpham{masp="49",tensp="Ốp kính siêu nhân",maloai=1,mancc=2,dongia=55000,soluong=100,mota="Đây là sp thứ 1",tenhinh="49.png",khuyenmai=0},
                 new Sanpham{masp="50",tensp="Ốp nhám vô diện",maloai=1,mancc=1,dongia=70000,soluong=100,mota="Đây là sp thứ 1",tenhinh="50.png",khuyenmai=0},
-                new Sanpham{masp="r1",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r1.png",khuyenmai=0},
+
+                 new Sanpham{masp="r1",tensp="Ring Gấu Trúc ",maloai=3,mancc=1,dongia=90000,soluong=100,mota="Đây là sp thứ 1",tenhinh="r1.png",khuyenmai=0},
+
                 new Sanpham{masp="r2",tensp="Ring Gà Con ",maloai=3,mancc=1,dongia=50000,soluong=100,mota="Đây là sp thứ 2",tenhinh="r2.png",khuyenmai=0},
                 new Sanpham{masp="r3",tensp="Ring Gấu Đen Dễ Thương ",maloai=3,mancc=3,dongia=95000,soluong=100,mota="Đây là sp thứ 3",tenhinh="r3.png",khuyenmai=0},
                 new Sanpham{masp="r4",tensp="Ring Gấu Hồng Kute ",maloai=3,mancc=1,dongia=80000,soluong=100,mota="Đây là sp thứ 4",tenhinh="r4.png",khuyenmai=0},

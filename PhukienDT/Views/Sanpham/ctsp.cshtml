@@ -23,22 +23,23 @@
 			<div class="col-lg-6">
 				<div>
 					<div style=" font-size: 25px; font-weight:bold">{{Tensp}}</div>
-					<div style="color:red">Sao</div>
-					<div>Đánh giá</div>
-					<div>Đã bán</div>
+					<div>Sao :</div>
+					<div>Đánh giá : </div>
+					<div>Đã bán :</div>
+
 				</div>
-				<div style="color:red; font-weight:bold; margin-top:50px">
+				<div>
+					<input type="number" min="0" value="1" />
+				</div>
+				<div class="row" style="color:red; font-weight:bold; margin-top:50px">
+					<div style="font-size: 35px;float:left;">Giá :{{Dongia}}</div>
 					<div style="font-size: 20px;float:left;">đ</div>
-					<div style="font-size: 35px;float:left;">{{Dongia}}</div>
 				</div>
 				<div>
-					<div style="font-size: 20px">Số lượng:{{Soluong}} </div>
+					<div class="row"style="font-size: 20px">Còn Lại :{{Soluong}} </div>
 				</div>
 				<div>
-					<input type="number" min="0" value="1"/>
-				</div>
-				<div>
-					tong tien
+					<button class="giohang themgiohang btn-danger">Add to Cart</button>
 				</div>
 			</div>
 		</div>
