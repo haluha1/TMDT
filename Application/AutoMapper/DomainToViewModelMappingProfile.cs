@@ -33,7 +33,7 @@ namespace Application.AutoMapper
                 foreach (var i in dest.Cthdons)
                 {
                     i.HoadonNavigation = null;
-                    i.SanphamNavigation.Giohangs = null;
+                    i.SanphamNavigation.CtGiohangs = null;
                     i.SanphamNavigation.KhachHangYeuThichs = null;
                 }
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
