@@ -46,7 +46,21 @@ namespace Application.Implementation
 			return Mapper.Map<TaiKhoan, TaiKhoanViewModel>(item);
 
 		}
-
+		public TaiKhoanViewModel Register(TaiKhoanViewModel TaiKhoanVm)
+		{
+			var taiKhoan = Mapper.Map<TaiKhoanViewModel, TaiKhoan>(TaiKhoanVm);
+			var today = DateTime.Today.ToShortDateString();
+			taiKhoan.thoigiandk = today;
+			_repository.AddReturn(taiKhoan);
+			taiKhoan.matk = taiKhoan.KeyId;
+			TaiKhoanVm.KeyId = taiKhoan.KeyId;
+			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
+			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
+			//sp.Id = HP_EmployeeVm.Id;
+			//employee.UserBy.IsEmployee = true;
+			_unitOfWork.Commit();
+			return TaiKhoanVm;
+		}
 		public bool Login(LoginViewModel LoginVm)
 		{
 			var user = _repository.FindAll().Where(x => (x.email == LoginVm.Username) && (x.matkhau == LoginVm.Password));

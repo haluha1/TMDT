@@ -10,6 +10,11 @@ namespace Data.EF
 {
 	public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<PhukienDTDbContext>
 	{
+		public DbInitializer()
+		{
+			
+		}
+
 		protected override void Seed(PhukienDTDbContext context)
 		{
             //Loại sản phẩm

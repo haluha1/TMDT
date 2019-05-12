@@ -60,36 +60,42 @@
                             </div>
 
                             <div class="container">
-                                <div style="margin-left: 225px">
-                                    <label for="txtEmail"><b>Username</b></label>
-                                    <div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
+                                <div id="form-body">
+                                    <div id="areaSignIn">
+                                        <div style="margin-left: 225px">
+                                            <label for="txtEmail"><b>Username</b></label>
+                                            <div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
+                                        </div>
+
+                                        <div style="margin-left: 225px">
+                                            <label for="txtPassword"><b>Password</b></label>
+                                            <div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
+                                        </div>
+
+                                        <label style="margin-left: 225px">
+                                            <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
+                                        </label>
+
+                                        <div>
+                                            <span class="psw"> <a href="#">Forgot password?</a></span>
+                                        </div>
+                                    </div>
                                 </div>
+                                
 
-                                <div style="margin-left: 225px">
-                                    <label for="txtPassword"><b>Password</b></label>
-                                    <div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
-                                </div>
 
-                                <label style="margin-left: 225px">
-                                    <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
-                                </label>
-
+                                
                                 <div>
-                                    <span class="psw"> <a href="#">Forgot password?</a></span>
-                                </div>
-
-                                <div>
-                                    <div style="margin-left: 400px"><button type="submit">Login</button></div>
-                                    <div style="margin-left: 600px; margin-top: -65px"><button type="submit">Register</button></div>
+                                    <div style="margin-left: 400px"><button id="btnSubmit" type="button">Login</button></div>
+                                    <div style="margin-left: 600px; margin-top: -65px"><button id="btnRegister" type="button">Register</button></div>
                                 </div>
                             </div>
-
-                            <!---
-            <div class="container">
-              <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
-              <span class="psw"> <a href="#">Forgot password?</a></span>
-            </div>
-                  --->
+                                <!---
+    <div class="container">
+      <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw"> <a href="#">Forgot password?</a></span>
+    </div>
+          --->
                         </form>
                     </div>
                 </div>
@@ -97,9 +103,112 @@
         </div>
     </nav>
 
+    <script id="SingUp-template" type="x-tmpl-mustache">
+        <div id="areaSignUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="uname" style="margin-top:20px; font-size:16px"><b>Họ tên</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Nhập họ tên... " id="txtname" name="uname" required>
 
-                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1" ">
+                        <label for="email" style="margin-top:20px; font-size:16px"><b>Email</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="email" placeholder="Nhập email..." id="txtEmaildk" name="email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="pass" style="margin-top:20px; font-size:16px"><b>Password</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="password" placeholder="Nhập mật khẩu..." id="txtpass" name="pass" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="address" style="margin-top:20px; font-size:16px" "><b>Địa chỉ</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Nhập địa chỉ..." id="txtaddress" name="address" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="sdt" style="margin-top:20px; font-size:16px" " ><b>Số điện thoại</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Nhập số điện thoại" id="txtsdt" name="sdt" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="stk" style="margin-top:20px; font-size:16px" "><b>Số tài khoản</b></label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Nhập số tài khoản" id="txtstk" name="stk" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
 
+                    </div>
+                    <div class=" col-lg-2">
+                        <input type="radio" name="userType" value="0" />
+                        <label for="nguoimua"><b> Người mua </b></label>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="radio" name="userType" value="1" />
+                        <label for="nguoiban"><b> Nguời bán </b></label>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+       
+    </script>
+    <script id="SignIn-template" type="x-tmpl-mustache">
+        <div id="areaSignIn">
+            <div style="margin-left: 225px">
+                <label for="txtEmail"><b>Username</b></label>
+                <div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
+                </div>
+
+                <div style="margin-left: 225px">
+                    <label for="txtPassword"><b>Password</b></label>
+                    <div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
+                    </div>
+
+                    <label style="margin-left: 225px">
+                        <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
+                                    </label>
+
+                        <div>
+                            <span class="psw"> <a href="#">Forgot password?</a></span>
+                        </div>
+                                </div>
+    </script>
 
             
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Utilities;
 using Utilities.Constants;
 
 namespace PhukienDT.Controllers
@@ -61,6 +62,35 @@ namespace PhukienDT.Controllers
 			}
 		}
 		[HttpPost]
+		public JsonResult Register(TaiKhoanViewModel TaikhoanVm)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+					return Json(allErrors, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					_userService.Register(TaikhoanVm);
+					var s = UtilityFunction.RandomString(6, false);
+
+
+				}
+				if (_userService.Save()) return Json(TaikhoanVm, JsonRequestBehavior.AllowGet);
+
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(Response, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+		}
+
+		[HttpPost]
 		public JsonResult Login(LoginViewModel LoginVm)
 		{
 			try
@@ -98,7 +128,7 @@ namespace PhukienDT.Controllers
 		{
 			try
 			{
-				if (Session[CommonConstrants.USER_SESSION]==null)
+				if (Session[CommonConstrants.USER_SESSION]==null || UserLoginViewModel.Current.KeyId==0)
 				{
 					return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 					
