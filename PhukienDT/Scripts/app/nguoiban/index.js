@@ -18,6 +18,25 @@
         
         //loadReligion();
         general.configs.pageSize = 12;
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+
+            switch (target) {
+                case "#home":
+                    loadData(true);
+                    break;
+                case "#menu1":
+                    loadDataCon(true);
+                    break;
+                case "#menu2":
+                    loadDataHet(true);
+                    break;
+                case "#menu3":
+                    loadDataKhoa(true);
+                    break;
+            };
+        });
         $('#frmMaintainance').validate({
             errorClass: 'red',
             ignore: [],
@@ -109,95 +128,16 @@
     }
 }
 
+
 function loadData(isPageChanged) {
-    var ProductTypeID = window.location.href.split('/').reverse()[0];
     var template = $('#table-template').html();
     var render = "";
     $.ajax({
         type: 'GET',
-        url: '/Sanpham/GetByType',
+        url: '/Sanpham/GetAllSanPham',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: {
-            id: ProductTypeID,
-            keyword: $('#txtKeyword').val(),
-            page: general.configs.pageIndex,
-            pageSize: general.configs.pageSize
-        },
-        success: function (response) {
-            console.log(response);
-            $.each(response.Result, function (i, item) {
-                //begin
-                if (i%4==0 && i%2==0) {
-                    render += '<div class="row row-space">'
-                }
-                var imgsrc = "";
-                switch (item.LoaispNavigation.KeyId) {
-                    case 2: {
-                        imgsrc = "/img/Bao/" + item.tenhinh;
-                        break;
-                    }
-                    case 3: {
-                        imgsrc = "/img/Ring/" + item.tenhinh;
-                        break;
-                    }
-                    case 4: {
-                        imgsrc = "/img/Khac/" + item.tenhinh;
-                        break;
-                    }
-                    default: {
-                        imgsrc = "/img/" + item.tenhinh;
-                        break;
-                    }
-                }
-
-                render += Mustache.render(template, {
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    Price: item.dongia,
-                    img: imgsrc,
-                    ProductType: item.maloai,
-                    Quanlity: item.soluong
-                });
-                //end
-                if ( (i%4==3 && i%2==1) || (i+1)==response.length ) {
-                    render += '</div>'
-                }
-
-            });
-            $('#lblTotalRecords').text(response.PageCount);
-            $('#new-Product').html(render);
-            $('#new-Product1').html(render);
-            $('#new-Product2').html(render);
-            $('#new-Product3').html(render);
-            wrapPaging(response.PageCount, function () {
-                loadData();
-            }, isPageChanged);
-        },
-        error: function (status) {
-            console.log(status);
-            //general.notify('Không thể load dữ liệu', 'error');
-        }
-    });
-}
-
-function loadData(isPageChanged) {
-    var ProductTypeID = window.location.href.split('/').reverse()[0];
-    var template = $('#table-template').html();
-    var template1 = $('#table-template1').html();
-    var template2 = $('#table-template2').html();
-    var template3 = $('#table-template3').html();
-    var render = "";
-    var render1 = "";
-    var render2 = "";
-    var render3 = "";
-    $.ajax({
-        type: 'GET',
-        url: '/Sanpham/GetByType',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: {
-            id: ProductTypeID,
             keyword: $('#txtKeyword').val(),
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
@@ -237,30 +177,7 @@ function loadData(isPageChanged) {
                     ProductType: item.maloai,
                     Quanlity: item.soluong
                 });
-
-                render1 += Mustache.render(template1, {
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    Price: item.dongia,
-                    img: imgsrc,
-                    ProductType: item.maloai,
-                    Quanlity: item.soluong
-                });
-                render2 += Mustache.render(template2, {
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    Price: item.dongia,
-                    img: imgsrc,
-                    ProductType: item.maloai,
-                    Quanlity: item.soluong
-                });
-                render3 += Mustache.render(template3, {
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    Price: item.dongia,
-                    img: imgsrc,
-                    ProductType: item.maloai
-                });
+                
                 //end
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
                     render += '</div>'
@@ -269,11 +186,204 @@ function loadData(isPageChanged) {
             });
             $('#lblTotalRecords').text(response.PageCount);
             $('#new-Product').html(render);
-            $('#new-Product1').html(render1);
-            $('#new-Product2').html(render2);
-            $('#new-Product3').html(render3);
             wrapPaging(response.PageCount, function () {
                 loadData();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            //general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+
+function loadDataCon(isPageChanged) {
+    
+    var template1 = $('#table-template1').html();
+    var render1 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Sanpham/GetAllSanPhamCon',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render1 += '<div class="row row-space">'
+                }
+                var imgsrc = "";
+                switch (item.LoaispNavigation.KeyId) {
+                    case 2: {
+                        imgsrc = "/img/Bao/" + item.tenhinh;
+                        break;
+                    }
+                    case 3: {
+                        imgsrc = "/img/Ring/" + item.tenhinh;
+                        break;
+                    }
+                    case 4: {
+                        imgsrc = "/img/Khac/" + item.tenhinh;
+                        break;
+                    }
+                    default: {
+                        imgsrc = "/img/" + item.tenhinh;
+                        break;
+                    }
+                }
+                render1 += Mustache.render(template1, {
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    Price: item.dongia,
+                    img: imgsrc,
+                    ProductType: item.maloai,
+                    Quanlity: item.soluong
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render1 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product1').html(render1);
+            wrapPaging(response.PageCount, function () {
+                loadDataCon();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            //general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+
+function loadDataHet(isPageChanged) {
+    var template2 = $('#table-template2').html();
+    var render2 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Sanpham/GetAllSanPhamHet',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render2 += '<div class="row row-space">'
+                }
+                var imgsrc = "";
+                switch (item.LoaispNavigation.KeyId) {
+                    case 2: {
+                        imgsrc = "/img/Bao/" + item.tenhinh;
+                        break;
+                    }
+                    case 3: {
+                        imgsrc = "/img/Ring/" + item.tenhinh;
+                        break;
+                    }
+                    case 4: {
+                        imgsrc = "/img/Khac/" + item.tenhinh;
+                        break;
+                    }
+                    default: {
+                        imgsrc = "/img/" + item.tenhinh;
+                        break;
+                    }
+                }
+                render2 += Mustache.render(template2, {
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    Price: item.dongia,
+                    img: imgsrc,
+                    ProductType: item.maloai,
+                    Quanlity: item.soluong
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render2 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product2').html(render2);
+            wrapPaging(response.PageCount, function () {
+                loadDataHet();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            //general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+
+function loadDataKhoa(isPageChanged) {
+    var template3 = $('#table-template3').html();
+    var render3 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Sanpham/GetAllSanPhamKhoa',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
+        success: function (response) {
+            console.log(response);
+            $.each(response.Result, function (i, item) {
+                //begin
+                if (i % 4 == 0 && i % 2 == 0) {
+                    render3 += '<div class="row row-space">'
+                }
+                var imgsrc = "";
+                switch (item.LoaispNavigation.KeyId) {
+                    case 2: {
+                        imgsrc = "/img/Bao/" + item.tenhinh;
+                        break;
+                    }
+                    case 3: {
+                        imgsrc = "/img/Ring/" + item.tenhinh;
+                        break;
+                    }
+                    case 4: {
+                        imgsrc = "/img/Khac/" + item.tenhinh;
+                        break;
+                    }
+                    default: {
+                        imgsrc = "/img/" + item.tenhinh;
+                        break;
+                    }
+                }
+                render3 += Mustache.render(template3, {
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    Price: item.dongia,
+                    img: imgsrc,
+                    ProductType: item.maloai,
+                    Quanlity: item.soluong
+                });
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
+                    render3 += '</div>'
+                }
+
+            });
+            $('#lblTotalRecords').text(response.PageCount);
+            $('#new-Product3').html(render3);
+            wrapPaging(response.PageCount, function () {
+                loadDataKhoa();
             }, isPageChanged);
         },
         error: function (status) {

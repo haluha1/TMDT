@@ -52,17 +52,23 @@ namespace PhukienDT.Controllers
         }
 
         #region AjaxAPI
-        public JsonResult GetAllSanPham()
+        public JsonResult GetAllSanPham(string keyword, int page, int pageSize)
         {
             try
             {
 
                 var data = _sanphamService.GetAll();
-
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    var keysearch = keyword.Trim().ToUpper();
+                    
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                }
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
-
-                return Json(data, JsonRequestBehavior.AllowGet);
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);              
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
 
 			}
 			catch (Exception ex)
@@ -72,7 +78,85 @@ namespace PhukienDT.Controllers
 			}
 		}
 
-		public JsonResult GetNewProduct(int page, int pageSize)
+        public JsonResult GetAllSanPhamHet(string keyword, int page, int pageSize)
+        {
+            try
+            {
+                var data = _sanphamService.GetAll().Where(x=>x.soluong == 0);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    var keysearch = keyword.Trim().ToUpper();
+
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                }
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetAllSanPhamCon(string keyword, int page, int pageSize)
+        {
+            try
+            {
+                var data = _sanphamService.GetAll().Where(x => x.soluong > 0);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    var keysearch = keyword.Trim().ToUpper();
+
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                }
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetAllSanPhamKhoa(string keyword, int page, int pageSize)
+        {
+            try
+            {
+                var data = _sanphamService.GetAll().Where(x => x.soluong == 0);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    var keysearch = keyword.Trim().ToUpper();
+
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                }
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetNewProduct(int page, int pageSize)
 		{
 			try
 			{

@@ -1,6 +1,6 @@
-﻿var nguoibanController = function () {
+﻿var donbanController = function () {
     this.initialize = function () {
-        loadData();
+        loadDataHd();
         //TestSave();
         registerEvents();
     }
@@ -92,9 +92,6 @@
         });
     }
 
-
-
-
     function loadSTT(that) {
         $that = that;
         var tbl = $that.children();
@@ -110,118 +107,66 @@
 }
 
 
-function loadData(isPageChanged) {
-    var ProductTypeID = window.location.href.split('/').reverse()[0];
+function loadDataHd(isPageChanged) {
     var template = $('#table-template').html();
-    var template1 = $('#table-template1').html();
-    var template2 = $('#table-template2').html();
-    var template3 = $('#table-template3').html();
-    var template4 = $('#table-template4').html();
     var render = "";
-    var render1 = "";
-    var render2 = "";
-    var render3 = "";
-    var render4 = "";
     $.ajax({
         type: 'GET',
         url: '/Hoadon/GetAllHoadon',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        beforeSend: function () { general.startLoading(); },
+        data: {
+            keyword: $('#txtKeyword').val(),
+            page: general.configs.pageIndex,
+            pageSize: general.configs.pageSize
+        },
         success: function (response) {
-
             console.log(response);
             $.each(response.Result, function (i, item) {
                 //begin
                 if (i % 4 == 0 && i % 2 == 0) {
                     render += '<div class="row row-space">'
                 }
-                var imgsrc = "";
-                switch (item.LoaispNavigation.KeyId) {
-                    case 2: {
-                        imgsrc = "/img/Bao/" + item.tenhinh;
-                        break;
-                    }
-                    case 3: {
-                        imgsrc = "/img/Ring/" + item.tenhinh;
-                        break;
-                    }
-                    case 4: {
-                        imgsrc = "/img/Khac/" + item.tenhinh;
-                        break;
-                    }
-                    default: {
-                        imgsrc = "/img/" + item.tenhinh;
-                        break;
-                    }
-                }
-
+                //var imgsrc = "";
+                //switch (item.LoaispNavigation.KeyId) {
+                //    case 2: {
+                //        imgsrc = "/img/Bao/" + item.tenhinh;
+                //        break;
+                //    }
+                //    case 3: {
+                //        imgsrc = "/img/Ring/" + item.tenhinh;
+                //        break;
+                //    }
+                //    case 4: {
+                //        imgsrc = "/img/Khac/" + item.tenhinh;
+                //        break;
+                //    }
+                //    default: {
+                //        imgsrc = "/img/" + item.tenhinh;
+                //        break;
+                //    }
+                //}
                 render += Mustache.render(template, {
-                    HoadonID: item.mahd,
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    MaHD: item.mahd,
+                    TenKH: item.hoten,
                     Total: item.tongtien,
+                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
-                    img: imgsrc
                 });
-
-                render1 += Mustache.render(template1, {
-                    HoadonID: item.mahd,
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
-                    Total: item.tongtien,
-                    Trangthai: item.tinhtrang,
-                    img: imgsrc
-                });
-                render2 += Mustache.render(template2, {
-                    HoadonID: item.mahd,
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
-                    Total: item.tongtien,
-                    Trangthai: item.tinhtrang,
-                    img: imgsrc
-                });
-                render3 += Mustache.render(template3, {
-                    HoadonID: item.mahd,
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
-                    Total: item.tongtien,
-                    Trangthai: item.tinhtrang,
-                    img: imgsrc
-                });
-                render4 += Mustache.render(template4, {
-                    HoadonID: item.mahd,
-                    ProductID: item.KeyId,
-                    ProductName: item.tensp,
-                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
-                    Total: item.tongtien,
-                    Trangthai: item.tinhtrang,
-                    img: imgsrc
-                });
-                //end
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
-                    render += '</div>'
+                    render2 += '</div>'
                 }
 
             });
             $('#lblTotalRecords').text(response.PageCount);
             $('#new-Product').html(render);
-            $('#new-Product1').html(render1);
-            $('#new-Product2').html(render2);
-            $('#new-Product3').html(render3);
-            $('#new-Product4').html(render4);
-            general.stopLoading();
             wrapPaging(response.PageCount, function () {
-                loadData();
+                loadDataHet();
             }, isPageChanged);
         },
         error: function (status) {
             console.log(status);
-            //general.notify('Không thể load dữ liệu', 'error');
+            general.notify('Không thể load dữ liệu', 'error');
         }
     });
 }

@@ -47,7 +47,7 @@ namespace Application.Implementation
 
         public List<HoadonViewModel> GetAll()
         {
-            var query = _repository.FindAll().OrderBy(x => x.KeyId);
+            var query = _repository.FindAll(x=>x.Cthdons).OrderBy(x => x.KeyId);
             var data = new List<HoadonViewModel>();
             foreach (var item in query)
             {

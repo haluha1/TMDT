@@ -6,8 +6,8 @@
 @section Scripts1{
     <script src="/Scripts/app/nguoiban/donban.js"></script>
     <script>
-        var nguoiban = new nguoibanController();
-        nguoiban.initialize();
+        var donban = new donbanController();
+        donban.initialize();
     </script>
 }
 @section Style{
@@ -29,7 +29,7 @@
             <div class="col-lg-4"></div>
         </div>
         <div>
-            <input type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
             <div>
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
             </div>
@@ -39,7 +39,6 @@
                 <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
-                        <th>Thông tin sản phẩm</th>
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
@@ -66,7 +65,6 @@
                 <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
-                        <th>Thông tin sản phẩm</th>
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
@@ -82,10 +80,6 @@
                             </td>*@
                         <td>
                             <div>mã đơn hàng</div>
-                        </td>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
                         </td>
                         <td>
                             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
@@ -126,7 +120,6 @@
                     <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
-                            <th>Thông tin sản phẩm</th>
                             <th>Thông tin khách hàng</th>
                             <th>Tổng đơn hàng</th>
                             <th>Tình trạng</th>
@@ -142,10 +135,6 @@
                                 </td>*@
                             <td>
                                 <div>mã đơn hàng</div>
-                            </td>
-                            <td>
-                                <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                                <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
                             </td>
                             <td>
                                 <div style="float:left"><img width="50px" src="../img/3.png" /></div>
@@ -188,7 +177,6 @@
                 <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
-                        <th>Thông tin sản phẩm</th>
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
@@ -204,10 +192,6 @@
                             </td>*@
                         <td>
                             <div>mã đơn hàng</div>
-                        </td>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
                         </td>
                         <td>
                             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
@@ -249,7 +233,6 @@
                 <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
-                        <th>Thông tin sản phẩm</th>
                         <th>Thông tin khách hàng</th>
                         <th>Tổng đơn hàng</th>
                         <th>Tình trạng</th>
@@ -265,10 +248,6 @@
                             </td>*@
                         <td>
                             <div>mã đơn hàng</div>
-                        </td>
-                        <td>
-                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
                         </td>
                         <td>
                             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
@@ -324,17 +303,11 @@
 <script id="table-template" type="x-tmpl-mustache">
     <tr>
         <td>
-            <div>{{HoadonID}}</div> 
-        </td>
-        <td>
-            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">
-                {{ProductName}}, {{ProductID}}
-            </div>
+            <div>{{MaHD}}</div> 
         </td>
         <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{TenKH}}</div>
         </td>
         <td>
             {{Total}}
@@ -359,12 +332,6 @@
     <tr>
         <td>
             <div>{{HoadonID}}</div>
-        </td>
-        <td>
-            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">
-                {{ProductName}}, {{ProductID}}
-            </div>
         </td>
         <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
@@ -394,12 +361,6 @@
             <div>{{HoadonID}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">
-                {{ProductName}}, {{ProductID}}
-            </div>
-        </td>
-        <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
             <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
         </td>
@@ -427,12 +388,6 @@
             <div>{{HoadonID}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">
-                {{ProductName}}, {{ProductID}}
-            </div>
-        </td>
-        <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
             <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
         </td>
@@ -458,12 +413,6 @@
     <tr>
         <td>
             <div>{{HoadonID}}</div>
-        </td>
-        <td>
-            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">
-                {{ProductName}}, {{ProductID}}
-            </div>
         </td>
         <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>

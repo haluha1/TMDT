@@ -6,8 +6,8 @@
 @section Scripts1{
     <script src="/Scripts/app/nguoiban/index.js"></script>
     <script>
-        var nguoiban = new nguoibanController();
-        nguoiban.initialize();
+        var sanpham = new nguoibanController();
+        sanpham.initialize();
     </script>
 }
 @section Style{
@@ -26,7 +26,7 @@
         <div><h3 style="color:red">Tổng số lượng sản phẩm</h3></div>
         <div class="row">
             <div class="col-lg-6">
-                <input type="text" placeholder="Tìm sản phẩm...">
+                <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
                 <div>
                     <img style="height:27px;margin-top:-85px; margin-left: 290px" src="/img/search.png" />
                 </div>
@@ -155,7 +155,6 @@
                         <th>Tên sản phẩm</th>
                         <th>Loại sản phẩm</th>
                         <th>Đơn giá</th>
-                        <th>Số lượng nhập kho</th>
                     </tr>
                 </thead>
                 <tbody id="new-Product2">    
@@ -259,9 +258,6 @@
         <td>
             {{Quanlity}}
         </td>
-        <td>
-            sl còn lại
-        </td>
     </tr>
 </script>
 <script id="table-template2" type="x-tmpl-mustache">
@@ -275,9 +271,6 @@
         </td>
         <td>
             {{Price}}
-        </td>
-        <td>
-            {{Quanlity}}
         </td>
     </tr>
 </script>

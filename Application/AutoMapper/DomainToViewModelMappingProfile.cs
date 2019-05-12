@@ -26,14 +26,13 @@ namespace Application.AutoMapper
 			CreateMap<CtRating, CtRatingViewModel>();
 			CreateMap<Giatin, GiatinViewModel>();
 			CreateMap<Giohang, GiohangViewModel>();
-			CreateMap<Hoadon, HoadonViewModel>().AfterMap((src, dest) =>
+			CreateMap<Hoadon, HoadonViewModel>().MaxDepth(1).AfterMap((src, dest) =>
             {
                 dest.KhachHangNavigation.Hoadons = null;
                 
                 foreach (var i in dest.Cthdons)
                 {
                     i.HoadonNavigation = null;
-                    i.SanphamNavigation.Cthds = null;
                     i.SanphamNavigation.Giohangs = null;
                     i.SanphamNavigation.KhachHangYeuThichs = null;
                 }
