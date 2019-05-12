@@ -18,6 +18,7 @@ namespace Data.Entities
         public int makh { get; set; }
         public double tongtien { get; set; }
         public string thoigian { get; set; }
+        public string tinhtrang { get; set; }
         public ICollection<Cthd> Cthdons { get; set; }
 		public virtual Khachhang KhachHangNavigation { get; set; }
 

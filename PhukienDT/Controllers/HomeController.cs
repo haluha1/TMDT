@@ -131,5 +131,5 @@ namespace PhukienDT.Controllers
 				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
-	}
+    }
 }

@@ -3,6 +3,16 @@
     ViewBag.Title = "Donban";
     Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
 }
+@section Scripts1{
+    <script src="/Scripts/app/nguoiban/donban.js"></script>
+    <script>
+        var nguoiban = new nguoibanController();
+        nguoiban.initialize();
+    </script>
+}
+@section Style{
+
+}
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Tất cả</a></li>
@@ -24,6 +34,22 @@
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
             </div>
         </div>
+        <div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Thông tin sản phẩm</th>
+                        <th>Thông tin khách hàng</th>
+                        <th>Tổng đơn hàng</th>
+                        <th>Tình trạng</th>
+                        <th>Chi tiết đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody id="new-Product">  
+                </tbody>
+            </table>
+        </div>
     </div>
     <div id="menu1" class="tab-pane fade">
         <div class="row">
@@ -35,6 +61,56 @@
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
             </div>
         </div>
+        <div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Thông tin sản phẩm</th>
+                        <th>Thông tin khách hàng</th>
+                        <th>Tổng đơn hàng</th>
+                        <th>Tình trạng</th>
+                        <th>Chi tiết đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody id="new-Product1">
+                    <tr>
+                        @*<td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+                            </td>*@
+                        <td>
+                            <div>mã đơn hàng</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên khách hàng</div>
+                        </td>
+                        <td>
+                            tiền
+                        </td>
+                        <td>
+                            <div class="custom-select" style="width:200px;">
+                                <select>
+                                    <option value="0">Chờ xác nhận</option>
+                                    <option value="1">Giao hàng</option>
+                                    <option value="2">Hoàn thành</option>
+                                    <option value="3">Đã hủy</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <button>Xem</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div id="menu2" class="tab-pane fade">
         <div class="row">
@@ -44,6 +120,56 @@
             <input type="text" placeholder="Tìm sản phẩm...">
             <div>
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
+            </div>
+            <div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Thông tin sản phẩm</th>
+                            <th>Thông tin khách hàng</th>
+                            <th>Tổng đơn hàng</th>
+                            <th>Tình trạng</th>
+                            <th>Chi tiết đơn hàng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="new-Product2">
+                        <tr>
+                            @*<td>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""></label>
+                                    </div>
+                                </td>*@
+                            <td>
+                                <div>mã đơn hàng</div>
+                            </td>
+                            <td>
+                                <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+                                <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
+                            </td>
+                            <td>
+                                <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+                                <div style="float:left; margin-left: 10px; font-weight:bold;">tên khách hàng</div>
+                            </td>
+                            <td>
+                                tiền
+                            </td>
+                            <td>
+                                <div class="custom-select" style="width:200px;">
+                                    <select>
+                                        <option value="0">Chờ xác nhận</option>
+                                        <option value="1">Giao hàng</option>
+                                        <option value="2">Hoàn thành</option>
+                                        <option value="3">Đã hủy</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <button>Xem</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -57,65 +183,307 @@
                 <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
             </div>
         </div>
+        <div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Thông tin sản phẩm</th>
+                        <th>Thông tin khách hàng</th>
+                        <th>Tổng đơn hàng</th>
+                        <th>Tình trạng</th>
+                        <th>Chi tiết đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody id="new-Product3">
+                    <tr>
+                        @*<td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+                            </td>*@
+                        <td>
+                            <div>mã đơn hàng</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên khách hàng</div>
+                        </td>
+                        <td>
+                            tiền
+                        </td>
+                        <td>
+                            <div class="custom-select" style="width:200px;">
+                                <select>
+                                    <option value="0">Chờ xác nhận</option>
+                                    <option value="1">Giao hàng</option>
+                                    <option value="2">Hoàn thành</option>
+                                    <option value="3">Đã hủy</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <button>Xem</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+        <div class="row">
+            <div class="col-lg-8"><h3>Tổng số lượng sản phẩm</h3></div>
+        </div>
+        <div>
+            <input type="text" placeholder="Tìm sản phẩm...">
+            <div>
+                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="..\img\search.png" />
+            </div>
+        </div>
+        <div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Thông tin sản phẩm</th>
+                        <th>Thông tin khách hàng</th>
+                        <th>Tổng đơn hàng</th>
+                        <th>Tình trạng</th>
+                        <th>Chi tiết đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody id="new-Product4">
+                    <tr>
+                        @*<td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+                            </td>*@
+                        <td>
+                            <div>mã đơn hàng</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
+                        </td>
+                        <td>
+                            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+                            <div style="float:left; margin-left: 10px; font-weight:bold;">tên khách hàng</div>
+                        </td>
+                        <td>
+                            tiền
+                        </td>
+                        <td>
+                            <div class="custom-select" style="width:200px;">
+                                <select>
+                                    <option value="0">Chờ xác nhận</option>
+                                    <option value="1">Giao hàng</option>
+                                    <option value="2">Hoàn thành</option>
+                                    <option value="3">Đã hủy</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <button>Xem</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<div>
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Mã đơn hàng</th>
-                <th>Thông tin sản phẩm</th>
-                <th>Thông tin khách hàng</th>
-                <th>Tổng đơn hàng</th>
-                <th>Tình trạng</th>
-                <th>Chi tiết đơn hàng</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                @*<td>
-            <div class="checkbox">
-                <label><input type="checkbox" value=""></label>
-            </div>
-        </td>*@
-                <td>
-                    <div>mã đơn hàng</div>
-                </td>
-                <td>
-                    <div style="float:left"><img width="50px" src="../img/2.png" /></div>
-                    <div style="float:left; margin-left: 10px; font-weight:bold;">tên sp, mã sp</div>
-                </td>
-                <td>
-                    <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-                    <div style="float:left; margin-left: 10px; font-weight:bold;">tên khách hàng</div>
-                </td>
-                <td>
-                    tiền
-                </td>
-                <td>
-                    <div class="custom-select" style="width:200px;">
-                        <select>
-                            <option value="0">Chờ xác nhận</option>
-                            <option value="1">Giao hàng</option>
-                            <option value="2">Hoàn thành</option>
-                            <option value="3">Đã hủy</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <button>Xem</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-            </tr>
 
-        </tbody>
-    </table>
+<!--Phân trang-->
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+            <select id="ddlShowPage">
+                <option value="12" selected="selected">12</option>
+                <option value="24">24</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+            </select>
+            <span class="item-per-page">
+                bản ghi/trang.
+            </span>
+            Tổng số bản ghi: <strong id="lblTotalRecords"></strong>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+            <ul id="paginationUL"></ul>
+        </div>
+    </div>
 </div>
 
-<div>phân trang</div>
-
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div>{{HoadonID}}</div> 
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">
+                {{ProductName}}, {{ProductID}}
+            </div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+        </td>
+        <td>
+            {{Total}}
+        </td>
+        <td>
+            {{Trangthai}}
+            @*<div class="custom-select" style="width:200px;">
+            <select>
+                <option value="0">Chờ xác nhận</option>
+                <option value="1">Giao hàng</option>
+                <option value="2">Hoàn thành</option>
+                <option value="3">Đã hủy</option>
+            </select>
+        </div>*@
+        </td>
+        <td>
+            <button>Xem</button>
+        </td>
+    </tr>
+</script>
+<script id="table-template1" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div>{{HoadonID}}</div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">
+                {{ProductName}}, {{ProductID}}
+            </div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+        </td>
+        <td>
+            {{Total}}
+        </td>
+        <td>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Giao hàng</option>
+                    <option value="2">Hoàn thành</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <button>Xem</button>
+        </td>
+    </tr>
+</script>
+<script id="table-template2" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div>{{HoadonID}}</div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">
+                {{ProductName}}, {{ProductID}}
+            </div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+        </td>
+        <td>
+            {{Total}}
+        </td>
+        <td>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Giao hàng</option>
+                    <option value="2">Hoàn thành</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <button>Xem</button>
+        </td>
+    </tr>
+</script>
+<script id="table-template3" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div>{{HoadonID}}</div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">
+                {{ProductName}}, {{ProductID}}
+            </div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+        </td>
+        <td>
+            {{Total}}
+        </td>
+        <td>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Giao hàng</option>
+                    <option value="2">Hoàn thành</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <button>Xem</button>
+        </td>
+    </tr>
+</script>
+<script id="table-template4" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            <div>{{HoadonID}}</div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/2.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">
+                {{ProductName}}, {{ProductID}}
+            </div>
+        </td>
+        <td>
+            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
+            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+        </td>
+        <td>
+            {{Total}}
+        </td>
+        <td>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Giao hàng</option>
+                    <option value="2">Hoàn thành</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <button>Xem</button>
+        </td>
+    </tr>
+</script>

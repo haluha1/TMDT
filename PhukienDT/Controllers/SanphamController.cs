@@ -17,13 +17,11 @@ namespace PhukienDT.Controllers
     {
         private ISanphamService _sanphamService;
 		private IUserService _userService;
-		private IRatingService _ratingService;
 
-		public SanphamController(ISanphamService sanphamService, IUserService userService, IRatingService ratingService)
+		public SanphamController(ISanphamService sanphamService, IUserService userService)
 		{
 			_sanphamService = sanphamService;
 			_userService = userService;
-			_ratingService = ratingService;
 		}
 
 		public ActionResult Index(int? id)
@@ -171,28 +169,6 @@ namespace PhukienDT.Controllers
 			{
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
-			}
-		}
-
-		[HttpPost]
-		public JsonResult Rating()
-		{
-			try
-			{
-				
-					var RatingVm = _ratingService.GetAll().Where(x=>x.RatingNccNavigation.mancc==1).FirstOrDefault();
-					
-					Rating sp = Mapper.Map<RatingViewModel, Rating>(RatingVm);
-					//user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
-					_sanphamService.Save();
-					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
-
-
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
 		#endregion

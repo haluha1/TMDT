@@ -1,10 +1,10 @@
-﻿var sanphamController = function () {
+﻿var nguoibanController = function () {
     this.initialize = function () {
         loadData();
         //TestSave();
         registerEvents();
     }
-   
+
     function registerEvents() {
         //$('.yearpicker').datepicker({
         //    format: "yyyy",
@@ -15,7 +15,7 @@
         //    startView: 2,
         //    minViewMode: 2
         //});
-        
+
         //loadReligion();
         general.configs.pageSize = 12;
         $('#frmMaintainance').validate({
@@ -36,7 +36,7 @@
                 }
             },
             rules: {
-                
+
                 txtCertificate: {
                     required: true,
                 }
@@ -48,7 +48,7 @@
             general.configs.pageIndex = 1;
             loadData(true);
         });
-        
+
 
         $('body').on('click', '.yeuthich', function (e) {
             e.preventDefault();
@@ -57,8 +57,8 @@
             likeProduct(that);
         });
 
-        
-        
+
+
 
     }
     //function UrlExists(url) {
@@ -71,7 +71,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Sanpham/Like",
+            url: "/Hoadon/Like",
             data: { id: that },
             dataType: "json",
             beforeSend: function () {
@@ -82,7 +82,7 @@
                 if (response.Status == "OK") {
                     general.notify(response.Result, 'success');
                 }
-               
+
 
             },
             error: function (status) {
@@ -109,27 +109,31 @@
     }
 }
 
+
 function loadData(isPageChanged) {
     var ProductTypeID = window.location.href.split('/').reverse()[0];
     var template = $('#table-template').html();
+    var template1 = $('#table-template1').html();
+    var template2 = $('#table-template2').html();
+    var template3 = $('#table-template3').html();
+    var template4 = $('#table-template4').html();
     var render = "";
+    var render1 = "";
+    var render2 = "";
+    var render3 = "";
+    var render4 = "";
     $.ajax({
         type: 'GET',
-        url: '/Sanpham/GetByType',
+        url: '/Hoadon/GetAllHoadon',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: {
-            id: ProductTypeID,
-            keyword: $('#txtKeyword').val(),
-            page: general.configs.pageIndex,
-            pageSize: general.configs.pageSize
-        },
-        beforeSend: function() { general.startLoading(); },
+        beforeSend: function () { general.startLoading(); },
         success: function (response) {
+
             console.log(response);
             $.each(response.Result, function (i, item) {
                 //begin
-                if (i%4==0 && i%2==0) {
+                if (i % 4 == 0 && i % 2 == 0) {
                     render += '<div class="row row-space">'
                 }
                 var imgsrc = "";
@@ -153,19 +157,63 @@ function loadData(isPageChanged) {
                 }
 
                 render += Mustache.render(template, {
+                    HoadonID: item.mahd,
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
-                    Price: item.dongia,
+                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
+                    img: imgsrc
+                });
+
+                render1 += Mustache.render(template1, {
+                    HoadonID: item.mahd,
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
+                    img: imgsrc
+                });
+                render2 += Mustache.render(template2, {
+                    HoadonID: item.mahd,
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
+                    img: imgsrc
+                });
+                render3 += Mustache.render(template3, {
+                    HoadonID: item.mahd,
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
+                    img: imgsrc
+                });
+                render4 += Mustache.render(template4, {
+                    HoadonID: item.mahd,
+                    ProductID: item.KeyId,
+                    ProductName: item.tensp,
+                    CusName: item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
                     img: imgsrc
                 });
                 //end
-                if ( (i%4==3 && i%2==1) || (i+1)==response.length ) {
+                if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
                     render += '</div>'
                 }
 
             });
             $('#lblTotalRecords').text(response.PageCount);
-            $('#Product-wrapper').html(render);
+            $('#new-Product').html(render);
+            $('#new-Product1').html(render1);
+            $('#new-Product2').html(render2);
+            $('#new-Product3').html(render3);
+            $('#new-Product4').html(render4);
             general.stopLoading();
             wrapPaging(response.PageCount, function () {
                 loadData();
@@ -194,7 +242,7 @@ function TestSave() {
 
     $.ajax({
         type: "POST",
-        url: "/Sanpham/SaveEntity",
+        url: "/Hoadon/SaveEntity",
         data: { sanphamVm: data },
         dataType: "json",
         beforeSend: function () {

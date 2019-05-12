@@ -11,7 +11,11 @@ namespace Data.EF
 {
 	public class PhukienDTDbContext : DbContext
 	{
-		private static PhukienDTDbContext _context;
+        static PhukienDTDbContext()
+        {
+            Database.SetInitializer<PhukienDTDbContext>(null);
+        }
+        private static PhukienDTDbContext _context;
 		public static PhukienDTDbContext Instance
 		{
 			get
@@ -67,12 +71,15 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.masp);
 
 			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
-			
-			
+            modelBuilder.Entity<CtRating>()
+            .HasRequired<Khachhang>(s => s.KhachhangNavigation)
+            .WithMany(g => g.CtRatings)
+            .HasForeignKey<int>(s => s.makh);
 
 
 
-			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
+
+            modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
 			modelBuilder.Entity<Giohang>().HasKey(e => e.KeyId).ToTable("GioHang");
 			

@@ -9,7 +9,7 @@ namespace Application.ViewModels
 	public class SanphamViewModel
 	{
 		public int KeyId { get; set; }
-		public int masp { get; set; }
+		public string masp { get; set; }
 		public string tensp { get; set; }
 		public int maloai { get; set; }
 		public int mancc { get; set; }
