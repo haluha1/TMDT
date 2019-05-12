@@ -48,11 +48,50 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public ActionResult Rating()
+        {
+            return View();
+        }
+
+        public ActionResult Sanphamyt()
+        {
+            return View();
+        }
+        public ActionResult Giohang()
+        {
+            return View();
+        }
         public ActionResult Theosanpham()
         {
             return View();
         }
         public JsonResult GetCTSP(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetGioHang(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetSPYT(int id)
         {
             try
             {

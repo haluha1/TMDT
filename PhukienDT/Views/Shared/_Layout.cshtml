@@ -47,52 +47,53 @@
                         <img style="height:27px;margin-top:-75px; margin-left: 230px" src="/img/search.png" />
                     </div>
                 </div>
-                <div class="col-sm-5" style="float:left;margin-top:20px">
-                    <a class="col-sm-4 nav-a-right" href="#"><img class="nav-img-right" src="/img/heart.png" /></a>
-                    <a class="col-sm-4 nav-a-right" href="#"><img class="nav-img-right" src="/img/bag.png" /></a>
-                    <a class="col-sm-4 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
-                    <div id="user" class="modal">
+				<div class="col-sm-5" style="float:left;margin-top:20px">
+					<a class="col-sm-3 nav-a-right" href="#"><img class="nav-img-right" src="/img/heart.png" /></a>
+					<a class="col-sm-3 nav-a-right" href="#"><img class="nav-img-right" src="/img/bag.png" /></a>
+					<a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
+					<a class="col-sm-3 nav-a-right" id="btnExit" ><img id="avatar" class="avatar nav-img-right" src="~/img/exit.png"  /></a>
+					<div id="user" class="modal">
 
-                        <form class="modal-content animate" id="frmMaintainance" action="#"  method="post">
-                            <div class="imgcontainer">
-                                <span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
-                                <img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
-                            </div>
+						<form class="modal-content animate" id="frmMaintainance" action="#" method="post">
+							<div class="imgcontainer">
+								<span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
+								<img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
+							</div>
 
-                            <div class="container">
-                                <div style="margin-left: 225px">
-                                    <label for="txtEmail"><b>Username</b></label>
-                                    <div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
-                                </div>
+							<div class="container">
+								<div style="margin-left: 225px">
+									<label for="txtEmail"><b>Username</b></label>
+									<div><input type="email" placeholder="Enter Your Email" id="txtEmail" name="txtEmail"></div>
+								</div>
 
-                                <div style="margin-left: 225px">
-                                    <label for="txtPassword"><b>Password</b></label>
-                                    <div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
-                                </div>
+								<div style="margin-left: 225px">
+									<label for="txtPassword"><b>Password</b></label>
+									<div><input type="password" placeholder="Enter Your Password" id="txtPassword" name="txtPassword"></div>
+								</div>
 
-                                <label style="margin-left: 225px">
-                                    <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
-                                </label>
+								<label style="margin-left: 225px">
+									<input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Remember me
+								</label>
 
-                                <div>
-                                    <span class="psw"> <a href="#">Forgot password?</a></span>
-                                </div>
+								<div>
+									<span class="psw"> <a href="#">Forgot password?</a></span>
+								</div>
 
-                                <div>
-                                    <div style="margin-left: 400px"><button type="submit">Login</button></div>
-                                    <div style="margin-left: 600px; margin-top: -65px"><button type="submit">Register</button></div>
-                                </div>
-                            </div>
+								<div>
+									<div style="margin-left: 400px"><button type="submit">Login</button></div>
+									<div style="margin-left: 600px; margin-top: -65px"><button type="submit">Register</button></div>
+								</div>
+							</div>
 
-                            <!---
-            <div class="container">
-              <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
-              <span class="psw"> <a href="#">Forgot password?</a></span>
-            </div>
-                  --->
-                        </form>
-                    </div>
-                </div>
+							<!---
+			<div class="container">
+			  <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
+			  <span class="psw"> <a href="#">Forgot password?</a></span>
+			</div>
+				  --->
+						</form>
+					</div>
+				</div>
             </div>
         </div>
     </nav>

@@ -896,6 +896,9 @@
     <Content Include="Views\Nguoiban\Doanhthu.cshtml" />
     <Content Include="Views\Nguoiban\Muatin.cshtml" />
     <Content Include="Views\Sanpham\Index.cshtml" />
+    <Content Include="Views\Sanpham\Giohang.cshtml" />
+    <Content Include="Views\Sanpham\Sanphamyt.cshtml" />
+    <Content Include="Views\Sanpham\Rating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -946,7 +949,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51415</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -1,0 +1,44 @@
+﻿
+@{
+	ViewBag.Title = "Sanphamyt";
+}
+@section Scripts{
+	<script src="/Scripts/app/sanpham/index.js"></script>
+	<script>
+		var sp = new sanphamController();
+		sp.initialize();
+	</script>
+}
+
+<h2> Sản Phẩm Yêu Thích  </h2>
+<h4 style="margin-top:50px">
+	<a href="http://localhost:51415/Home/Index">Trang Chủ /Sản Phẩm Yêu Thích  </a>
+</h4>
+<div style="margin-top:100px " id="Product-wrapper"></div>
+<script id="table-template" type="x-tmpl-mustache">
+	<div>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Tên sản phẩm</th>
+					<th>Loại sản phẩm</th>
+					<th>Đơn giá</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<div style="float:left"><img width="50px" src="{{IMG}}" /></div>
+						<div style="float:left; margin-left: 10px; font-weight:bold;">{{Tensp}}</div>
+					</td>
+					<td>
+						{{Loaisp}}
+					</td>
+					<td>
+						{{Dongia}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</script>

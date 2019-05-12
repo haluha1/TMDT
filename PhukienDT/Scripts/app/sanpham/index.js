@@ -2,6 +2,8 @@
     this.initialize = function () {
 		loadData();
 		loadDetail();
+		loadGioHang();
+		loadSPYT();
         //TestSave();
         registerEvents();
     }
@@ -61,6 +63,13 @@
 		$('body').on('click', '.mua', function (e) {
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
 		});
+		$('body').on('click', '.themgiohang', function (e) {
+			window.location.href = "/Sanpham/Giohang/" +  window.location.href.split('/').reverse()[0];;
+		});
+		$('body').on('click', '.yt', function (e) {
+			window.location.href = "/Sanpham/Sanphamyt/" + $(this).data('id');
+		});
+
         
 
     }
@@ -284,6 +293,117 @@ function loadDetail() {
 			wrapPaging(response.PageCount, function () {
 				//loadDetail();
 			},);
+		},
+
+		error: function (status) {
+			general.notify('Có lỗi xảy ra', 'error');
+			general.stopLoading();
+		}
+	});
+}
+function loadGioHang(isPageChanged) {
+	var that = window.location.href.split('/').reverse()[0];
+	var template = $('#table-template').html();
+	var render = "";
+	$.ajax({
+		type: 'GET',
+		url: '/Sanpham/GetGioHang',
+		dataType: 'json',
+		contentType: "application/json; charset=utf-8",
+		data: {
+			id: that
+		},
+		success: function (response) {
+			console.log(response);
+			var render = "";
+			var imgsrc = "";
+			switch (response.Result.LoaispNavigation.KeyId) {
+				case 2: {
+					imgsrc = "/img/Bao/" + response.Result.tenhinh;
+					break;
+				}
+				case 3: {
+					imgsrc = "/img/Ring/" + response.Result.tenhinh;
+					break;
+				}
+				case 4: {
+					imgsrc = "/img/Khac/" + response.Result.tenhinh;
+					break;
+				}
+				default: {
+					imgsrc = "/img/" + response.Result.tenhinh;
+					break;
+				}
+			}
+
+
+			render += Mustache.render(template, {
+				IMG: imgsrc,
+				Tensp: response.Result.tensp,
+				Loaisp: response.Result.LoaispNavigation.tenloai,
+				Dongia: response.Result.dongia,
+				Soluong: response.Result.soluong
+			});
+			$('#lblTotalRecords').text(response.PageCount);
+			$('#Product-wrapper').html(render);
+			wrapPaging(response.PageCount, function () {
+				//loadDetail();
+			}, );
+		},
+
+		error: function (status) {
+			general.notify('Có lỗi xảy ra', 'error');
+			general.stopLoading();
+		}
+	});
+}
+function loadSPYT(isPageChanged) {
+	var that = window.location.href.split('/').reverse()[0];
+	var template = $('#table-template').html();
+	var render = "";
+	$.ajax({
+		type: 'GET',
+		url: '/Sanpham/GetSPYT',
+		dataType: 'json',
+		contentType: "application/json; charset=utf-8",
+		data: {
+			id: that
+		},
+		success: function (response) {
+			console.log(response);
+			var render = "";
+			var imgsrc = "";
+			switch (response.Result.LoaispNavigation.KeyId) {
+				case 2: {
+					imgsrc = "/img/Bao/" + response.Result.tenhinh;
+					break;
+				}
+				case 3: {
+					imgsrc = "/img/Ring/" + response.Result.tenhinh;
+					break;
+				}
+				case 4: {
+					imgsrc = "/img/Khac/" + response.Result.tenhinh;
+					break;
+				}
+				default: {
+					imgsrc = "/img/" + response.Result.tenhinh;
+					break;
+				}
+			}
+
+
+			render += Mustache.render(template, {
+				IMG: imgsrc,
+				Tensp: response.Result.tensp,
+				Loaisp: response.Result.LoaispNavigation.tenloai,
+				Dongia: response.Result.dongia
+			});
+			$('#lblTotalRecords').text(response.PageCount);
+			$('#Product-wrapper').html(render);
+			wrapPaging(response.PageCount, function () {
+				//loadDetail();
+			}, );
 		},
 
 		error: function (status) {
