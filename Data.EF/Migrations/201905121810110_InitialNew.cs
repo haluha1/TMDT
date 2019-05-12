@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialNew : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@ namespace Data.EF.Migrations
                         code = c.String(),
                         DateCreate = c.DateTime(nullable: false),
                         CodeType = c.Int(nullable: false),
+                        CodeStatus = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.KeyId);
             

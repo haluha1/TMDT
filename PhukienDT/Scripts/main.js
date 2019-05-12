@@ -90,6 +90,10 @@ var mainController = function () {
             sendEmail();
         });
 
+        $('body').on('click', '#btnActive', function (e) {
+            confirmRegister(e);
+        });
+
         $('#btnRegister').on('click', function (e) {
             if (gIsSignInOn == true) {
                 var template = $('#SingUp-template').html();
@@ -133,8 +137,12 @@ function loadData(isPageChanged) {
         type: 'POST',
         success: function (response) {
             console.log(response);
-            if (response.Status == "OK") {
+            if (response.Status == "OK" && response.Result.KeyId != 0) {
+
                 var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
+                if (response.Result.Avatar == null || response.Result.Avatar == '') {
+                    avatarSrc = "/img/login.png";
+                }
                 general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
                 $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
                 $('#btnLogin').attr('onclick', '');
@@ -144,6 +152,45 @@ function loadData(isPageChanged) {
             console.log(status);
         }
     });
+}
+
+function confirmRegister(e) {
+    if ($('#frmMaintainance').valid()) {
+        e.preventDefault();
+        var code = $('#txtCode').val();
+        var that = $('#btnActive').data('id');
+        $.ajax({
+            url: '/Home/ConfirmCode',
+            type: 'POST',
+            data: { id: that, Code: code },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK" && response.Result.KeyId != 0) {
+                    
+                    var avatarSrc = "/img/login.png";
+                    if (response.Result.Avatar == null || response.Result.Avatar == '') {
+                        avatarSrc = response.Result.Avatar;
+                    }
+                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                    $('#btnLogin').attr('onclick', '');
+                    $('#user').css('display', 'none');
+                    $('#frmMaintainance').trigger('reset');
+                    
+                    general.stopLoading();
+                }
+                else {
+                    general.notify(response.Result + '!', 'error');
+                }
+
+            },
+            error: function (status) {
+                console.log(status);
+                general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                general.stopLoading();
+            }
+        });
+    }
 }
 
 function Login(e) {
@@ -221,16 +268,18 @@ function Register(e) {
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
-                    var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
-                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                    $('#btnLogin').attr('onclick', '');
-                    $('#user').css('display', 'none');
-                    $('#frmMaintainance').trigger('reset');
-                    general.stopLoading();
+                    var template = $('#SignUpConfirm-template').html();
+                    var render = "";
+                    render += Mustache.render(template, {
+                        ID: response.Result.KeyId
+                    });
+                    $('#btnArea').html('');
+                    $('#form-body').fadeOut();
+                    $('#form-body').html(render);
+                    $('#form-body').fadeIn();
                 }
                 else {
-                    general.notify(response.Result + '!', 'error');
+                    general.notify(response.Result, 'error');
                 }
 
             },
