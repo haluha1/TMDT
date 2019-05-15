@@ -271,18 +271,18 @@ namespace PhukienDT.Controllers
 		{
 			try
 			{
-				if (Session[CommonConstrants.USER_SESSION] != null || UserLoginViewModel.Current.KeyId!=0)
+				if (Session[CommonConstrants.USER_SESSION] != null)
 				{
 					var spVm = _sanphamService.GetById(id);
 					var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
 					Sanpham sp = Mapper.Map<SanphamViewModel, Sanpham>(spVm);
 					user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
 					_sanphamService.Save();
-					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = Notification.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
 				}
 				else
 				{
-					return Json(new { Result = const_Error.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = Notification.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 				}
 				
 			}

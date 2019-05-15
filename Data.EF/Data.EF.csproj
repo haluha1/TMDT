@@ -55,9 +55,9 @@
     <Compile Include="EFRepository.cs" />
     <Compile Include="EFUnitOfWork.cs" />
     <Compile Include="Extensions\ModelBuilderExtensions.cs" />
-    <Compile Include="Migrations\201905130044478_nn.cs" />
-    <Compile Include="Migrations\201905130044478_nn.Designer.cs">
-      <DependentUpon>201905130044478_nn.cs</DependentUpon>
+    <Compile Include="Migrations\201905151725593_newConfig.cs" />
+    <Compile Include="Migrations\201905151725593_newConfig.Designer.cs">
+      <DependentUpon>201905151725593_newConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PhukienDTDbContext.cs" />
@@ -81,8 +81,8 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905130044478_nn.resx">
-      <DependentUpon>201905130044478_nn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905151725593_newConfig.resx">
+      <DependentUpon>201905151725593_newConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -126,8 +126,10 @@ namespace Data.EF
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
 			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
-			
-			
+			modelBuilder.Entity<Ncc>()
+			.HasMany<Sanpham>(s => s.Sanphams)
+			.WithOptional(g => g.NccNavigation);
+
 
 			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");
 
@@ -135,6 +137,8 @@ namespace Data.EF
 			.HasRequired<Loaisp>(s => s.LoaispNavigation)
 			.WithMany(g => g.Sanphams)
 			.HasForeignKey<int>(s => s.maloai);
+
+			
 
 			modelBuilder.Entity<Sanpham>()
 			.HasMany<Khachhang>(s => s.KhachHangYeuThichs)

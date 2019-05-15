@@ -26,7 +26,7 @@
 			new Loaisp{maloai=1,tenloai="Ốp lưng"},
 			new Loaisp{maloai=2,tenloai="Bao Airpod"},
 			new Loaisp{maloai=3,tenloai="Ring- Bóp"},
-			new Loaisp{maloai=3,tenloai="Khác"}
+			new Loaisp{maloai=4,tenloai="Khác"}
 			};
 			loaisps.ForEach(s => context.Loaisps.AddOrUpdate(s));
 			context.SaveChanges();
@@ -48,15 +48,15 @@
 			new TaiKhoan{matk=11,hoten="Trần Ngọc Ngà", email="ngocnga@gmail.com", diachi="478 Lý Thái Tổ", sdt="0123456701", sotk="2222222222222", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Webmaster},
 
 			new TaiKhoan{matk=12,hoten="Lê Thị Mai", email="maile@gmail.com", diachi="333 Hai Bà Trưng", sdt="0123456702", sotk="3333333333333", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=13,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=14,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=15,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=16,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=17,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava5.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=18,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=19,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=20,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
-			new TaiKhoan{matk=21,hoten="Nguyễn Văn An", email="maile@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=13,hoten="Nguyễn Văn An", email="maile1@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=14,hoten="Nguyễn Văn An", email="maile2@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=15,hoten="Nguyễn Văn An", email="maile3@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=16,hoten="Nguyễn Văn An", email="maile4@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=17,hoten="Nguyễn Văn An", email="maile5@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava5.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=18,hoten="Nguyễn Văn An", email="maile6@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava1.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=19,hoten="Nguyễn Văn An", email="maile7@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava2.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=20,hoten="Nguyễn Văn An", email="maile8@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava4.png", UserType=UserType.Customer},
+			new TaiKhoan{matk=21,hoten="Nguyễn Văn An", email="maile9@gmail.com", diachi="123 An Dương Vương", sdt="0123456700", sotk="1111111111111", matkhau="123", thoigiandk="1/1/2019", avatar="ava3.png", UserType=UserType.Customer}
 			};
 			taikhoans.ForEach(s => context.TaiKhoans.AddOrUpdate(s));
 			context.SaveChanges();
@@ -228,7 +228,8 @@
 				new Sanpham{masp="k17",tensp="Dây Đeo Hihi ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k17.png",khuyenmai=0},
 				new Sanpham{masp="k18",tensp="Dây Đeo Smile ",maloai=4,mancc=1,dongia=186000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k18.png",khuyenmai=0},
 				new Sanpham{masp="k19",tensp="Dây Đeo Supreme ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k19.png",khuyenmai=0},
-				new Sanpham{masp="k20",tensp="Dây Đeo Trứng Gà ",maloai=4,mancc=10,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k20.png",khuyenmai=0},
+				new Sanpham{masp="k20",tensp="Dây Đeo Trứng Gà ",maloai=4,mancc=10,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k20.png",khuyenmai=0}
+
 			};
 			sanphams.ForEach(s => context.Sanphams.AddOrUpdate(s));
 			context.SaveChanges();
@@ -289,7 +290,7 @@
 				new Cthd{mahd =8, masp = 4, soluong = 1, thanhtien = 60000 },
 				new Cthd{mahd =9, masp = 74, soluong = 1, thanhtien = 1400000 },
 				new Cthd{mahd =9, masp =2, soluong = 1, thanhtien = 40000 },
-				new Cthd{mahd =10, masp = 19, soluong = 1, thanhtien = 10000 },
+				new Cthd{mahd =10, masp = 19, soluong = 1, thanhtien = 10000 }
 			};
 			cthds.ForEach(s => context.Cthds.AddOrUpdate(s));
 			context.SaveChanges();

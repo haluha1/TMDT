@@ -273,6 +273,7 @@
     <Content Include="Scripts\app\home\index.js" />
     <Content Include="Scripts\app\nguoiban\donban.js" />
     <Content Include="Scripts\app\nguoiban\index.js" />
+    <Content Include="Scripts\app\sanpham\SPYT.js" />
     <Content Include="Scripts\app\sanpham\index.js" />
     <Content Include="Scripts\app\shared\autocomplete.js" />
     <Content Include="Scripts\app\shared\autocompletejs.js" />

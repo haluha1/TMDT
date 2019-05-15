@@ -105,6 +105,11 @@ namespace PhukienDT.Controllers
 			}
 		}
 
+		public ActionResult LogOut()
+		{
+			Session.Clear();
+			return RedirectToAction("Index", "Home");
+		}
 
 		[HttpPost]
 		public JsonResult Login(LoginViewModel LoginVm)

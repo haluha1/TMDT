@@ -212,9 +212,10 @@ namespace Data.EF
                 new Sanpham{masp="k15",tensp="Dây Đeo Mặt Cười  ",maloai=4,mancc=3,dongia=155000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k15.png",khuyenmai=0},
                 new Sanpham{masp="k16",tensp="Dây Đeo Hoạt Hình ",maloai=4,mancc=4,dongia=113000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k16.png",khuyenmai=0},
                 new Sanpham{masp="k17",tensp="Dây Đeo Hihi ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k17.png",khuyenmai=0},
-                new Sanpham{masp="k18",tensp="Dây Đeo Smile ",maloai=4,mancc=1,dongia=186000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k18.png",khuyenmai=0},
-                new Sanpham{masp="k19",tensp="Dây Đeo Supreme ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k19.png",khuyenmai=0},
-                new Sanpham{masp="k20",tensp="Dây Đeo Trứng Gà ",maloai=4,mancc=10,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k20.png",khuyenmai=0},
+				new Sanpham{masp="k18",tensp="Dây Đeo Smile ",maloai=4,mancc=1,dongia=186000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k18.png",khuyenmai=0},
+				new Sanpham{masp="k19",tensp="Dây Đeo Supreme ",maloai=4,mancc=2,dongia=123000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k19.png",khuyenmai=0},
+				new Sanpham{masp="k20",tensp="Dây Đeo Trứng Gà ",maloai=4,mancc=10,dongia=191000,soluong=100,mota="Đây là sp thứ 1",tenhinh="k20.png",khuyenmai=0}
+                
             };
             sanphams.ForEach(s => context.Sanphams.Add(s));
             context.SaveChanges();

@@ -13,7 +13,6 @@ window.onclick = function (event) {
 
 var mainController = function () {
     this.initialize = function () {
-        loadData();
         //Rating();
         registerEvents();
         resetFormMaintainance();
@@ -137,32 +136,6 @@ var mainController = function () {
     }
 }
 
-function loadData(isPageChanged) {
-    $.ajax({
-        url: '/Home/IsLogin',
-        type: 'POST',
-        success: function (response) {
-            console.log(response);
-            if (response.Status == "OK" && response.Result.KeyId != 0) {
-
-                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
-                if (response.Result.Avatar == null || response.Result.Avatar == '') {
-                    avatarSrc = "/img/login.png";
-                }
-                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                $('#btnLogin').attr('onclick', '');
-            }
-            else {
-                $('#btnExit').css('display', 'none');
-            }
-
-        },
-        error: function (status) {
-            console.log(status);
-        }
-    });
-}
 
 function likeProduct(that) {
     $.ajax({
@@ -176,7 +149,7 @@ function likeProduct(that) {
         success: function (response) {
             console.log(response);
             if (response.Status == "OK") {
-                general.notify(response.Result, 'Thêm thành công');
+                general.notify(response.Result, 'success');
             }
 
         },
@@ -246,13 +219,19 @@ function Login(e) {
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
-                    var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
-                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                    $('#btnLogin').attr('onclick', '');
-                    $('#user').css('display', 'none');
-                    $('#frmMaintainance').trigger('reset');
-                    general.stopLoading();
+                    if (response.Result.UserType == 0) {
+                        var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : "/img/" + response.Result.Avatar;
+                        general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                        $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc /img/search.png
+                        $('#btnExit').css('display', 'block');
+                        $('#btnLogin').attr('onclick', '');
+                        $('#user').css('display', 'none');
+                        $('#frmMaintainance').trigger('reset');
+                    }
+                    if (response.Result.UserType == 1) {
+                        window.location.href = "/Nguoiban";
+                    }
+                    
                 }
                 else {
                     general.notify(response.Result + '!', 'error');
@@ -262,7 +241,6 @@ function Login(e) {
             error: function (status) {
                 console.log(status);
                 general.notify('Email hoặc mật khẩu không đúng!', 'error');
-                general.stopLoading();
             }
         });
     }

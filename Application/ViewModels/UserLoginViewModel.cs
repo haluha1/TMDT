@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Application.ViewModels
 			Email = TaiKhoanVm.email;
 			UserName = TaiKhoanVm.hoten;
 			Avatar = TaiKhoanVm.avatar;
+			UserType = TaiKhoanVm.UserType;
 		}
 
 		private UserLoginViewModel() { }
@@ -25,11 +27,11 @@ namespace Application.ViewModels
 			get
 			{
 				UserLoginViewModel session = (UserLoginViewModel)HttpContext.Current.Session[CommonConstrants.USER_SESSION];
-				if (session == null)
-				{
-					session = new UserLoginViewModel();
-					HttpContext.Current.Session[CommonConstrants.USER_SESSION] = session;
-				}
+				//if (session == null)
+				//{
+				//	session = new UserLoginViewModel();
+				//	HttpContext.Current.Session[CommonConstrants.USER_SESSION] = session;
+				//}
 				return session;
 			}
 		}
@@ -38,5 +40,6 @@ namespace Application.ViewModels
 		public string Email { get; set; }
 		public string UserName { get; set; }
 		public string Avatar { get; set; }
+		public UserType UserType { get; set; }
 	}
 }

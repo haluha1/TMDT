@@ -154,25 +154,29 @@ function loadData(isPageChanged) {
                     render += '<div class="row row-space">'
                 }
                 var imgsrc = "";
-                switch (item.LoaispNavigation.KeyId) {
-                    case 2: {
-                        imgsrc = "/img/Bao/" + item.tenhinh;
-                        break;
-                    }
-                    case 3: {
-                        imgsrc = "/img/Ring/" + item.tenhinh;
-                        break;
-                    }
-                    case 4: {
-                        imgsrc = "/img/Khac/" + item.tenhinh;
-                        break;
-                    }
-                    default: {
-                        imgsrc = "/img/" + item.tenhinh;
-                        break;
+                if (item.KeyId <= 50) {
+                    imgsrc = "/img/" + item.tenhinh;
+                }
+                else {
+                    switch (item.LoaispNavigation.KeyId) {
+                        case 2: {
+                            imgsrc = "/img/Bao/" + item.tenhinh;
+                            break;
+                        }
+                        case 3: {
+                            imgsrc = "/img/Ring/" + item.tenhinh;
+                            break;
+                        }
+                        case 4: {
+                            imgsrc = "/img/Khac/" + item.tenhinh;
+                            break;
+                        }
+                        default: {
+                            imgsrc = "/img/" + item.tenhinh;
+                            break;
+                        }
                     }
                 }
-
                 render += Mustache.render(template, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,

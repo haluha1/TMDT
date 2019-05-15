@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class nn : DbMigration
+    public partial class newConfig : DbMigration
     {
         public override void Up()
         {
@@ -113,7 +113,7 @@ namespace Data.EF.Migrations
                         masp = c.String(),
                         tensp = c.String(),
                         maloai = c.Int(nullable: false),
-                        mancc = c.Int(nullable: false),
+                        mancc = c.Int(),
                         dongia = c.Double(nullable: false),
                         soluong = c.Int(nullable: false),
                         mota = c.String(),
@@ -250,10 +250,10 @@ namespace Data.EF.Migrations
             DropForeignKey("dbo.CtGioHang", "Giohang_FK", "dbo.GioHang");
             DropForeignKey("dbo.HoaDon", "makh", "dbo.KhachHang");
             DropForeignKey("dbo.CTHD", "masp", "dbo.SanPham");
-            DropForeignKey("dbo.SanPham", "NccNavigation_User_FK", "dbo.Ncc");
             DropForeignKey("dbo.WebMaster", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.Ncc", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.KhachHang", "User_FK", "dbo.TaiKhoan");
+            DropForeignKey("dbo.SanPham", "NccNavigation_User_FK", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "mancc", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "magiatin", "dbo.GiaTin");
             DropForeignKey("dbo.SanPham", "maloai", "dbo.LoaiSP");

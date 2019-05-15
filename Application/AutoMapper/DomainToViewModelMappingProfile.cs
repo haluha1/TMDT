@@ -50,12 +50,20 @@ namespace Application.AutoMapper
             CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
 			CreateMap<CtGiohang, CtGiohangViewModel>().ForMember(m=>m.GiohangNavigation, opt=>opt.Ignore());
 			
-			CreateMap<Khachhang, KhachhangViewModel>();
+			CreateMap<Khachhang, KhachhangViewModel>().ForMember(m=>m.Hoadons, opt=>opt.Ignore())
+													  .ForMember(m=>m.CtRatings, opt=>opt.Ignore());
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());
 			CreateMap<Mucduytri, MucduytriViewModel>();
-			CreateMap<Ncc, NccViewModel>();
-			CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore());
-            CreateMap<TaiKhoan, TaiKhoanViewModel>();
+			CreateMap<Ncc, NccViewModel>().ForMember(m=>m.Sanphams, opt=>opt.Ignore())
+										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore());
+
+			CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
+												  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())
+												  .ForMember(m => m.KhachHangYeuThichs, opt => opt.Ignore());
+
+
+
+			CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();
 
 			
@@ -72,7 +80,7 @@ namespace Application.AutoMapper
 					}
 						
 				}
-			}); ;
+			});
 		}
 	}
 }

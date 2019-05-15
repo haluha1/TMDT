@@ -9,7 +9,12 @@ namespace Data.Entities
 {
     public class Giohang
     {
-        public int KeyId { get; set; }
+		public Giohang()
+		{
+			CtGiohangs = new HashSet<CtGiohang>();
+		}
+
+		public int KeyId { get; set; }
         public int soluong { get; set; }
         public double thanhtien { get; set; }
 		public virtual ICollection<CtGiohang> CtGiohangs { get; set; }
