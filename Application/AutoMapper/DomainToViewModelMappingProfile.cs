@@ -49,13 +49,13 @@ namespace Application.AutoMapper
 			CreateMap<Ncc, NccViewModel>().ForMember(m=>m.Sanphams, opt=>opt.Ignore())
 										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore());
 
-			CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
-												  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())
-												  .ForMember(m => m.KhachHangYeuThichs, opt => opt.Ignore());
+            CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
+                                                  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())
+                                                  .ForMember(m => m.KhachHangYeuThichs, opt => opt.Ignore());
 
 
 
-			CreateMap<TaiKhoan, TaiKhoanViewModel>();
+            CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();
 
 			

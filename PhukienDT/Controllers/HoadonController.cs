@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace PhukienDT.Controllers
         {
             try
             {
+                var ncc = UserLoginViewModel.Current.KeyId;
                 var data = _hoadonService.GetAll();
                 if (!string.IsNullOrEmpty(keyword))
                 {

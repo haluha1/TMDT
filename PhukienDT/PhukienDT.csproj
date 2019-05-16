@@ -271,10 +271,12 @@
     <Content Include="img\search.png" />
     <Content Include="Models\template.html" />
     <Content Include="Scripts\app\home\index.js" />
+    <Content Include="Scripts\app\nguoiban\muatin.js" />
     <Content Include="Scripts\app\nguoiban\donban.js" />
     <Content Include="Scripts\app\nguoiban\index.js" />
     <Content Include="Scripts\app\sanpham\ctsp.js" />
     <Content Include="Scripts\app\sanpham\giohang.js" />
+    <Content Include="Scripts\app\nguoiban\thongtin.js" />
     <Content Include="Scripts\app\sanpham\SPYT.js" />
     <Content Include="Scripts\app\sanpham\index.js" />
     <Content Include="Scripts\app\shared\autocomplete.js" />
@@ -906,6 +908,7 @@
     <Content Include="Views\Sanpham\Sanphamyt.cshtml" />
     <Content Include="Views\Sanpham\_Buy.cshtml" />
     <Content Include="Views\Home\ttcn.cshtml" />
+    <Content Include="Views\Nguoiban\Thongtinnguoiban.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
