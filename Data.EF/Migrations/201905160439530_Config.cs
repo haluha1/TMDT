@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class newConfig : DbMigration
+    public partial class Config : DbMigration
     {
         public override void Up()
         {
@@ -113,19 +113,18 @@ namespace Data.EF.Migrations
                         masp = c.String(),
                         tensp = c.String(),
                         maloai = c.Int(nullable: false),
-                        mancc = c.Int(),
+                        mancc = c.Int(nullable: false),
                         dongia = c.Double(nullable: false),
                         soluong = c.Int(nullable: false),
                         mota = c.String(),
                         tenhinh = c.String(),
                         khuyenmai = c.Single(nullable: false),
-                        NccNavigation_User_FK = c.Int(),
                     })
                 .PrimaryKey(t => t.KeyId)
                 .ForeignKey("dbo.LoaiSP", t => t.maloai, cascadeDelete: true)
-                .ForeignKey("dbo.Ncc", t => t.NccNavigation_User_FK)
+                .ForeignKey("dbo.Ncc", t => t.mancc, cascadeDelete: true)
                 .Index(t => t.maloai)
-                .Index(t => t.NccNavigation_User_FK);
+                .Index(t => t.mancc);
             
             CreateTable(
                 "dbo.LoaiSP",
@@ -250,10 +249,10 @@ namespace Data.EF.Migrations
             DropForeignKey("dbo.CtGioHang", "Giohang_FK", "dbo.GioHang");
             DropForeignKey("dbo.HoaDon", "makh", "dbo.KhachHang");
             DropForeignKey("dbo.CTHD", "masp", "dbo.SanPham");
+            DropForeignKey("dbo.SanPham", "mancc", "dbo.Ncc");
             DropForeignKey("dbo.WebMaster", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.Ncc", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.KhachHang", "User_FK", "dbo.TaiKhoan");
-            DropForeignKey("dbo.SanPham", "NccNavigation_User_FK", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "mancc", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "magiatin", "dbo.GiaTin");
             DropForeignKey("dbo.SanPham", "maloai", "dbo.LoaiSP");
@@ -268,7 +267,7 @@ namespace Data.EF.Migrations
             DropIndex("dbo.HoaDonMuaTin", new[] { "magiatin" });
             DropIndex("dbo.HoaDonMuaTin", new[] { "mancc" });
             DropIndex("dbo.Ncc", new[] { "User_FK" });
-            DropIndex("dbo.SanPham", new[] { "NccNavigation_User_FK" });
+            DropIndex("dbo.SanPham", new[] { "mancc" });
             DropIndex("dbo.SanPham", new[] { "maloai" });
             DropIndex("dbo.CTHD", new[] { "masp" });
             DropIndex("dbo.CTHD", new[] { "mahd" });

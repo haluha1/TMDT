@@ -42,7 +42,7 @@ namespace Application.Implementation
 
 		public List<SanphamViewModel> GetAll()
 		{
-			var query = _repository.FindAll();
+			var query = _repository.FindAll(x=>x.NccNavigation);
 			var data = new List<SanphamViewModel>();
 			foreach (var item in query)
 			{
