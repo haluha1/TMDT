@@ -216,6 +216,9 @@ function Login(e) {
             url: '/Home/Login',
             type: 'POST',
             data: { LoginVm: data },
+            beforeSend: function () {
+                general.startLoad();
+            },
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
@@ -236,11 +239,13 @@ function Login(e) {
                 else {
                     general.notify(response.Result + '!', 'error');
                 }
+                general.stopLoad();
 
             },
             error: function (status) {
                 console.log(status);
                 general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                general.stopLoad();
             }
         });
     }
@@ -276,6 +281,9 @@ function Register(e) {
             url: '/Home/Register',
             type: 'POST',
             data: { TaikhoanVm: data },
+            beforeSend: function () {
+                general.startLoad();
+            },
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
@@ -292,12 +300,12 @@ function Register(e) {
                 else {
                     general.notify(response.Result, 'error');
                 }
-
+                general.startLoad();
             },
             error: function (status) {
                 console.log(status);
                 general.notify('Email hoặc mật khẩu không đúng!', 'error');
-                general.stopLoading();
+                general.stopLoad();
             }
         });
     }
