@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Application.ViewModels.SanphamViewModel>
+﻿
+@model IEnumerable<Application.ViewModels.SanphamViewModel>
 @{
     ViewBag.Title = @Html.DisplayFor(Model => Model.FirstOrDefault().LoaispNavigation.tenloai);
 }
@@ -49,7 +50,7 @@
         <div>Rating</div>
         <div>Số lượng còn</div>
         <div>
-            <button class="yeuthich btn-danger" data-id="{{ProductID}}">Thêm vào yêu thích</button>
+            <button class="yeuthich  btn-danger" data-id="{{ProductID}}">Thêm vào yêu thích</button>
             <button class="yeuthich mua btn-danger" data-id="{{ProductID}}">Mua ngay</button>
         </div>
     </div>

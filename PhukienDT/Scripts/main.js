@@ -10,42 +10,12 @@ window.onclick = function (event) {
 
 
 
-//$('#frmMaintainance').validate({
-//    errorClass: 'red',
-//    ignore: [],
-//    lang: 'vi',
-//    invalidHandler: function (event, validator) {
-//        var errors = validator.numberOfInvalids();
-//        if (errors) {
-//            var errorElement = validator.errorList[0].element;
-//            var errorElementTag = validator.errorList[0].element.labels[0].textContent;
-//            if (errorElement.type.includes("text")) {
-//                general.notify('Hãy nhập ' + errorElementTag, 'error');
-//            }
-//            if (errorElement.type.includes("select")) {
-//                general.notify('Hãy chọn ' + errorElementTag, 'error');
-//            }
-//        }
-//    },
-//    rules: {
-//        uname: {
-//            required: true
-//        },
-//        psw: {
-//            required: true
-//        }
-//    }
-//});
 
 var mainController = function () {
     this.initialize = function () {
-        loadData();
-        Rating();
-        //TestSave();
+        //Rating();
         registerEvents();
         resetFormMaintainance();
-        //$('#areaSignUp').fadeOut();
-        //$('#areaSignIn').fadeIn();
     }
     var gIsSignInOn = true;
     function registerEvents() {
@@ -73,7 +43,22 @@ var mainController = function () {
                 },
                 txtPassword: {
                     required: true
+                },
+                uname: {
+                    required: true
+                },
+                pass: {
+                    required: true
+                },
+                sdt: {
+                    required: true,
+                    number: true
+                },
+                stk: {
+                    required: true,
+                    number: true
                 }
+
             },
             messages: {
                 txtEmail: {
@@ -81,15 +66,39 @@ var mainController = function () {
                 },
                 txtPassword: {
                     required: "Hãy nhập mật khẩu!"
+                },
+                uname: {
+                    required: "Hãy nhập họ tên!"
+                },
+                pass: {
+                    required: "Hãy nhập mật khẩu!"
+                },
+                sdt: {
+                    required: "Hãy nhập sđt!",
+                    number: "Sđt phải là các ký tự số!"
+                },
+                stk: {
+                    required: "Hãy nhập số tài khoản!",
+                    number: "Số tài khoản phải là số!"
                 }
+
             }
         });
-        
+
 
         $('#btnSearch').on('click', function () {
-            sendEmail();
+            loadData(true);
         });
 
+        $('body').on('click', '#btnActive', function (e) {
+            confirmRegister(e);
+        });
+        $('body').on('click', '.yeuthich', function (e) {
+            e.preventDefault();
+            $(this).prop('disabled', true);
+            var that = $(this).data('id');
+            likeProduct(that);
+        });
         $('#btnRegister').on('click', function (e) {
             if (gIsSignInOn == true) {
                 var template = $('#SingUp-template').html();
@@ -115,7 +124,7 @@ var mainController = function () {
                 $('#form-body').fadeIn();
                 resetFormMaintainance();
                 gIsSignInOn = true;
-                
+
             }
         });
 
@@ -127,23 +136,67 @@ var mainController = function () {
     }
 }
 
-function loadData(isPageChanged) {
+
+function likeProduct(that) {
     $.ajax({
-        url: '/Home/IsLogin',
-        type: 'POST',
+        type: "POST",
+        url: "/Sanpham/Like",
+        data: { id: that },
+        dataType: "json",
+        beforeSend: function () {
+            general.startLoading();
+        },
         success: function (response) {
             console.log(response);
             if (response.Status == "OK") {
-                var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : response.Result.Avatar;
-                general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                $('#btnLogin').attr('onclick', '');
+                general.notify(response.Result, 'success');
             }
+
         },
         error: function (status) {
-            console.log(status);
+            general.notify('Có lỗi xảy ra', 'error');
+            general.stopLoading();
         }
     });
+}
+
+function confirmRegister(e) {
+    if ($('#frmMaintainance').valid()) {
+        e.preventDefault();
+        var code = $('#txtCode').val();
+        var that = $('#btnActive').data('id');
+        $.ajax({
+            url: '/Home/ConfirmCode',
+            type: 'POST',
+            data: { id: that, Code: code },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK" && response.Result.KeyId != 0) {
+
+                    var avatarSrc = "/img/login.png";
+                    if (response.Result.Avatar == null || response.Result.Avatar == '') {
+                        avatarSrc = "/img/login.png";
+                    }
+                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
+                    $('#btnLogin').attr('onclick', '');
+                    $('#user').css('display', 'none');
+                    $('#frmMaintainance').trigger('reset');
+
+                    general.stopLoading();
+                }
+                else {
+                    general.notify(response.Result + '!', 'error');
+                }
+
+            },
+            error: function (status) {
+                console.log(status);
+                general.notify('Email hoặc mật khẩu không đúng!', 'error');
+                general.stopLoading();
+            }
+        });
+    }
 }
 
 function Login(e) {
@@ -166,13 +219,19 @@ function Login(e) {
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
-                    var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
-                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                    $('#btnLogin').attr('onclick', '');
-                    $('#user').css('display', 'none');
-                    $('#frmMaintainance').trigger('reset');
-                    general.stopLoading();
+                    if (response.Result.UserType == 0) {
+                        var avatarSrc = response.Result.Avatar == '' ? "/img/login.png" : "/img/" + response.Result.Avatar;
+                        general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
+                        $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc /img/search.png
+                        $('#btnExit').css('display', 'block');
+                        $('#btnLogin').attr('onclick', '');
+                        $('#user').css('display', 'none');
+                        $('#frmMaintainance').trigger('reset');
+                    }
+                    if (response.Result.UserType == 1) {
+                        window.location.href = "/Nguoiban";
+                    }
+                    
                 }
                 else {
                     general.notify(response.Result + '!', 'error');
@@ -182,7 +241,6 @@ function Login(e) {
             error: function (status) {
                 console.log(status);
                 general.notify('Email hoặc mật khẩu không đúng!', 'error');
-                general.stopLoading();
             }
         });
     }
@@ -221,16 +279,18 @@ function Register(e) {
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
-                    var avatarSrc = response.Result.Avatar == '' ? "../img/login.png" : response.Result.Avatar;
-                    general.notify('Xin chào ' + response.Result.UserName + '!', 'success');
-                    $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc ../img/search.png
-                    $('#btnLogin').attr('onclick', '');
-                    $('#user').css('display', 'none');
-                    $('#frmMaintainance').trigger('reset');
-                    general.stopLoading();
+                    var template = $('#SignUpConfirm-template').html();
+                    var render = "";
+                    render += Mustache.render(template, {
+                        ID: response.Result.KeyId
+                    });
+                    $('#btnArea').html('');
+                    $('#form-body').fadeOut();
+                    $('#form-body').html(render);
+                    $('#form-body').fadeIn();
                 }
                 else {
-                    general.notify(response.Result + '!', 'error');
+                    general.notify(response.Result, 'error');
                 }
 
             },
@@ -240,6 +300,9 @@ function Register(e) {
                 general.stopLoading();
             }
         });
+    }
+    else {
+        $('#txtname').focus();
     }
 }
 
@@ -254,7 +317,7 @@ function sendEmail() {
         },
         success: function (response) {
             console.log(response);
-            
+
         },
         error: function (status) {
             console.log(status);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.ViewModels;
+using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,14 @@ namespace PhukienDT.Controllers
         // GET: Nguoiban
         public ActionResult Index()
         {
-            return View();
+			if (UserLoginViewModel.Current != null && UserLoginViewModel.Current.UserType == UserType.Merchant)
+			{
+				return View();
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home", new { area = "" });
+			}
         }
         public ActionResult Sanpham()
         {

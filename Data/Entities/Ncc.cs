@@ -11,12 +11,19 @@ namespace Data.Entities
 {
     public class Ncc
     {
+		public Ncc()
+		{
+			Hoadonmuatins = new HashSet<Hoadonmuatin>();
+			Sanphams = new HashSet<Sanpham>();
+		}
+
 		public int User_FK { get; set; } // PK
 		public string tenncc { get; set; }
         public string gioithieu { get; set; }
         public int sltinton { get; set; }
 
-		
+
+		public virtual ICollection<Sanpham> Sanphams { get; set; }
 		public virtual ICollection<Hoadonmuatin> Hoadonmuatins { get; set; }
 		public virtual TaiKhoan TaiKhoanBy { get; set; }
     }

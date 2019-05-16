@@ -11,6 +11,9 @@ namespace Data.Entities
     {
 		public Sanpham()
 		{
+			Cthds = new HashSet<Cthd>();
+			CtGiohangs = new HashSet<CtGiohang>();
+			KhachHangYeuThichs = new HashSet<Khachhang>();
 		}
 
 		public Sanpham(int keyId, string masp, string tensp, int maloai, int mancc, double dongia, int soluong, string mota, string tenhinh, float khuyenmai)
@@ -30,7 +33,7 @@ namespace Data.Entities
 		public string masp { get; set; }
         public string tensp { get; set; }
         public int maloai { get; set; }
-        public int mancc { get; set; }
+        public int? mancc { get; set; }
         public double dongia { get; set; }
         public int soluong { get; set; }
         public string mota { get; set; }

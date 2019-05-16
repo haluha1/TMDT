@@ -1,4 +1,4 @@
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
 using Data.Entities;
@@ -46,11 +46,62 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
+        public ActionResult Rating()
+        {
+            return View();
+        }
+
+        public ActionResult Sanphamyt()
+        {
+            return View();
+        }
+        public ActionResult Giohang()
+        {
+            return View();
+        }
         public ActionResult Theosanpham()
         {
             return View();
         }
         public JsonResult GetCTSP(int id)
+        {
+            try
+            {
+                var data = _sanphamService.GetById(id);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetGioHang()
+        {
+            try
+            {
+				if (UserLoginViewModel.Current.KeyId == 0)
+				{
+					return Json(new { Result = "Vui lòng đăng nhập!", Status="FAIL" }, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+
+					var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
+					GHViewModel gh = new GHViewModel(user);
+					//var gh = Mapper.Map<GHViewModel, GHViewModel>(ghh);
+					return Json(new { Result = gh, Status="OK" }, JsonRequestBehavior.AllowGet);
+				}
+
+                
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetSPYT(int id)
         {
             try
             {
@@ -227,11 +278,11 @@ namespace PhukienDT.Controllers
 					Sanpham sp = Mapper.Map<SanphamViewModel, Sanpham>(spVm);
 					user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
 					_sanphamService.Save();
-					return Json(new { Result = CommonConstrants.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = Notification.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
 				}
 				else
 				{
-					return Json(new { Result = const_Error.NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+					return Json(new { Result = Notification.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 				}
 				
 			}

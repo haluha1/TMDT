@@ -9,6 +9,13 @@ namespace Data.Entities
 {
     public class Khachhang
     {
+		public Khachhang()
+		{
+			SanPhamYeuThichs = new HashSet<Sanpham>();
+			Hoadons = new HashSet<Hoadon>();
+			CtRatings = new HashSet<CtRating>();
+		}
+
 		public int User_FK { get; set; } // PK
 		public string makh { get; set; }
 		

@@ -74,25 +74,41 @@ namespace PhukienDT.Controllers
 				else
 				{
 					var s = UtilityFunction.RandomString(6, false);
-					string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
-					MailContent = MailContent.Replace("{{Code}}", s);
-
-					new MailHelper().SendMail(TaikhoanVm.email, "Register Code", MailContent);
 					_userService.Register(TaikhoanVm,s);
+					if (TaikhoanVm.KeyId == 0)
+					{
+						if (TaikhoanVm.email == "") return Json(new { Result = const_Error.EXISTED_EMAIL, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+						if (TaikhoanVm.sdt == "") return Json(new { Result = const_Error.EXISTED_SDT, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+					}
+					else
+					{
+						
+						string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
+						MailContent = MailContent.Replace("{{Code}}", s);
+
+						new MailHelper().SendMail(TaikhoanVm.email, "Register Code", MailContent);
+						if (_userService.Save()) return Json(new { Result = TaikhoanVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
+					}
 					
 
 
 				}
-				if (_userService.Save()) return Json(new { Result = TaikhoanVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
+				
 
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(Response, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = Response, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 			catch (Exception ex)
 			{
 				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
+		}
+
+		public ActionResult LogOut()
+		{
+			Session.Clear();
+			return RedirectToAction("Index", "Home");
 		}
 
 		[HttpPost]
@@ -150,15 +166,22 @@ namespace PhukienDT.Controllers
 			}
 		}
 		[HttpPost]
-		public JsonResult ConfirmEmail(string toEmailAddress, string subject, string content)
+		public JsonResult ConfirmCode(int id, string Code)
 		{
 			try
 			{
-				string MailContent = System.IO.File.ReadAllText(Server.MapPath("/Models/template.html"));
-				MailContent = MailContent.Replace("{{Code}}", "Active");
-
-				new MailHelper().SendMail(toEmailAddress, "Register Code", MailContent);
-				return Json("OK", JsonRequestBehavior.AllowGet);
+				var userVm = _userService.ConfirmEmail(id, Code);
+				if (userVm.KeyId == null || userVm.KeyId == 0)
+				{
+					return Json(new { Result = "Mã kích hoạt sai!", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					var userSession = new UserLoginViewModel(userVm);
+					Session.Add(CommonConstrants.USER_SESSION, userSession);
+					return Json(new { Result = userSession, Status = "OK" }, JsonRequestBehavior.AllowGet);
+				}
+				
 			}
 			catch (Exception ex)
 			{

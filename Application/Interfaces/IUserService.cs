@@ -15,6 +15,7 @@ namespace Application.Interfaces
 		TaiKhoan GetUser(int id);
 		TaiKhoanViewModel GetById(int id);
 		TaiKhoanViewModel Register(TaiKhoanViewModel TaiKhoanVm,string s);
+		TaiKhoanViewModel ConfirmEmail(int id, string s);
 		TaiKhoanViewModel GetByEmail(string email);
 
 		bool Save();

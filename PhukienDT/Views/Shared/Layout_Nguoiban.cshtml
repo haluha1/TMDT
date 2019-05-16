@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Application.ViewModels;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -69,44 +70,44 @@
             </ul>
         </div>
         @*<div style="margin-top:25px" class="col-lg-1">
-            <div id="imgmenu"><img height="30px" src="/img/menu.png"></div>
-            <div id="divmenu" style="width: 300px; height:240px; margin-left: -100px; margin-top:30px; background-color:#D7D7D7 ">
-                <a href="/Nguoiban/Sanpham">
-                    <div class="row chinh">
-                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/sp.png" />
-                        <div id="chinh2" class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
-                    </div>
-                </a>
-                <a href="/Nguoiban/Donban">
-                    <div class="row chinh">
-                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/h.png" />
-                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
-                    </div>
-                </a>
-                <a href="/Nguoiban/Doanhthu">
-                    <div class="row chinh">
-                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/t.png" />
-                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
-                    </div>
-                </a>
-                <a href="/Nguoiban/Muatin">
-                    <div class="row chinh">
-                        <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/b.jpg" />
-                        <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
-                    </div>
-                </a>
-            </div>
-        </div>*@
+                <div id="imgmenu"><img height="30px" src="/img/menu.png"></div>
+                <div id="divmenu" style="width: 300px; height:240px; margin-left: -100px; margin-top:30px; background-color:#D7D7D7 ">
+                    <a href="/Nguoiban/Sanpham">
+                        <div class="row chinh">
+                            <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/sp.png" />
+                            <div id="chinh2" class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Sản phẩm</div>
+                        </div>
+                    </a>
+                    <a href="/Nguoiban/Donban">
+                        <div class="row chinh">
+                            <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/h.png" />
+                            <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Đơn bán</div>
+                        </div>
+                    </a>
+                    <a href="/Nguoiban/Doanhthu">
+                        <div class="row chinh">
+                            <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/t.png" />
+                            <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Doanh thu</div>
+                        </div>
+                    </a>
+                    <a href="/Nguoiban/Muatin">
+                        <div class="row chinh">
+                            <img class="col-lg-6" style="border-radius:50%; width: 70px;" src="/img/b.jpg" />
+                            <div class="col-lg-6" style="font-weight:bold; font-size: 15px; margin-top: 10px">Mua tin</div>
+                        </div>
+                    </a>
+                </div>
+            </div>*@
         <div style="margin-top:17px" class="col-lg-1">
             <img style="border-radius: 50%; height: 40px; width:40px" src="/img/logo3.png">
         </div>
         <div style="margin-top:25px" class="col-lg-2" style="color:red; font-weight:bold">
-            Tên merchant
+            @UserLoginViewModel.Current.UserName
         </div>
     </div>
 
 
-    
+
 
 
     @*<div style="height:85px; background-color:black; color: white;width: 1372px;">
@@ -216,6 +217,3 @@
 </body>
 </html>
 
-@{
-    ViewBag.Title = "Layout_Nguoiban";
-}

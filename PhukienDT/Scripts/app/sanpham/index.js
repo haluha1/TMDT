@@ -1,80 +1,72 @@
 ﻿var sanphamController = function () {
     this.initialize = function () {
+        general.configs.pageSize = 12;
 		loadData();
-		loadDetail();
-        //TestSave();
         registerEvents();
     }
 
     function registerEvents() {
-        //$('.yearpicker').datepicker({
-        //    format: "yyyy",
-        //    //todayBtn: "linked",
-        //    clearBtn: true,
-        //    language: "vi",
-        //    todayHighlight: true,
-        //    startView: 2,
-        //    minViewMode: 2
-        //});
-        
-        //loadReligion();
-        general.configs.pageSize = 12;
-        $('#frmMaintainance').validate({
-            errorClass: 'red',
-            ignore: [],
-            lang: 'vi',
-            invalidHandler: function (event, validator) {
-                var errors = validator.numberOfInvalids();
-                if (errors) {
-                    var errorElement = validator.errorList[0].element;
-                    var errorElementTag = validator.errorList[0].element.labels[0].textContent;
-                    if (errorElement.type.includes("text")) {
-                        general.notify('Hãy nhập ' + errorElementTag, 'error');
-                    }
-                    if (errorElement.type.includes("select")) {
-                        general.notify('Hãy chọn ' + errorElementTag, 'error');
-                    }
-                }
-            },
-            rules: {
-                
-                txtCertificate: {
-                    required: true,
-                }
-            }
-        });
-
         $('#ddlShowPage').on('change', function () {
             general.configs.pageSize = $(this).val();
             general.configs.pageIndex = 1;
             loadData(true);
         });
-        
+        $('#btnMua').on('click', function () {
+            var kt = false;
+            if ($('#txtName').val() == '') {
+                general.notify("Vui lòng nhập tên người nhận!")
+                kt = true;
 
-        $('body').on('click', '.yeuthich', function (e) {
-            e.preventDefault();
-            $(this).prop('disabled', true);
-            var that = $(this).data('id');
-            likeProduct(that);
+            }
+            if ($('#txtAddress').val() == '') {
+                general.notify("Vui lòng nhập địa chỉ người nhận!")
+                kt = true;
+
+            }
+            if ($('#txtPhone').val() == '') {
+                general.notify("Vui lòng nhập số điện thoại người nhận!")
+                kt = true;
+
+            }
+            if (!kt) {
+                general.notify("Cảm ơn bạn đã đặt hàng!", "success");
+                document.getElementById('buy').style.display = 'none';
+            }
         });
+        
+        $('body').on('change', '.soluongSp', function (e) {
+            console.log($(this));
+            var dongia = $(this).closest('tr').find('td:eq(2)').text();
+            var soluong = $(this).closest('tr').find('td:eq(3) input').val()
+            $(this).closest('tr').find('td:eq(4)').text(dongia * soluong);
+            loadTotal();
+        });
+
+        //$('body').on('click', '.yeuthich', function (e) {
+        //    e.preventDefault();
+        //    $(this).prop('disabled', true);
+        //    var that = $(this).data('id');
+        //    likeProduct(that);
+        //});
 
 		$('body').on('click', '.mua', function (e) {
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
+        });		
+
+		$('body').on('click', '.themgiohang', function (e) {
+			window.location.href = "/Sanpham/Giohang/" +  window.location.href.split('/').reverse()[0];;
 		});
+		
+        
         
 
     }
-    //function UrlExists(url) {
-    //    var http = new XMLHttpRequest();
-    //    http.open('HEAD', url, false);
-    //    http.send();
-    //    return http.status != 404;
-    //}
-    function likeProduct(that) {
+
+    function DeleteCart(that) {
 
         $.ajax({
             type: "POST",
-            url: "/Sanpham/Like",
+            url: "/Sanpham/DeleteCart",
             data: { id: that },
             dataType: "json",
             beforeSend: function () {
@@ -82,10 +74,8 @@
             },
             success: function (response) {
                 console.log(response);
-                if (response.Status == "OK") {
-                    general.notify(response.Result, 'success');
-                }
-               
+                loadGioHang(true);
+
 
             },
             error: function (status) {
@@ -94,6 +84,20 @@
             }
         });
     }
+    //function UrlExists(url) {
+    //    var http = new XMLHttpRequest();
+    //    http.open('HEAD', url, false);
+    //    http.send();
+    //    return http.status != 404;
+    //}
+    //function loadTotal() {
+    //    var total = 0;
+    //    $.each($('.subTotal'), function (i) {
+    //        total = total + parseInt($(this).text());
+    //    });
+    //    $('#tongTien').text(total);
+    //}
+    
 
 
 
@@ -105,11 +109,7 @@
             $(this).closest('tr').find('td:first span').html(keyT + 1)
         });
     }
-
-    function resetFormMaintainance() {
-        $('#frmMaintainance').trigger('reset');
-
-    }
+    
 }
 
 function loadData(isPageChanged) {
@@ -237,61 +237,4 @@ function wrapPaging(recordCount, callBack, changePageSize) {
                 setTimeout(callBack(), 200);
             }
         });
-}
-function loadDetail() {
-	var that = window.location.href.split('/').reverse()[0];
-	var template = $('#table-template').html();
-	var render = "";
-	$.ajax({
-		type: 'GET',
-		url: '/Sanpham/GetCTSP',
-		dataType: 'json',
-		beforeSend: function () {
-			general.startLoading();
-		},
-
-		data: { id: that },
-		success: function (response) {
-			console.log(response);
-			var template = $('#table-template').html();
-			var render = "";
-			var imgsrc = "";
-			switch (response.Result.LoaispNavigation.KeyId) {
-				case 2: {
-					imgsrc = "/img/Bao/" + response.Result.tenhinh;
-					break;
-				}
-				case 3: {
-					imgsrc = "/img/Ring/" + response.Result.tenhinh;
-					break;
-				}
-				case 4: {
-					imgsrc = "/img/Khac/" + response.Result.tenhinh;
-					break;
-				}
-				default: {
-					imgsrc = "/img/" + response.Result.tenhinh;
-					break;
-				}
-			}
-
-
-			render += Mustache.render(template, {
-				IMG: imgsrc,
-				Tensp: response.Result.tensp,
-				Dongia: response.Result.dongia,
-				Soluong: response.Result.soluong
-			});
-			$('#lblTotalRecords').text(response.PageCount);
-			$('#Product-wrapper').html(render);
-			wrapPaging(response.PageCount, function () {
-				//loadDetail();
-			},);
-		},
-
-		error: function (status) {
-			general.notify('Có lỗi xảy ra', 'error');
-			general.stopLoading();
-		}
-	});
 }

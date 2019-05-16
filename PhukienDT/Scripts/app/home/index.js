@@ -66,6 +66,9 @@ homeController = function () {
         //});
         
         //loadReligion();
+		$('body').on('click', '.buy', function (e) {
+			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
+		});
         
         $('#frmMaintainance').validate({
             errorClass: 'red',
@@ -112,30 +115,7 @@ homeController = function () {
     //    http.send();
     //    return http.status != 404;
     //}
-    function likeProduct(that) {
-
-        $.ajax({
-            type: "POST",
-            url: "/Sanpham/Like",
-            data: { id: that },
-            dataType: "json",
-            beforeSend: function () {
-                general.startLoading();
-            },
-            success: function (response) {
-                console.log(response);
-                if (response.Status == "OK") {
-                    general.notify(response.Result, 'success');
-                }
-
-
-            },
-            error: function (status) {
-                general.notify('Có lỗi xảy ra', 'error');
-                general.stopLoading();
-            }
-        });
-    }
+    
 
 
 
@@ -175,25 +155,29 @@ function loadData(isPageChanged) {
                     render += '<div class="row row-space">'
                 }
                 var imgsrc = "";
-                switch (item.LoaispNavigation.KeyId) {
-                    case 2: {
-                        imgsrc = "/img/Bao/" + item.tenhinh;
-                        break;
-                    }
-                    case 3: {
-                        imgsrc = "/img/Ring/" + item.tenhinh;
-                        break;
-                    }
-                    case 4: {
-                        imgsrc = "/img/Khac/" + item.tenhinh;
-                        break;
-                    }
-                    default: {
-                        imgsrc = "/img/" + item.tenhinh;
-                        break;
+                if (item.KeyId <= 50) {
+                    imgsrc = "/img/" + item.tenhinh;
+                }
+                else {
+                    switch (item.LoaispNavigation.KeyId) {
+                        case 2: {
+                            imgsrc = "/img/Bao/" + item.tenhinh;
+                            break;
+                        }
+                        case 3: {
+                            imgsrc = "/img/Ring/" + item.tenhinh;
+                            break;
+                        }
+                        case 4: {
+                            imgsrc = "/img/Khac/" + item.tenhinh;
+                            break;
+                        }
+                        default: {
+                            imgsrc = "/img/" + item.tenhinh;
+                            break;
+                        }
                     }
                 }
-
                 render += Mustache.render(template, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
