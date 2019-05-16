@@ -42,7 +42,7 @@ namespace Application.Implementation
 
 		public List<SanphamViewModel> GetAll()
 		{
-			var query = _repository.FindAll();
+			var query = _repository.FindAll(x=>x.NccNavigation);
 			var data = new List<SanphamViewModel>();
 			foreach (var item in query)
 			{
@@ -76,7 +76,15 @@ namespace Application.Implementation
 			return Mapper.Map<Sanpham, SanphamViewModel>(data);
 		}
 
-		public SanphamViewModel GetBysId(string keyword)
+        public NccViewModel GetThongtinNguoiban()
+        {
+            //var data = _repository.FindById(id, p => p.UserBy.WardFKNavigation, p => p.LastupdatedBy, p => p.UserBy, p => p.DepartmentFkNavigation, p => p.PositionFkNavigation);
+            //var data = _repository.FindById(id);
+            //return Mapper.Map<Ncc, NccViewModel>(data);
+            throw new NotImplementedException();
+        }
+
+        public SanphamViewModel GetBysId(string keyword)
 		{
 			throw new NotImplementedException();
 		}

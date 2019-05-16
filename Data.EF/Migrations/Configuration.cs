@@ -64,7 +64,16 @@
 			//Nhà cung cấp
 			var nccs = new List<Ncc>
 			{
-			new Ncc{tenncc="ABC", gioithieu="shop bán ốp", sltinton=3, User_FK=1}
+			new Ncc{tenncc="ABC", gioithieu="shop bán ốp", sltinton=3, User_FK=1},
+			new Ncc{tenncc="Hello Kitty", gioithieu="Shop bán phụ kiện điện thoại", User_FK=2},
+			new Ncc{tenncc="Husky", gioithieu="Shop bán phụ kiện điện thoại", User_FK=3},
+			new Ncc{tenncc="Dogie", gioithieu="Shop bán phụ kiện điện thoại", User_FK=4},
+			new Ncc{tenncc="Mimi", gioithieu="Shop bán phụ kiện điện thoại", User_FK=5},
+			new Ncc{tenncc="BeBe", gioithieu="Shop bán phụ kiện điện thoại", User_FK=6},
+			new Ncc{tenncc="Hihihi", gioithieu="Shop bán phụ kiện điện thoại", User_FK=7},
+			new Ncc{tenncc="Olala", gioithieu="Shop bán phụ kiện điện thoại", User_FK=8},
+			new Ncc{tenncc="Babies", gioithieu="Shop bán phụ kiện điện thoại", User_FK=9},
+			new Ncc{tenncc="Chago", gioithieu="Shop bán phụ kiện điện thoại", User_FK=10}
 			};
 			nccs.ForEach(s => context.Nccs.AddOrUpdate(s));
 			context.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using Infrastructure.SharedKernel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace Data.Entities
 		public int User_FK { get; set; } // PK
 		public string tenncc { get; set; }
         public string gioithieu { get; set; }
-        public int sltinton { get; set; }
+		[DefaultValue(0)]
+		public int sltinton { get; set; }
 
 
 		public virtual ICollection<Sanpham> Sanphams { get; set; }

@@ -120,8 +120,9 @@ namespace PhukienDT.Controllers
         {
             try
             {
+                var ncc = UserLoginViewModel.Current.KeyId;
 
-                var data = _sanphamService.GetAll();
+                var data = _sanphamService.GetAll().Where(x=>x.NccNavigation !=null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -146,7 +147,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _sanphamService.GetAll().Where(x=>x.soluong == 0);
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _sanphamService.GetAll().Where(x=>x.soluong == 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -172,7 +174,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _sanphamService.GetAll().Where(x => x.soluong > 0);
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _sanphamService.GetAll().Where(x => x.soluong > 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();

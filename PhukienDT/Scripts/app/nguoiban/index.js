@@ -174,7 +174,7 @@ function loadData(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.tenloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 
@@ -242,7 +242,7 @@ function loadDataCon(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.maloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -307,7 +307,7 @@ function loadDataHet(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.maloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -449,3 +449,4 @@ function wrapPaging(recordCount, callBack, changePageSize) {
             }
         });
 }
+

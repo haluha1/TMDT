@@ -99,10 +99,16 @@
                 </div>
             </div>*@
         <div style="margin-top:17px" class="col-lg-1">
-            <img style="border-radius: 50%; height: 40px; width:40px" src="/img/logo3.png">
+            <a href="/Nguoiban/Thongtinnguoiban">
+                <img style="border-radius: 50%; height: 40px; width:40px" src="/img/logo3.png">
+            </a>
         </div>
+        @*<div style="margin-top:17px" class="col-lg-1">
+            <img style="border-radius: 50%; height: 40px; width:40px" src="/img/logo3.png">
+        </div>*@
         <div style="margin-top:25px" class="col-lg-2" style="color:red; font-weight:bold">
             @UserLoginViewModel.Current.UserName
+            <a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
         </div>
     </div>
 
