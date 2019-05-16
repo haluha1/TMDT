@@ -63,7 +63,7 @@ namespace Application.Implementation
 				if (TaiKhoanVm.UserType == Data.Enum.UserType.Customer)
 				{
 					taiKhoan.KhachhangNavigation = new Khachhang();
-					taiKhoan.KhachhangNavigation.GiohangNavigation = new Giohang();
+					
 				}
 				if (TaiKhoanVm.UserType == Data.Enum.UserType.Merchant)
 				{

@@ -48,67 +48,68 @@
                         <img style="height:27px;margin-top:-75px; margin-left: 230px" src="/img/search.png" />
                     </div>
                 </div>
-                <div class="col-sm-5" style="float:left;margin-top:20px">
-                    <a class="col-sm-3 nav-a-right" href="/SanPham/Sanphamyt/"><img class="nav-img-right" src="/img/heart.png" /></a>
-                    <a class="col-sm-3 nav-a-right" href="/SanPham/Giohang/"><img class="nav-img-right" src="/img/bag.png" /></a>
-                    @if (UserLoginViewModel.Current == null)
-                    {
-                        <a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
-                    }
-                    else
-                    {
-                        <a class="col-sm-3 nav-a-right" id="btnLogin"><img id="avatar" class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
-                        <a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
-                        @*@Html.ActionLink("Log Out", "LogOut", "Home");*@
-                    }
+				<div class="col-sm-5" style="float:left;margin-top:20px">
+					<a class="col-sm-3 nav-a-right" href="/SanPham/Sanphamyt/"><img class="nav-img-right" src="/img/heart.png" /></a>
+					<a class="col-sm-3 nav-a-right" href="/SanPham/Giohang/"><img class="nav-img-right" src="/img/bag.png" /></a>
+					@if (UserLoginViewModel.Current == null)
+	{
+				<a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
+				<a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut" style="display: none;"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
+}
+else
+{
+				<a class="col-sm-3 nav-a-right" id="btnLogin"><img id="avatar" class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
+				<a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
+				@*@Html.ActionLink("Log Out", "LogOut", "Home");*@
+}
 
-                    <div id="user" class="modal">
+					<div id="user" class="modal">
 
-                        <form class="modal-content animate" id="frmMaintainance" action="#" method="post">
-                            <div class="imgcontainer">
-                                <span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
-                                <img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
-                            </div>
+						<form class="modal-content animate" id="frmMaintainance" action="#" method="post">
+							<div class="imgcontainer">
+								<span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
+								<img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
+							</div>
 
-                            <div class="container">
-                                <div id="form-body">
-                                    <div style="margin-left: 225px">
-                                        <label for="txtEmail"><b>Tên Đăng Nhập</b></label>
-                                        <div><input type="email" placeholder="Nhập Email" id="txtEmail" name="txtEmail"></div>
-                                    </div>
+							<div class="container">
+								<div id="form-body">
+									<div style="margin-left: 225px">
+										<label for="txtEmail"><b>Tên Đăng Nhập</b></label>
+										<div><input type="email" placeholder="Nhập Email" id="txtEmail" name="txtEmail"></div>
+									</div>
 
-                                    <div style="margin-left: 225px">
-                                        <label for="txtPassword"><b>Mật Khẩu</b></label>
-                                        <div><input type="password" placeholder="Nhập Mật Khẩu" id="txtPassword" name="txtPassword"></div>
-                                    </div>
+									<div style="margin-left: 225px">
+										<label for="txtPassword"><b>Mật Khẩu</b></label>
+										<div><input type="password" placeholder="Nhập Mật Khẩu" id="txtPassword" name="txtPassword"></div>
+									</div>
 
-                                    <label style="margin-left: 225px">
-                                        <input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Nhớ Mật Khẩu
-                                    </label>
+									<label style="margin-left: 225px">
+										<input type="checkbox" checked="checked" id="chkRememberMe" name="remember"> Nhớ Mật Khẩu
+									</label>
 
-                                    <div>
-                                        <span class="psw"> <a href="#">Quên Tài Khoản ?</a></span>
-                                    </div>
-                                </div>
-
-
-
+									<div>
+										<span class="psw"> <a href="#">Quên Tài Khoản ?</a></span>
+									</div>
+								</div>
 
 
-                                <div id="btnArea">
-                                    <div style="margin-left: 400px" ><button style="width:130px" id="btnSubmit" type="button">Đăng Nhập</button></div>
-                                    <div style="margin-left: 600px; margin-top: -65px"><button id="btnRegister" type="button">Đăng Ký</button></div>
-                                </div>
-                            </div>
-                            <!---
-            <div class="container">
-              <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
-              <span class="psw"> <a href="#">Forgot password?</a></span>
-            </div>
-                  --->
-                        </form>
-                    </div>
-                </div>
+
+
+
+								<div id="btnArea">
+									<div style="margin-left: 400px"><button style="width:130px" id="btnSubmit" type="button">Đăng Nhập</button></div>
+									<div style="margin-left: 600px; margin-top: -65px"><button id="btnRegister" type="button">Đăng Ký</button></div>
+								</div>
+							</div>
+							<!---
+			<div class="container">
+			  <button type="button" onclick="document.getElementById('user').style.display='none'" class="cancelbtn">Cancel</button>
+			  <span class="psw"> <a href="#">Forgot password?</a></span>
+			</div>
+				  --->
+						</form>
+					</div>
+				</div>
             </div>
         </div>
     </nav>

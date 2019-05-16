@@ -181,7 +181,8 @@ function loadData(isPageChanged) {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
-                    img: imgsrc
+					img: imgsrc,
+					MaNCC: item.NccNavigation.tenncc
                 });
                 //end
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {

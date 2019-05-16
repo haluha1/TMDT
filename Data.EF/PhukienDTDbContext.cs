@@ -41,7 +41,7 @@ namespace Data.EF
 		public DbSet<CtRating> CtRatings { get; set; }
 		public DbSet<Giatin> Giatins { get; set; }
 		public DbSet<CtGiohang> CtGiohangs { get; set; }
-		public DbSet<Giohang> Giohangs { get; set; }
+		
 		public DbSet<Hoadon> Hoadons { get; set; }
 		public DbSet<Hoadonmuatin> Hoadonmuatins { get; set; }
 		public DbSet<Khachhang> Khachhangs { get; set; }
@@ -87,13 +87,12 @@ namespace Data.EF
 
             modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
-			modelBuilder.Entity<Giohang>().HasKey(e => e.KeyId).ToTable("GioHang");
-
+			
 			modelBuilder.Entity<CtGiohang>().HasKey(e => e.KeyId).ToTable("CtGioHang");
 			modelBuilder.Entity<CtGiohang>()
-			.HasRequired<Giohang>(s => s.GiohangNavigation)
+			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
 			.WithMany(g => g.CtGiohangs)
-			.HasForeignKey<int>(s => s.Giohang_FK);
+			.HasForeignKey<int>(s => s.User_FK);
 
 			modelBuilder.Entity<CtGiohang>()
 			.HasRequired<Sanpham>(s => s.SanphamNavigation)
@@ -119,9 +118,7 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.mancc);
 
 			modelBuilder.Entity<Khachhang>().HasKey(e => e.User_FK).ToTable("KhachHang");
-			modelBuilder.Entity<Khachhang>()
-							.HasOptional(s => s.GiohangNavigation) // Mark Address property optional in Student entity
-							.WithRequired(ad => ad.KhachHangBy);
+			
 
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");

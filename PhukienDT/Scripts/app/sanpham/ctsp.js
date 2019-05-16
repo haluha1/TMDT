@@ -89,7 +89,11 @@
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
 		});		
 		$('body').on('click', '.themgiohang', function (e) {
-			window.location.href = "/Sanpham/Giohang/" +  window.location.href.split('/').reverse()[0];;
+			//window.location.href = "/Sanpham/Giohang/" +  ;
+			var that = window.location.href.split('/').reverse()[0];
+			var sl = $('#txtSoluong').val();
+			AddToCart(that,sl);
+
 		});
 		$('body').on('click', '.yt', function (e) {
 			window.location.href = "/Sanpham/Sanphamyt/" + $(this).data('id');
@@ -163,7 +167,28 @@
                 general.stopLoading();
             }
         });
-    }
+	}
+	function AddToCart(that, sl) {
+		var data = {
+			KeyId: 0,
+			masp: that,
+			soluong: sl
+		};
+		$.ajax({
+			type: "POST",
+			url: "/Sanpham/AddToCart",
+			data: { ctGiohangVm: data},
+			dataType: "json",
+			success: function (response) {
+				console.log(response);
+				general.notify("Đã thêm vào giỏ hàng!", "success"); //warn ,info , error 
+			},
+
+			error: function (status) {
+				general.notify('Có lỗi xảy ra', 'error');
+			}
+		});
+	}
    
 }
 

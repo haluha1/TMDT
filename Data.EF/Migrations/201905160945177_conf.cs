@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Config : DbMigration
+    public partial class conf : DbMigration
     {
         public override void Up()
         {
@@ -26,26 +26,14 @@ namespace Data.EF.Migrations
                     {
                         KeyId = c.Int(nullable: false, identity: true),
                         masp = c.Int(nullable: false),
-                        Giohang_FK = c.Int(nullable: false),
+                        User_FK = c.Int(nullable: false),
                         soluong = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.KeyId)
-                .ForeignKey("dbo.GioHang", t => t.Giohang_FK, cascadeDelete: true)
+                .ForeignKey("dbo.KhachHang", t => t.User_FK, cascadeDelete: true)
                 .ForeignKey("dbo.SanPham", t => t.masp, cascadeDelete: true)
                 .Index(t => t.masp)
-                .Index(t => t.Giohang_FK);
-            
-            CreateTable(
-                "dbo.GioHang",
-                c => new
-                    {
-                        KeyId = c.Int(nullable: false),
-                        soluong = c.Int(nullable: false),
-                        thanhtien = c.Double(nullable: false),
-                    })
-                .PrimaryKey(t => t.KeyId)
-                .ForeignKey("dbo.KhachHang", t => t.KeyId)
-                .Index(t => t.KeyId);
+                .Index(t => t.User_FK);
             
             CreateTable(
                 "dbo.KhachHang",
@@ -246,7 +234,7 @@ namespace Data.EF.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.CtGioHang", "masp", "dbo.SanPham");
-            DropForeignKey("dbo.CtGioHang", "Giohang_FK", "dbo.GioHang");
+            DropForeignKey("dbo.CtGioHang", "User_FK", "dbo.KhachHang");
             DropForeignKey("dbo.HoaDon", "makh", "dbo.KhachHang");
             DropForeignKey("dbo.CTHD", "masp", "dbo.SanPham");
             DropForeignKey("dbo.SanPham", "mancc", "dbo.Ncc");
@@ -259,7 +247,6 @@ namespace Data.EF.Migrations
             DropForeignKey("dbo.SanPhamYeuThich_KhachHang", "KhachHangRefId", "dbo.KhachHang");
             DropForeignKey("dbo.SanPhamYeuThich_KhachHang", "SanPhamYeuThichRefId", "dbo.SanPham");
             DropForeignKey("dbo.CTHD", "mahd", "dbo.HoaDon");
-            DropForeignKey("dbo.GioHang", "KeyId", "dbo.KhachHang");
             DropForeignKey("dbo.CtRating", "makh", "dbo.KhachHang");
             DropIndex("dbo.SanPhamYeuThich_KhachHang", new[] { "KhachHangRefId" });
             DropIndex("dbo.SanPhamYeuThich_KhachHang", new[] { "SanPhamYeuThichRefId" });
@@ -274,8 +261,7 @@ namespace Data.EF.Migrations
             DropIndex("dbo.HoaDon", new[] { "makh" });
             DropIndex("dbo.CtRating", new[] { "makh" });
             DropIndex("dbo.KhachHang", new[] { "User_FK" });
-            DropIndex("dbo.GioHang", new[] { "KeyId" });
-            DropIndex("dbo.CtGioHang", new[] { "Giohang_FK" });
+            DropIndex("dbo.CtGioHang", new[] { "User_FK" });
             DropIndex("dbo.CtGioHang", new[] { "masp" });
             DropTable("dbo.SanPhamYeuThich_KhachHang");
             DropTable("dbo.MucDuyTri");
@@ -291,7 +277,6 @@ namespace Data.EF.Migrations
             DropTable("dbo.HoaDon");
             DropTable("dbo.CtRating");
             DropTable("dbo.KhachHang");
-            DropTable("dbo.GioHang");
             DropTable("dbo.CtGioHang");
             DropTable("dbo.ActiveCode");
         }

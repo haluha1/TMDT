@@ -5,6 +5,36 @@
 	}
 
 	function registerEvents() {
+		$('body').on('click', '.btnXoa', function () {
+			var id = $(this).data('id');	
+			$.ajax({
+				type: 'GET',
+				url: '/Sanpham/DeleteItem',
+				dataType: 'json',
+				data: { id: id },
+				
+				contentType: "application/json; charset=utf-8",
+				success: function (response) {
+
+					$(this).parent().parent().remove();
+					loadTotalPrice();
+					loadGioHang();
+					general.notify('Xóa thành công', 'success');
+										},
+
+				error: function (status) {
+					$(this).parent().parent().remove();
+					loadTotalPrice();
+					loadGioHang();
+					general.notify('Xóa thành công', 'success');
+				}
+			});
+		});
+		
+		$('.soluongSp').on('change', function () {
+			loadTotalPrice();
+
+		});
 		$('#ddlShowPage').on('change', function () {
 			general.configs.pageSize = $(this).val();
 			general.configs.pageIndex = 1;
@@ -35,9 +65,9 @@
 
 		$('body').on('change', '.soluongSp', function (e) {
 			console.log($(this));
-			var dongia = $(this).closest('tr').find('td:eq(2)').text();
-			var soluong = $(this).closest('tr').find('td:eq(3) input').val()
-			$(this).closest('tr').find('td:eq(4)').text(dongia * soluong);
+			var dongia = $(this).closest('tr').find('td:eq(3)').text();
+			var soluong = $(this).closest('tr').find('td:eq(4) input').val()
+			$(this).closest('tr').find('td:eq(5)').text(dongia * soluong);
 			loadTotal();
 		});
 
@@ -93,7 +123,8 @@
 						Dongia: item.SanphamNavigation.dongia,
 						Soluong: item.soluong,
 						ThanhTien: item.SanphamNavigation.dongia * item.soluong,
-						KeyID: item.KeyId
+						KeyID: item.KeyId,
+						Masp: item.KeyId
 					});
 					//end
 					if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -102,12 +133,8 @@
 
 				});
 
-
-
-
-
 				$('#lblTotalRecords').text(response.PageCount);
-				$('#Product-wrapper').html(render);
+				$('#new-Product').html(render);
 				$('#tongTien').text(response.Result.thanhtien);
 				wrapPaging(response.PageCount, function () {
 					//loadDetail();
@@ -149,13 +176,13 @@
 	//    http.send();
 	//    return http.status != 404;
 	//}
-	//function loadTotal() {
-	//    var total = 0;
-	//    $.each($('.subTotal'), function (i) {
-	//        total = total + parseInt($(this).text());
-	//    });
-	//    $('#tongTien').text(total);
-	//}
+	function loadTotal() {
+	    var total = 0;
+	    $.each($('.subTotal'), function (i) {
+	        total = total + parseInt($(this).text());
+	    });
+	    $('#tongTien').text(total);
+	}
 
 }
 
@@ -250,4 +277,12 @@ function wrapPaging(recordCount, callBack, changePageSize) {
 				setTimeout(callBack(), 200);
 			}
 		});
+}
+function loadTotalPrice() {
+	var totalPrice = 0;
+	$('#giohang > tbody > tr').each(function () {
+		totalPrice += parseInt($(this).find('td:eq(5)').text());	
+	});
+	$('#tongTien').empty();
+	$('#tongTien').append(totalPrice);
 }

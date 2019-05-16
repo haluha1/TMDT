@@ -16,13 +16,16 @@ namespace PhukienDT.Controllers
     public class SanphamController : Controller
     {
         private ISanphamService _sanphamService;
+        private ICtGiohangService _ctGiohangService;
 		private IUserService _userService;
 
-		public SanphamController(ISanphamService sanphamService, IUserService userService)
+		public SanphamController(ICtGiohangService ctGiohangService,ISanphamService sanphamService, IUserService userService)
 		{
 			_sanphamService = sanphamService;
 			_userService = userService;
-		}
+            _ctGiohangService = ctGiohangService;
+
+        }
 
 		public ActionResult Index(int? id)
         {
@@ -57,7 +60,15 @@ namespace PhukienDT.Controllers
         }
         public ActionResult Giohang()
         {
-            return View();
+            if (UserLoginViewModel.Current == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+            
         }
         public ActionResult Theosanpham()
         {
@@ -76,24 +87,32 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        #region AjaxAPI
+
         public JsonResult GetGioHang()
+
         {
             try
             {
-				if (UserLoginViewModel.Current.KeyId == 0)
-				{
-					return Json(new { Result = "Vui lòng đăng nhập!", Status="FAIL" }, JsonRequestBehavior.AllowGet);
-				}
-				else
-				{
+                if (UserLoginViewModel.Current.KeyId == 0)
+                {
+                    return Json(new { Result = "Vui lòng đăng nhập!", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    
+                        var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
+                        GHViewModel gh = new GHViewModel(user);
 
-					var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
-					GHViewModel gh = new GHViewModel(user);
-					//var gh = Mapper.Map<GHViewModel, GHViewModel>(ghh);
-					return Json(new { Result = gh, Status="OK" }, JsonRequestBehavior.AllowGet);
-				}
+                        //var ghh = Mapper.Map<GHViewModel, GHViewModel>(gh);
+                        return Json(new { Result = gh, Status = "OK" }, JsonRequestBehavior.AllowGet);
+                    
+                    
+                }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -114,8 +133,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-        #region AjaxAPI
         public JsonResult GetAllSanPham(string keyword, int page, int pageSize)
         {
             try
@@ -141,7 +158,6 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
-
         public JsonResult GetAllSanPhamHet(string keyword, int page, int pageSize)
         {
             try
@@ -167,7 +183,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetAllSanPhamCon(string keyword, int page, int pageSize)
         {
             try
@@ -193,7 +208,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetAllSanPhamKhoa(string keyword, int page, int pageSize)
         {
             try
@@ -266,7 +280,8 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
-		[HttpPost]
+
+        [HttpPost]
 		public JsonResult Like(int id)
 		{
 			try
@@ -293,7 +308,36 @@ namespace PhukienDT.Controllers
 			}
 		}
 
-		[HttpPost]
+        [HttpPost]
+        public JsonResult AddToCart(CtGiohangViewModel ctGiohangVm)
+        {
+            try
+            {
+                if (Session[CommonConstrants.USER_SESSION] != null)
+                {
+                    var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
+                    ctGiohangVm.User_FK = user.KeyId;
+                    CtGiohang ct = Mapper.Map<CtGiohangViewModel, CtGiohang>(ctGiohangVm);
+                    
+                    user.KhachhangNavigation.CtGiohangs.Add(ct);
+                    if (_userService.Save())
+                        return Json(new { Result = Notification.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Result = Notification.NOT_ADD_TO_CART, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { Result = Notification.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
 		public JsonResult SaveEntity(SanphamViewModel sanphamVm)
 		{
 			try
@@ -319,6 +363,23 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
-		#endregion
-	}
+        #endregion
+
+        public JsonResult DeleteItem(int id)
+        {
+            try
+            {
+
+                _ctGiohangService.Delete(id);
+                _ctGiohangService.Save();
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+    }
 }
