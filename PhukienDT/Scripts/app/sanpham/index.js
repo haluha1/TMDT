@@ -5,62 +5,65 @@
         registerEvents();
     }
 
-    function registerEvents() {
-        $('#ddlShowPage').on('change', function () {
-            general.configs.pageSize = $(this).val();
-            general.configs.pageIndex = 1;
-            loadData(true);
-        });
-        $('#btnMua').on('click', function () {
-            var kt = false;
-            if ($('#txtName').val() == '') {
-                general.notify("Vui lòng nhập tên người nhận!")
-                kt = true;
+	function registerEvents() {
+		$('#ddlShowPage').on('change', function () {
+			general.configs.pageSize = $(this).val();
+			general.configs.pageIndex = 1;
+			loadData(true);
+		});
+		$('#btnMua').on('click', function () {
+			var kt = false;
+			if ($('#txtName').val() == '') {
+				general.notify("Vui lòng nhập tên người nhận!")
+				kt = true;
 
-            }
-            if ($('#txtAddress').val() == '') {
-                general.notify("Vui lòng nhập địa chỉ người nhận!")
-                kt = true;
+			}
+			if ($('#txtAddress').val() == '') {
+				general.notify("Vui lòng nhập địa chỉ người nhận!")
+				kt = true;
 
-            }
-            if ($('#txtPhone').val() == '') {
-                general.notify("Vui lòng nhập số điện thoại người nhận!")
-                kt = true;
+			}
+			if ($('#txtPhone').val() == '') {
+				general.notify("Vui lòng nhập số điện thoại người nhận!")
+				kt = true;
 
-            }
-            if (!kt) {
-                general.notify("Cảm ơn bạn đã đặt hàng!", "success");
-                document.getElementById('buy').style.display = 'none';
-            }
-        });
-        
-        $('body').on('change', '.soluongSp', function (e) {
-            console.log($(this));
-            var dongia = $(this).closest('tr').find('td:eq(2)').text();
-            var soluong = $(this).closest('tr').find('td:eq(3) input').val()
-            $(this).closest('tr').find('td:eq(4)').text(dongia * soluong);
-            loadTotal();
-        });
+			}
+			if (!kt) {
+				general.notify("Cảm ơn bạn đã đặt hàng!", "success");
+				document.getElementById('buy').style.display = 'none';
+			}
+		});
 
-        //$('body').on('click', '.yeuthich', function (e) {
-        //    e.preventDefault();
-        //    $(this).prop('disabled', true);
-        //    var that = $(this).data('id');
-        //    likeProduct(that);
-        //});
+		$('body').on('change', '.soluongSp', function (e) {
+			console.log($(this));
+			var dongia = $(this).closest('tr').find('td:eq(2)').text();
+			var soluong = $(this).closest('tr').find('td:eq(3) input').val()
+			$(this).closest('tr').find('td:eq(4)').text(dongia * soluong);
+			loadTotal();
+		});
+
+		//$('body').on('click', '.yeuthich', function (e) {
+		//    e.preventDefault();
+		//    $(this).prop('disabled', true);
+		//    var that = $(this).data('id');
+		//    likeProduct(that);
+		//});
 
 		$('body').on('click', '.mua', function (e) {
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
-        });		
+		});
 
 		$('body').on('click', '.themgiohang', function (e) {
-			window.location.href = "/Sanpham/Giohang/" +  window.location.href.split('/').reverse()[0];;
-		});
-		
-        
-        
+			//window.location.href = "/Sanpham/Giohang/" +  ;
+			var that = window.location.href.split('/').reverse()[0];
+			var sl = $('#txtSoluong').val();
+			AddToCart(that, sl);
 
-    }
+
+
+
+		});
+	}
 
     function DeleteCart(that) {
 
@@ -97,7 +100,27 @@
     //    });
     //    $('#tongTien').text(total);
     //}
-    
+	function AddToCart(that, sl) {
+		var data = {
+			KeyId: 0,
+			masp: that,
+			soluong: sl
+		};
+		$.ajax({
+			type: "POST",
+			url: "/Sanpham/AddToCart",
+			data: { ctGiohangVm: data },
+			dataType: "json",
+			success: function (response) {
+				console.log(response);
+				general.notify("Đã thêm vào giỏ hàng!", "success"); //warn ,info , error 
+			},
+
+			error: function (status) {
+				general.notify('Có lỗi xảy ra', 'error');
+			}
+		});
+	}
 
 
 
@@ -159,7 +182,8 @@ function loadData(isPageChanged) {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
-                    img: imgsrc
+					img: imgsrc,
+					NhaCC: item.NccNavigation.tenncc
                 });
                 //end
                 if ( (i%4==3 && i%2==1) || (i+1)==response.length ) {

@@ -76,7 +76,15 @@ namespace Application.Implementation
 			return Mapper.Map<Sanpham, SanphamViewModel>(data);
 		}
 
-		public SanphamViewModel GetBysId(string keyword)
+        public NccViewModel GetThongtinNguoiban()
+        {
+            //var data = _repository.FindById(id, p => p.UserBy.WardFKNavigation, p => p.LastupdatedBy, p => p.UserBy, p => p.DepartmentFkNavigation, p => p.PositionFkNavigation);
+            //var data = _repository.FindById(id);
+            //return Mapper.Map<Ncc, NccViewModel>(data);
+            throw new NotImplementedException();
+        }
+
+        public SanphamViewModel GetBysId(string keyword)
 		{
 			throw new NotImplementedException();
 		}

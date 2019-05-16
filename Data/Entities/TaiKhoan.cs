@@ -18,6 +18,7 @@ namespace Data.Entities
 
 		public TaiKhoan(int keyId, int matk, string hoten, string email, string diachi, string sdt, string sotk, string matkhau, string thoigiandk, string avatar, UserType userType)
 		{
+			KeyId = keyId;
 			this.matk = matk;
 			this.hoten = hoten;
 			this.email = email;

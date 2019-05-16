@@ -8,9 +8,9 @@
 	@*<link href="~/Content/style.css" rel="stylesheet" />*@
 }
 @section Scripts{
-	<script src="/Scripts/app/sanpham/index.js"></script>
+	<script src="/Scripts/app/sanpham/ctsp.js"></script>
 	<script>
-		var sp = new sanphamController();
+		var sp = new ctspController();
 		sp.initialize();
 	</script>
 }
@@ -26,10 +26,9 @@
 					<div>Sao :</div>
 					<div>Đánh giá : </div>
 					<div>Đã bán :</div>
-
 				</div>
 				<div>
-					<input type="number" min="0" value="1" />
+					<input id="txtSoluong" type="number" min="0" value="1" />
 				</div>
 				<div class="row" style="color:red; font-weight:bold; margin-top:50px">
 					<div style="font-size: 35px;float:left;">Giá :{{Dongia}}</div>
@@ -39,7 +38,7 @@
 					<div class="row"style="font-size: 20px">Còn Lại :{{Soluong}} </div>
 				</div>
 				<div>
-					<button class="giohang themgiohang btn-danger">Add to Cart</button>
+					<button style="width:200px" class="giohang themgiohang btn-danger">Thêm vào giỏ hàng </button>
 				</div>
 			</div>
 		</div>

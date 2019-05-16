@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Thongtinnguoiban";
+    Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
+}
+@section Scripts1{
+    <script src="/Scripts/app/nguoiban/thongtin.js"></script>
+    <script>
+        var nguoiban = new nguoibanController();
+        nguoiban.initialize();
+    </script>
+}
+
+
+<h1 style="color:blue; text-align:center">Thông tin người bán</h1>
+<script id="table-template" type="x-tmpl-mustache">
+    <div>
+        <h3 style="color:red ; margin-left: 800px">Số lượng tin còn:{{Sltin}}</h3>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Tên nhà cung cấp:</div>
+            <div class="font col-lg-4">{{Tenncc}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Tên shop:</div>
+            <div class="font col-lg-4">{{Ten}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Giới thiệu:</div>
+            <div class="font col-lg-4">{{Gt}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Email :</div>
+            <div class="font col-lg-4">{{Email}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Số điện thoại:</div>
+            <div class="font col-lg-4">{{Sdt}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        @*<div class="row">
+            <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Mật khẩu: </div>
+            <div class="font col-lg-4">{{mk}}</div>
+            <div class="col-lg-2"></div>
+        </div>*@
+    </div>
+</script>
+    <div id="new-Product">
+    </div>
+    @*<script id="table-template" type="x-tmpl-mustache">
+        <h3 style="color:red ; margin-left: 800px">Số lượng tin còn:{{Sltin}}</h3>
+        <div>Tên nhà cung cấp: {{Tenncc}}</div>
+        <div>Tên shop: {{Ten}}</div>
+        <div>Giới thiệu: {{Gt}}</div>
+        <div>Email đăng ký: {{Email}}</div>
+        <div>Số điện thoại: {{Sdt}}</div>
+        <div>Mật khẩu: {{mk}}</div>
+    </script>*@
+
+
+

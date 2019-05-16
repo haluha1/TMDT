@@ -18,6 +18,45 @@
         
         //loadReligion();
         general.configs.pageSize = 12;
+        $("#inputGroupFile01").on('change', function () {
+            var dtl = {
+                Name: "AAA",
+                Type: 1,
+                Price: 1,
+                Quantity: 100,
+                Descrip: "ABC DEF GHI"
+            };
+
+
+
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var data = new FormData();
+
+            if (files.length == 1) {
+                for (var i = 0; i < files.length; i++) {
+                    data.append("UploadedImage", files[i]);
+                }
+                data.append("DTL", dtl);
+                $.ajax({
+                    type: "POST",
+                    url: "/Sanpham/Upload",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (path) {
+                        console.log(path);
+                        gAvatarImage = path;
+                        $('#imgAvatar').css('background-image', 'url("' + gAvatarImage + '")');
+                        //$('#lblAvatar').text(files[0].name);
+                    },
+                    error: function () {
+                        general.notify('Lỗi khi upload ảnh !', 'error');
+                    }
+                });
+            }
+        });
+
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
@@ -174,7 +213,7 @@ function loadData(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.tenloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 
@@ -242,7 +281,7 @@ function loadDataCon(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.maloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -307,7 +346,7 @@ function loadDataHet(isPageChanged) {
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
-                    ProductType: item.maloai,
+                    ProductType: item.LoaispNavigation.tenloai,
                     Quanlity: item.soluong
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -449,3 +488,4 @@ function wrapPaging(recordCount, callBack, changePageSize) {
             }
         });
 }
+

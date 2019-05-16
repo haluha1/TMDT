@@ -24,16 +24,8 @@ namespace Application.AutoMapper
 			
 			CreateMap<Cthd, CthdViewModel>();
 			CreateMap<CtRating, CtRatingViewModel>();
-			CreateMap<Giatin, GiatinViewModel>();
-			CreateMap<Giohang, GiohangViewModel>().MaxDepth(1).AfterMap((src, dest) =>
-			{
-
-				foreach (var i in dest.CtGiohangs)
-				{
-					i.GiohangNavigation = null;
-				}
-
-			});
+			CreateMap<Giatin, GiatinViewModel>().ForMember(m=>m.Hoadonmuatins, opt=>opt.Ignore());
+			
 			CreateMap<Hoadon, HoadonViewModel>().MaxDepth(1).AfterMap((src, dest) =>
             {
                 dest.KhachHangNavigation.Hoadons = null;
@@ -47,8 +39,8 @@ namespace Application.AutoMapper
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 
             });
-            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
-			CreateMap<CtGiohang, CtGiohangViewModel>().ForMember(m=>m.GiohangNavigation, opt=>opt.Ignore());
+            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().ForMember(m=>m.NccNavigation, opt=>opt.Ignore());
+            CreateMap<CtGiohang, CtGiohangViewModel>();
 			
 			CreateMap<Khachhang, KhachhangViewModel>().ForMember(m=>m.Hoadons, opt=>opt.Ignore())
 													  .ForMember(m=>m.CtRatings, opt=>opt.Ignore());
@@ -63,7 +55,7 @@ namespace Application.AutoMapper
 
 
 
-			CreateMap<TaiKhoan, TaiKhoanViewModel>();
+            CreateMap<TaiKhoan, TaiKhoanViewModel>();
 			CreateMap<Webmaster, WebmasterViewModel>();
 
 			
@@ -74,7 +66,6 @@ namespace Application.AutoMapper
 					foreach (var i in dest.CtRatings)
 					{
 						i.KhachhangNavigation.CtRatings = null;
-						i.KhachhangNavigation.GiohangNavigation = null;
 						i.KhachhangNavigation.SanPhamYeuThichs = null;
 						i.KhachhangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 					}

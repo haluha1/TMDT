@@ -49,11 +49,15 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Implementation\CtGiohangService.cs" />
+    <Compile Include="Implementation\GiatinService.cs" />
     <Compile Include="Implementation\HoadonService.cs" />
     <Compile Include="Implementation\LoaiSPService.cs" />
     <Compile Include="Implementation\RatingService.cs" />
     <Compile Include="Implementation\SanphamService.cs" />
     <Compile Include="Implementation\UserService.cs" />
+    <Compile Include="Interfaces\ICtGiohangService.cs" />
+    <Compile Include="Interfaces\IGiatinService.cs" />
     <Compile Include="Interfaces\IHoadonService.cs" />
     <Compile Include="Interfaces\ILoaiSPService.cs" />
     <Compile Include="Interfaces\IRatingService.cs" />
@@ -65,7 +69,6 @@
     <Compile Include="ViewModels\CtRatingViewModel.cs" />
     <Compile Include="ViewModels\GHViewModel.cs" />
     <Compile Include="ViewModels\GiatinViewModel.cs" />
-    <Compile Include="ViewModels\GiohangViewModel.cs" />
     <Compile Include="ViewModels\HoadonmuatinViewModel.cs" />
     <Compile Include="ViewModels\HoadonViewModel.cs" />
     <Compile Include="ViewModels\KhachhangViewModel.cs" />

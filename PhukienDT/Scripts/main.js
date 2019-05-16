@@ -93,7 +93,7 @@ var mainController = function () {
         $('body').on('click', '#btnActive', function (e) {
             confirmRegister(e);
         });
-        $('body').on('click', '.yeuthich', function (e) {
+		$('body').on('click', '.btn-Like', function (e) {
             e.preventDefault();
             $(this).prop('disabled', true);
             var that = $(this).data('id');
@@ -238,14 +238,13 @@ function Login(e) {
                 }
                 else {
                     general.notify(response.Result + '!', 'error');
-                }
-                general.stopLoad();
-
+				}
+				general.stopLoad();
             },
             error: function (status) {
                 console.log(status);
-                general.notify('Email hoặc mật khẩu không đúng!', 'error');
-                general.stopLoad();
+				general.notify('Email hoặc mật khẩu không đúng!', 'error');
+				general.stopLoad();
             }
         });
     }

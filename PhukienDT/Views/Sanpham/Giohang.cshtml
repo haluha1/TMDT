@@ -1,28 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "Giohang";
+	ViewBag.Title = "Giohang";
 }
 @section Scripts{
-    <script src="/Scripts/app/sanpham/index.js"></script>
-    <script>
-        var sp = new sanphamController();
-        sp.initialize();
-    </script>
+	<script src="/Scripts/app/sanpham/giohang.js"></script>
+	<script>
+		var gh1 = new giohangController();
+		gh1.initialize();
+	</script>
 }
 <h2> Giỏ Hàng  </h2>
 <h4 style="margin-top:50px">
-    <a href="/Home/Index">Trang Chủ /Giỏ Hàng </a>
+	<a href="/Home/Index">Trang Chủ /Giỏ Hàng </a>
 </h4>
 
 <div id="buy" class="modal">
-    <form class="modal-content animate" id="buy" action="#" method="post">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('buy').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
-        </div>
+	<form class="modal-content animate" id="buy" action="#" method="post">
+		<div class="imgcontainer">
+			<span onclick="document.getElementById('buy').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<img style="width:25%; margin-top: -50px" src="/img/logo3.png" alt="Avatar" class="avatar">
+		</div>
 
-        <div class="container">
+		<div class="container">
             <div id="form-body">
+                <div style="margin-left: 225px">
+                    <label for="chkNewInfo"><b>Dùng thông tin khác </b></label>
+                    <input type="checkbox" id="chkNewInfo" name="chkNewInfo" value="">
+
+                </div>
                 <div style="margin-left: 225px">
                     <label for="txtName"><b>Họ tên</b></label>
                     <div><input type="text" placeholder="Họ tên" id="txtName" name="txtEmail"></div>
@@ -44,58 +49,56 @@
                 </div>
 
             </div>
-            <div id="btnArea">
-                <div style="margin-left: 400px"><button id="btnMua" type="button">Đặt hàng</button></div>
-            </div>
-        </div>
-    </form>
+			<div id="btnArea">
+				<div style="margin-left: 400px"><button id="btnMua" type="button">Đặt hàng</button></div>
+			</div>
+		</div>
+	</form>
 </div>
 
+<div class="row">
+	<table  id="giohang" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="5%">Mã sản phẩm</th>
+				<th>Tên sản phẩm</th>
+				<th>Loại sản phẩm</th>
+				<th>Đơn giá</th>
+				<th>Số Lượng </th>
+				<th>Thành Tiền </th>
+				<th> #</th>
+			</tr>
+		</thead>
+		<tbody id="new-Product"></tbody>
+	</table>
 
+</div>
 
+<script id="table-template" type="x-tmpl-mustache">
+	<tr>
+		<td>
+			{{Masp}}
+		</td>
+		<td>
+			<div style="float:left"><img width="50px" src="{{IMG}}" /></div>
+			<div style="float:left; margin-left: 10px; font-weight:bold;">{{Tensp}}</div>
+		</td>
+		<td>
+			{{Loaisp}}
+		</td>
+		<td>
+			{{Dongia}}
+		</td>
+		<td>
+			<input class="soluongSp" type="number" min="1" width=20px value="{{Soluong}}" />
+		</td>
+		<td class="subTotal">
+			{{ThanhTien}}
+		</td>
+		<td> <button class="btnXoa" data-id="{{KeyID}}">xóa</button></td>
 
+	</tr>
+</script>
 <div style="margin-top:100px " id="Product-wrapper"></div>
 <br /> Tổng Tiền : <p id="tongTien"></p>
-<button class="btn btn-danger" onclick="document.getElementById('buy').style.display='block'" style="float: right;">Mua</button>
-<script id="table-template" type="x-tmpl-mustache">
-    <div class="row">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Tên sản phẩm</th>
-                    <th>Loại sản phẩm</th>
-                    <th>Đơn giá</th>
-                    <th>Số Lượng </th>
-                    <th>Thành Tiền </th>
-                    <th> Xóa</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div style="float:left"><img width="50px" src="{{IMG}}" /></div>
-                        <div style="float:left; margin-left: 10px; font-weight:bold;">{{Tensp}}</div>
-                    </td>
-                    <td>
-                        {{Loaisp}}
-                    </td>
-                    <td>
-                        {{Dongia}}
-                    </td>
-                    <td>
-                        <input class="soluongSp" type="number" min="1" width=20px value="{{Soluong}}" />
-                    </td>
-                    <td class="subTotal">
-                        {{ThanhTien}}
-                    </td>
-                    <td> <button class="btnXoa" data-id="{{KeyID}}">xóa</button></td>
-
-                </tr>
-
-            </tbody>
-        </table>
-
-    </div>
-</script>
-
-
+<button class="btn btn-danger" id="btnGoBuy" style="float: right;">Mua</button>

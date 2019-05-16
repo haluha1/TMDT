@@ -34,6 +34,8 @@ namespace PhukienDT
 			container.RegisterType<ISanphamService, SanphamService>();
 			container.RegisterType<IUserService, UserService>();
             container.RegisterType<IHoadonService, HoadonService>();
+            container.RegisterType<IGiatinService, GiatinService>();
+            container.RegisterType<ICtGiohangService, CtGiohangService>();
             //container.RegisterType<IRatingService, RatingService>();
             //container.RegisterType<ICtRatingService, CtRatingService>();
 
@@ -41,11 +43,14 @@ namespace PhukienDT
             container.RegisterType<IController, HomeController>("Home");
 			container.RegisterType<IController, SanphamController>("Sanpham");
             container.RegisterType<IController, HoadonController>("Hoadon");
-            //container.RegisterType<IController, RatingController>("Rating");
+			container.RegisterType<IController, KhachHangController>("KhachHang");
+			container.RegisterType<IController, NguoibanController>("Nguoiban");
+			container.RegisterType<IController, RatingController>("Rating");
+			//container.RegisterType<IController, RatingController>("Rating");
 
-            //container.RegisterType<IStudentService, StudentService>();
-            //container.RegisterType<IController, TestController>("Test");
-            return container;
+			//container.RegisterType<IStudentService, StudentService>();
+			//container.RegisterType<IController, TestController>("Test");
+			return container;
         }
     }
 }
