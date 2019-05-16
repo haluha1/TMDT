@@ -38,7 +38,7 @@ function currentSlide(n) {
 homeController = function () {
     this.initialize = function () {
         loadData();
-        TestSave();
+        //TestSave();
         registerEvents();
     }
     var listFamilyRelationship = [];

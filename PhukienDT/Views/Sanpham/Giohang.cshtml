@@ -3,10 +3,10 @@
     ViewBag.Title = "Giohang";
 }
 @section Scripts{
-    <script src="/Scripts/app/sanpham/index.js"></script>
+    <script src="~/Scripts/app/sanpham/giohang.js"></script>
     <script>
-        var sp = new sanphamController();
-        sp.initialize();
+        var gh1 = new giohangController();
+        gh1.initialize();
     </script>
 }
 <h2> Giỏ Hàng  </h2>
@@ -67,7 +67,7 @@
                     <th>Đơn giá</th>
                     <th>Số Lượng </th>
                     <th>Thành Tiền </th>
-                    <th> Xóa</th>
+                    <th> #</th>
                 </tr>
             </thead>
             <tbody>

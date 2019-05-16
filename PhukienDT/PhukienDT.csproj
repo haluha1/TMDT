@@ -273,6 +273,8 @@
     <Content Include="Scripts\app\home\index.js" />
     <Content Include="Scripts\app\nguoiban\donban.js" />
     <Content Include="Scripts\app\nguoiban\index.js" />
+    <Content Include="Scripts\app\sanpham\ctsp.js" />
+    <Content Include="Scripts\app\sanpham\giohang.js" />
     <Content Include="Scripts\app\sanpham\SPYT.js" />
     <Content Include="Scripts\app\sanpham\index.js" />
     <Content Include="Scripts\app\shared\autocomplete.js" />
@@ -953,7 +955,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51415</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
