@@ -33,7 +33,7 @@ namespace Data.Entities
 		public string masp { get; set; }
         public string tensp { get; set; }
         public int maloai { get; set; }
-        public int? mancc { get; set; }
+        public int mancc { get; set; }
         public double dongia { get; set; }
         public int soluong { get; set; }
         public string mota { get; set; }
