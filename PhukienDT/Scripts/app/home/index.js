@@ -105,10 +105,6 @@ homeController = function () {
             var that = $(this).data('id');
             likeProduct(that);
         });
-
-        
-        
-
     }
     //function UrlExists(url) {
     //    var http = new XMLHttpRequest();
@@ -202,7 +198,8 @@ function loadData(isPageChanged) {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
-                    img: imgsrc
+                    img: imgsrc,
+                    MerName: item.NccNavigation.tenncc,
                 });
                 //end
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
