@@ -180,9 +180,7 @@
 
 <script id="table-template" type="x-tmpl-mustache">
     <tr>
-        <td>
-            <div>{{MaHD}}</div> 
-        </td>
+        <td>{{MaHD}}</td>
         <td>
             <div style="float:left"><img width="50px" src="../img/3.png" /></div>
             <div style="float:left; margin-left: 10px; font-weight:bold;">{{TenKH}}</div>
@@ -194,11 +192,11 @@
             {{Trangthai}}
         </td>
         <td>
-            <a class="col-sm-4 nav-a-right" id="btnthemsanpham" onclick="document.getElementById('user').style.display='block'"><button> Xem</button></a>
+            <a class="col-sm-4 nav-a-right" id="btnthemsanpham" onclick="document.getElementById('user').style.display='block'"><button id="xemcthd"> Xem</button></a>
             <div id="user" class="modal">
                 <form class="modal-content animate" id="frmMaintainance" action="#" onsubmit="return validateForm()" method="post">
                     <span onclick="document.getElementById('user').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    <table class="table table-bordered table-hover">
+                    <table id="tblhd" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Mã đơn hàng</th>
@@ -207,7 +205,7 @@
                                 <th>Thành tiền</th>
                             </tr>
                         </thead>
-                        <tbody id=""></tbody>
+                        <tbody id="new-Product5"></tbody>
                     </table>
             </div>
         </td>
@@ -286,6 +284,23 @@
         </td>
         <td>
             {{Trangthai}}
+        </td>
+    </tr>
+</script>
+
+<script id="table-template5" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            a
+        </td>
+        <td>
+            b
+        </td>
+        <td>
+            c
+        </td>
+        <td>
+            d
         </td>
     </tr>
 </script>

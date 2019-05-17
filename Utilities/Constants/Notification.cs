@@ -15,5 +15,6 @@ namespace Utilities.Constants
 		public static string EXISTED_EMAIL = "Email đã tồn tại!";
 		public static string EXISTED_SDT = "SĐT đã tồn tại!";
 		public static string NOT_LOGIN = "NOT LOGIN!";
+		public static string BUYSUCCESS = "Đã lập hóa đơn mua tin!";
 	}
 }

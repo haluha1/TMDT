@@ -47,7 +47,7 @@ namespace Application.AutoMapper
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 
             });
-            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
+            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().ForMember(m=>m.NccNavigation,opt=>opt.Ignore());
 			CreateMap<CtGiohang, CtGiohangViewModel>().ForMember(m=>m.GiohangNavigation, opt=>opt.Ignore());
 			
 			CreateMap<Khachhang, KhachhangViewModel>().ForMember(m=>m.Hoadons, opt=>opt.Ignore())

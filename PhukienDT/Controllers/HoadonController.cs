@@ -13,12 +13,15 @@ namespace PhukienDT.Controllers
     {
         private IHoadonService _hoadonService;
         private IUserService _userService;
+        private ICthdService _cthdService;
 
-        public HoadonController(IHoadonService hoadonService, IUserService userService)
+        public HoadonController(IHoadonService hoadonService, IUserService userService, ICthdService cthdService)
         {
             _hoadonService = hoadonService;
             _userService = userService;
+            _cthdService = cthdService;
         }
+
 
         // GET: Hoadon
         public ActionResult Index()
@@ -150,6 +153,60 @@ namespace PhukienDT.Controllers
             }
         }
 
+        public JsonResult GetById(int id)
+        {
+            try
+            {
+                _hoadonService.GetById(id);
+                return Json("ok", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetAllCthdById(int id)
+        {
+            try
+            {
+                List<CthdViewModel> res = _cthdService.GetAllByInvoiceId(id);
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        
+        //public JsonResult GetAllCthd(string keyword, int page, int pageSize)
+        //{
+        //    try
+        //    {
+        //        var ncc = UserLoginViewModel.Current.KeyId;
+        //        var data = _cthdService.GetAll();
+        //        if (!string.IsNullOrEmpty(keyword))
+        //        {
+        //            var keysearch = keyword.Trim().ToUpper();
+
+        //            data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+        //        }
+        //        int totalRow = data.Count();
+        //        data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        //        //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+        //        //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);              
+        //        return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //        return Json(ex.Message, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         #endregion
     }

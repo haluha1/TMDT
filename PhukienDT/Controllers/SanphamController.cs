@@ -5,6 +5,7 @@ using Data.Entities;
 using Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -322,6 +323,30 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
-		#endregion
-	}
+
+        [HttpPost]
+        public JsonResult upload(HttpPostedFileBase file)
+        {
+            //verify that the file is selected and not empty
+            if (file != null && file.ContentLength > 0)
+            {
+                //getting the name of the file
+                var fileName = Path.GetFileName(file.FileName);
+
+                //store file in the Books folder
+                var path = Path.Combine(Server.MapPath("/img"), fileName);
+                try
+                {
+                    file.SaveAs(path);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return Json(path, JsonRequestBehavior.AllowGet);
+            }
+            return Json("error", JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+    }
 }
