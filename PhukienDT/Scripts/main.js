@@ -93,7 +93,7 @@ var mainController = function () {
         $('body').on('click', '#btnActive', function (e) {
             confirmRegister(e);
         });
-        $('body').on('click', '.yeuthich', function (e) {
+		$('body').on('click', '.btn-Like', function (e) {
             e.preventDefault();
             $(this).prop('disabled', true);
             var that = $(this).data('id');
@@ -215,7 +215,10 @@ function Login(e) {
         $.ajax({
             url: '/Home/Login',
             type: 'POST',
-            data: { LoginVm: data },
+			data: { LoginVm: data },
+			beforeSend: function () {
+				general.startLoad();
+			},
             success: function (response) {
                 console.log(response);
                 if (response.Status == "OK") {
@@ -235,12 +238,13 @@ function Login(e) {
                 }
                 else {
                     general.notify(response.Result + '!', 'error');
-                }
-
+				}
+				general.stopLoad();
             },
             error: function (status) {
                 console.log(status);
-                general.notify('Email hoặc mật khẩu không đúng!', 'error');
+				general.notify('Email hoặc mật khẩu không đúng!', 'error');
+				general.stopLoad();
             }
         });
     }

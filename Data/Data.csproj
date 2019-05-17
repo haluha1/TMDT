@@ -48,7 +48,6 @@
     <Compile Include="Entities\CtRating.cs" />
     <Compile Include="Entities\Function.cs" />
     <Compile Include="Entities\Giatin.cs" />
-    <Compile Include="Entities\Giohang.cs" />
     <Compile Include="Entities\Hoadon.cs" />
     <Compile Include="Entities\Hoadonmuatin.cs" />
     <Compile Include="Entities\Khachhang.cs" />

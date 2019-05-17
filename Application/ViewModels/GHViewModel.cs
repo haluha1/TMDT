@@ -11,13 +11,16 @@ namespace Application.ViewModels
 		public GHViewModel(TaiKhoanViewModel taiKhoanVm)
 		{
 			KeyId = taiKhoanVm.KeyId;
-			CtGiohangs = taiKhoanVm.KhachhangNavigation.GiohangNavigation.CtGiohangs;
+			CtGiohangs = taiKhoanVm.KhachhangNavigation.CtGiohangs;
 			foreach(var i in CtGiohangs)
 			{
-				i.GiohangNavigation = null;
-				i.SanphamNavigation.CtGiohangs = null;
-				i.SanphamNavigation.KhachHangYeuThichs = null;
-				i.SanphamNavigation.LoaispNavigation.Sanphams = null;
+                i.KhachhangNavigation = null;
+                i.SanphamNavigation.CtGiohangs = null;
+                i.SanphamNavigation.Cthds = null;
+                i.SanphamNavigation.KhachHangYeuThichs = null;
+                i.SanphamNavigation.LoaispNavigation.Sanphams = null;
+                tenNcc = i.SanphamNavigation.NccNavigation.tenncc;
+                i.SanphamNavigation.NccNavigation = null;
 			}
 		}
 
@@ -35,7 +38,9 @@ namespace Application.ViewModels
 				return tong;
 			}
 		}
-		public virtual ICollection<CtGiohangViewModel> CtGiohangs { get; set; }
+        public string tenNcc { get; set; }
+
+        public virtual ICollection<CtGiohangViewModel> CtGiohangs { get; set; }
 		public virtual KhachhangViewModel KhachHangBy { get; set; }
 	}
 }

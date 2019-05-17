@@ -10,9 +10,9 @@ namespace Application.ViewModels
 	{
 		public int KeyId { get; set; }
 		public int masp { get; set; }
-		public int Giohang_FK { get; set; }
+		public int User_FK { get; set; }
 		public int soluong { get; set; }
-		public virtual GiohangViewModel GiohangNavigation { get; set; }
+		public virtual KhachhangViewModel KhachhangNavigation { get; set; }
 		public virtual SanphamViewModel SanphamNavigation { get; set; }
 	}
 }

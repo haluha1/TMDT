@@ -274,6 +274,8 @@
     <Content Include="Scripts\app\nguoiban\muatin.js" />
     <Content Include="Scripts\app\nguoiban\donban.js" />
     <Content Include="Scripts\app\nguoiban\index.js" />
+    <Content Include="Scripts\app\sanpham\ctsp.js" />
+    <Content Include="Scripts\app\sanpham\giohang.js" />
     <Content Include="Scripts\app\nguoiban\thongtin.js" />
     <Content Include="Scripts\app\sanpham\SPYT.js" />
     <Content Include="Scripts\app\sanpham\index.js" />
@@ -905,6 +907,7 @@
     <Content Include="Views\Sanpham\Rating.cshtml" />
     <Content Include="Views\Sanpham\Sanphamyt.cshtml" />
     <Content Include="Views\Sanpham\_Buy.cshtml" />
+    <Content Include="Views\Home\ttcn.cshtml" />
     <Content Include="Views\Nguoiban\Thongtinnguoiban.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -956,7 +959,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51415</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
