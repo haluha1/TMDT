@@ -55,7 +55,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetAllHoadonChoxacnhan(string keyword, int page, int pageSize)
         {
             try
@@ -152,7 +151,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetById(int id)
         {
             try
@@ -166,7 +164,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetAllCthdById(int id)
         {
             try
@@ -180,8 +177,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-        
         //public JsonResult GetAllCthd(string keyword, int page, int pageSize)
         //{
         //    try

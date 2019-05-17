@@ -16,7 +16,6 @@ namespace Utilities.Constants
 		public static string EXISTED_SDT = "SĐT đã tồn tại!";
 		public static string NOT_LOGIN = "NOT LOGIN!";
 		public static string BUYSUCCESS = "Đã lập hóa đơn mua tin!";
-	}
         public static string NOT_ADD_TO_CART = "Thêm vào giỏ hàng thất bại!";
         public static string DELETE_FROM_CART = "Xóa thành công!";
     }

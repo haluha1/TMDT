@@ -49,7 +49,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
-    <Compile Include="Implementation\CthdService.cs" />
+	<Compile Include="Implementation\CthdService.cs" />
     <Compile Include="Implementation\CtGiohangService.cs" />
     <Compile Include="Implementation\GiatinService.cs" />
     <Compile Include="Implementation\HoadonService.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Implementation\RatingService.cs" />
     <Compile Include="Implementation\SanphamService.cs" />
     <Compile Include="Implementation\UserService.cs" />
-    <Compile Include="Interfaces\ICthdService.cs" />
+	<Compile Include="Interfaces\ICthdService.cs" />
     <Compile Include="Interfaces\ICtGiohangService.cs" />
     <Compile Include="Interfaces\IGiatinService.cs" />
     <Compile Include="Interfaces\IHoadonService.cs" />
