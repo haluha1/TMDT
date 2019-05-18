@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Utilities.Constants;
 
 namespace PhukienDT.Controllers
@@ -18,33 +19,33 @@ namespace PhukienDT.Controllers
     {
         private ISanphamService _sanphamService;
         private ICtGiohangService _ctGiohangService;
-		private IUserService _userService;
+        private IUserService _userService;
 
-		public SanphamController(ICtGiohangService ctGiohangService,ISanphamService sanphamService, IUserService userService)
-		{
-			_sanphamService = sanphamService;
-			_userService = userService;
+        public SanphamController(ICtGiohangService ctGiohangService, ISanphamService sanphamService, IUserService userService)
+        {
+            _sanphamService = sanphamService;
+            _userService = userService;
             _ctGiohangService = ctGiohangService;
 
         }
 
-		public ActionResult Index(int? id)
+        public ActionResult Index(int? id)
         {
-			if (id==null)
-			{
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			else
-			{
-				var model = _sanphamService.GetAll().Where(x => x.maloai == id).ToList();
-				IEnumerable<SanphamViewModel> sp;
-				sp = model;
-				return View(model);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var model = _sanphamService.GetAll().Where(x => x.maloai == id).ToList();
+                IEnumerable<SanphamViewModel> sp;
+                sp = model;
+                return View(model);
 
-			}
-            
+            }
+
         }
-        
+
         // GET: Sanpham
         public ActionResult ctsp()
         {
@@ -54,7 +55,6 @@ namespace PhukienDT.Controllers
         {
             return View();
         }
-
         public ActionResult Sanphamyt()
         {
             return View();
@@ -69,7 +69,7 @@ namespace PhukienDT.Controllers
             {
                 return View();
             }
-            
+
         }
         public ActionResult Theosanpham()
         {
@@ -88,10 +88,6 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-
-        #region AjaxAPI
-
         public JsonResult GetGioHang()
 
         {
@@ -103,14 +99,14 @@ namespace PhukienDT.Controllers
                 }
                 else
                 {
-                    
-                        var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
-                        GHViewModel gh = new GHViewModel(user);
 
-                        //var ghh = Mapper.Map<GHViewModel, GHViewModel>(gh);
-                        return Json(new { Result = gh, Status = "OK" }, JsonRequestBehavior.AllowGet);
-                    
-                    
+                    var user = _userService.GetById(UserLoginViewModel.Current.KeyId);
+                    GHViewModel gh = new GHViewModel(user);
+
+                    //var ghh = Mapper.Map<GHViewModel, GHViewModel>(gh);
+                    return Json(new { Result = gh, Status = "OK" }, JsonRequestBehavior.AllowGet);
+
+
                 }
 
 
@@ -140,12 +136,12 @@ namespace PhukienDT.Controllers
             {
                 var ncc = UserLoginViewModel.Current.KeyId;
 
-                var data = _sanphamService.GetAll().Where(x=>x.NccNavigation !=null && x.NccNavigation.User_FK == ncc);
+                var data = _sanphamService.GetAll().Where(x => x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
-                    
-                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -153,24 +149,24 @@ namespace PhukienDT.Controllers
                 //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);              
                 return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
 
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult GetAllSanPhamHet(string keyword, int page, int pageSize)
         {
             try
             {
                 var ncc = UserLoginViewModel.Current.KeyId;
-                var data = _sanphamService.GetAll().Where(x=>x.soluong == 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
+                var data = _sanphamService.GetAll().Where(x => x.conlai == 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -191,12 +187,12 @@ namespace PhukienDT.Controllers
             try
             {
                 var ncc = UserLoginViewModel.Current.KeyId;
-                var data = _sanphamService.GetAll().Where(x => x.soluong > 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
+                var data = _sanphamService.GetAll().Where(x => x.conlai > 0 && x.NccNavigation != null && x.NccNavigation.User_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -221,7 +217,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -237,81 +233,77 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GetNewProduct(int page, int pageSize)
-		{
-			try
-			{
+        {
+            try
+            {
 
-				var data = _sanphamService.GetAll().OrderByDescending(x=>x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
+                var data = _sanphamService.GetAll().OrderByDescending(x => x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
 
-				
-				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
 
-				return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
 
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
-			}
-		}
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
 
-		public JsonResult GetByType(int id, string keyword, int page, int pageSize)
-		{
-			try
-			{
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GetByType(int id, string keyword, int page, int pageSize)
+        {
+            try
+            {
 
-				var data = _sanphamService.GetAll().Where(x=>x.LoaispNavigation.KeyId==id);
-				if (!string.IsNullOrEmpty(keyword))
-				{
-					var keysearch = keyword.Trim().ToUpper();
-					data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword));
-				}
-				int totalRow = data.Count();
-				data = data.Skip((page - 1) * pageSize).Take(pageSize);
-				//JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-				//var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+                var data = _sanphamService.GetAll().Where(x => x.LoaispNavigation.KeyId == id);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    var keysearch = keyword.Trim().ToUpper();
+                    data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch));
+                }
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize);
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
 
-				return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
 
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
-			}
-		}
-
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
-		public JsonResult Like(int id)
-		{
-			try
-			{
-				if (Session[CommonConstrants.USER_SESSION] != null)
-				{
-					var spVm = _sanphamService.GetById(id);
-					var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
-					Sanpham sp = Mapper.Map<SanphamViewModel, Sanpham>(spVm);
-					user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
-					_sanphamService.Save();
-					return Json(new { Result = Notification.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
-				}
-				else
-				{
-					return Json(new { Result = Notification.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
-				}
-				
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
-			}
-		}
+        public JsonResult Like(int id)
+        {
+            try
+            {
+                if (Session[CommonConstrants.USER_SESSION] != null)
+                {
+                    var spVm = _sanphamService.GetById(id);
+                    var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
+                    Sanpham sp = Mapper.Map<SanphamViewModel, Sanpham>(spVm);
+                    user.KhachhangNavigation.SanPhamYeuThichs.Add(sp);
+                    _sanphamService.Save();
+                    return Json(new { Result = Notification.LIKE_PRODUCT, Status = "OK" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { Result = Notification.LIKE_NOT_LOGIN, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+                }
 
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
         public JsonResult AddToCart(CtGiohangViewModel ctGiohangVm)
         {
@@ -349,36 +341,36 @@ namespace PhukienDT.Controllers
                 return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
             }
         }
-
         [HttpPost]
-		public JsonResult SaveEntity(SanphamViewModel sanphamVm)
-		{
-			try
-			{
-				if (!ModelState.IsValid)
-				{
-					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
-					return Json(allErrors, JsonRequestBehavior.AllowGet);
-				}
-				else
-				{
-					if (sanphamVm.KeyId == 0) _sanphamService.Add(sanphamVm);
-					else _sanphamService.Update(sanphamVm);
-				}
-				if (_sanphamService.Save()) return Json(sanphamVm, JsonRequestBehavior.AllowGet);
+        public JsonResult SaveEntity(SanphamViewModel sanphamVm)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                    return Json(allErrors, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (sanphamVm.KeyId == 0) _sanphamService.Add(sanphamVm);
+                    else _sanphamService.Update(sanphamVm);
+                }
+                if (_sanphamService.Save()) return Json(sanphamVm, JsonRequestBehavior.AllowGet);
 
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(Response, JsonRequestBehavior.AllowGet);
-			}
-			catch (Exception ex)
-			{
-				Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				return Json(ex.Message, JsonRequestBehavior.AllowGet);
-			}
-		}
-        #endregion
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(Response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
-        public JsonResult DeleteItem(int id)
+		
+
+		public JsonResult DeleteItem(int id)
         {
             try
             {
@@ -393,31 +385,90 @@ namespace PhukienDT.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
+        
 
 		[HttpPost]
 		public JsonResult Upload()
 		{
-			var file = HttpContext.Request.Files["UploadedImage"];
-			//verify that the file is selected and not empty
+			var file = Request.Files["UploadedImage"];
+			var type = Request["Type"];
+			var srcType = "/img";
+			switch (type)
+			{
+				case "2":
+					srcType = "/img/Bao";
+					break;
+				case "3":
+					srcType = "/img/Ring";
+					break;
+				case "4":
+					srcType = "/img/Khac";
+					break;
+				default:
+					srcType = "/img";
+					break;
+			}
+
 			if (file != null && file.ContentLength > 0)
 			{
 				//getting the name of the file
 				var fileName = Path.GetFileName(file.FileName);
-
-				//store file in the Books folder
-				var path = Path.Combine(Server.MapPath("/img"), fileName);
-				try
+				var s = fileName.Split('.');
+				var ext = s[s.Count() - 1].ToLower();
+				List<string> extValid = new List<string>(new string[] { "png", "jpg", "jpeg" });
+				if (s.Count() >= 2 && extValid.Contains(ext))
 				{
-					file.SaveAs(path);
+					//var newFileName = DateTime.Now.ToFileTime().ToString();
+					var newFileName = $"Product_{DateTime.Now:yyyyMMddhhmmss}." + "png";
+					var path = Path.Combine(Server.MapPath(srcType), newFileName);
+					try
+					{
+						file.SaveAs(path);
+					}
+					catch (Exception ex)
+					{
+						return Json(new { Result="", Status="FAIL" }, JsonRequestBehavior.AllowGet);
+					}
+					return Json(new { Result = newFileName, Status = "OK" }, JsonRequestBehavior.AllowGet);
 				}
-				catch (Exception ex)
+				else
 				{
-					return Json("error", JsonRequestBehavior.AllowGet);
+					return Json(new { Result = "", Status = "INVALID" }, JsonRequestBehavior.AllowGet);
 				}
-				return Json(fileName, JsonRequestBehavior.AllowGet);
+					
+				
 			}
-			return Json("error", JsonRequestBehavior.AllowGet);
+			return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 		}
+
+		[HttpPost]
+		public JsonResult SaveAllEntity(SanphamViewModel sanphamVm)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+					return Json(allErrors, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					var user = UserLoginViewModel.Current;
+					sanphamVm.mancc = user.KeyId;
+					_sanphamService.Add(sanphamVm);
+				}
+				if (_sanphamService.Save()) return Json(new { Result = sanphamVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
+
+				return Json(new {Result = "", Status="FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+		}
+
+
+
 	}
 }

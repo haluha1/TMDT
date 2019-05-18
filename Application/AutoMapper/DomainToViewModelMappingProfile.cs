@@ -29,7 +29,7 @@ namespace Application.AutoMapper
 			CreateMap<Hoadon, HoadonViewModel>().MaxDepth(1).AfterMap((src, dest) =>
             {
                 dest.KhachHangNavigation.Hoadons = null;
-                
+				dest.KhachHangNavigation.CtGiohangs = null;
                 foreach (var i in dest.Cthdons)
                 {
                     i.HoadonNavigation = null;

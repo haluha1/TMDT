@@ -7,13 +7,13 @@ namespace Data.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class ddd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ddd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905161523181_init"; }
+            get { return "201905181209062_ddd"; }
         }
         
         string IMigrationMetadata.Source

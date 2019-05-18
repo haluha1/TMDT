@@ -90,6 +90,17 @@ var mainController = function () {
             loadData(true);
         });
 
+
+
+
+        $('body').on('click', '.themgiohang', function (e) {
+            //window.location.href = "/Sanpham/Giohang/" +  ;
+            var that = $(this).data('id');
+            var sl = $('#txtSoluong').val();
+            if (typeof sl === "undefined") sl = 1;
+            AddToCart(that, sl);
+
+        });
         $('body').on('click', '#btnActive', function (e) {
             confirmRegister(e);
         });
@@ -128,12 +139,36 @@ var mainController = function () {
             }
         });
 
+
+
     }
 
     function resetFormMaintainance() {
         $('#frmMaintainance').trigger('reset');
         $('#frmMaintainance').validate().resetForm();
     }
+}
+
+function AddToCart(that, sl) {
+    var data = {
+        KeyId: 0,
+        masp: that,
+        soluong: sl
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Sanpham/AddToCart",
+        data: { ctGiohangVm: data },
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            general.notify("Đã thêm vào giỏ hàng!", "success"); //warn ,info , error 
+        },
+
+        error: function (status) {
+            general.notify('Có lỗi xảy ra', 'error');
+        }
+    });
 }
 
 
@@ -353,6 +388,8 @@ function Rating() {
         }
     });
 }
+
+
 
 function wrapPaging(recordCount, callBack, changePageSize) {
     var totalsize = Math.ceil(recordCount / general.configs.pageSize);

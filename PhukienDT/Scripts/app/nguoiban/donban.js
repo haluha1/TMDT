@@ -17,6 +17,12 @@
         //});
 
         //loadReligion();
+        $('body').on('click', '#xemcthd', function () {
+            var Id = $(this).parent().parent().parent().find('td:eq(0)').text();
+            loadcthd(Id);
+        });
+
+
         general.configs.pageSize = 12;
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -365,6 +371,37 @@ function loadDataHuy(isPageChanged) {
             $('#new-Product4').html(render4);
             wrapPaging(response.PageCount, function () {
                 loadDataHuy();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+
+function loadcthd(id) {
+    var template5 = $('#table-template5').html();
+    var render5 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllCthdById',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            id: id,
+        },
+        success: function (response) {
+            console.log(response);
+                render5 += Mustache.render(template5, {
+                    MaHD: item.mahd,
+                    Masp: item.hoten,
+                    Slg: item.tongtien,
+                    Thanhtien: item.tinhtrang,
+                }); 
+            $('#new-Product5').html(render5);
+            wrapPaging(response.PageCount, function () {
+                loadcthd();
             }, isPageChanged);
         },
         error: function (status) {

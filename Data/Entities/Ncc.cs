@@ -16,6 +16,7 @@ namespace Data.Entities
 		{
 			Hoadonmuatins = new HashSet<Hoadonmuatin>();
 			Sanphams = new HashSet<Sanpham>();
+			Hoadons = new HashSet<Hoadon>();
 		}
 
 		public int User_FK { get; set; } // PK
@@ -24,7 +25,7 @@ namespace Data.Entities
 		[DefaultValue(0)]
 		public int sltinton { get; set; }
 
-
+		public virtual ICollection<Hoadon> Hoadons { get; set; }
 		public virtual ICollection<Sanpham> Sanphams { get; set; }
 		public virtual ICollection<Hoadonmuatin> Hoadonmuatins { get; set; }
 		public virtual TaiKhoan TaiKhoanBy { get; set; }

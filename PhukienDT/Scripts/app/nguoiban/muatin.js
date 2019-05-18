@@ -48,19 +48,6 @@ function loadData(isPageChanged) {
 }
 
 function Buy(that) {
-    var data = {
-        KeyId: 51,
-        masp: 51,
-        tensp: "Sp test",
-        maloai: 1,
-        mancc: 1,
-        dongia: 9999,
-        soluong: 1,
-        mota: "1",
-        tenhinh: "1",
-        khuyenmai: 0
-    };
-
     $.ajax({
         type: "POST",
         url: "/Nguoiban/Muatin",
@@ -71,10 +58,11 @@ function Buy(that) {
         },
         success: function (response) {
             console.log(response);
+            general.notify(response.Result,'success');
             general.stopLoad();
         },
         error: function (status) {
-            general.notify('Có lỗi trong khi ghi danh bạ!', 'error');
+            general.notify('Chưa thêm hóa đơn mua tin!', 'error');
             general.stopLoad();
         }
     });

@@ -114,11 +114,12 @@
 
                 }
             }
-			
-			if (!kt) {
-				general.notify("Cảm ơn bạn đã đặt hàng!", "success");
-				document.getElementById('buy').style.display = 'none';
-			}
+            SaveEntity();
+
+			//if (!kt) {
+			//	general.notify("Cảm ơn bạn đã đặt hàng!", "success");
+			//	document.getElementById('buy').style.display = 'none';
+			//}
 		});
 
 		$('body').on('change', '.soluongSp', function (e) {
@@ -205,6 +206,65 @@
 			}
 		});
 	}
+
+    function SaveEntity() {
+        var uName = $('#txtName').val();
+        var address = $('#txtAddress').val();
+        var sdt = $('#txtPhone').val();
+        var note = $('#txtNote').val();
+        var information = {
+            KeyId: 0,
+            mahd: 0,
+            makh: 0,
+            ncc_FK: 0,
+            tongtien: 0,
+            Name: uName,
+            Address: address,
+            Phone: sdt,
+            Note: note
+        };
+        var data = [];
+        $.each($('#new-Product tr'), function (keyT, valT) {
+            var Qty = $(this).find('td:eq(4) input').val();
+            var KId = $(this).find('td:eq(-1) button').data('id');
+            var sp = {
+                KeyId: 0,
+                masp: KId,
+                User_FK: 0,
+                soluong: Qty
+            };
+            if (Qty > 0) { data.push(sp); }
+        });
+        
+
+        $.ajax({
+            type: "POST",
+            url: "/Hoadon/SaveAllEntity",
+            data: {
+                Information: information,
+                Products: data
+            },
+            dataType: "json",
+            beforeSend: function () {
+                general.startLoad();
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+
+                    
+                    general.notify("Đặt hàng thành công!", 'success');
+                    document.getElementById('buy').style.display = 'none';
+                    alert("Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!");
+                    window.location.href = "/Home/Index";
+                }
+                general.stopLoad();
+            },
+            error: function (status) {
+                general.stopLoad();
+            }
+        });
+    }
 
 	function DeleteCart(that) {
 

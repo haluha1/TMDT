@@ -17,45 +17,45 @@
         //});
         
         //loadReligion();
-        general.configs.pageSize = 12;
-        $("#inputGroupFile01").on('change', function () {
-            var dtl = {
-                Name: "AAA",
-                Type: 1,
-                Price: 1,
-                Quantity: 100,
-                Descrip: "ABC DEF GHI"
-            };
+        general.configs.pageSize = 10;
+        //$("#inputGroupFile01").on('change', function () {
+        //    var dtl = {
+        //        Name: "AAA",
+        //        Type: 1,
+        //        Price: 1,
+        //        Quantity: 100,
+        //        Descrip: "ABC DEF GHI"
+        //    };
 
 
 
-            var fileUpload = $(this).get(0);
-            var files = fileUpload.files;
-            var data = new FormData();
+        //    var fileUpload = $(this).get(0);
+        //    var files = fileUpload.files;
+        //    var data = new FormData();
 
-            if (files.length == 1) {
-                for (var i = 0; i < files.length; i++) {
-                    data.append("UploadedImage", files[i]);
-                }
-                data.append("DTL", dtl);
-                $.ajax({
-                    type: "POST",
-                    url: "/Sanpham/Upload",
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    success: function (path) {
-                        console.log(path);
-                        gAvatarImage = path;
-                        $('#imgAvatar').css('background-image', 'url("' + gAvatarImage + '")');
-                        //$('#lblAvatar').text(files[0].name);
-                    },
-                    error: function () {
-                        general.notify('Lỗi khi upload ảnh !', 'error');
-                    }
-                });
-            }
-        });
+        //    if (files.length == 1) {
+        //        for (var i = 0; i < files.length; i++) {
+        //            data.append("UploadedImage", files[i]);
+        //        }
+        //        data.append("DTL", dtl);
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "/Sanpham/Upload",
+        //            contentType: false,
+        //            processData: false,
+        //            data: data,
+        //            success: function (path) {
+        //                console.log(path);
+        //                gAvatarImage = path;
+        //                $('#imgAvatar').css('background-image', 'url("' + gAvatarImage + '")');
+        //                //$('#lblAvatar').text(files[0].name);
+        //            },
+        //            error: function () {
+        //                general.notify('Lỗi khi upload ảnh !', 'error');
+        //            }
+        //        });
+        //    }
+        //});
 
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -101,12 +101,65 @@
             }
         });
 
+       
         $('#ddlShowPage').on('change', function () {
             general.configs.pageSize = $(this).val();
             general.configs.pageIndex = 1;
             loadData(true);
         });
-        
+
+        $('#btnthemsanpham').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Nguoiban/GetThongtinNguoiban',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    console.log(response);
+                    if (response.Result.NccNavigation.sltinton > 0) {
+                        document.getElementById('user').style.display = 'block';
+                    }
+                    else {
+                        general.notify("Vui lòng mua thêm tin để tiếp tục!",'warn')
+                    }
+                },
+                error: function (status) {
+                }
+            });
+        });
+
+        $('#btnAddSubmit').on('click', function (e) {
+            e.preventDefault();
+            UploadIMG();
+        });
+
+
+        $('#txtKeywordAll').on('keypress', function (e) {
+            if (e.which === 13) {
+                loadData(true);
+            }
+        });
+        $('#txtKeywordCon').on('keypress', function (e) {
+            if (e.which === 13) {
+                loadDataCon(true);
+            }
+        });
+        $('#txtKeywordHet').on('keypress', function (e) {
+            if (e.which === 13) {
+                loadDataHet(true);
+            }
+        });
+
+        $('#img-Search-btnAll').on('click', function () {
+            loadData(true);
+        });
+
+        $('#img-Search-btnCon').on('click', function () {
+            loadDataCon(true);
+        });
+        $('#img-Search-btnHet').on('click', function () {
+            loadDataHet(true);
+        });
 
         $('body').on('click', '.yeuthich', function (e) {
             e.preventDefault();
@@ -150,7 +203,83 @@
         });
     }
 
+    function UploadIMG() {
+        var ProductType = $('#txtloaithem').val();
+        var fileUpload = $('#inputGroupFile01').get(0);
+        var files = fileUpload.files;
+        var data = new FormData();
 
+        if (files.length == 1) {
+            for (var i = 0; i < files.length; i++) {
+                data.append("UploadedImage", files[i]);
+            }
+            data.append("Type", ProductType);
+            $.ajax({
+                type: "POST",
+                url: "/Sanpham/Upload",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                    if (response.Status == "OK") {
+                        SubmitTin(response.Result)
+                    }
+                    else {
+                        if (response.Status == "INVALID") {
+                            general.notify("Hình ảnh không hợp lệ!", 'error');
+                        }
+                    }
+                    
+                },
+                error: function () {
+                    general.notify('Lỗi khi upload ảnh !', 'error');
+                }
+            });
+        }
+    }
+
+    function SubmitTin(path) {
+        var Tensp = $('#txttenmoi').val();
+        var Loaisp = $('#txtloaithem').val();
+        var Dongia = $('#txtdongiathem').val();
+        var Soluong = $('#txtsluongthem').val();
+        var Mota = $('#txtmotathem').val();
+
+        var dtl = {
+            KeyId: 0,
+            masp: 999,
+            tensp: Tensp,
+            maloai: Loaisp,
+            mancc: 0,
+            dongia: Dongia,
+            soluong: Soluong,
+            conlai: Soluong,
+            mota: Mota,
+            tenhinh: path,
+            khuyenmai: 0
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Sanpham/SaveAllEntity",
+            data: { sanphamVm: dtl },
+            dataType: "json",
+            beforeSend: function () {
+                general.startLoad();
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+                    general.notify("Thêm sản phẩm thành công!", 'success');
+                    document.getElementById('user').style.display = 'none';
+                }
+                general.stopLoad();
+            },
+            error: function (status) {
+                general.stopLoad();
+            }
+        });
+    }
 
 
     function loadSTT(that) {
@@ -177,7 +306,7 @@ function loadData(isPageChanged) {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: {
-            keyword: $('#txtKeyword').val(),
+            keyword: $('#txtKeywordAll').val(),
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
         },
@@ -207,14 +336,16 @@ function loadData(isPageChanged) {
                         break;
                     }
                 }
-
+                if (item.KeyId <= 50) imgsrc = "/img/" + item.tenhinh;
                 render += Mustache.render(template, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
                     ProductType: item.LoaispNavigation.tenloai,
-                    Quanlity: item.soluong
+                    Quanlity: item.soluong,
+                    Sold: (item.soluong - item.conlai),
+                    InStock: item.conlai
                 });
                 
                 //end
@@ -246,7 +377,7 @@ function loadDataCon(isPageChanged) {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: {
-            keyword: $('#txtKeyword').val(),
+            keyword: $('#txtKeywordCon').val(),
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
         },
@@ -276,13 +407,15 @@ function loadDataCon(isPageChanged) {
                         break;
                     }
                 }
+                if (item.KeyId <= 50) imgsrc = "/img/" + item.tenhinh;
                 render1 += Mustache.render(template1, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
                     ProductType: item.LoaispNavigation.tenloai,
-                    Quanlity: item.soluong
+                    Quanlity: item.soluong,
+                    InStock: item.conlai
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
                     render1 += '</div>'
@@ -311,7 +444,7 @@ function loadDataHet(isPageChanged) {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: {
-            keyword: $('#txtKeyword').val(),
+            keyword: $('#txtKeywordHet').val(),
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
         },
@@ -341,6 +474,7 @@ function loadDataHet(isPageChanged) {
                         break;
                     }
                 }
+                if (item.KeyId <= 50) imgsrc = "/img/" + item.tenhinh;
                 render2 += Mustache.render(template2, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
@@ -406,13 +540,15 @@ function loadDataKhoa(isPageChanged) {
                         break;
                     }
                 }
+                if (item.KeyId <= 50) imgsrc = "/img/" + item.tenhinh;
                 render3 += Mustache.render(template3, {
                     ProductID: item.KeyId,
                     ProductName: item.tensp,
                     Price: item.dongia,
                     img: imgsrc,
                     ProductType: item.maloai,
-                    Quanlity: item.soluong
+                    Quanlity: item.soluong,
+                    Sold: item.conlai
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
                     render3 += '</div>'

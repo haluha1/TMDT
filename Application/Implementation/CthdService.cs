@@ -11,29 +11,21 @@ using System.Threading.Tasks;
 
 namespace Application.Implementation
 {
-    public class HoadonService : IHoadonService
+    public class CthdService: ICthdService
     {
-        private IRepository<Hoadon, int> _repository;
+        private IRepository<Cthd, int> _repository;
         private IUnitOfWork _unitOfWork;
 
-        public HoadonService(IRepository<Hoadon, int> repository, IUnitOfWork unitOfWork)
+        public CthdService(IRepository<Cthd, int> repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
 
-        public HoadonViewModel Add(HoadonViewModel hoadonVm)
+
+        public CthdViewModel Add(CthdViewModel hoadonVm)
         {
-            var hd = Mapper.Map<HoadonViewModel, Hoadon>(hoadonVm);
-            _repository.AddReturn(hd);
-			hd.mahd = hd.KeyId;
-            hoadonVm.KeyId = hd.KeyId;
-			hoadonVm.mahd = hd.KeyId;
-			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
-			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
-			//sp.Id = HP_EmployeeVm.Id;
-			//employee.UserBy.IsEmployee = true;
-			return hoadonVm;
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)
@@ -46,29 +38,42 @@ namespace Application.Implementation
             GC.SuppressFinalize(this);
         }
 
-        public List<HoadonViewModel> GetAll()
+        public List<CthdViewModel> GetAll()
         {
-            var query = _repository.FindAll(x=>x.Cthdons).OrderBy(x => x.KeyId);
-            var data = new List<HoadonViewModel>();
+            var query = _repository.FindAll();
+            var data = new List<CthdViewModel>();
             foreach (var item in query)
             {
-                var _data = Mapper.Map<Hoadon, HoadonViewModel>(item);
+                var _data = Mapper.Map<Cthd, CthdViewModel>(item);
                 data.Add(_data);
             }
             return data;
         }
 
-        public List<HoadonViewModel> GetAll(string keyword)
+        public List<CthdViewModel> GetAllByInvoiceId(int invoiceId)
+        {
+            var query = _repository.FindAll(x => x.mahd== invoiceId);
+           
+            var data = new List<CthdViewModel>();
+            foreach (var item in query)
+            {
+                var _data = Mapper.Map<Cthd, CthdViewModel>(item);
+                data.Add(_data);
+            }
+            return data;
+        }
+
+        public List<CthdViewModel> GetAll(string keyword)
         {
             throw new NotImplementedException();
         }
 
-        public HoadonViewModel GetById(int id)
+        public CthdViewModel GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public HoadonViewModel GetBysId(string keyword)
+        public CthdViewModel GetBysId(string keyword)
         {
             throw new NotImplementedException();
         }
@@ -78,7 +83,7 @@ namespace Application.Implementation
             return _unitOfWork.Commit();
         }
 
-        public void Update(HoadonViewModel hoadonVm)
+        public void Update(CthdViewModel hoadonVm)
         {
             throw new NotImplementedException();
         }

@@ -13,6 +13,7 @@ namespace Application.ViewModels
 		public string gioithieu { get; set; }
 		public int sltinton { get; set; }
 
+		public virtual ICollection<HoadonViewModel> Hoadons { get; set; }
 		public virtual ICollection<SanphamViewModel> Sanphams { get; set; }
 		public virtual TaiKhoanViewModel TaiKhoanBy { get; set; }
 		public virtual ICollection<HoadonmuatinViewModel> Hoadonmuatins { get; set; }

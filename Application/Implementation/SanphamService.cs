@@ -26,12 +26,13 @@ namespace Application.Implementation
 		{
 			var sp = Mapper.Map<SanphamViewModel, Sanpham>(sanphamVm);
 			_repository.AddReturn(sp);
+			sp.masp = sp.KeyId.ToString();
 			sanphamVm.KeyId = sp.KeyId;
+			sanphamVm.masp = sp.masp;
 			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
 			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
 			//sp.Id = HP_EmployeeVm.Id;
 			//employee.UserBy.IsEmployee = true;
-			_unitOfWork.Commit();
 			return sanphamVm;
 		}
 

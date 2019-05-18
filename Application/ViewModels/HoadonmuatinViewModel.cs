@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Application.ViewModels
 		public int mancc { get; set; }
 		public int magiatin { get; set; }
 		public string thoigian { get; set; }
+		public PostInvoiceStatus Status { get; set; }
 		public virtual GiatinViewModel GiatinNavigation { get; set; }
 		public virtual NccViewModel NccNavigation { get; set; }
 	}
