@@ -17,7 +17,6 @@ namespace Application.Interfaces
 		TaiKhoanViewModel Register(TaiKhoanViewModel TaiKhoanVm,string s);
 		TaiKhoanViewModel ConfirmEmail(int id, string s);
 		TaiKhoanViewModel GetByEmail(string email);
-
-		bool Save();
+        bool Save();
 	}
 }

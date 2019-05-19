@@ -271,6 +271,7 @@
     <Content Include="img\search.png" />
     <Content Include="Models\template.html" />
     <Content Include="Scripts\app\home\index.js" />
+    <Content Include="Scripts\app\home\ttcn.js" />
     <Content Include="Scripts\app\nguoiban\muatin.js" />
     <Content Include="Scripts\app\nguoiban\donban.js" />
     <Content Include="Scripts\app\nguoiban\index.js" />

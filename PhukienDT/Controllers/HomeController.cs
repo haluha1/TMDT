@@ -35,8 +35,12 @@ namespace PhukienDT.Controllers
 
 			return View();
 		}
+        public ActionResult ttcn()
+        {
+            return View();
+        }
 
-		public ActionResult Contact()
+        public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";
 
@@ -189,5 +193,54 @@ namespace PhukienDT.Controllers
 				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 		}
+        public JsonResult GetPassword(int id)
+        {
+            try
+            {
+                if (Session[CommonConstrants.USER_SESSION] == null || UserLoginViewModel.Current.KeyId == 0)
+                {
+                    return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    var pass =_userService.GetUser(id).matkhau;
+
+                    return Json(pass, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePassword(string mk)
+        {
+            try
+            {
+                //var id = UserLoginViewModel.Current.KeyId;
+                //var omk = UserLoginViewModel.Current.Password;
+                if (Session[CommonConstrants.USER_SESSION] == null || UserLoginViewModel.Current.KeyId == 0)
+                {
+                    return Json(new { Result = "", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    var user = _userService.GetUser(UserLoginViewModel.Current.KeyId);
+                    user.matkhau = mk;
+                    _userService.Save();
+                    return Json(new { Result = Session[CommonConstrants.USER_SESSION], Status = "OK" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

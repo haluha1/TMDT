@@ -19,6 +19,7 @@ namespace Application.ViewModels
 			UserName = TaiKhoanVm.hoten;
 			Avatar = TaiKhoanVm.avatar;
 			UserType = TaiKhoanVm.UserType;
+            Password = TaiKhoanVm.matkhau;
 		}
 
 		private UserLoginViewModel() { }
@@ -40,6 +41,7 @@ namespace Application.ViewModels
 		public string Email { get; set; }
 		public string UserName { get; set; }
 		public string Avatar { get; set; }
+		public string Password { get; set; }
 		public UserType UserType { get; set; }
 	}
 }

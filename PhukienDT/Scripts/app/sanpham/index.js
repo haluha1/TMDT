@@ -11,6 +11,10 @@
 			general.configs.pageIndex = 1;
 			loadData(true);
 		});
+		$('#buttonsearch').on('click', function () {
+			loadData();
+
+		});
 		$('#btnMua').on('click', function () {
 			var kt = false;
 			if ($('#txtName').val() == '') {

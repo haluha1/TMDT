@@ -39,7 +39,7 @@ homeController = function () {
     this.initialize = function () {
         loadData();
         //TestSave();
-        registerEvents();
+		registerEvents();
     }
     var listFamilyRelationship = [];
     var listWorkingProcessDetail = [];

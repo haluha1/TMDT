@@ -1,9 +1,57 @@
 ﻿
 @{
-    ViewBag.Title = "ttcn";
-    Layout = "/Views/Shared/_Layout.cshtml";
+	/**/
+
+	ViewBag.Title = "ttcn";
+	Layout = "/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+	<script src="~/Scripts/app/home/ttcn.js"></script>
+	<script>
+		var tt = new ttcnController();
+		tt.initialize();
+	</script>
 }
 
+<h1> Trang Thông Tin Cá Nhân</h1>
+<h4 style="margin-top:50px">
+	<a href="/Home/Index">Trang Thông Tin Cá Nhân </a>
+</h4>
+<div  id="Product-wrapper"></div>
+<script id="table-template" type="x-tmpl-mustache">
+	<div class="row">
+		<div class="col-lg-3">
+			<img src="/img/{{Avatar}}" style="height:200px; margin-left:70px; margin-bottom:100px ">
+		</div>
+		<div class="col-lg-8">
+			<div style="color:red"><h1 style="margin-left:200px"> Hồ Sơ Của Tôi</h1></div>
+			<div style="font-family:'Times New Roman', Times, serif; font-size:x-large"  class="text-primary" >Mã người dùng:{{UserID}}</div>
+			<div style="font-family:'Times New Roman', Times, serif; font-size:x-large"  class="text-primary">Họ Tên:{{Username}}  </div>
+			<div style="font-family:'Times New Roman', Times, serif; font-size:x-large"  class="text-primary">Email:{{Email}}</div>
+			<button id="dmk" onclick="document.getElementById('areaChangePasswd').style.display='block'" style="height:60px; width:200px; font-size:larger" >Đổi mật khẩu</button>
+			<div id="areaChangePasswd" style="display:none;">
+				<div class="form-group" style="margin-left: 225px">
+					<label for="txtPassword"><b>Mật Khẩu Hiện Tại</b></label>
+					<div><input type="password" placeholder="Nhập Mật Khẩu " id="old_pass" name="txtPassword"></div>
+				</div>
+				<div class="form-group" style="margin-left: 225px">
+					<label for="txtPassword1"><b>Mật Khẩu Mới</b></label>
+					<div><input type="password" placeholder="Nhập Mật Khẩu mới " id="new_pass" name="txtPassword1"></div>
+				</div>
+				<div class="form-group" style="margin-left: 225px">
+					<label for="txtPassword2"><b>Xác Nhân Mật Khẩu</b></label>
+					<div><input type="password" placeholder="Nhập lại Mật Khẩu " id="re_new_pass" name="txtPassword2"></div>
+				</div>
+				<button class="btn btn-primary" id="submit_change_pass">
+					<span class="glyphicon glyphicon-ok"></span> Thay đổi
+				</button>
+				<br><br>
+			</div>
+			<div class="alert alert-danger hidden"></div>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+	</script>
 
 
 

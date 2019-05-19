@@ -45,12 +45,13 @@
                 <div class="col-sm-7" style="float:left; margin-top:10px">
                     <input class="search" id="txtKeyword" type="text" style="width:100%;" placeholder="Tìm kiếm..." />
                     <div>
-                        <img style="height:27px;margin-top:-75px; margin-left: 230px" src="/img/search.png" />
+                        <img id="buttonsearch" style="height:27px;margin-top:-75px; margin-left: 230px" src="/img/search.png" />
                     </div>
                 </div>
 				<div class="col-sm-5" style="float:left;margin-top:20px">
 					<a class="col-sm-3 nav-a-right" href="/SanPham/Sanphamyt/"><img class="nav-img-right" src="/img/heart.png" /></a>
 					<a class="col-sm-3 nav-a-right" href="/SanPham/Giohang/"><img class="nav-img-right" src="/img/bag.png" /></a>
+					
 					@if (UserLoginViewModel.Current == null)
 	{
 				<a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
@@ -58,7 +59,7 @@
 }
 else
 {
-				<a class="col-sm-3 nav-a-right" id="btnLogin"><img id="avatar" class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
+				<a class="col-sm-3 nav-a-right" id="btnLogin" ><img id="avatar"  class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
 				<a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
 				@*@Html.ActionLink("Log Out", "LogOut", "Home");*@
 }
@@ -111,6 +112,9 @@ else
 					</div>
 				</div>
             </div>
+			<div style=" margin-left:1100px">
+				<a style="font-size:15px; color:blue" href="/Home/ttcn">Xem thông tin</a>
+			</div>
         </div>
     </nav>
 

@@ -267,7 +267,7 @@ namespace PhukienDT.Controllers
 				if (!string.IsNullOrEmpty(keyword))
 				{
 					var keysearch = keyword.Trim().ToUpper();
-					data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keyword));
+					data = data.Where(x => (x.masp + x.tensp + x.mota + (x.NccNavigation == null ? "" : x.NccNavigation.tenncc)).ToUpper().Contains(keysearch));
 				}
 				int totalRow = data.Count();
 				data = data.Skip((page - 1) * pageSize).Take(pageSize);
@@ -283,6 +283,28 @@ namespace PhukienDT.Controllers
 				return Json(ex.Message, JsonRequestBehavior.AllowGet);
 			}
 		}
+
+        public JsonResult Timkiem(string keyword, int page, int pageSize)
+        {
+            try
+            {
+                var keysearch = keyword.Trim().ToUpper();
+                var data = _sanphamService.GetAll().Where(x => x.tensp.Contains(keysearch));
+                
+                int totalRow = data.Count();
+                data = data.Skip((page - 1) * pageSize).Take(pageSize);
+                //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+                //var result = JsonConvert.SerializeObject(data, Formatting.Indented, jss);
+
+                return Json(new { Result = data, PageCount = totalRow }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         [HttpPost]
 		public JsonResult Like(int id)
