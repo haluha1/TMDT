@@ -17,6 +17,12 @@
         //});
 
         //loadReligion();
+        $('body').on('click', '#xemcthd', function () {
+            var Id = $(this).parent().parent().parent().find('td:eq(0)').text();
+            loadcthd(Id);
+        });
+
+
         general.configs.pageSize = 12;
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -171,7 +177,9 @@ function loadDataHd(isPageChanged) {
                 //}
                 render += Mustache.render(template, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
                     //img: imgsrc,
                     Trangthai: item.tinhtrang,
@@ -216,9 +224,10 @@ function loadDataChoxacnhan(isPageChanged) {
 
                 render1 += Mustache.render(template1, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -261,9 +270,10 @@ function loadDataGiaohang(isPageChanged) {
 
                 render2 += Mustache.render(template2, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -306,9 +316,10 @@ function loadDataHoanthanh(isPageChanged) {
 
                 render3 += Mustache.render(template3, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -351,9 +362,10 @@ function loadDataHuy(isPageChanged) {
 
                 render4 += Mustache.render(template4, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -365,6 +377,39 @@ function loadDataHuy(isPageChanged) {
             $('#new-Product4').html(render4);
             wrapPaging(response.PageCount, function () {
                 loadDataHuy();
+            }, isPageChanged);
+        },
+        error: function (status) {
+            console.log(status);
+            general.notify('Không thể load dữ liệu', 'error');
+        }
+    });
+}
+
+function loadcthd(id) {
+    var template5 = $('#table-template5').html();
+    var render5 = "";
+    $.ajax({
+        type: 'GET',
+        url: '/Hoadon/GetAllCthdById',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: {
+            id: id,
+        },
+        success: function (response) {
+            console.log(response);
+                render5 += Mustache.render(template5, {
+                    MaHD: item.mahd,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
+                }); 
+            $('#new-Product5').html(render5);
+            wrapPaging(response.PageCount, function () {
+                loadcthd();
             }, isPageChanged);
         },
         error: function (status) {

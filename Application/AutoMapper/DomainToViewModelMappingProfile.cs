@@ -24,12 +24,12 @@ namespace Application.AutoMapper
 			
 			CreateMap<Cthd, CthdViewModel>();
 			CreateMap<CtRating, CtRatingViewModel>();
-			CreateMap<Giatin, GiatinViewModel>();
+			CreateMap<Giatin, GiatinViewModel>().ForMember(m=>m.Hoadonmuatins, opt=>opt.Ignore());
 			
 			CreateMap<Hoadon, HoadonViewModel>().MaxDepth(1).AfterMap((src, dest) =>
             {
                 dest.KhachHangNavigation.Hoadons = null;
-                
+				dest.KhachHangNavigation.CtGiohangs = null;
                 foreach (var i in dest.Cthdons)
                 {
                     i.HoadonNavigation = null;
@@ -39,7 +39,12 @@ namespace Application.AutoMapper
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 
             });
-            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>();
+            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().MaxDepth(1).AfterMap((src, dest) =>
+			{
+				dest.NccNavigation.Hoadonmuatins = null;
+				dest.NccNavigation.Sanphams = null;
+				dest.NccNavigation.Hoadons = null;
+			});
             CreateMap<CtGiohang, CtGiohangViewModel>();
 			
 			CreateMap<Khachhang, KhachhangViewModel>().ForMember(m=>m.Hoadons, opt=>opt.Ignore())
@@ -47,11 +52,18 @@ namespace Application.AutoMapper
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());
 			CreateMap<Mucduytri, MucduytriViewModel>();
 			CreateMap<Ncc, NccViewModel>().ForMember(m=>m.Sanphams, opt=>opt.Ignore())
-										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore());
+										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore())
+										  .MaxDepth(1).AfterMap((src, dest) =>
+										  {
+											  foreach (var i in dest.Hoadonmuatins)
+											  {
+												  i.NccNavigation = null;
+											  }
+										  });
 
-            CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
-                                                  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())
-                                                  .ForMember(m => m.KhachHangYeuThichs, opt => opt.Ignore());
+			CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
+												  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())
+												  .ForMember(m => m.KhachHangYeuThichs, opt => opt.Ignore());
 
 
 

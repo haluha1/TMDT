@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class conf : DbMigration
+    public partial class eee : DbMigration
     {
         public override void Up()
         {
@@ -69,13 +69,21 @@ namespace Data.EF.Migrations
                         KeyId = c.Int(nullable: false, identity: true),
                         mahd = c.Int(nullable: false),
                         makh = c.Int(nullable: false),
+                        ncc_FK = c.Int(nullable: false),
                         tongtien = c.Double(nullable: false),
                         thoigian = c.String(),
                         tinhtrang = c.String(),
+                        Name = c.String(),
+                        Phone = c.String(),
+                        Address = c.String(),
+                        Note = c.String(),
+                        NccNavigation_User_FK = c.Int(),
                     })
                 .PrimaryKey(t => t.KeyId)
+                .ForeignKey("dbo.Ncc", t => t.NccNavigation_User_FK)
                 .ForeignKey("dbo.KhachHang", t => t.makh, cascadeDelete: true)
-                .Index(t => t.makh);
+                .Index(t => t.makh)
+                .Index(t => t.NccNavigation_User_FK);
             
             CreateTable(
                 "dbo.CTHD",
@@ -104,9 +112,11 @@ namespace Data.EF.Migrations
                         mancc = c.Int(nullable: false),
                         dongia = c.Double(nullable: false),
                         soluong = c.Int(nullable: false),
+                        conlai = c.Int(nullable: false),
                         mota = c.String(),
                         tenhinh = c.String(),
                         khuyenmai = c.Single(nullable: false),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.KeyId)
                 .ForeignKey("dbo.LoaiSP", t => t.maloai, cascadeDelete: true)
@@ -146,6 +156,7 @@ namespace Data.EF.Migrations
                         mancc = c.Int(nullable: false),
                         magiatin = c.Int(nullable: false),
                         thoigian = c.String(),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.KeyId)
                 .ForeignKey("dbo.GiaTin", t => t.magiatin, cascadeDelete: true)
@@ -241,6 +252,7 @@ namespace Data.EF.Migrations
             DropForeignKey("dbo.WebMaster", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.Ncc", "User_FK", "dbo.TaiKhoan");
             DropForeignKey("dbo.KhachHang", "User_FK", "dbo.TaiKhoan");
+            DropForeignKey("dbo.HoaDon", "NccNavigation_User_FK", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "mancc", "dbo.Ncc");
             DropForeignKey("dbo.HoaDonMuaTin", "magiatin", "dbo.GiaTin");
             DropForeignKey("dbo.SanPham", "maloai", "dbo.LoaiSP");
@@ -258,6 +270,7 @@ namespace Data.EF.Migrations
             DropIndex("dbo.SanPham", new[] { "maloai" });
             DropIndex("dbo.CTHD", new[] { "masp" });
             DropIndex("dbo.CTHD", new[] { "mahd" });
+            DropIndex("dbo.HoaDon", new[] { "NccNavigation_User_FK" });
             DropIndex("dbo.HoaDon", new[] { "makh" });
             DropIndex("dbo.CtRating", new[] { "makh" });
             DropIndex("dbo.KhachHang", new[] { "User_FK" });

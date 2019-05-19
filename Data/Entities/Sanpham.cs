@@ -1,6 +1,8 @@
-﻿using Infrastructure.SharedKernel;
+﻿using Data.Enum;
+using Infrastructure.SharedKernel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace Data.Entities
 			KhachHangYeuThichs = new HashSet<Khachhang>();
 		}
 
-		public Sanpham(int keyId, string masp, string tensp, int maloai, int mancc, double dongia, int soluong, string mota, string tenhinh, float khuyenmai)
+		public Sanpham(int keyId, string masp, string tensp, int maloai, int mancc, double dongia, int soluong, int conlai, string mota, string tenhinh, float khuyenmai, ProductStatus status)
 		{
 			KeyId = keyId;
 			this.masp = masp;
@@ -25,9 +27,11 @@ namespace Data.Entities
 			this.mancc = mancc;
 			this.dongia = dongia;
 			this.soluong = soluong;
+			this.conlai = conlai;
 			this.mota = mota;
 			this.tenhinh = tenhinh;
 			this.khuyenmai = khuyenmai;
+			Status = status;
 		}
 
 		public string masp { get; set; }
@@ -36,9 +40,12 @@ namespace Data.Entities
         public int mancc { get; set; }
         public double dongia { get; set; }
         public int soluong { get; set; }
-        public string mota { get; set; }
+		public int conlai { get; set; }
+		public string mota { get; set; }
         public string tenhinh { get; set; }
         public float khuyenmai { get; set; }
+		[DefaultValue(ProductStatus.Processing)]
+		public ProductStatus Status { get; set; }
 		public virtual Loaisp LoaispNavigation { get; set; }
 		public virtual ICollection<Cthd> Cthds { get; set; }
 		public virtual Ncc NccNavigation { get; set; }

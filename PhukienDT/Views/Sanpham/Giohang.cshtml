@@ -22,28 +22,33 @@
 		</div>
 
 		<div class="container">
-			<div id="form-body">
-				<div style="margin-left: 225px">
-					<label for="txtName"><b>Họ tên</b></label>
-					<div><input type="text" placeholder="Họ tên" id="txtName" name="txtEmail"></div>
-				</div>
+            <div id="form-body">
+                <div style="margin-left: 225px">
+                    <label for="chkNewInfo"><b>Dùng thông tin khác </b></label>
+                    <input type="checkbox" id="chkNewInfo" name="chkNewInfo" value="">
 
-				<div style="margin-left: 225px">
-					<label for="txtAddress"><b>Địa chỉ</b></label>
-					<div><input type="text" placeholder="Địa chỉ" id="txtAddress" name="txtAddress"></div>
-				</div>
+                </div>
+                <div style="margin-left: 225px">
+                    <label for="txtName"><b>Họ tên</b></label>
+                    <div><input type="text" placeholder="Họ tên" id="txtName" name="txtEmail"></div>
+                </div>
 
-				<div style="margin-left: 225px">
-					<label for="txtPhone"><b>Số điện thoại</b></label>
-					<div><input type="text" placeholder="Số điện thoại" id="txtPhone" name="txtPhone"></div>
-				</div>
+                <div style="margin-left: 225px">
+                    <label for="txtAddress"><b>Địa chỉ</b></label>
+                    <div><input type="text" placeholder="Địa chỉ" id="txtAddress" name="txtAddress"></div>
+                </div>
 
-				<div style="margin-left: 225px">
-					<label for="txtNote"><b>Ghi chú</b></label>
-					<div><input type="text" placeholder="..." id="txtNote" name="txtNote"></div>
-				</div>
+                <div style="margin-left: 225px">
+                    <label for="txtPhone"><b>Số điện thoại</b></label>
+                    <div><input type="text" placeholder="Số điện thoại" id="txtPhone" name="txtPhone"></div>
+                </div>
 
-			</div>
+                <div style="margin-left: 225px">
+                    <label for="txtNote"><b>Ghi chú</b></label>
+                    <div><input type="text" placeholder="..." id="txtNote" name="txtNote"></div>
+                </div>
+
+            </div>
 			<div id="btnArea">
 				<div style="margin-left: 400px"><button id="btnMua" type="button">Đặt hàng</button></div>
 			</div>
@@ -96,4 +101,4 @@
 </script>
 <div style="margin-top:100px " id="Product-wrapper"></div>
 <br /> Tổng Tiền : <p id="tongTien"></p>
-<button class="btn btn-danger" onclick="document.getElementById('buy').style.display='block'" style="float: right;">Mua</button>
+<button class="btn btn-danger" id="btnGoBuy" style="float: right;">Mua</button>

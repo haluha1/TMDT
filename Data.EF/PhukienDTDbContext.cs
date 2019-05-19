@@ -105,6 +105,7 @@ namespace Data.EF
 			.HasRequired<Khachhang>(s => s.KhachHangNavigation)
 			.WithMany(g => g.Hoadons)
 			.HasForeignKey<int>(s => s.makh);
+			
 
 			modelBuilder.Entity<Hoadonmuatin>().HasKey(e => e.KeyId).ToTable("HoaDonMuaTin");
 			modelBuilder.Entity<Hoadonmuatin>()

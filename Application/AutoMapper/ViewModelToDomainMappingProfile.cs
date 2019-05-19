@@ -13,7 +13,7 @@ namespace Application.AutoMapper
 	{
 		public ViewModelToDomainMappingProfile()
 		{
-			CreateMap<SanphamViewModel, Sanpham>().ConstructUsing(c => new Sanpham(c.KeyId, c.masp, c.tensp, c.maloai, c.mancc, c.dongia, c.soluong, c.mota, c.tenhinh, c.khuyenmai));
+			CreateMap<SanphamViewModel, Sanpham>().ConstructUsing(c => new Sanpham(c.KeyId, c.masp, c.tensp, c.maloai, c.mancc, c.dongia, c.soluong, c.conlai, c.mota, c.tenhinh, c.khuyenmai, c.Status));
 
 			//CreateMap<RatingViewModel, Rating>().ConstructUsing(c => new Rating(c.KeyId, c.marating, c.soluongrate, c.diemtb, c.RatingFor));
 			//CreateMap<TaiKhoanViewModel, TaiKhoan>().ConstructUsing(c => new TaiKhoan(c.KeyId, c.matk, c.hoten, c.email, c.diachi, c.sdt, c.sotk, c.matkhau, c.thoigiandk, c.avatar, c.UserType));

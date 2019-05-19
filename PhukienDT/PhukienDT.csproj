@@ -175,6 +175,7 @@
     <Compile Include="Controllers\NguoibanController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
+    <Compile Include="Controllers\WebmasterController.cs" />
     <Compile Include="Ctsp.aspx.cs">
       <DependentUpon>Ctsp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,6 +271,28 @@
     <Content Include="img\rabbit1.png" />
     <Content Include="img\search.png" />
     <Content Include="Models\template.html" />
+    <Content Include="Scripts\admin-side\css\custom.css" />
+    <Content Include="Scripts\admin-side\css\custom.min.css" />
+    <Content Include="Scripts\admin-side\css\helper.css" />
+    <Content Include="Scripts\admin-side\css\style.css" />
+    <Content Include="Scripts\admin-side\images\american-express.png" />
+    <Content Include="Scripts\admin-side\images\cropper.jpg" />
+    <Content Include="Scripts\admin-side\images\imagenotfound.png" />
+    <Content Include="Scripts\admin-side\images\img.jpg" />
+    <Content Include="Scripts\admin-side\images\inbox.png" />
+    <Content Include="Scripts\admin-side\images\mastercard.png" />
+    <Content Include="Scripts\admin-side\images\media.jpg" />
+    <Content Include="Scripts\admin-side\images\paypal.png" />
+    <Content Include="Scripts\admin-side\images\picture.jpg" />
+    <Content Include="Scripts\admin-side\images\prod-1.jpg" />
+    <Content Include="Scripts\admin-side\images\prod-2.jpg" />
+    <Content Include="Scripts\admin-side\images\prod-3.jpg" />
+    <Content Include="Scripts\admin-side\images\prod-4.jpg" />
+    <Content Include="Scripts\admin-side\images\prod-5.jpg" />
+    <Content Include="Scripts\admin-side\images\user.png" />
+    <Content Include="Scripts\admin-side\images\visa.png" />
+    <Content Include="Scripts\admin-side\js\custom.js" />
+    <Content Include="Scripts\admin-side\js\custom.min.js" />
     <Content Include="Scripts\app\home\index.js" />
     <Content Include="Scripts\app\home\ttcn.js" />
     <Content Include="Scripts\app\nguoiban\muatin.js" />
@@ -294,6 +317,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\app\webmaster\postinvoice.js" />
     <Content Include="Scripts\bootstrap-datepicker\.gitignore" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
@@ -637,6 +661,11 @@
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\malformed_cookie.html" />
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\server.js" />
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\test\tests.js" />
+    <Content Include="Scripts\font-awesome\.gitignore" />
+    <Content Include="Scripts\font-awesome\css\font-awesome.css" />
+    <Content Include="Scripts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Scripts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Scripts\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery-validation\dist\additional-methods.js" />
@@ -659,6 +688,10 @@
     <Content Include="Scripts\notifyjs\examples\metro.html" />
     <Content Include="Scripts\notifyjs\examples\multi-text.html" />
     <Content Include="Scripts\notifyjs\examples\position.html" />
+    <Content Include="Scripts\timepicker.js\timepicker.css" />
+    <Content Include="Scripts\timepicker.js\timepicker.js" />
+    <Content Include="Scripts\timepicker.js\timepicker.min.css" />
+    <Content Include="Scripts\timepicker.js\timepicker.min.js" />
     <Content Include="Scripts\twbs-pagination\examples\bootstrap-v4.html" />
     <Content Include="Scripts\twbs-pagination\examples\index.html" />
     <Content Include="Scripts\twbs-pagination\Gruntfile.js" />
@@ -832,6 +865,43 @@
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\cookie.jquery.json" />
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\package.json" />
     <Content Include="Scripts\carhartl-jquery-cookie-92b7715\README.md" />
+    <Content Include="Scripts\font-awesome\.bower.json" />
+    <Content Include="Scripts\font-awesome\.npmignore" />
+    <Content Include="Scripts\font-awesome\bower.json" />
+    <Content Include="Scripts\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Scripts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Scripts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\font-awesome\less\animated.less" />
+    <Content Include="Scripts\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Scripts\font-awesome\less\core.less" />
+    <Content Include="Scripts\font-awesome\less\fixed-width.less" />
+    <Content Include="Scripts\font-awesome\less\font-awesome.less" />
+    <Content Include="Scripts\font-awesome\less\icons.less" />
+    <Content Include="Scripts\font-awesome\less\larger.less" />
+    <Content Include="Scripts\font-awesome\less\list.less" />
+    <Content Include="Scripts\font-awesome\less\mixins.less" />
+    <Content Include="Scripts\font-awesome\less\path.less" />
+    <Content Include="Scripts\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Scripts\font-awesome\less\screen-reader.less" />
+    <Content Include="Scripts\font-awesome\less\stacked.less" />
+    <Content Include="Scripts\font-awesome\less\variables.less" />
+    <Content Include="Scripts\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Scripts\font-awesome\scss\_animated.scss" />
+    <Content Include="Scripts\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Scripts\font-awesome\scss\_core.scss" />
+    <Content Include="Scripts\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Scripts\font-awesome\scss\_icons.scss" />
+    <Content Include="Scripts\font-awesome\scss\_larger.scss" />
+    <Content Include="Scripts\font-awesome\scss\_list.scss" />
+    <Content Include="Scripts\font-awesome\scss\_mixins.scss" />
+    <Content Include="Scripts\font-awesome\scss\_path.scss" />
+    <Content Include="Scripts\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Scripts\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Scripts\font-awesome\scss\_stacked.scss" />
+    <Content Include="Scripts\font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -910,6 +980,9 @@
     <Content Include="Views\Sanpham\_Buy.cshtml" />
     <Content Include="Views\Home\ttcn.cshtml" />
     <Content Include="Views\Nguoiban\Thongtinnguoiban.cshtml" />
+    <Content Include="Views\Shared\_Layout_Webmaster.cshtml" />
+    <Content Include="Views\Webmaster\Index.cshtml" />
+    <Content Include="Views\Webmaster\PostInvoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,3 +46,24 @@ function loadData(isPageChanged) {
         }
     });
 }
+
+function Buy(that) {
+    $.ajax({
+        type: "POST",
+        url: "/Nguoiban/Muatin",
+        data: { id: that },
+        dataType: "json",
+        beforeSend: function () {
+            general.startLoad();
+        },
+        success: function (response) {
+            console.log(response);
+            general.notify(response.Result,'success');
+            general.stopLoad();
+        },
+        error: function (status) {
+            general.notify('Chưa thêm hóa đơn mua tin!', 'error');
+            general.stopLoad();
+        }
+    });
+}

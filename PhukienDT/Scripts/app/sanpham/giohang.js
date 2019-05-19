@@ -3,7 +3,7 @@
 		loadGioHang();
 		registerEvents();
 	}
-
+    var tempData;
 	function registerEvents() {
 		$('body').on('click', '.btnXoa', function () {
 			var id = $(this).data('id');	
@@ -39,28 +39,87 @@
 			general.configs.pageSize = $(this).val();
 			general.configs.pageIndex = 1;
 			loadData(true);
-		});
-		$('#btnMua').on('click', function () {
-			var kt = false;
-			if ($('#txtName').val() == '') {
-				general.notify("Vui lòng nhập tên người nhận!")
-				kt = true;
+        });
+        $('#btnGoBuy').on('click', function () {
+            var l = $('#new-Product tr').length;
+            if (l < 1) general.notify("Giỏ hàng trống!", 'warn');
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Home/IsLogin',
+                    dataType: 'json',
+                    beforeSend: function () { general.startLoad(); },
+                    success: function (response) {
+                        console.log(response);
+                        tempData = {
+                            UserName: response.Result.UserName,
+                            Address: response.Result.Address,
+                            Phone: response.Result.Phone
+                        };
+                        $('#chkNewInfo').prop('checked', false)
+                        $("#txtName").val(tempData.UserName);
+                        $("#txtAddress").val(tempData.Address);
+                        $("#txtPhone").val(tempData.Phone);
 
-			}
-			if ($('#txtAddress').val() == '') {
-				general.notify("Vui lòng nhập địa chỉ người nhận!")
-				kt = true;
+                        $("#txtName").prop('disabled', true);
+                        $("#txtAddress").prop('disabled', true);
+                        $("#txtPhone").prop('disabled', true);
+                        document.getElementById('buy').style.display = 'block';
+                        general.stopLoad();
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        general.stopLoad();
+                        //general.notify('Không thể load dữ liệu', 'error');
+                    }
+                });
+                
+            } 
+        });
 
-			}
-			if ($('#txtPhone').val() == '') {
-				general.notify("Vui lòng nhập số điện thoại người nhận!")
-				kt = true;
+        $('#chkNewInfo').on('change', function () {
+            var isChecked = $(this).is(':checked');
+            if (isChecked == true) {
+                $("#txtName").prop('disabled', false);
+                $("#txtAddress").prop('disabled', false);
+                $("#txtPhone").prop('disabled', false);
+            }
+            else {
+                //ajax => disable
+                $("#txtName").val(tempData.UserName);
+                $("#txtAddress").val(tempData.Address);
+                $("#txtPhone").val(tempData.Phone);
 
-			}
-			if (!kt) {
-				general.notify("Cảm ơn bạn đã đặt hàng!", "success");
-				document.getElementById('buy').style.display = 'none';
-			}
+                $("#txtName").prop('disabled', true);
+                $("#txtAddress").prop('disabled', true);
+                $("#txtPhone").prop('disabled', true);
+            }
+        })
+        $('#btnMua').on('click', function () {
+            if ($('#chkNewInfo').is(':checked') == true) {
+                var kt = false;
+                if ($('#txtName').val() == '') {
+                    general.notify("Vui lòng nhập tên người nhận!")
+                    kt = true;
+
+                }
+                if ($('#txtAddress').val() == '') {
+                    general.notify("Vui lòng nhập địa chỉ người nhận!")
+                    kt = true;
+
+                }
+                if ($('#txtPhone').val() == '') {
+                    general.notify("Vui lòng nhập số điện thoại người nhận!")
+                    kt = true;
+
+                }
+            }
+            SaveEntity();
+
+			//if (!kt) {
+			//	general.notify("Cảm ơn bạn đã đặt hàng!", "success");
+			//	document.getElementById('buy').style.display = 'none';
+			//}
 		});
 
 		$('body').on('change', '.soluongSp', function (e) {
@@ -147,6 +206,65 @@
 			}
 		});
 	}
+
+    function SaveEntity() {
+        var uName = $('#txtName').val();
+        var address = $('#txtAddress').val();
+        var sdt = $('#txtPhone').val();
+        var note = $('#txtNote').val();
+        var information = {
+            KeyId: 0,
+            mahd: 0,
+            makh: 0,
+            ncc_FK: 0,
+            tongtien: 0,
+            Name: uName,
+            Address: address,
+            Phone: sdt,
+            Note: note
+        };
+        var data = [];
+        $.each($('#new-Product tr'), function (keyT, valT) {
+            var Qty = $(this).find('td:eq(4) input').val();
+            var KId = $(this).find('td:eq(-1) button').data('id');
+            var sp = {
+                KeyId: 0,
+                masp: KId,
+                User_FK: 0,
+                soluong: Qty
+            };
+            if (Qty > 0) { data.push(sp); }
+        });
+        
+
+        $.ajax({
+            type: "POST",
+            url: "/Hoadon/SaveAllEntity",
+            data: {
+                Information: information,
+                Products: data
+            },
+            dataType: "json",
+            beforeSend: function () {
+                general.startLoad();
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.Status == "OK") {
+
+                    
+                    general.notify("Đặt hàng thành công!", 'success');
+                    document.getElementById('buy').style.display = 'none';
+                    alert("Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!");
+                    window.location.href = "/Home/Index";
+                }
+                general.stopLoad();
+            },
+            error: function (status) {
+                general.stopLoad();
+            }
+        });
+    }
 
 	function DeleteCart(that) {
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,11 @@ namespace Application.ViewModels
 		public int mancc { get; set; }
 		public double dongia { get; set; }
 		public int soluong { get; set; }
+		public int conlai { get; set; }
 		public string mota { get; set; }
 		public string tenhinh { get; set; }
 		public float khuyenmai { get; set; }
+		public ProductStatus Status { get; set; }
 		public virtual LoaispViewModel LoaispNavigation { get; set; }
 		public virtual ICollection<CthdViewModel> Cthds { get; set; }
 		public virtual NccViewModel NccNavigation { get; set; }

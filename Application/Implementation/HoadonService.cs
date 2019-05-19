@@ -26,13 +26,14 @@ namespace Application.Implementation
         {
             var hd = Mapper.Map<HoadonViewModel, Hoadon>(hoadonVm);
             _repository.AddReturn(hd);
+			hd.mahd = hd.KeyId;
             hoadonVm.KeyId = hd.KeyId;
-            //sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
-            //CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
-            //sp.Id = HP_EmployeeVm.Id;
-            //employee.UserBy.IsEmployee = true;
-            _unitOfWork.Commit();
-            return hoadonVm;
+			hoadonVm.mahd = hd.KeyId;
+			//sanphamVm.Id = _convertFunction.Instance.Create_Code(true, sp.KeyId,
+			//CommonConstants.defaultLengthNumberCode, const_AddressbookType.Employee);
+			//sp.Id = HP_EmployeeVm.Id;
+			//employee.UserBy.IsEmployee = true;
+			return hoadonVm;
         }
 
         public void Delete(int id)

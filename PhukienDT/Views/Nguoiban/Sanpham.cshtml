@@ -26,14 +26,14 @@
         <div><h3 style="color:red">Tổng số lượng sản phẩm</h3></div>
         <div class="row">
             <div class="col-lg-6">
-                <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
+                <input id="txtKeywordAll" type="text" placeholder="Tìm sản phẩm...">
                 <div>
-                    <img style="height:27px;margin-top:-85px; margin-left: 290px" src="/img/search.png" />
+                    <img id="img-Search-btnAll" style="height:27px;margin-top:-85px; margin-left: 290px" src="/img/search.png" />
                 </div>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-4">
-                <a class="col-sm-4 nav-a-right" id="btnthemsanpham" onclick="document.getElementById('user').style.display='block'"><button class="btn-danger btnthemsp"> + Thêm sản phẩm mới</button></a>
+                <a class="col-sm-4 nav-a-right" id="btnthemsanpham"><button class="btn-danger btnthemsp"> + Thêm sản phẩm mới</button></a>
                 <div id="user" class="modal">
 
                     <form class="modal-content animate" id="frmMaintainance" action="#" onsubmit="return validateForm()" method="post">
@@ -46,35 +46,35 @@
                         <div class="container">
                             <div style="margin-left: 180px">
                                 <label for="product"><b>Tên sản phẩm: </b></label>
-                                <input type="text" placeholder="Nhập thông tin ..." id="txtproduct" name="product" required>
+                                <input type="text" placeholder="Nhập thông tin ..." id="txttenmoi" name="product" required>
                             </div>
 
                             <div style="margin-left: 180px">
                                 <label for="loaiProduct"><b>Loại sản phẩm: </b></label>
                                 <div class="custom-select" style="width:200px; margin-left: 110px; margin-top: -23px; outline: none;width: 60%;padding: 12px 20px;margin: 8px 0;
                                         display: inline-block;border: 1px solid #ccc;box-sizing: border-box;border-radius: 20px;-moz-border-radius: 20px;-webkit-border-radius: 20px;">
-                                    <select>
-                                        <option value="0">Ốp điện thoại</option>
-                                        <option value="1">Bao máy tính bảng</option>
-                                        <option value="2">Ring- bóp</option>
-                                        <option value="3">Khác</option>
+                                    <select id="txtloaithem">
+                                        <option value="1">Ốp điện thoại</option>
+                                        <option value="2">Bao máy tính bảng</option>
+                                        <option value="3">Ring- bóp</option>
+                                        <option value="4">Khác</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div style="margin-left: 180px">
                                 <label for="dongia"><b>Đơn giá: </b></label>
-                                <input style="margin-left:43px" type="number" placeholder="Nhập thông tin ..." id="txtdongia" name="dongia" required>
+                                <input style="margin-left:43px" type="number" placeholder="Nhập thông tin ..." id="txtdongiathem" name="dongia" required>
                             </div>
 
                             <div style="margin-left: 180px">
                                 <label for="sluong"><b>Số lượng: </b></label>
-                                <input style="margin-left:34px" type="number" placeholder="Nhập thông tin ..." id="txtsluong" name="sluong" required>
+                                <input style="margin-left:34px" type="number" placeholder="Nhập thông tin ..." id="txtsluongthem" name="sluong" required>
                             </div>
 
                             <div style="margin-left: 180px">
                                 <label for="mota"><b>Mô tả: </b></label>
-                                <input style="margin-left:60px" type="text" placeholder="Nhập thông tin ..." id="txtmota" name="mota" required>
+                                <input style="margin-left:60px" type="text" placeholder="Nhập thông tin ..." id="txtmotathem" name="mota" required>
                             </div>
 
                             <div style="margin-left: 180px">
@@ -87,7 +87,7 @@
                             </div>
 
                             <div>
-                                <div style="margin-left: 400px"><button class="btnthemtk" type="submit">Thêm</button></div>
+                                <div style="margin-left: 400px"><button class="btnthemtk" id="btnAddSubmit" type="submit">Thêm</button></div>
                             </div>
                         </div>
                 </div>
@@ -116,9 +116,9 @@
             <div class="col-lg-8"><h3 style="color:red">Số lượng sản phẩm còn</h3></div>
         </div>
         <div>
-            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeywordCon" type="text" placeholder="Tìm sản phẩm...">
             <div>
-                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
+                <img id="img-Search-btnCon" style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
         </div>
         <div>
@@ -143,9 +143,9 @@
             <div class="col-lg-8"><h3 style="color:red">Số lượng sản phẩm hết</h3></div>
         </div>
         <div>
-            <input id="txtKeyword" type="text" placeholder="Tìm sản phẩm...">
+            <input id="txtKeywordHet" type="text" placeholder="Tìm sản phẩm...">
             <div>
-                <img style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
+                <img id="img-Search-btnHet" style="height:27px;margin-top:-85px; margin-left: 630px" src="/img/search.png" />
             </div>
         </div>
         <div>
@@ -202,10 +202,10 @@
         <div class="col-sm-5">
             <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
                 <select id="ddlShowPage">
-                    <option value="12" selected="selected">12</option>
-                    <option value="24">24</option>
-                    <option value="36">36</option>
-                    <option value="48">48</option>
+                    <option value="10" selected="selected">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
                 </select>
                 <span class="item-per-page">
                     bản ghi/trang.
@@ -236,10 +236,10 @@
             {{Quanlity}}
         </td>
         <td>
-            sl đã bán
+            {{Sold}}
         </td>
         <td>
-            sl còn lại
+            {{InStock}}
         </td>
     </tr>
 </script>
@@ -257,6 +257,9 @@
         </td>
         <td>
             {{Quanlity}}
+        </td>
+        <td>
+            {{InStock}}
         </td>
     </tr>
 </script>
@@ -290,7 +293,7 @@
             {{Quanlity}}
         </td>
         <td>
-            sl còn lại
+            {{Sold}}
         </td>
         <td>
             ghi chú lý do khóa và số lần bị khóa

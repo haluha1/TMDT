@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Webmaster.cshtml";
+}
+@section Scripts{
+    <script src="/Scripts/app/webmaster/postinvoice.js"></script>
+    <script>
+        var postjs = new postinvoiceController();
+        postjs.initialize();
+    </script>
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Hóa đơn mua tin</h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+            <div class="input-group">
+                <input type="text" id="txtKeyword" class="form-control" placeholder="Gõ từ khóa...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btnSearch" type="button">Tìm!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  form-group pull-right">
+            @*<button id="btnCreate" class="btn btn-success">Thêm mới</button>*@
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel panel-default table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="5%">Mã HD</th>
+                                <th>Nhà cung cấp</th>
+                                <th>Gói tin</th>
+                                <th>Thời gian</th>
+                                <th>Trạng thái</th>
+                                <th width="10%">#</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content"></tbody>
+                    </table>
+                </div>
+                <!--Pagination-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                            <select id="ddlShowPage">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                            </select>
+                            <span class="item-per-page">
+                                bản ghi/trang.
+                            </span>
+                            Tổng số bản ghi: <strong id="lblTotalRecords"></strong>
+                        </div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                            <ul id="paginationUL"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{MaHD}}</td>
+        <td>{{NCC}}</td>
+        <td>{{Type}}</td>
+        <td>{{Time}}</td>
+        <td>{{{Status}}}</td>
+        <th scope="row">
+            <button class="btn btn-md btn-success btn-edit" data-id="{{KeyId}}" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-pencil"></i></button>
+        </th>
+    </tr>
+</script>
+
+<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="formEditMastertitle">Xem</h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" id="frmMaintainance">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Số phiếu</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtId" readonly />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Trạng thái</label>
+                            <div class="col-sm-4" id="AVStatus">
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-4 hidden">
+                                <input type="text" class="form-control" id="txtEmployeeKeyId" readonly />
+                            </div>
+                            <label for="txtCustomer" class="col-sm-2 col-form-label">Tên nhân viên @*<span class="star">*</span>*@</label>
+                            <div class="col-sm-4 autocomplete">
+                                <input id="txtEmplyeeFullName" class="form-control" data-addressbookid type="text" name="" style="width:100%" autocomplete="off" readonly />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Số phép năm còn lại</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtNODaysRemain" readonly />
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="dtDateModified" class="col-sm-2 col-form-label">Ngày lập phiếu</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="dtDateCreated" readonly />
+                            </div>
+                            <label for="dtDateModified" class="col-sm-2 col-form-label">Ngày chỉnh sửa</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="dtDateModified" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Phòng ban</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtDepartment" readonly />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Chức vụ</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtPosition" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-4 hidden">
+                                <input type="text" class="form-control" id="txtPermitDaysId" readonly />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Loại nghỉ<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <select id="seldetailTimeKeepingType" class="form-control" name="seldetailTimeKeepingType">
+                                    <option value="">Chọn loại nghỉ</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Ngày bắt đầu<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtFromdate" name="txtFromdate" autocomplete="off" class="form-control date-picker" placeholder="Chọn ngày bắt đầu" />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Ngày kết thúc<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtTodate" name="txtTodate" autocomplete="off" class="form-control date-picker" placeholder="Chọn ngày kết thúc" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Số ngày nghỉ phép</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtNOdate" readonly />
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Phần trăm tính lương</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtPercentSalary" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Lý do<span class="star">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtReason" name="txtReason" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Chú thích</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtNote">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Bàn giao công việc lại cho</label>
+                            <div class="col-sm-4">
+                                <select id="selHandoverTo" placeholder="Chọn nhân viên" class="form-control" name="selHandoverTo">
+                                    <option value="">Chọn người bàn giao</option>
+                                </select>
+                            </div>
+                            <label for="" class="col-sm-2 col-form-label">Yêu cầu người xác nhận<span class="star">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="hidden" class="form-control" id="txtRequestToId">
+                                <select id="selRequestTo" placeholder="Chọn người xác nhận" class="form-control" name="selRequestTo">
+                                    <option value="">Chọn người xác nhận</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-8 checkbox pull-left">
+                                <label><input type="checkbox" value="" id="chkCommitBackToWork" onchange="document.getElementById('btnSave').disabled = !this.checked;">Tôi cam kết sẽ bắt đầu lại công việc sau thời gian nghỉ trên</label>
+                            </div>
+                            <div class="col-sm-4 hidden">
+                                <input type="text" class="form-control" id="txtStatusFK" readonly />
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-offset-2 col-sm-6" id="formEdit">
+                                <button type="button" id="btnSave" class="btn btn-success" disabled>Ghi</button>
+                                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Hủy</button>
+                            </div>
+                            <div class="col-sm-6" id="formEditMaster">
+
+                                <button type="button" id="btnRequest" class="btn btn-primary">Yêu cầu xác nhận</button>
+
+                                    <button type="button" id="btnApprove" class="btn btn-success">Xác nhận</button>
+                                    <button type="button" id="btnDeny" data-dismiss="modal" class="btn btn-danger">Không xác nhận</button>
+                              
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

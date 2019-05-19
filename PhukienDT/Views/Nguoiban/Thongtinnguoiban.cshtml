@@ -18,6 +18,12 @@
         <h3 style="color:red ; margin-left: 800px">Số lượng tin còn:{{Sltin}}</h3>
         <div class="row">
             <div class="col-lg-2"></div>
+            <div class="font col-lg-4">Mã nhà cung cấp:</div>
+            <div class="font col-lg-4">{{Mancc}}</div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
             <div class="font col-lg-4">Tên nhà cung cấp:</div>
             <div class="font col-lg-4">{{Tenncc}}</div>
             <div class="col-lg-2"></div>
@@ -54,17 +60,38 @@
         </div>*@
     </div>
 </script>
-    <div id="new-Product">
-    </div>
-    @*<script id="table-template" type="x-tmpl-mustache">
-        <h3 style="color:red ; margin-left: 800px">Số lượng tin còn:{{Sltin}}</h3>
-        <div>Tên nhà cung cấp: {{Tenncc}}</div>
-        <div>Tên shop: {{Ten}}</div>
-        <div>Giới thiệu: {{Gt}}</div>
-        <div>Email đăng ký: {{Email}}</div>
-        <div>Số điện thoại: {{Sdt}}</div>
-        <div>Mật khẩu: {{mk}}</div>
-    </script>*@
-
-
+<div id="new-Product"></div>
+<hr />
+<div>
+    <h2 style="text-align:center; color:red; font-weight:bold">THÔNG TIN HÓA ĐƠN MUA TIN</h2>
+</div>
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Mã hóa đơn</th>
+                <th>Gói giá tin</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody id="new-Product1"></tbody>
+    </table>
+</div>
+<script id="table-template1" type="x-tmpl-mustache">
+    <tr>
+        <td>
+            {{Mahd}}
+        </td>
+        <td>
+            {{Goigiatin}}
+        </td>
+        <td>
+            {{Thoigian}}
+        </td>
+        <td>
+            {{Trangthai}}
+        </td>
+    </tr>
+</script>
 
