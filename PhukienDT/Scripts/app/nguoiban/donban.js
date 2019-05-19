@@ -177,7 +177,9 @@ function loadDataHd(isPageChanged) {
                 //}
                 render += Mustache.render(template, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
                     //img: imgsrc,
                     Trangthai: item.tinhtrang,
@@ -222,9 +224,10 @@ function loadDataChoxacnhan(isPageChanged) {
 
                 render1 += Mustache.render(template1, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -267,9 +270,10 @@ function loadDataGiaohang(isPageChanged) {
 
                 render2 += Mustache.render(template2, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -312,9 +316,10 @@ function loadDataHoanthanh(isPageChanged) {
 
                 render3 += Mustache.render(template3, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -357,9 +362,10 @@ function loadDataHuy(isPageChanged) {
 
                 render4 += Mustache.render(template4, {
                     MaHD: item.mahd,
-                    TenKH: item.hoten,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
                     Total: item.tongtien,
-                    //img: imgsrc,
                     Trangthai: item.tinhtrang,
                 });
                 if ((i % 4 == 3 && i % 2 == 1) || (i + 1) == response.length) {
@@ -395,9 +401,11 @@ function loadcthd(id) {
             console.log(response);
                 render5 += Mustache.render(template5, {
                     MaHD: item.mahd,
-                    Masp: item.hoten,
-                    Slg: item.tongtien,
-                    Thanhtien: item.tinhtrang,
+                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
+                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
+                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
+                    Total: item.tongtien,
+                    Trangthai: item.tinhtrang,
                 }); 
             $('#new-Product5').html(render5);
             wrapPaging(response.PageCount, function () {
