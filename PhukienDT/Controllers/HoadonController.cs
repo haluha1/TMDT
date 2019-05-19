@@ -42,7 +42,7 @@ namespace PhukienDT.Controllers
             try
             {
                 var ncc = UserLoginViewModel.Current.KeyId;
-                var data = _hoadonService.GetAll();
+                var data = _hoadonService.GetAll().Where(x => x.ncc_FK != null && x.ncc_FK == ncc);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -66,7 +66,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _hoadonService.GetAll().Where(x=>x.tinhtrang == "Chờ xác nhận");
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _hoadonService.GetAll().Where(x => x.ncc_FK != null && x.ncc_FK == ncc && x.tinhtrang == "Chờ xác nhận");
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -90,7 +91,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _hoadonService.GetAll().Where(x => x.tinhtrang == "Giao hàng");
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _hoadonService.GetAll().Where(x => x.ncc_FK != null && x.ncc_FK == ncc && x.tinhtrang == "Giao hàng");
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -114,7 +116,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _hoadonService.GetAll().Where(x => x.tinhtrang == "Hoàn thành");
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _hoadonService.GetAll().Where(x => x.ncc_FK != null && x.ncc_FK == ncc && x.tinhtrang == "Hoàn thành");
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -138,7 +141,8 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                var data = _hoadonService.GetAll().Where(x => x.tinhtrang == "Hủy");
+                var ncc = UserLoginViewModel.Current.KeyId;
+                var data = _hoadonService.GetAll().Where(x => x.ncc_FK != null && x.ncc_FK == ncc && x.tinhtrang == "Hủy");
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();

@@ -1,14 +1,13 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Donban";
     Layout = "~/Views/Shared/Layout_Nguoiban.cshtml";
 }
 @section Scripts1{
-    <script src="/Scripts/app/nguoiban/donban.js"></script>
-    <script>
-        var donban = new donbanController();
-        donban.initialize();
-    </script>
+<script src="/Scripts/app/nguoiban/donban.js"></script>
+<script>
+    var donban = new donbanController();
+    donban.initialize();
+</script>
 }
 @section Style{
 
@@ -45,8 +44,7 @@
                         <th>Chi tiết đơn hàng</th>
                     </tr>
                 </thead>
-                <tbody id="new-Product">  
-                </tbody>
+                <tbody id="new-Product"></tbody>
             </table>
         </div>
     </div>
@@ -71,8 +69,7 @@
                         <th>Xử lý</th>
                     </tr>
                 </thead>
-                <tbody id="new-Product1">
-                </tbody>
+                <tbody id="new-Product1"></tbody>
             </table>
         </div>
     </div>
@@ -96,8 +93,7 @@
                             <th>Xử lý</th>
                         </tr>
                     </thead>
-                    <tbody id="new-Product2">
-                    </tbody>
+                    <tbody id="new-Product2"></tbody>
                 </table>
             </div>
         </div>
@@ -122,8 +118,7 @@
                         <th>Tình trạng</th>
                     </tr>
                 </thead>
-                <tbody id="new-Product3"> 
-                </tbody>
+                <tbody id="new-Product3"></tbody>
             </table>
         </div>
     </div>
@@ -147,8 +142,7 @@
                         <th>Tình trạng</th>
                     </tr>
                 </thead>
-                <tbody id="new-Product4">
-                </tbody>
+                <tbody id="new-Product4"></tbody>
             </table>
         </div>
     </div>
@@ -182,8 +176,9 @@
     <tr>
         <td>{{MaHD}}</td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{TenKH}}</div>
+            <div>Tên khách hàng: {{TenKH}}</div>
+            <div>Địa chỉ: {{dc}}</div>
+            <div>Số điện thoại: {{sdt}}</div>
         </td>
         <td>
             {{Total}}
@@ -217,8 +212,9 @@
             <div>{{MaHD}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{TenKH}}</div>
+            <div>Tên khách hàng: {{TenKH}}</div>
+            <div>Địa chỉ: {{dc}}</div>
+            <div>Số điện thoại: {{sdt}}</div>
         </td>
         <td>
             {{Total}}
@@ -238,8 +234,9 @@
             <div>{{MaHD}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+            <div>Tên khách hàng: {{TenKH}}</div>
+            <div>Địa chỉ: {{dc}}</div>
+            <div>Số điện thoại: {{sdt}}</div>
         </td>
         <td>
             {{Total}}
@@ -259,8 +256,9 @@
             <div>{{MaHD}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+            <div>Tên khách hàng: {{TenKH}}</div>
+            <div>Địa chỉ: {{dc}}</div>
+            <div>Số điện thoại: {{sdt}}</div>
         </td>
         <td>
             {{Total}}
@@ -276,8 +274,9 @@
             <div>{{MaHD}}</div>
         </td>
         <td>
-            <div style="float:left"><img width="50px" src="../img/3.png" /></div>
-            <div style="float:left; margin-left: 10px; font-weight:bold;">{{CusName}}</div>
+            <div>Tên khách hàng: {{TenKH}}</div>
+            <div>Địa chỉ: {{dc}}</div>
+            <div>Số điện thoại: {{sdt}}</div>
         </td>
         <td>
             {{Total}}
