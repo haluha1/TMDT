@@ -39,7 +39,12 @@ namespace Application.AutoMapper
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 
             });
-            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().ForMember(m=>m.NccNavigation, opt=>opt.Ignore());
+            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().MaxDepth(1).AfterMap((src, dest) =>
+			{
+				dest.NccNavigation.Hoadonmuatins = null;
+				dest.NccNavigation.Sanphams = null;
+				dest.NccNavigation.Hoadons = null;
+			});
             CreateMap<CtGiohang, CtGiohangViewModel>();
 			
 			CreateMap<Khachhang, KhachhangViewModel>().ForMember(m=>m.Hoadons, opt=>opt.Ignore())
@@ -47,7 +52,14 @@ namespace Application.AutoMapper
 			CreateMap<Loaisp, LoaispViewModel>().ForMember(m => m.Sanphams, opt => opt.Ignore());
 			CreateMap<Mucduytri, MucduytriViewModel>();
 			CreateMap<Ncc, NccViewModel>().ForMember(m=>m.Sanphams, opt=>opt.Ignore())
-										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore());
+										  .ForMember(m=>m.TaiKhoanBy, opt=>opt.Ignore())
+										  .MaxDepth(1).AfterMap((src, dest) =>
+										  {
+											  foreach (var i in dest.Hoadonmuatins)
+											  {
+												  i.NccNavigation = null;
+											  }
+										  });
 
 			CreateMap<Sanpham, SanphamViewModel>().ForMember(m => m.Cthds, opt => opt.Ignore())
 												  .ForMember(m => m.CtGiohangs, opt => opt.Ignore())

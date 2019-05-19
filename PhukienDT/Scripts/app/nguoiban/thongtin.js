@@ -33,7 +33,7 @@ function loadThongtinNguoiban(isPageChanged) {
                     Mahd: item.KeyId,
                     Goigiatin: item.GiatinNavigation.soluongtin + "- " + item.GiatinNavigation.gia,
                     Thoigian: item.thoigian,
-                        //Trangthai: item.GiatinNavigation.trangthai
+                    Trangthai: item.Status == "0" ? "Chưa thanh toán" : "Đã xử lý"
                     });
         });
             $('#lblTotalRecords').text(response.PageCount);

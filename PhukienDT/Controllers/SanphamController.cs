@@ -454,8 +454,11 @@ namespace PhukienDT.Controllers
 				else
 				{
 					var user = UserLoginViewModel.Current;
+					var ncc = _userService.GetUser(user.KeyId);
+					ncc.NccNavigation.sltinton -= 1;
 					sanphamVm.mancc = user.KeyId;
 					_sanphamService.Add(sanphamVm);
+
 				}
 				if (_sanphamService.Save()) return Json(new { Result = sanphamVm, Status = "OK" }, JsonRequestBehavior.AllowGet);
 

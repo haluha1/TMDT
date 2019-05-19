@@ -160,7 +160,9 @@ namespace PhukienDT.Controllers
                 Hoadonmuatin hd = Mapper.Map<HoadonmuatinViewModel, Hoadonmuatin>(hdVm);
                 user.NccNavigation.Hoadonmuatins.Add(hd);
                 _userService.Save();
-                return Json(new { Result = Notification.BUYSUCCESS, Status = "OK" }, JsonRequestBehavior.AllowGet);
+				hd.mahd = hd.KeyId;
+				_userService.Save();
+				return Json(new { Result = Notification.BUYSUCCESS, Status = "OK" }, JsonRequestBehavior.AllowGet);
                 
 
             }

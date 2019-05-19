@@ -47,7 +47,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -71,7 +71,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -95,7 +95,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -119,7 +119,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -143,7 +143,7 @@ namespace PhukienDT.Controllers
                 {
                     var keysearch = keyword.Trim().ToUpper();
 
-                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keyword)).ToList();
+                    data = data.Where(x => x.KhachHangNavigation.TaiKhoanBy.hoten.ToUpper().Contains(keysearch)).ToList();
                 }
                 int totalRow = data.Count();
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
