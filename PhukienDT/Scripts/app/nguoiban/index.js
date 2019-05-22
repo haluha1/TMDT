@@ -257,7 +257,8 @@
             conlai: Soluong,
             mota: Mota,
             tenhinh: path,
-            khuyenmai: 0
+            khuyenmai: 0,
+            Status: 0
         };
         $.ajax({
             type: "POST",

@@ -57,7 +57,8 @@ function loadDetail() {
 			}
 
 
-			render += Mustache.render(template, {
+            render += Mustache.render(template, {
+                KeyId: response.Result.KeyId,
 				IMG: imgsrc,
 				Tensp: response.Result.tensp,
 				Dongia: response.Result.dongia,

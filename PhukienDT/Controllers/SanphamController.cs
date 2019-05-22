@@ -242,7 +242,7 @@ namespace PhukienDT.Controllers
             try
             {
 
-                var data = _sanphamService.GetAll().OrderByDescending(x => x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
+                var data = _sanphamService.GetAll().Where(x=>x.Status == Data.Enum.ProductStatus.Activated).OrderByDescending(x => x.KeyId).Skip((page - 1) * pageSize).Take(pageSize);
 
 
                 //JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
@@ -262,7 +262,7 @@ namespace PhukienDT.Controllers
             try
             {
 
-                var data = _sanphamService.GetAll().Where(x => x.LoaispNavigation.KeyId == id);
+                var data = _sanphamService.GetAll().Where(x => x.LoaispNavigation.KeyId == id && x.Status == Data.Enum.ProductStatus.Activated);
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     var keysearch = keyword.Trim().ToUpper();
@@ -475,7 +475,7 @@ namespace PhukienDT.Controllers
 			}
 		}
 
-
+		#endregion
 
 	}
 }

@@ -303,6 +303,17 @@
             };
             cthds.ForEach(s => context.Cthds.AddOrUpdate(s));
             context.SaveChanges();
-        }
+
+			// Function
+			var functions = new List<Function>
+			{
+				new Function{KeyId = "Webmaster", Name = "Quản lý tin", URL = "/", ParentId = null, IconCss = "fa-money" },
+				new Function{KeyId = "WebmasterChild1", Name = "Mua tin", URL = "/Webmaster/PostInvoice", ParentId = "Webmaster", IconCss = "fa-money" },
+				new Function{KeyId = "WebmasterChild2", Name = "Duyệt tin", URL = "/Webmaster/PostProduct", ParentId = "Webmaster", IconCss = "fa-money" }
+
+			};
+			functions.ForEach(s => context.Functions.AddOrUpdate(s));
+			context.SaveChanges();
+		}
     }
 }

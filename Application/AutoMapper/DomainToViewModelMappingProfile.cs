@@ -39,7 +39,7 @@ namespace Application.AutoMapper
                 dest.KhachHangNavigation.TaiKhoanBy.KhachhangNavigation = null;
 
             });
-            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().MaxDepth(1).AfterMap((src, dest) =>
+            CreateMap<Hoadonmuatin, HoadonmuatinViewModel>().AfterMap((src, dest) =>
 			{
 				dest.NccNavigation.Hoadonmuatins = null;
 				dest.NccNavigation.Sanphams = null;
@@ -84,6 +84,7 @@ namespace Application.AutoMapper
 						
 				}
 			});
+			//CreateMap<Function, FunctionViewModel>();
 		}
 	}
 }

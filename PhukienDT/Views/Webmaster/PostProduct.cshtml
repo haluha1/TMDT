@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Webmaster.cshtml";
+}
+@section Scripts{
+    <script src="/Scripts/app/webmaster/postProduct.js"></script>
+    <script>
+        var postPjs = new postProductController();
+        postPjs.initialize();
+    </script>
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Danh sách tin</h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+            <div class="input-group">
+                <input type="text" id="txtKeyword" class="form-control" placeholder="Gõ từ khóa...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btnSearch" type="button">Tìm!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  form-group pull-right">
+            @*<button id="btnCreate" class="btn btn-success">Thêm mới</button>*@
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel panel-default table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="10%">Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Nhà cung cấp</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                                <th width="10%">#</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content"></tbody>
+                    </table>
+                </div>
+                <!--Pagination-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                            <select id="ddlShowPage">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                            </select>
+                            <span class="item-per-page">
+                                bản ghi/trang.
+                            </span>
+                            Tổng số bản ghi: <strong id="lblTotalRecords"></strong>
+                        </div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                            <ul id="paginationUL"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ProductID}}</td>
+        <td>{{ProductName}}</td>
+        <td><img src="{{Img}}" width="35px" height="35px" /></td>
+        <td>{{Ncc}}</td>
+        <td>{{{Price}}}</td>
+        <td>{{{Qty}}}</td>
+        <td>{{{Status}}}</td>
+        <th scope="row">
+            <button class="btn btn-md btn-success btn-edit" data-id="{{KeyId}}" type="button" data-toggle="tooltip" data-placement="top" title="Xem" {{{IsCompleted}}}><i class="fa fa-pencil"></i></button>
+        </th>
+    </tr>
+</script>
+
+<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="formEditMastertitle">Xem</h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" id="frmMaintainance">
+
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <input type="file" id="fileInputAvatar" style="display:none" accept="image/*">
+                                <div class="avatarWrapper">
+                                    <div class="thumb" id="imgAvatar"></div>
+                                    <div class="avatarFunctionArea" id="avatarFunctionArea">
+                                        <a href="#" class="btnFunction" id="btnUpdateAvatar">Cập nhật</a>
+                                        <a href="#" class="btnFunction" id="btnDeleteAvatar">Xóa</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group row">
+                                    <input type="hidden" id="txtKeyId" />
+                                    <label for="txtProductCode" class="col-sm-2 col-form-label">Mã sản phẩm</label>
+                                    <div class="col-sm-4 autocomplete">
+                                        <input id="txtProductCode" class="form-control" data-addressbookid="" type="text" name="txtProductCode" style="width:100%" disabled />
+                                    </div>
+
+
+                                    <label for="txtMerchant" class="col-sm-2 col-form-label">Nhà cung cấp</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="txtMerchant" name="txtMerchant" disabled />
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="txtProductName" class="col-sm-2 col-form-label">Tên sản phẩm</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="txtProductName" name="txtProductName" disabled />
+                                    </div>
+                                    <label for="selProductType" class="col-sm-2 col-form-label">Loại</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="selProductType" name="selProductType" disabled />
+                                        @*<select id="selProductType" class="form-control" name="selProductType"></select>*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <label for="txtPrice" class="col-sm-2 col-form-label">Đơn giá</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="txtPrice" name="txtPrice" disabled />
+                                    </div>
+                                    <label for="txtQty" class="col-sm-2 col-form-label">Số lượng</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="txtQty" name="txtQty" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <label for="txtSale" class="col-sm-2 col-form-label">Khuyến mãi</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="txtSale" name="txtSale" disabled />
+                                    </div>
+                                    <label for="txtStatus" class="col-sm-2 col-form-label">Trạng thái</label>
+                                    <div class="col-sm-4">
+                                        <select id="txtStatus" class="form-control" name="txtStatus" disabled />
+                                            <option value="0">Chờ phê duyệt</option>
+                                            <option value="1">Đã phê duyệt</option>
+                                            <option value="2">Hết hàng</option>
+                                            <option value="3">Khóa</option>
+                                            <option value="4">Không phê duyệt</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="txtDescription" class="col-sm-2 col-form-label">Mô tả</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="txtDescription" name="txtDescription" disabled />
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-offset-8 col-sm-4" id="formEdit">
+                                <button type="button" id="btnAccept" class="btn btn-success">Duyệt</button>
+                                <button type="button" id="btnCancel"  class="btn btn-danger">Không duyệt</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

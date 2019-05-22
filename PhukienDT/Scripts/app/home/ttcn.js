@@ -4,35 +4,8 @@
 		registerEvents();
 	}
 	function registerEvents() {
-		$('#ddlShowPage').on('change', function () {
-			general.configs.pageSize = $(this).val();
-			general.configs.pageIndex = 1;
-			loadData(true);
-		});
-		$('#btnMua').on('click', function () {
-			var kt = false;
-			if ($('#txtName').val() == '') {
-				general.notify("Vui lòng nhập tên người nhận!")
-				kt = true;
-
-			}
-			if ($('#txtAddress').val() == '') {
-				general.notify("Vui lòng nhập địa chỉ người nhận!")
-				kt = true;
-
-			}
-			if ($('#txtPhone').val() == '') {
-				general.notify("Vui lòng nhập số điện thoại người nhận!")
-				kt = true;
-
-			}
-			if (!kt) {
-				general.notify("Cảm ơn bạn đã đặt hàng!", "success");
-				document.getElementById('buy').style.display = 'none';
-			}
-		});
-
-			$('body').on('click', '#submit_change_pass', function (e) {
+		
+		$('body').on('click', '#submit_change_pass', function (e) {
 				var old_pass = $('#old_pass').val();
 				var new_pass = $('#new_pass').val();
 				var re_new_pass = $('#re_new_pass').val();
@@ -67,14 +40,7 @@
 					
 				}
 			});	
-
-		$('body').on('change', '.soluongSp', function (e) {
-			console.log($(this));
-			var dongia = $(this).closest('tr').find('td:eq(2)').text();
-			var soluong = $(this).closest('tr').find('td:eq(3) input').val()
-			$(this).closest('tr').find('td:eq(4)').text(dongia * soluong);
-			loadTotal();
-		});
+        
 	}
 }
 	function loadTTCN(isPageChanged) {

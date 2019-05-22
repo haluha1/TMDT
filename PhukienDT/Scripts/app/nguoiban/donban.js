@@ -1,26 +1,14 @@
 ﻿var donbanController = function () {
     this.initialize = function () {
         loadDataHd();
-        //TestSave();
         registerEvents();
     }
 
     function registerEvents() {
-        //$('.yearpicker').datepicker({
-        //    format: "yyyy",
-        //    //todayBtn: "linked",
-        //    clearBtn: true,
-        //    language: "vi",
-        //    todayHighlight: true,
-        //    startView: 2,
-        //    minViewMode: 2
+        //$('body').on('click', '#xemcthd', function () {
+        //    var Id = $(this).parent().parent().parent().find('td:eq(0)').text();
+        //    loadcthd(Id);
         //});
-
-        //loadReligion();
-        $('body').on('click', '#xemcthd', function () {
-            var Id = $(this).parent().parent().parent().find('td:eq(0)').text();
-            loadcthd(Id);
-        });
 
 
         general.configs.pageSize = 12;
@@ -78,24 +66,54 @@
             loadData(true);
         });
 
-
-        $('body').on('click', '.yeuthich', function (e) {
+        $('body').on('click', '.btnView', function (e) {
             e.preventDefault();
-            $(this).prop('disabled', true);
+            //document.getElementById('modal-add-edit').style.display = 'block';
             var that = $(this).data('id');
-            likeProduct(that);
+            resetFormMaintainance();
+            loadcthd(that);
+        });
+
+        $('body').on('click', '.btnAccept', function (e) {
+            e.preventDefault();
+            var that = $(this).data('id');
+            var data = "Giao hàng";
+            UpdateInvoice(that,data);
+        });
+        $('body').on('click', '.btnSuccess', function (e) {
+            e.preventDefault();
+            var that = $(this).data('id');
+            var data = "Hoàn thành";
+            UpdateInvoice(that,data);
+        });
+        $('body').on('click', '.btnCancel', function (e) {
+            e.preventDefault();
+            var that = $(this).data('id');
+            var data = "Hủy";
+            UpdateInvoice(that,data);
         });
 
 
 
 
+        //$('#btnAccept').on('click', function () {
+        //    var data = "Giao hàng";
+        //    UpdateInvoice(data);
+        //});
+        //$('#btnSuccess').on('click', function () {
+        //    var data = "Hoàn thành";
+        //    UpdateInvoice(data);
+        //});
+        //$('#btnCancel').on('click', function () {
+        //    var data = "Hủy";
+        //    UpdateInvoice(data);
+        //});
+
+
+
     }
-    //function UrlExists(url) {
-    //    var http = new XMLHttpRequest();
-    //    http.open('HEAD', url, false);
-    //    http.send();
-    //    return http.status != 404;
-    //}
+    
+
     function likeProduct(that) {
 
         $.ajax({
@@ -176,6 +194,7 @@ function loadDataHd(isPageChanged) {
                 //    }
                 //}
                 render += Mustache.render(template, {
+                    KeyId: item.KeyId,
                     MaHD: item.mahd,
                     TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
                     dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
@@ -223,6 +242,7 @@ function loadDataChoxacnhan(isPageChanged) {
                 }
 
                 render1 += Mustache.render(template1, {
+                    KeyId: item.KeyId,
                     MaHD: item.mahd,
                     TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
                     dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
@@ -269,6 +289,7 @@ function loadDataGiaohang(isPageChanged) {
                 }
 
                 render2 += Mustache.render(template2, {
+                    KeyId: item.KeyId,
                     MaHD: item.mahd,
                     TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
                     dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
@@ -315,6 +336,7 @@ function loadDataHoanthanh(isPageChanged) {
                 }
 
                 render3 += Mustache.render(template3, {
+                    KeyId: item.KeyId,
                     MaHD: item.mahd,
                     TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
                     dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
@@ -361,6 +383,7 @@ function loadDataHuy(isPageChanged) {
                 }
 
                 render4 += Mustache.render(template4, {
+                    KeyId: item.KeyId,
                     MaHD: item.mahd,
                     TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
                     dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
@@ -394,30 +417,113 @@ function loadcthd(id) {
         url: '/Hoadon/GetAllCthdById',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: {
-            id: id,
-        },
+        data: { id: id },
         success: function (response) {
             console.log(response);
+            $('#btnAccept').data('id', response.KeyId);
+            $('#btnSuccess').data('id', response.KeyId);
+            $('#btnCancel').data('id', response.KeyId);
+            if (response.tinhtrang == "Chờ xác nhận") {
+                $('#btnAccept').css('display', 'inline-block');
+                $('#btnSuccess').css('display', 'none');
+                $('#btnCancel').css('display', 'inline-block');
+            }
+            if (response.tinhtrang == "Giao hàng") {
+                $('#btnAccept').css('display', 'none');
+                $('#btnSuccess').css('display', 'inline-block');
+                $('#btnCancel').css('display', 'inline-block');
+            }
+            if (response.tinhtrang == "Hoàn thành" || response.tinhtrang == "Hủy") {
+                $('#btnAccept').css('display', 'none');
+                $('#btnSuccess').css('display', 'none');
+                $('#btnCancel').css('display', 'none');
+            }
+            $('#txtKeyId').val(response.KeyId);
+            $('#txtHdId').val(response.mahd);
+            $('#dtDateCreate').val(response.thoigian);
+            $('#txtCustomer').val(response.Name);
+            $('#txtPhoneNumber').val(response.Phone);
+            $('#txtAddress').val(response.Address);
+            $('#txtNote').val(response.Note);
+            $('#txtTotalMoney').text(response.tongtien + " VNĐ");
+            $.each(response.Cthdons, function (i, item) {
+                var imgsrc = "";
+                switch (item.SanphamNavigation.LoaispNavigation.KeyId) {
+                    case 2: {
+                        imgsrc = "/img/Bao/" + item.SanphamNavigation.tenhinh;
+                        break;
+                    }
+                    case 3: {
+                        imgsrc = "/img/Ring/" + item.SanphamNavigation.tenhinh;
+                        break;
+                    }
+                    case 4: {
+                        imgsrc = "/img/Khac/" + item.SanphamNavigation.tenhinh;
+                        break;
+                    }
+                    default: {
+                        imgsrc = "/img/" + item.SanphamNavigation.tenhinh;
+                        break;
+                    }
+                }
+                if (item.KeyId <= 50) imgsrc = "/img/" + item.SanphamNavigation.tenhinh;
+
                 render5 += Mustache.render(template5, {
-                    MaHD: item.mahd,
-                    TenKH: item.makh + "- " + item.KhachHangNavigation.TaiKhoanBy.hoten,
-                    dc: item.KhachHangNavigation.TaiKhoanBy.diachi,
-                    sdt: item.KhachHangNavigation.TaiKhoanBy.sdt,
-                    Total: item.tongtien,
-                    Trangthai: item.tinhtrang,
-                }); 
+                    ProductCode: item.SanphamNavigation.masp,
+                    ProductName: item.SanphamNavigation.tensp,
+                    Imgsrc: imgsrc,
+                    Price: item.SanphamNavigation.dongia,
+                    Qty: item.soluong,
+                    SubTotal: item.thanhtien
+                });
+
+            });
+                
             $('#new-Product5').html(render5);
-            wrapPaging(response.PageCount, function () {
-                loadcthd();
-            }, isPageChanged);
+            document.getElementById('modal-add-edit').style.display = 'block';
+            //wrapPaging(response.PageCount, function () {
+            //    loadcthd();
+            //}, isPageChanged);
         },
         error: function (status) {
             console.log(status);
-            general.notify('Không thể load dữ liệu', 'error');
         }
     });
 }
+
+function UpdateInvoice(that,data) {
+    //var id = $('#txtKeyId').val();
+
+    $.ajax({
+        type: "POST",
+        url: "/Hoadon/UpdateStatus",
+        data: { KeyId: that, Status: data },
+        dataType: "json",
+        beforeSend: function () {
+            general.startLoad();
+        },
+        success: function (response) {
+            if (response.Status == "OK") {
+                general.notify("Cập nhật đơn hàng thành công!", 'success');
+            }
+                
+            console.log(response);
+            general.stopLoad();
+            loadDataHd(true);
+            loadDataChoxacnhan(true);
+            loadDataGiaohang(true);
+            loadDataHoanthanh(true);
+            loadDataHuy(true);
+            document.getElementById('modal-add-edit').style.display = 'none';
+
+        },
+        error: function (status) {
+            general.stopLoad();
+        }
+    });
+}
+
+
 
 function TestSave() {
     var data = {

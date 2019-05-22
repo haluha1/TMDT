@@ -38,6 +38,7 @@ namespace PhukienDT
             container.RegisterType<ICthdService, CthdService>();
             container.RegisterType<ICtGiohangService, CtGiohangService>();
 			container.RegisterType<IHoadonmuatinService, HoadonmuatinService>();
+			container.RegisterType<IFunctionService, FunctionService>();
 			//container.RegisterType<IRatingService, RatingService>();
 			//container.RegisterType<ICtRatingService, CtRatingService>();
 

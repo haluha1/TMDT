@@ -56,7 +56,8 @@ namespace Application.Implementation
 
 		public HoadonmuatinViewModel GetById(int id)
 		{
-			throw new NotImplementedException();
+			var data = _repository.FindById(id);
+			return Mapper.Map<Hoadonmuatin, HoadonmuatinViewModel>(data);
 		}
 
 		public HoadonmuatinViewModel GetBysId(string keyword)
@@ -71,7 +72,9 @@ namespace Application.Implementation
 
 		public void Update(HoadonmuatinViewModel hoadonVm)
 		{
-			throw new NotImplementedException();
+			var sp = Mapper.Map<HoadonmuatinViewModel, Hoadonmuatin>(hoadonVm);
+
+			_repository.Update(sp);
 		}
 	}
 }

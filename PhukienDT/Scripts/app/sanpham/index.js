@@ -12,7 +12,14 @@
 			loadData(true);
 		});
 		
-
+        $('#buttonsearch').on('click', function () {
+            loadData(true);
+        });
+        $('#txtKeyword').on('keypress', function (e) {
+            if (e.which === 13) {
+                loadData(true);
+            }
+        });
 		$('body').on('click', '.mua', function (e) {
 			window.location.href = "/Sanpham/ctsp/" + $(this).data('id');
 		});

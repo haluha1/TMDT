@@ -1,0 +1,71 @@
+﻿@using System.Linq
+
+
+@{
+    Layout = null;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!--header start here-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Đăng nhập hệ thống</title>
+
+    <!-- Bootstrap -->
+    <link href="/Scripts/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link href="/Scripts/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!--Notify-->
+    <link href="/Scripts/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="/Scripts/admin-side/css/custom.css" rel="stylesheet" />
+    <link href="/Scripts/admin-side/css/style.css" rel="stylesheet" />
+</head>
+
+<body class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form id="formLogin" method="post">
+                        <h1>Đăng nhập</h1>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="text" class="form-control" value="Email" id="txtEmailLogin" name="txtEmailLogin" asp-for="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập email';}" />
+                        <input type="password" class="form-control" value="Mật khẩu" id="txtPasswordLogin" name="txtPasswordLogin" asp-for="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mật khẩu';}" style="margin-top:10px" />
+
+                        <input type="submit" id="btnLogin" class="btn btn-default submit btn_login" value="Đăng nhập">
+
+                    </form>
+                </section>
+
+                <!-- sau này dùng để login với fb or google-->
+
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/notifyjs/dist/notify.js"></script>
+    <script src="/Scripts/notifyjs/dist/styles/metro/notify-metro.js"></script>
+
+    <script src="/Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="/Scripts/jquery-validation/dist/additional-methods.js"></script>
+    <script src="/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="/Scripts/jquery-validation/dist/Localization/messages_vi.js"></script>
+    <script src="/Scripts/app/shared/general.js"></script>
+    <script src="/Scripts/app/webmaster/login.js"></script>
+    <script>
+        var lg = new loginController();
+        lg.initialize();
+    </script>
+</body>
+</html>

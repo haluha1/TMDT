@@ -263,6 +263,7 @@ function Login(e) {
                         $('#avatar').prop('src', avatarSrc); // Dùng ..\\img\\search.png hoặc /img/search.png
                         $('#btnExit').css('display', 'block');
                         $('#btnLogin').attr('onclick', '');
+                        $('#btnLogin').attr('href', '/Home/ttcn');
                         $('#user').css('display', 'none');
                         $('#frmMaintainance').trigger('reset');
                     }

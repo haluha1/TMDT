@@ -1,5 +1,6 @@
 ﻿@using Application.ViewModels;
-
+<!--import ViewImport roi -->
+@model List<FunctionViewModel>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +19,9 @@
 
     <!-- bootstrap-daterangepicker -->
     <link href="/Scripts/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
-   
+
     <link href="/Scripts/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
-    
+
     <link href="/Scripts/timepicker.js/timepicker.min.css" rel="stylesheet" />
 
     <!-- Custom Theme Style -->
@@ -35,7 +36,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Classy Login form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <!-- //for-mobile-apps -->
-    
+
     @RenderSection("Styles", required: false)
 </head>
 
@@ -72,66 +73,51 @@
                     <br />
 
                     <!-- sidebar menu -->
-                    @*@await Component.InvokeAsync("SideBar")*@                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-    <div class="menu_section">
-        <!--  <h3>Functions</h3>-->
-        <ul class="nav side-menu">
-           
+                    @*@await Component.InvokeAsync("SideBar")*@
 
-        </ul>
-    </div>
-    @*<div class="menu_section">
-        <h3>Live On</h3>
-        <ul class="nav side-menu">
-            <li>
-                <a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="e_commerce.html">E-commerce</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="project_detail.html">Project Detail</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="page_403.html">403 Error</a></li>
-                    <li><a href="page_404.html">404 Error</a></li>
-                    <li><a href="page_500.html">500 Error</a></li>
-                    <li><a href="plain_page.html">Plain Page</a></li>
-                    <li><a href="login.html">Login Page</a></li>
-                    <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="#level1_1">Level One</a>
-                    <li>
-                        <a>Level One<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li class="sub_menu">
-                                <a href="level2.html">Level Two</a>
-                            </li>
-                            <li>
-                                <a href="#level2_1">Level Two</a>
-                            </li>
-                            <li>
-                                <a href="#level2_2">Level Two</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#level1_2">Level One</a>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-        </ul>
-    </div>*@
 
-</div>
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <!--  <h3>Functions</h3>-->
+                            <ul class="nav side-menu">
+                                @if (Model != null)
+                                {
+                                    foreach (var item in Model.Where(x => string.IsNullOrEmpty(x.ParentId)))
+                                    {
+                                    <li>
+                                        @if (Model.Any(x => x.ParentId == item.KeyId))
+                                        {
+                                            <a><i class="fa @item.IconCss"></i> @item.Name <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                @foreach (var jitem in Model.Where(x => x.ParentId == item.KeyId))
+                                                {
+                                                    if (Model.Any(x => x.ParentId == jitem.KeyId))
+                                                    {
+                                                        <li>
+                                                            <a><i class="fa @jitem.IconCss"></i> @jitem.Name <span class="fa fa-chevron-down"></span></a>
+                                                            <ul class="nav child_menu">
+                                                                @foreach (var zjitem in Model.Where(x => x.ParentId == jitem.KeyId))
+                                                                {
+                                                                    <li><a href="@zjitem.URL">@zjitem.Name</a></li>
+                                                                }
+                                                            </ul>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="@jitem.URL">@jitem.Name</a></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        
+
+                    </div>
                     <!-- /sidebar menu -->
                 </div>
             </div>
@@ -146,7 +132,24 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 @*@await Html.PartialAsync("_LoginPartial")*@
-                            </li>
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    @if (UserLoginViewModel.Current.Avatar != string.Empty)
+                                    {
+                                        <img src="@UserLoginViewModel.Current.Avatar" alt="">@UserLoginViewModel.Current.UserName
+
+
+                                    }
+                                    else
+                                    {
+                                        <img src="/img/login.png" alt="">@UserLoginViewModel.Current.UserName
+                                    }
+
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="/Home/LogOut">Đăng xuất</a></li>
+                                </ul>
+</li>
                             <li role="presentation" class="dropdown" id="notification_content">
                                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-envelope-o"></i>
@@ -195,11 +198,11 @@
 
     <!-- jQuery -->
     <script src="/Scripts/jquery-3.3.1.js" charset="utf-8"></script>
-    
+
 
     <!-- Bootstrap -->
     <script src="/Scripts/bootstrap/dist/js/bootstrap.js"></script>
-    
+
     <script src="/Scripts/mustache/mustache.js"></script>
 
     <script src="/Scripts/twbs-pagination/jquery.twbsPagination.js"></script>
@@ -210,12 +213,12 @@
     <script src="/Scripts/jquery-validation/dist/additional-methods.js"></script>
     <script src="/Scripts/jquery-validation/dist/Localization/messages_vi.js"></script>
     <script src="/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    
+
     <script src="/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="/Scripts/bootstrap-datepicker/dist/locales/bootstrap-datepicker.vi.min.js"></script>
     <script src="/Scripts/notifyjs/dist/notify.js"></script>
     <script src="/Scripts/notifyjs/dist/styles/metro/notify-metro.js"></script>
-    
+
     <!-- Custom Theme Scripts -->
     <script src="/Scripts/app/shared/general.js"></script>
     @*<script src="~/app/shared/unitround.js"></script>*@
@@ -226,7 +229,7 @@
         var notification = new ngeneralController();
         notification.initialize();
     </script>
-    
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

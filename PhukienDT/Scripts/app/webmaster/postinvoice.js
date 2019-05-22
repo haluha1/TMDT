@@ -18,14 +18,39 @@
                 loadData(true);
             }
         });
-        
+        $('body').on('click', '.btn-edit', function (e) {
+            e.preventDefault();
+            var that = $(this).data('id');
+            Duyet(that);
+        });
         
 	}
     
 
+    
+}
 
-    
-    
+function Duyet(that) {
+    $.ajax({
+        type: "POST",
+        url: "/Webmaster/DuyetPostInvoice",
+        data: { id: that },
+        dataType: "json",
+        beforeSend: function () {
+            general.startLoad();
+        },
+        success: function (response) {
+            console.log(response);
+            general.stopLoad();
+            general.notify("Đã duyệt!", 'success');
+            loadData(true);
+
+        },
+        error: function (status) {
+            
+            general.stopLoad();
+        }
+    });
 }
 
 function loadData(isPageChanged) {
@@ -47,6 +72,7 @@ function loadData(isPageChanged) {
                 $.each(response.Result, function (i, item) {
                     var _color = '';
                     var status = '';
+                    var isCompleted = "";
                     if (item.Status == 0) {
                         _color = 'red';
                         status = 'Chưa thanh toán'
@@ -55,6 +81,7 @@ function loadData(isPageChanged) {
                     else {
                         _color = 'green';
                         status = 'Đã thanh toán';
+                        isCompleted = 'style="display: none;"';
                     }
                     
                     render += Mustache.render(template, {
@@ -64,6 +91,7 @@ function loadData(isPageChanged) {
                         Type: item.GiatinNavigation.soluongtin + " tin",
                         Time: item.thoigian,
                         Status: '<span class="badge bg-' + _color + '">' + status + '</span>',
+                        IsCompleted: isCompleted
                     });
 
                 });

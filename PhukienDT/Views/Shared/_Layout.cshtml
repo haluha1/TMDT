@@ -53,17 +53,17 @@
 					<a class="col-sm-3 nav-a-right" href="/SanPham/Giohang/"><img class="nav-img-right" src="/img/bag.png" /></a>
 					
 					@if (UserLoginViewModel.Current == null)
-	{
-				<a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
-				<a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut" style="display: none;"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
-}
-else
-{
-				<a class="col-sm-3 nav-a-right" id="btnLogin" ><img id="avatar"  class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
-				<a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
-				@*@Html.ActionLink("Log Out", "LogOut", "Home");*@
-}
-
+	                {
+				        <a class="col-sm-3 nav-a-right" id="btnLogin" onclick="document.getElementById('user').style.display='block'"><img id="avatar" class="avatar nav-img-right" src="/img/login.png" /></a>
+				        <a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut" style="display: none;"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
+                    }
+                    else
+                    {
+				        <a href="/Home/ttcn" class="col-sm-3 nav-a-right" id="btnLogin" ><img id="avatar"  class="avatar nav-img-right" src="/img/@UserLoginViewModel.Current.Avatar" /></a>
+				        <a class="col-sm-3 nav-a-right" id="btnExit" href="/Home/LogOut"><img id="avatar" class="avatar nav-img-right" src="/img/exit.png" /></a>
+				        @*@Html.ActionLink("Log Out", "LogOut", "Home");*@
+                    }
+    
 					<div id="user" class="modal">
 
 						<form class="modal-content animate" id="frmMaintainance" action="#" method="post">
@@ -112,9 +112,7 @@ else
 					</div>
 				</div>
             </div>
-			<div style=" margin-left:1100px">
-				<a style="font-size:15px; color:blue" href="/Home/ttcn">Xem thông tin</a>
-			</div>
+			
         </div>
     </nav>
 

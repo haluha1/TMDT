@@ -179,7 +179,7 @@ namespace PhukienDT.Controllers
         {
             try
             {
-                List<CthdViewModel> res = _cthdService.GetAllByInvoiceId(id);
+                HoadonViewModel res = _hoadonService.GetById(id);
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -254,6 +254,7 @@ namespace PhukienDT.Controllers
 						hd.ncc_FK = i;
 						hd.tongtien = 0;
 						hd.thoigian = DateTime.Now.ToShortDateString();
+						hd.tinhtrang = "Chờ xác nhận";
 						hd.Name = Information.Name;
 						hd.Phone = Information.Phone;
 						hd.Address = Information.Address;
@@ -303,6 +304,34 @@ namespace PhukienDT.Controllers
 
 				}
 				return Json(new { Result="Đã có lỗi xảy ra khi đặt hàng!", Status="FAIL"}, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				return Json(new { Result = ex.Message, Status = "FAIL" }, JsonRequestBehavior.AllowGet);
+			}
+		}
+
+		[HttpPost]
+		public JsonResult UpdateStatus(int KeyId, string Status)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+					return Json(allErrors, JsonRequestBehavior.AllowGet);
+				}
+				else
+				{
+					var hd = _hoadonService.GetById(KeyId);
+					hd.tinhtrang = Status;
+					_hoadonService.Update(hd);
+
+					if (_hoadonService.Save()) return Json(new { Result = hd, Status = "OK" }, JsonRequestBehavior.AllowGet);
+
+				}
+				return Json(new { Result = "Đã có lỗi xảy ra!", Status = "FAIL" }, JsonRequestBehavior.AllowGet);
 			}
 			catch (Exception ex)
 			{

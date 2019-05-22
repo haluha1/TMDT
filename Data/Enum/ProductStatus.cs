@@ -11,6 +11,7 @@ namespace Data.Enum
 		Processing,
 		Activated,
 		Sold,
-		Blocked
+		Blocked,
+		InActive
 	}
 }

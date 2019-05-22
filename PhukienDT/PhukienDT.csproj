@@ -317,6 +317,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\app\webmaster\login.js" />
+    <Content Include="Scripts\app\webmaster\postProduct.js" />
     <Content Include="Scripts\app\webmaster\postinvoice.js" />
     <Content Include="Scripts\bootstrap-datepicker\.gitignore" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
@@ -983,6 +985,8 @@
     <Content Include="Views\Shared\_Layout_Webmaster.cshtml" />
     <Content Include="Views\Webmaster\Index.cshtml" />
     <Content Include="Views\Webmaster\PostInvoice.cshtml" />
+    <Content Include="Views\Webmaster\Login.cshtml" />
+    <Content Include="Views\Webmaster\PostProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
