@@ -3,29 +3,11 @@
         pageSize: 10,
         pageIndex: 1
     },
-    addressBookType: {
-        max_length: 5,
-        Employee : "P",
-        Vendor : "S",
-        CustomerC : "C",
-    },
-    code: {
-        Invoice: "IV",
-        CashReceipt: "CR",
-        SalesOrder:"SO"
-    },
     productType: {
         Material: 1,
         Labor: 2,
         Equipment:3,
         FinishedProducts:4
-    },
-    bomId: {
-        Header: 'TD',
-        Note: 'NOTE',
-        TTA: 'TTA',
-        TTB: 'TTB',
-        TTC:'TTC'
     },
     unit: {
         Percent: 5,

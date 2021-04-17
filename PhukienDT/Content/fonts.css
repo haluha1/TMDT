@@ -370,12 +370,12 @@ a .icon-spin {
 
 @keyframes spin {
   /* line 324, ../sass/fonts.scss */
-  0% {
-    transform: rotate(0deg); }
+  0% { transform: rotate(0deg); }
 
   /* line 327, ../sass/fonts.scss */
-  100% {
-    transform: rotate(359deg); } }
+  100% { transform: rotate(360deg); }
+
+}
 
 /* Icon rotations and mirroring */
 /* line 332, ../sass/fonts.scss */

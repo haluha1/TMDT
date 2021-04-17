@@ -91,13 +91,12 @@ function loadData(isPageChanged) {
             page: general.configs.pageIndex,
             pageSize: general.configs.pageSize
         },
-        beforeSend: function() { general.startLoading(); },
+        beforeSend: function () { general.startLoad(); general.startLoading(); },
         success: function (response) {
-            console.log(response);
             $.each(response.Result, function (i, item) {
                 //begin
                 if (i%4==0 && i%2==0) {
-                    render += '<div class="row row-space">'
+                    render += '<div class="row row-space flex-container">';
                 }
                 var imgsrc = "";
                 switch (item.LoaispNavigation.KeyId) {
@@ -119,9 +118,13 @@ function loadData(isPageChanged) {
                     }
                 }
                 if (item.KeyId <= 50) imgsrc = "/img/" + item.tenhinh;
+                item.tensp = item.tensp.replace(/  /g, " ");
+                let shortName = item.tensp.length > 30 ? (item.tensp.substr(0, 30)+"...") : item.tensp;
                 render += Mustache.render(template, {
                     ProductID: item.KeyId,
-                    ProductName: item.tensp,
+                    ProductName: shortName,
+                    alt: item.tensp,
+                    title: item.tensp,
                     Price: item.dongia,
 					img: imgsrc,
 					NhaCC: item.NccNavigation.tenncc
@@ -138,9 +141,10 @@ function loadData(isPageChanged) {
             wrapPaging(response.PageCount, function () {
                 loadData();
             }, isPageChanged);
+            general.stopLoad(); general.stopLoading();
         },
         error: function (status) {
-            console.log(status);
+            general.stopLoad(); general.stopLoading();
             //general.notify('Không thể load dữ liệu', 'error');
         }
     });

@@ -10,14 +10,16 @@
 
     <title>@ViewBag.Title</title>
     <link href="/Scripts/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/fonts.css" rel="stylesheet" />
     <script src="/Scripts/jquery-3.3.1.js"></script>
     <script src="/Scripts/bootstrap/dist/js/bootstrap.js"></script>
     <link href="/Content/style.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @*<script src="/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.js" asp-append-version="true"></script>
-    
-    <script src="/Scripts/bootstrap-datepicker/dist/locales/bootstrap-datepicker.vi.min.js" asp-append-version="true"></script>
-    *@<link href="/Scripts/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+        <script src="/Scripts/bootstrap-datepicker/dist/locales/bootstrap-datepicker.vi.min.js" asp-append-version="true"></script>
+    *@
+    <link href="/Scripts/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
     @RenderSection("Style", required: false)
 </head>
 <body>

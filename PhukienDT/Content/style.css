@@ -78,8 +78,35 @@ img.avatar {
     padding: 16px;
 }
 
+.flex-container {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flex-container .flex-cell {
+	max-width: 25%;
+	border-radius: 10px;
+	flex: 1;
+}
+
+.flex-cell {
+	display: table;
+}
+
+.flex-cell:hover {
+	border-color: rgba(126, 239, 104, 0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+	outline: 0 none;
+	cursor: pointer;
+}
+
+.flex-cell div {
+	display: table-row;
+}
+
 span.psw {
-    margin-left: 225px;
+	margin-left: 225px;
 }
 
 /* The Modal (background) */
