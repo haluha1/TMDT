@@ -7,13 +7,13 @@ namespace Data.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class eee : IMigrationMetadata
+    public sealed partial class PhukienDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(eee));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PhukienDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905191403088_eee"; }
+            get { return "202104170940348_PhukienDB"; }
         }
         
         string IMigrationMetadata.Source

@@ -9,11 +9,16 @@ namespace Data.EF
 {
 	public class EFUnitOfWork : IUnitOfWork
 	{
+		private readonly PhukienDTDbContext _context;
+		public EFUnitOfWork(PhukienDTDbContext context)
+		{
+			_context = context;
+		}
 		public bool Commit()
 		{
 			try
 			{
-				PhukienDTDbContext.Instance.SaveChanges();
+				_context.SaveChanges();
 				return true;
 			}
 			catch (Exception ex)
@@ -50,7 +55,7 @@ namespace Data.EF
 
 		public void Dispose()
 		{
-			PhukienDTDbContext.Instance.Dispose();
+			_context.Dispose();
 		}
 
 		//public void RegisterAmended(Infrastructure.SharedKernel.DomainEntity<T> entity, IUnitOfWorkRepository<T> repository)

@@ -1,6 +1,4 @@
-﻿
-
-using Data.Entities;
+﻿using Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,29 +11,15 @@ namespace Data.EF
 {
 	public class PhukienDTDbContext : DbContext
 	{
-        static PhukienDTDbContext()
-        {
-            Database.SetInitializer<PhukienDTDbContext>(null);
-        }
-        private static PhukienDTDbContext _context;
-		public static PhukienDTDbContext Instance
-		{
-			get
-			{
-				if (_context == null)
-				{
-					_context = new PhukienDTDbContext();
-				}
-				return _context;
-			}
-		}
 		public PhukienDTDbContext() : base("PhukienDTDbContext")
 		{
 			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhukienDTDbContext, Configuration>());
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<PhukienDTDbContext>());
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhukienDTDbContext, Configuration>());
 		}
+
 		#region creare DbSet
-		//public DbSet<Student> Students { get; set; }
-		#endregion
+
 		public DbSet<ActiveCode> ActiveCodes { get; set; }
 		public DbSet<Cthd> Cthds { get; set; }
 		public DbSet<CtRating> CtRatings { get; set; }
@@ -55,7 +39,7 @@ namespace Data.EF
 
 		public DbSet<Function> Functions { get; set; }
 
-
+		#endregion
 
 
 
@@ -77,17 +61,17 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.masp);
 
 			modelBuilder.Entity<CtRating>().HasKey(e => e.KeyId).ToTable("CtRating");
-            modelBuilder.Entity<CtRating>()
-            .HasRequired<Khachhang>(s => s.KhachhangNavigation)
-            .WithMany(g => g.CtRatings)
-            .HasForeignKey<int>(s => s.makh);
+			modelBuilder.Entity<CtRating>()
+			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
+			.WithMany(g => g.CtRatings)
+			.HasForeignKey<int>(s => s.makh);
 
 
 
 
-            modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
+			modelBuilder.Entity<Giatin>().HasKey(e => e.KeyId).ToTable("GiaTin");
 
-			
+
 			modelBuilder.Entity<CtGiohang>().HasKey(e => e.KeyId).ToTable("CtGioHang");
 			modelBuilder.Entity<CtGiohang>()
 			.HasRequired<Khachhang>(s => s.KhachhangNavigation)
@@ -105,7 +89,7 @@ namespace Data.EF
 			.HasRequired<Khachhang>(s => s.KhachHangNavigation)
 			.WithMany(g => g.Hoadons)
 			.HasForeignKey<int>(s => s.makh);
-			
+
 
 			modelBuilder.Entity<Hoadonmuatin>().HasKey(e => e.KeyId).ToTable("HoaDonMuaTin");
 			modelBuilder.Entity<Hoadonmuatin>()
@@ -119,12 +103,12 @@ namespace Data.EF
 			.HasForeignKey<int>(s => s.mancc);
 
 			modelBuilder.Entity<Khachhang>().HasKey(e => e.User_FK).ToTable("KhachHang");
-			
+
 
 			modelBuilder.Entity<Loaisp>().HasKey(e => e.KeyId).ToTable("LoaiSP");
 			modelBuilder.Entity<Mucduytri>().HasKey(e => e.KeyId).ToTable("MucDuyTri");
 			modelBuilder.Entity<Ncc>().HasKey(e => e.User_FK).ToTable("Ncc");
-			
+
 
 
 			modelBuilder.Entity<Sanpham>().HasKey(e => e.KeyId).ToTable("SanPham");
@@ -150,7 +134,7 @@ namespace Data.EF
 				cs.ToTable("SanPhamYeuThich_KhachHang");
 			});
 
-			
+
 
 			modelBuilder.Entity<TaiKhoan>().HasKey(e => e.KeyId).ToTable("TaiKhoan");
 			modelBuilder.Entity<TaiKhoan>()

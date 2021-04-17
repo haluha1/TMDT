@@ -41,7 +41,6 @@ namespace PhukienDT.Controllers
                 IEnumerable<SanphamViewModel> sp;
                 sp = model;
                 return View(model);
-
             }
 
         }

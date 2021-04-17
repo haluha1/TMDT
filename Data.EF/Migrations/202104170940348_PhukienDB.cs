@@ -3,7 +3,7 @@ namespace Data.EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class eee : DbMigration
+    public partial class PhukienDB : DbMigration
     {
         public override void Up()
         {

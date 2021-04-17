@@ -12,11 +12,13 @@ namespace Data.EF
 {
 	public class EFRepository<T, K> : IRepository<T, K>, IDisposable where T : DomainEntity<K>
 	{
-		private PhukienDTDbContext _context
+
+		private PhukienDTDbContext _context;
+		public EFRepository()
 		{
-			get { return PhukienDTDbContext.Instance; }
+			_context = new PhukienDTDbContext();
 		}
-		
+
 		public void Add(T entity)
 		{
 			_context.Set<T>().Add(entity);
