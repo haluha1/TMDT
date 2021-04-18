@@ -1,8 +1,13 @@
+using System.Data.Entity;
 using System.Web.Mvc;
 using Application.Implementation;
 using Application.Interfaces;
 using Data.EF;
 using Infrastructure.Interfaces;
+using Login.Controllers;
+using Login.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using PhukienDT.Controllers;
 using Unity.Mvc3;
@@ -28,6 +33,13 @@ namespace PhukienDT
 			// e.g. container.RegisterType<ITestService, TestService>();            
 			container.RegisterType(typeof(IUnitOfWork), typeof(EFUnitOfWork));
 			container.RegisterType(typeof(IRepository<,>), typeof(EFRepository<,>));
+			//container.RegisterType(typeof(IUserStore<>), typeof(UserStore<>));
+			//container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
+
+			container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
+			container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
+			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
+			container.RegisterType<AccountController>(new InjectionConstructor());
 
 			//Service
 			container.RegisterType<ILoaiSPService, LoaiSPService>();

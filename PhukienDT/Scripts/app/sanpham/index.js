@@ -33,18 +33,14 @@
             url: "/Sanpham/DeleteCart",
             data: { id: that },
             dataType: "json",
-            beforeSend: function () {
-                general.startLoading();
-            },
+            beforeSend: function () { general.startLoad(); general.startLoading(); },
             success: function (response) {
-                console.log(response);
                 loadGioHang(true);
-
-
+                general.stopLoad(); general.stopLoading();
             },
             error: function (status) {
-                general.notify('Có lỗi xảy ra', 'error');
-                general.stopLoading();
+                //general.notify('Có lỗi xảy ra', 'error');
+                general.stopLoad(); general.stopLoading();
             }
         });
     }
@@ -169,16 +165,13 @@ function TestSave() {
         url: "/Sanpham/SaveEntity",
         data: { sanphamVm: data },
         dataType: "json",
-        beforeSend: function () {
-            general.startLoading();
-        },
+        beforeSend: function () { general.startLoad(); general.startLoading(); },
         success: function (response) {
-            console.log(response);
-            general.stopLoading();
+            general.stopLoad(); general.stopLoading();
         },
         error: function (status) {
-            general.notify('Có lỗi trong khi ghi danh bạ!', 'error');
-            general.stopLoading();
+            //general.notify('Có lỗi trong khi ghi danh bạ!', 'error');
+            general.stopLoad(); general.stopLoading();
         }
     });
 }

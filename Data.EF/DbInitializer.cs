@@ -16,7 +16,7 @@ namespace Data.EF
 		//{
 		//}
 
-		public void InitializeDatabase(PhukienDTDbContext context)
+		public override void InitializeDatabase(PhukienDTDbContext context)
 		{
 			if (context.Database.Exists())
 			{
